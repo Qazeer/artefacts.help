@@ -3,6 +3,5 @@
 # In other words, the last line must be the last tag in the allowed-tags list.
 allowed-tags:
   - windows_program_execution
+  - windows_file_presence
   - windows_local_persistence
-  - windows_local_persistence
-  - windows_program_execution

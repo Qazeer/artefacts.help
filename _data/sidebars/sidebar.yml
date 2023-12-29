@@ -7,17 +7,25 @@ entries:
   - title: All
     output: web
     folderitems:
-    
-    - title: amcache
+
+    - title: Amcache
       url: /windows_amcache
       output: web
-    
+
+    - title: RecentFileCache
+      url: /windows_amcache
+      output: web
+
   - title: By category
     output: web
     folderitems:
-  
+
     - title: Program execution
       url: /tag_windows_program_execution
+      output: web
+
+    - title: File presence
+      url: /tag_windows_file_presence
       output: web
 
     - title: Local persistence
