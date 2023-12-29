@@ -1,0 +1,33 @@
+entries:
+
+- title: sidebar
+  product: Windows
+  folders:
+
+  - title: All
+    output: web
+    folderitems:
+    
+    - title: amcache
+      url: /windows_amcache
+      output: web
+    
+  - title: By category
+    output: web
+    folderitems:
+  
+    - title: Program execution
+      url: /tag_windows_program_execution
+      output: web
+
+    - title: Local persistence
+      url: /tag_windows_local_persistence
+      output: web
+
+- title: sidebar
+  product: Linux
+  folders:
+
+  - title: All
+    output: web
+    folderitems:

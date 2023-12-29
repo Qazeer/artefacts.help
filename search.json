@@ -1,0 +1,32 @@
+---
+title: search
+layout: none
+search: exclude
+---
+
+{% assign pages = site.html_pages | where_exp: "page", "page.search != 'exclude'"  %}
+[
+{% for page in pages %}
+{
+"title": {{ page.title | jsonify }},
+"tags": {{ page.tags | jsonify }},
+"keywords": {{ page.keywords | jsonify }},
+"url": {{ page.url | remove: "/" | jsonify }},
+"location": {{ page.location | jsonify }}
+}
+{% unless forloop.last and site.posts.size < 1 %},{% endunless %}
+{% endfor %}
+
+{% for post in site.posts %}
+
+{
+"title": {{ page.title | jsonify }},
+"tags": {{ page.tags | jsonify }},
+"keywords": {{ page.keywords | jsonify }},
+"url": {{ page.url | remove: "/" | jsonify }},
+"location": {{ page.location | jsonify }}
+}
+{% unless forloop.last %},{% endunless %}
+{% endfor %}
+
+]
