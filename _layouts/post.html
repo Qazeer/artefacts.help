@@ -22,7 +22,7 @@ layout: default
     <div class="post-content" itemprop="articleBody">
 
         {% if page.location %}
-        <div class="location">{{page.location | escape}}</div>
+        <div class="location">{{ page.location | escape | replace: '\n', '<br>' }}</div>
         {% endif %}
 
         {{ content }}
