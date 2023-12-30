@@ -32,7 +32,7 @@ For a very comprehensive analysis of the `Amcache` artefact, and its evolution
 across different release of the underlying `DLL`, refer to the
 [ANSSI's ANALYSIS OF THE AMCACHE v2 white paper](https://www.ssi.gouv.fr/uploads/2019/01/anssi-coriin_2019-amcache_investigation.pdf).
 
-### Information / interpretation
+### Information of interest
 
 The `Amcache.hve` registry hive is split in a number of root keys, with keys
 being added, changed, or removed depending on the `Amcache` `DLLs` versions.
