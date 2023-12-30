@@ -3,7 +3,7 @@ title: Amcache / RecentFileCache
 keywords: Amcache, RecentFileCache
 tags:
   - windows_program_execution
-  - windows_file_presence
+  - windows_file_knowledge
 location: '<SYSTEMROOT>\AppCompat\Programs\Amcache.hve\n\nAmcache DLL 6.1.7600 and older:\n<SYSTEMROOT>\AppCompat\Programs\RecentFileCache.bcf'
 last_updated: 2023-12-30
 sidebar: sidebar

@@ -24,8 +24,8 @@ entries:
       url: /tag_windows_program_execution
       output: web
 
-    - title: File presence
-      url: /tag_windows_file_presence
+    - title: File knowledge
+      url: /tag_windows_file_knowledge
       output: web
 
     - title: Local persistence
