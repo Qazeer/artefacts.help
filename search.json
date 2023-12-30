@@ -20,11 +20,11 @@ search: exclude
 {% for post in site.posts %}
 
 {
-"title": {{ page.title | jsonify }},
-"tags": {{ page.tags | jsonify }},
-"keywords": {{ page.keywords | jsonify }},
-"url": {{ page.url | remove: "/" | jsonify }},
-"location": {{ page.location | jsonify }}
+"title": {{ post.title | jsonify }},
+"tags": {{ post.tags | jsonify }},
+"keywords": {{ post.keywords | jsonify }},
+"url": {{ post.url | remove: "/" | jsonify }},
+"location": {{ post.location | jsonify }}
 }
 {% unless forloop.last %},{% endunless %}
 {% endfor %}
