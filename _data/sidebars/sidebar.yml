@@ -8,6 +8,10 @@ entries:
     output: web
     folderitems:
 
+    - title: $Bitmap
+      url: /windows_mft
+      output: web
+
     - title: $MFT
       url: /windows_mft
       output: web
@@ -16,8 +20,8 @@ entries:
       url: /windows_mft
       output: web
 
-    - title: $Bitmap
-      url: /windows_mft
+    - title: $Secure
+      url: /windows_secure
       output: web
 
     - title: Amcache
