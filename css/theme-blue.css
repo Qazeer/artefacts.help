@@ -6,7 +6,7 @@
 
 
 h3 {color: #FFA500; }
-h4 {color: #808080; }
+h4 {color: #BE7534; }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     background-color: #347DBE;
@@ -92,7 +92,7 @@ a.navbar-brand:hover {
 body.print h1 {color: #347DBE !important; font-size:28px !important;}
 body.print h2 {color: #595959 !important; font-size:20px !important;}
 body.print h3 {color: #007fff !important; font-size:14px !important;}
-body.print h4 {color: #679DCE !important; font-size:14px; font-style: italic !important;}
+body.print h4 {color: #679DCE !important; font-size:10px !important;}
 
 .anchorjs-link:hover {
     color: #216f9b;
