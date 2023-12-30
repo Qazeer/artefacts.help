@@ -1,5 +1,6 @@
 ---
 title: Amcache / RecentFileCache
+summary: 'Very complex artefact, linked to an application compatibility feature.\n\nTracks program execution (or simply file presence for recent version), installed drivers, and shortcuts from a subset of folders.\n\nProgram execution / binary presence notably includes: executable full path, program size, SHA1 (of the first 30MB of the executable).'
 keywords: Amcache, RecentFileCache
 tags:
   - windows_program_execution
