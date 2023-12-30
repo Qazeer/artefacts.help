@@ -8,6 +8,18 @@ entries:
     output: web
     folderitems:
 
+    - title: $MFT
+      url: /windows_mft
+      output: web
+
+    - title: $MFTMir
+      url: /windows_mft
+      output: web
+
+    - title: $Bitmap
+      url: /windows_mft
+      output: web
+
     - title: Amcache
       url: /windows_amcache
       output: web
@@ -20,12 +32,16 @@ entries:
     output: web
     folderitems:
 
-    - title: Program execution
-      url: /tag_windows_program_execution
+    - title: NTFS filesystem
+      url: /tag_windows_ntfs_filesystem
       output: web
 
     - title: File knowledge
       url: /tag_windows_file_knowledge
+      output: web
+
+    - title: Program execution
+      url: /tag_windows_program_execution
       output: web
 
     - title: Local persistence
