@@ -48,6 +48,10 @@ entries:
       url: /windows_pca
       output: web
 
+    - title: Prefetch
+      url: /windows_prefetch
+      output: web
+
     - title: RecentFileCache
       url: /windows_amcache
       output: web
