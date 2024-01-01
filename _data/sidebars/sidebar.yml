@@ -48,6 +48,10 @@ entries:
       url: /windows_amcache
       output: web
 
+    - title: Windows Search Database
+      url: /windows_search_db
+      output: web
+
   - title: By category
     output: web
     folderitems:
@@ -66,6 +70,10 @@ entries:
 
     - title: Program execution
       url: /tag_windows_program_execution
+      output: web
+
+    - title: Browsing history
+      url: /tag_windows_browsing_history
       output: web
 
     - title: Local persistence
