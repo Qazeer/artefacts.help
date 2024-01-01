@@ -124,7 +124,7 @@ caption {
     text-align: left;
 }
 th {
-    text-align: left;
+    text-align: center;
 }
 table {
     max-width: 100%;
@@ -141,7 +141,7 @@ table > tbody > tr > td,
 table > tfoot > tr > td {
     padding: 8px;
     line-height: 1.42857143;
-    vertical-align: top;
+    vertical-align: middle;
     border-top: 1px solid #ddd;
 }
 table > thead > tr > th {
@@ -150,7 +150,7 @@ table > thead > tr > th {
     text-transform: none;
     background-color: #777;
     color: white;
-    text-align: left;
+    text-align: middle;
 }
 table > caption + thead > tr:first-child > th,
 table > colgroup + thead > tr:first-child > th,
