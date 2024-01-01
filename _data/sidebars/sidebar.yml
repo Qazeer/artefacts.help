@@ -24,6 +24,10 @@ entries:
       url: /windows_secure
       output: web
 
+    - title: $UsnJrnl
+      url: /windows_usnjrnl
+      output: web
+
     - title: Amcache
       url: /windows_amcache
       output: web
