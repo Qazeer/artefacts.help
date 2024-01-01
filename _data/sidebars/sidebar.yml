@@ -12,6 +12,10 @@ entries:
       url: /windows_mft
       output: web
 
+    - title: $I30
+      url: /windows_i30
+      output: web
+
     - title: $LogFile
       url: /windows_logfile
       output: web
