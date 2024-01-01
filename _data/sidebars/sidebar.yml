@@ -92,6 +92,10 @@ entries:
       url: /tag_windows_browsing_history
       output: web
 
+    - title: Network usage
+      url: /tag_windows_network_usage
+      output: web
+
     - title: Local persistence
       url: /tag_windows_local_persistence
       output: web
