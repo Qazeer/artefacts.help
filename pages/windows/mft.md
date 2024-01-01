@@ -5,7 +5,7 @@ keywords: Filesystem, MFT, MFTMir, LogFile, Bitmap, $MFT, $MFTMir, $Bitmap
 tags:
   - windows_ntfs_filesystem
   - windows_file_knowledge
-location: '<SYSTEMDRIVE>:\$MFT\n\n<SYSTEMDRIVE>:\$MFTMir\n\n<SYSTEMDRIVE>:\$Bitmap'
+location: '<ROOT>:\$MFT\n\n<ROOT>:\$MFTMir\n\n<ROOT>:\$Bitmap'
 last_updated: 2023-12-30
 sidebar: sidebar
 permalink: windows_mft.html
