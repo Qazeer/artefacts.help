@@ -44,6 +44,10 @@ entries:
       url: /windows_jumplists
       output: web
 
+    - title: PCA
+      url: /windows_pca
+      output: web
+
     - title: RecentFileCache
       url: /windows_amcache
       output: web
