@@ -52,6 +52,10 @@ entries:
       url: /windows_recycle_bin
       output: web
 
+    - title: Shimcache
+      url: /windows_shimcache
+      output: web
+
     - title: Windows Search Database
       url: /windows_search_db
       output: web
