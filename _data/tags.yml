@@ -4,5 +4,6 @@
 allowed-tags:
   - windows_ntfs_filesystem
   - windows_file_knowledge
+  - windows_files_and_folders_access
   - windows_program_execution
   - windows_local_persistence
