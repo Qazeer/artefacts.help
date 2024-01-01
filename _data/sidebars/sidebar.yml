@@ -28,6 +28,10 @@ entries:
       url: /windows_amcache
       output: web
 
+    - title: Jumplists
+      url: /windows_jumplists
+      output: web
+
     - title: RecentFileCache
       url: /windows_amcache
       output: web
@@ -42,6 +46,10 @@ entries:
 
     - title: File knowledge
       url: /tag_windows_file_knowledge
+      output: web
+
+    - title: Files and folders access
+      url: /tag_windows_files_and_folders_access
       output: web
 
     - title: Program execution
