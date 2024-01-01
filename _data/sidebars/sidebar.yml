@@ -64,6 +64,10 @@ entries:
       url: /windows_shimcache
       output: web
 
+    - title: SRUM
+      url: /windows_srum
+      output: web
+
     - title: Windows Search Database
       url: /windows_search_db
       output: web
