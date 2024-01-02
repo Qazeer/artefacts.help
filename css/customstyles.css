@@ -255,8 +255,7 @@ div#toc ul {
 }
 
 div#toc ul li ul {
-    padding-left:8px;
-
+    padding-left:4px;
 }
 
 div#toc ul li ul li::before {
@@ -384,6 +383,10 @@ ul#mysidebar {
 }
 
 .nav ul li ul li a {
+    padding-left:20px;
+}
+
+.nav ul li ul li ul li a {
     padding-left:40px;
 }
 

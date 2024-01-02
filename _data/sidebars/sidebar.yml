@@ -8,72 +8,111 @@ entries:
     output: web
     folderitems:
 
+    - title: ETW
+      type: subfolder
+      output: web
+      subfolderitems:
+
+      - title: Overview
+        url: /windows_etw_overview.html
+        output: web
+
+      - title: Tools
+        url: /windows_etw_tools.html
+        output: web
+
+      - title: Authentication
+        type: subfolder
+        output: web
+        subfolderitems:
+
+        - title: Destination host
+          url: /windows_etw_authentication_dst_host.html
+          output: web
+
+        - title: Source host
+          url: /windows_etw_authentication_src_host.html
+          output: web
+
+        - title: Domain Controllers
+          url: /windows_etw_authentication_dc_host.html
+          output: web
+
+    - title: Registry
+      type: subfolder
+      output: web
+      subfolderitems:
+
+      - title: Overview
+        url: /windows_registry_overview.html
+        output: web
+
     - title: $Bitmap
-      url: /windows_mft
+      url: /windows_mft.html
       output: web
 
     - title: $I30
-      url: /windows_i30
+      url: /windows_i30.html
       output: web
 
     - title: $LogFile
-      url: /windows_logfile
+      url: /windows_logfile.html
       output: web
 
     - title: $MFT
-      url: /windows_mft
+      url: /windows_mft.html
       output: web
 
     - title: $MFTMir
-      url: /windows_mft
+      url: /windows_mft.html
       output: web
 
     - title: $Secure
-      url: /windows_secure
+      url: /windows_secure.html
       output: web
 
     - title: $UsnJrnl
-      url: /windows_usnjrnl
+      url: /windows_usnjrnl.html
       output: web
 
     - title: Amcache
-      url: /windows_amcache
+      url: /windows_amcache.html
       output: web
 
     - title: Jumplists
-      url: /windows_jumplists
+      url: /windows_jumplists.html
       output: web
 
     - title: PCA
-      url: /windows_pca
+      url: /windows_pca.html
       output: web
 
     - title: Prefetch
-      url: /windows_prefetch
+      url: /windows_prefetch.html
       output: web
 
     - title: RecentFileCache
-      url: /windows_amcache
+      url: /windows_amcache.html
       output: web
 
     - title: Recycle Bin
-      url: /windows_recycle_bin
+      url: /windows_recycle_bin.html
       output: web
 
     - title: Shimcache
-      url: /windows_shimcache
+      url: /windows_shimcache.html
       output: web
 
     - title: SRUM
-      url: /windows_srum
+      url: /windows_srum.html
       output: web
 
     - title: Windows Search Database
-      url: /windows_search_db
+      url: /windows_search_db.html
       output: web
 
-    - title: Windows Timeline / ActivitiesCache.db
-      url: /windows_activities_cache
+    - title: Windows Timeline / ActivitiesCache.db.html
+      url: /windows_activities_cache.html
       output: web
 
   - title: By category
@@ -81,31 +120,39 @@ entries:
     folderitems:
 
     - title: NTFS filesystem
-      url: /tag_windows_ntfs_filesystem
+      url: /tag_windows_ntfs_filesystem.html
+      output: web
+
+    - title: ETW
+      url: /tag_windows_etw.html
       output: web
 
     - title: File knowledge
-      url: /tag_windows_file_knowledge
+      url: /tag_windows_file_knowledge.html
       output: web
 
     - title: Files and folders access
-      url: /tag_windows_files_and_folders_access
+      url: /tag_windows_files_and_folders_access.html
       output: web
 
     - title: Program execution
-      url: /tag_windows_program_execution
+      url: /tag_windows_program_execution.html
       output: web
 
     - title: Browsing history
-      url: /tag_windows_browsing_history
+      url: /tag_windows_browsing_history.html
       output: web
 
     - title: Network usage
-      url: /tag_windows_network_usage
+      url: /tag_windows_network_usage.html
+      output: web
+
+    - title: Lateral movement
+      url: /tag_windows_lateral_movement.html
       output: web
 
     - title: Local persistence
-      url: /tag_windows_local_persistence
+      url: /tag_windows_local_persistence.html
       output: web
 
 - title: sidebar

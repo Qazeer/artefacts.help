@@ -2,56 +2,74 @@
 
 <ul id="mysidebar" class="nav">
   {% for entry in sidebar %}
-  <li class="sidebarTitle">{{entry.product}} {{entry.version}}</li>
-  {% for folder in entry.folders %}
-  {% if folder.output contains "web" %}
-  <li>
-      <a title="{{folder.title}}" href="#">{{folder.title}}</a>
-      <ul>
-          {% for folderitem in folder.folderitems %}
-          {% if folderitem.output contains "web" %}
-          {% if folderitem.external_url %}
-          <li><a title="{{folderitem.title}}" href="{{folderitem.external_url}}" target="_blank" rel="noopener">{{folderitem.title}}</a></li>
-          {% elsif page.url == folderitem.url %}
-          <li class="active"><a title="{{folderitem.title}}" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
-          {% elsif folderitem.type == "empty" %}
-          <li><a title="{{folderitem.title}}" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
-
-          {% else %}
-          <li><a title="{{folderitem.title}}" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
-          {% endif %}
-          {% for subfolders in folderitem.subfolders %}
-          {% if subfolders.output contains "web" %}
-          <li class="subfolders">
-              <a title="{{subfolders.title}}" href="#">{{ subfolders.title }}</a>
-              <ul>
-                  {% for subfolderitem in subfolders.subfolderitems %}
-                  {% if subfolderitem.output contains "web" %}
-                  {% if subfolderitem.external_url %}
-                  <li><a title="{{subfolderitem.title}}" href="{{subfolderitem.external_url}}" target="_blank" rel="noopener">{{subfolderitem.title}}</a></li>
-                  {% elsif page.url == subfolderitem.url %}
-                  <li class="active"><a title="{{subfolderitem.title}}" href="{{subfolderitem.url | remove: "/"}}">{{subfolderitem.title}}</a></li>
-                  {% else %}
-                  <li><a title="{{subfolderitem.title}}" href="{{subfolderitem.url | remove: "/"}}">{{subfolderitem.title}}</a></li>
-                  {% endif %}
-                  {% endif %}
-                  {% endfor %}
-              </ul>
+    <li class="sidebarTitle">{{entry.product}} {{entry.version}}</li>
+      {% for folder in entry.folders %}
+        {% if folder.output contains "web" %}
+          <li>
+            <a title="{{folder.title}}" href="#">{{folder.title}}</a>
+            <ul>
+            {% for folderitem in folder.folderitems %}
+              {% if folderitem.output contains "web" %}
+                {% comment %} Handling level 0 subfolders {% endcomment %}
+                {% if folderitem.type == "subfolder" %}
+                  <li class="subfolders">
+                    <a title="{{folderitem.title}}" href="#">{{ folderitem.title }}</a>
+                    <ul>
+                    {% for subfolderitems_level1 in folderitem.subfolderitems %}
+                      {% if subfolderitems_level1.output contains "web" %}
+                        {% comment %} Handling level 1 subfolders {% endcomment %}
+                        {% if subfolderitems_level1.type == "subfolder" %}
+                          <li class="subfolders">
+                            <a title="{{subfolderitems_level1.title}}" href="#">{{ subfolderitems_level1.title }}</a>
+                            <ul>
+                            {% for subfolderitems_level2 in subfolderitems_level1.subfolderitems %}
+                              {% if subfolderitems_level2.output contains "web" %}
+                                {% if subfolderitems_level2.external_url %}
+                                  <li><a title="{{subfolderitems_level2.title}}" href="{{subfolderitems_level2.external_url}}" target="_blank" rel="noopener">{{subfolderitems_level2.title}}</a></li>
+                                {% elsif page.url == subfolderitems_level2.url %}
+                                  <li class="active"><a title="{{subfolderitems_level2.title}}" href="{{subfolderitems_level2.url | remove: "/"}}">{{subfolderitems_level2.title}}</a></li>
+                                {% else %}
+                                  <li><a title="{{subfolderitems_level2.title}}" href="{{subfolderitems_level2.url | remove: "/"}}">{{subfolderitems_level2.title}}</a></li>
+                                {% endif %}
+                              {% endif %}
+                            {% endfor %}
+                            </ul>
+                          </li>
+                        {% elsif subfolderitems_level1.external_url %}
+                          <li><a title="{{subfolderitems_level1.title}}" href="{{subfolderitems_level1.external_url}}" target="_blank" rel="noopener">{{subfolderitems_level1.title}}</a></li>
+                        {% elsif page.url == subfolderitems_level1.url %}
+                          <li class="active"><a title="{{subfolderitems_level1.title}}" href="{{subfolderitems_level1.url | remove: "/"}}">{{subfolderitems_level1.title}}</a></li>
+                        {% elsif subfolderitems_level1.type == "empty" %}
+                          <li><a title="{{subfolderitems_level1.title}}" href="{{subfolderitems_level1.url | remove: "/"}}">{{subfolderitems_level1.title}}</a></li>
+                        {% else %}
+                          <li><a title="{{subfolderitems_level1.title}}" href="{{subfolderitems_level1.url | remove: "/"}}">{{subfolderitems_level1.title}}</a></li>
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                    </ul>
+                  </li>
+                {% elsif folderitem.external_url %}
+                  <li><a title="{{folderitem.title}}" href="{{folderitem.external_url}}" target="_blank" rel="noopener">{{folderitem.title}}</a></li>
+                {% elsif page.url == folderitem.url %}
+                  <li class="active"><a title="{{folderitem.title}}" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
+                {% elsif folderitem.type == "empty" %}
+                  <li><a title="{{folderitem.title}}" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
+                {% else %}
+                  <li><a title="{{folderitem.title}}" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+            </ul>
           </li>
-          {% endif %}
-          {% endfor %}
-          {% endif %}
-          {% endfor %}
-      </ul>
-   </li>
-     {% endif %}
+        {% endif %}
       {% endfor %}
-      {% endfor %}
-      <!-- if you aren't using the accordion, uncomment this block:
-         <p class="external">
-             <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
-         </p>
-         -->
+    </li>
+  {% endfor %}
+<!-- if you aren't using the accordion, uncomment this block:
+<p class="external">
+<a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+</p>
+-->
 </ul>
 
 <!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->

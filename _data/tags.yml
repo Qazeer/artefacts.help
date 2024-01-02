@@ -3,8 +3,10 @@
 # In other words, the last line must be the last tag in the allowed-tags list.
 allowed-tags:
   - windows_ntfs_filesystem
+  - windows_etw
   - windows_file_knowledge
   - windows_files_and_folders_access
   - windows_program_execution
   - windows_browsing_history
+  - windows_lateral_movement
   - windows_local_persistence
