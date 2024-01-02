@@ -72,6 +72,10 @@ entries:
       url: /windows_search_db
       output: web
 
+    - title: Windows Timeline / ActivitiesCache.db
+      url: /windows_activities_cache
+      output: web
+
   - title: By category
     output: web
     folderitems:
