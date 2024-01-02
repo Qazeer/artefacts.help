@@ -105,9 +105,9 @@ esentutl.exe /p SRUDB.dat
 
 #### SrumECmd
 
-The `SrumECmd` utility (`KAPE` `SrumECmd` module) can parse and extract
-information from the `SRUDB.dat` database, and correlates information from the
-`SOFTWARE` registry hive.
+The [`SrumECmd`](https://github.com/EricZimmerman/Srum) utility (`KAPE`
+`SrumECmd` module) can parse and extract information from the `SRUDB.dat`
+database, and correlates information from the `SOFTWARE` registry hive.
 
 ```bash
 # Parses the specified SRUM database, using the optionally provided SOFTWARE registry hive.
