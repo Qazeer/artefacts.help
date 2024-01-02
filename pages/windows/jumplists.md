@@ -71,7 +71,7 @@ process `JumpLists` files.
 
 Associated `KAPE` compound module: `JLECmd`.
 
-```
+```bash
 # Parses the specified JumpLists file.
 JLECmd.exe [-q --csv <CSV_DIRECTORY_OUTPUT>] -f <JUMPLIST_FILE>
 
