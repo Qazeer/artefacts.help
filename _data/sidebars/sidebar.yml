@@ -83,6 +83,10 @@ entries:
       url: /windows_jumplists.html
       output: web
 
+    - title: LNK / Shortcut files
+      url: /windows_lnk.html
+      output: web
+
     - title: PCA
       url: /windows_pca.html
       output: web
