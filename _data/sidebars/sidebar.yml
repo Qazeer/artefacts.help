@@ -111,6 +111,10 @@ entries:
       url: /windows_srum.html
       output: web
 
+    - title: UAL / SUM
+      url: /windows_ual.html
+      output: web
+
     - title: Windows Search Database
       url: /windows_search_db.html
       output: web
