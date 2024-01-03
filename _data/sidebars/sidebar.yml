@@ -47,33 +47,38 @@ entries:
         url: /windows_registry_overview.html
         output: web
 
-    - title: $Bitmap
-      url: /windows_mft.html
+    - title: NTFS
+      type: subfolder
       output: web
+      subfolderitems:
 
-    - title: $I30
-      url: /windows_i30.html
-      output: web
+      - title: $Bitmap
+        url: /windows_mft.html
+        output: web
 
-    - title: $LogFile
-      url: /windows_logfile.html
-      output: web
+      - title: $I30
+        url: /windows_i30.html
+        output: web
 
-    - title: $MFT
-      url: /windows_mft.html
-      output: web
+      - title: $LogFile
+        url: /windows_logfile.html
+        output: web
 
-    - title: $MFTMir
-      url: /windows_mft.html
-      output: web
+      - title: $MFT
+        url: /windows_mft.html
+        output: web
 
-    - title: $Secure
-      url: /windows_secure.html
-      output: web
+      - title: $MFTMir
+        url: /windows_mft.html
+        output: web
 
-    - title: $UsnJrnl
-      url: /windows_usnjrnl.html
-      output: web
+      - title: $Secure
+        url: /windows_secure.html
+        output: web
+
+      - title: $UsnJrnl
+        url: /windows_usnjrnl.html
+        output: web
 
     - title: Amcache
       url: /windows_amcache.html
@@ -119,7 +124,7 @@ entries:
       url: /windows_search_db.html
       output: web
 
-    - title: Windows Timeline / ActivitiesCache.db.html
+    - title: Windows Timeline / ActivitiesCache
       url: /windows_activities_cache.html
       output: web
 
