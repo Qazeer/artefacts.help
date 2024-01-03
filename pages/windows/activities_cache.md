@@ -16,8 +16,8 @@ folder: windows
 
 ### Overview
 
-**Introduced in Windows 10 version 1803**, the Windows Activity history tracks
-a number of operations on the system: programs used, local files opened,
+**Introduced in `Windows 10` version 1803**, the Windows Activity history
+tracks a number of operations on the system: programs used, local files opened,
 SharePoint documents consulted, and websites browsed (using Internet Explorer /
 Microsoft Edge Legacy). The Activity history can be consulted in the Windows
 Timeline (Windows + Tab keys).

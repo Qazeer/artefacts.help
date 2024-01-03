@@ -26,8 +26,8 @@ standalone registry hive, with multiple root keys that contain various types of
 data.
 
 The `Amcache` behavior depends on the version of the associated libraries, and
-not the version of the operating system. The `Amcache` on an up-to-date Windows
-7 and Windows 10 will thus behave the same way.
+not the version of the operating system. The `Amcache` on an up-to-date
+`Windows 7` and `Windows 10` will thus behave the same way.
 
 For a very comprehensive analysis of the `Amcache` artefact, and its evolution
 across different release of the underlying `DLL`, refer to the

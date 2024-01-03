@@ -18,7 +18,7 @@ The `Application Compatibility Cache`, also known as `Shimcache`, was
 introduced in `Windows XP` as part of the `Application Compatibility
 Infrastructure (Shim Infrastructure)` feature. The `Shim Infrastructure` is
 designed to identify application compatibility issues and maintain support of
-existing software to new versions of the `Windows` operating system. As stated
+existing software to new versions of the Windows operating system. As stated
 in the Microsoft documentation, the `Shim Infrastructure` "implements a form of
 application programming interface (API) hooking" in order to redirect API calls
 made by an application to an alternative library containing stub functions,
@@ -79,8 +79,8 @@ on the version of the Windows operating system in use:
   - From `Windows Vista` / `Windows Server 2008` up to `Windows 8.1` /
     `Windows Server 2012 R2`, the (undocumented) `Insert Flag` flag which, when
     set, seems to indicate that the entry was executed. This flag is no
-    longer present starting from Windows 10 / Windows Server 2016, and thus a
-    `Shimcache` entry does not necessarily reflect an execution** (as entries
+    longer present starting from `Windows 10` / `Windows Server 2016`, and thus
+    a `Shimcache` entry does not necessarily reflect an execution** (as entries
     may also be created for files in a directory that is accessed
     interactively).
 
