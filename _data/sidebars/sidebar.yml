@@ -51,6 +51,20 @@ entries:
         url: /windows_registry_tools.html
         output: web
 
+      - title: System information
+        type: subfolder
+        url: /windows_registry_systeminfo.html
+        output: web
+        subfolderitems:
+
+        - title: SYSTEM - ComputerName
+          url: /windows_registry_systeminfo.html#hklmsystem---computername
+          output: web
+
+        - title: SOFTWARE - CurrentVersion
+          url: /windows_registry_systeminfo.html#hklmsoftware---currentversion
+          output: web
+
     - title: NTFS
       type: subfolder
       output: web
