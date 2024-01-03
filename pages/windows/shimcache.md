@@ -5,6 +5,7 @@ keywords: Shimcache, Application Compatibility Cache, shimming
 tags:
   - windows_program_execution
   - windows_file_knowledge
+  - windows_registry
 location: 'SYSTEM registry hive.\n\nRegistry keys:\n\n>= Windows Server 2003 and Windows XP 64-bit:\nHKLM\SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCache\AppCompatCache\n\nWindows XP 32-bit:\nHKLM\SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatibility\AppCompatCache'
 last_updated: 2024-01-01
 sidebar: sidebar
