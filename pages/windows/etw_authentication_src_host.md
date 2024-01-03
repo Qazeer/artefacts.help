@@ -5,6 +5,7 @@ keywords: Security, Logon, RunAs, explicit credentials, 4648, 4624, Logon Type 9
 tags:
   - windows_etw
   - windows_lateral_movement
+  - windows_lateral_movement_src
 location: 'Channel: Security'
 last_updated: 2024-01-02
 sidebar: sidebar

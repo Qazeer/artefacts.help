@@ -161,8 +161,21 @@ entries:
       output: web
 
     - title: Lateral movement
-      url: /tag_windows_lateral_movement.html
+      type: subfolder
       output: web
+      subfolderitems:
+
+      - title: All
+        url: /tag_windows_lateral_movement.html
+        output: web
+
+      - title: Destination host
+        url: /tag_windows_lateral_movement_dst.html
+        output: web
+
+      - title: Source host
+        url: /tag_windows_lateral_movement_src.html
+        output: web
 
     - title: Local persistence
       url: /tag_windows_local_persistence.html

@@ -5,6 +5,7 @@ keywords: Security, Logon, 4624, 4625, 4672, 4634, 4647, 4649, 4778, 4779, 4800,
 tags:
   - windows_etw
   - windows_lateral_movement
+  - windows_lateral_movement_dst
 location: 'Channel: Security'
 last_updated: 2024-01-02
 sidebar: sidebar
