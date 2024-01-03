@@ -26,7 +26,7 @@
                               {% if subfolderitems_level2.output contains "web" %}
                                 {% if subfolderitems_level2.external_url %}
                                   <li><a title="{{subfolderitems_level2.title}}" href="{{subfolderitems_level2.external_url}}" target="_blank" rel="noopener">{{subfolderitems_level2.title}}</a></li>
-                                {% elsif page.url == subfolderitems_level2.url %}
+                                {% elsif subfolderitems_level2.url contains page.url %}
                                   <li class="active"><a title="{{subfolderitems_level2.title}}" href="{{subfolderitems_level2.url | remove: "/"}}">{{subfolderitems_level2.title}}</a></li>
                                 {% else %}
                                   <li><a title="{{subfolderitems_level2.title}}" href="{{subfolderitems_level2.url | remove: "/"}}">{{subfolderitems_level2.title}}</a></li>
@@ -37,7 +37,7 @@
                           </li>
                         {% elsif subfolderitems_level1.external_url %}
                           <li><a title="{{subfolderitems_level1.title}}" href="{{subfolderitems_level1.external_url}}" target="_blank" rel="noopener">{{subfolderitems_level1.title}}</a></li>
-                        {% elsif page.url == subfolderitems_level1.url %}
+                        {% elsif subfolderitems_level1.url contains page.url %}
                           <li class="active"><a title="{{subfolderitems_level1.title}}" href="{{subfolderitems_level1.url | remove: "/"}}">{{subfolderitems_level1.title}}</a></li>
                         {% elsif subfolderitems_level1.type == "empty" %}
                           <li><a title="{{subfolderitems_level1.title}}" href="{{subfolderitems_level1.url | remove: "/"}}">{{subfolderitems_level1.title}}</a></li>
@@ -50,7 +50,7 @@
                   </li>
                 {% elsif folderitem.external_url %}
                   <li><a title="{{folderitem.title}}" href="{{folderitem.external_url}}" target="_blank" rel="noopener">{{folderitem.title}}</a></li>
-                {% elsif page.url == folderitem.url %}
+                {% elsif folderitem.url contains page.url %}
                   <li class="active"><a title="{{folderitem.title}}" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
                 {% elsif folderitem.type == "empty" %}
                   <li><a title="{{folderitem.title}}" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
