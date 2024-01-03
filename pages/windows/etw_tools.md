@@ -1,7 +1,7 @@
 ---
 title: ETW - Tools
-summary: 'Tools for processing ETW and EVTX files, including: LogParser, Winlogbeat, EvtxECmd, Chainsaw, Hayabusa, and Velociraptor.'
-keywords: 'Event Tracing for Windows tools, ETW tools, EVTX tools, EVTX parsing, Event Viewer, Event Log Explorer, LogParser, LogParser_LogonLogoffEvents, Winlogbeat, EvtxECmd, Chainsaw, Hayabusa, Velociraptor'
+summary: 'Tools for processing ETW and EVTX files, including: wevtutil, Get-WinEvent, LogParser, Winlogbeat, EvtxECmd, Chainsaw, Hayabusa, and Velociraptor.'
+keywords: 'Event Tracing for Windows tools, ETW tools, EVTX tools, EVTX parsing, Event Viewer, Event Log Explorer, wevtutil, Get-WinEvent, LogParser, LogParser_LogonLogoffEvents, Winlogbeat, EvtxECmd, Chainsaw, Hayabusa, Velociraptor'
 tags:
   - windows_etw
 last_updated: 2024-01-02
@@ -22,11 +22,87 @@ logman.exe query providers "<PROVIDER_NAME>"
 # Lists the providers the specified process emit events to.
 logman query providers -pid <PID>
 
-# List the available `channels` and their associated event counts.
+# Lists the available `channels` and their associated event counts.
 Get-WinEvent -ListLog *
 ```
 
-### EVTX files
+### Live system events access
+
+The PowerShell cmdlet `Get-WinEvent` and the `wevtutil` utility can be used to
+list available event log files and filter event log, from both local or remote
+system.
+
+The following commands can be used to enumerate the available event logs:
+
+```bash
+wevtutil el
+wevtutil /r:<HOSTNAME | IP> /u:<DOMAIN | WORKGROUP>\<USERNAME> /p:<PASSWORD> el
+
+Get-WinEvent -ListLog * | Where-Object { $_.RecordCount }
+Get-WinEvent -Computer <HOSTNAME | IP> -Credential <PSCredential> -ListLog * | Where-Object { $_.RecordCount }
+```
+
+The following commands can be used to retrieve configuration information and
+metadata about the specified event logs:
+
+```bash
+# Displays configuration information: enabled, DACL, file path, etc.
+wevtutil gl <LOGNAME>
+wevtutil /r:<HOSTNAME | IP> /u:<DOMAIN | WORKGROUP>\<USERNAME> /p:<PASSWORD> gl <LOGNAME>
+
+# Displays metadata information: creation time, last access / write time, number of events logged, file size, etc.
+wevtutil gli <LOGNAME>
+wevtutil /r:<HOSTNAME | IP> /u:<DOMAIN | WORKGROUP>\<USERNAME> /p:<PASSWORD> gli <LOGNAME>
+
+# Displays both the configuration and metadata information at once.
+Get-WinEvent -ListLog <LOGNAME> | Format-List -Property *
+Get-WinEvent -Computer <HOSTNAME | IP> -Credential <PSCredential> -ListLog <LOGNAME> | Format-List -Property *
+```
+
+The following commands can be used to filter the event logs.
+
+The `wevtutil` utility supports only `XPath` queries. The
+`Windows Event Viewer` utility can be used to define a filter query through the
+graphical and more user-friendly interface and export the filter in to a
+`XPath` format for use with `wevtutil`.
+
+```bash
+wevtutil qe <LOGNAME> /q:"<XPATH_QUERY>"
+wevtutil /r:<HOSTNAME | IP> /u:<DOMAIN | WORKGROUP>\<USERNAME> /p:<PASSWORD> qe <LOGNAME> /q:"<XPATH_QUERY>"
+
+# Example query to find events matching the specified Event ID between two dates.
+# DATETIME = YYYY-MM-DDTHH:mm:SS.
+wevtutil qe <LOGNAME> /q:"*[System[(EventID=<EVENT_ID>) and TimeCreated[@SystemTime>='<DATETIME>' and @SystemTime<'<DATETIME>']]]"
+```
+
+The PowerShell cmdlet `Get-WinEvent` can be used to filter the event logs on
+the following attributes:
+
+  - LogName (`<String[]>`)
+
+  - Path (`<String[]>`)
+
+  - ID (`<Int32[]>`)
+
+  - StartTime (`<DateTime>`)
+
+  - EndTime (`<DateTime>`)
+
+  - UserID (`<SID>`)
+
+  - Data (`<String[]>`)
+
+```bash
+# Filters the log by event ID.
+Get-WinEvent -FilterHashtable @{Path="<FILE_PATH>"; ID=<EVENT_ID | LIST_EVENT_IDs>} | Fl
+Get-WinEvent -Computer <HOSTNAME | IP> -Credential <PSCredential> -FilterHashtable @{Path="<FILE_PATH>"; ID=<EVENT_ID | LIST_EVENT_IDs>} | Fl
+
+# Searches the specified string in event data.
+Get-WinEvent -FilterHashtable @{Path="<FILE_PATH>"; data="<STRING | LIST_STRINGs>"} | Fl
+Get-WinEvent -Computer <HOSTNAME | IP> -Credential <PSCredential> -FilterHashtable @{Path="<FILE_PATH>"; data="<STRING | LIST_STRINGs>"} | Fl
+```
+
+### EVTX files parsing
 
 #### Graphical applications
 
@@ -79,6 +155,14 @@ doing a full per fields extract however.
 
 Associated `KAPE` modules: `EvtxECmd` and `EvtxECmd_RDP`.
 
+```bash
+# Processes all events in the specific evtx file or evtx files in the specified directory.
+EvtxECmd.exe [-f '<FILE>' | -d '<DIRECTORY>']  --csv '<OUTPUT_DIRECTORY_CSV>'
+
+# Filters the events to output based on a include list (--inc) or exclude list (--exc).
+EvtxECmd.exe [-f '<FILE>' | -d '<DIRECTORY>'] [--inc <LIST_EVENT_IDs> | --exc <LIST_EVENT_IDs>] --csv '<OUTPUT_DIRECTORY_CSV>'
+```
+
 #### [CLI] Chainsaw & Hayabusa
 
 [`Chainsaw`](https://github.com/WithSecureLabs/chainsaw) (`KAPE` module
@@ -126,9 +210,9 @@ docker run --detach --publish=7474:7474 --publish=7687:7687 --publish=8080:8080 
 # Deletes the example data present by default in the container.
 docker exec <CONTAINER_ID> python /usr/local/src/LogonTracer/logontracer.py --delete -u '<USERNAME>' -p '<PASSWORD>' -s <IP>
 
-# It is advised to add Security.evtx hives through the web interface, exposed by default on the TCP port 8080.
+# It is advised to add Security.evtx files through the web interface, exposed by default on the TCP port 8080.
 Upload Event Log (bottom left) -> Browse -> One or multiple files can be selected -> Upload
 
-# Alternatively, the Security.evtx hives can be upload using the logontracer.py Python script.
+# Alternatively, the Security.evtx files can be upload using the logontracer.py Python script.
 python3 logontracer.py [-e <EVTX> | -x <EVTX_XML>] -z <TIME_ZONE> -u '<USERNAME>' -p '<PASSWORD>' -s <IP>
 ```
