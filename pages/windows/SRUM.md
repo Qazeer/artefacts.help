@@ -117,6 +117,11 @@ SrumECmd.exe -f <SRUDB.dat | SRUM_DB_FILE> [-r <SOFTWARE>] --csv <OUTPUT_DIRECTO
 SrumECmd.exe -d <DIRECTORY> --csv <OUTPUT_DIRECTORY>
 ```
 
+The `PowerShell_SrumECmd_SRUM-RepairAndParse` `KAPE` module, leveraging the
+PowerShell script
+[`SRUM-Repair.ps1`](https://github.com/AndrewRathbun/DFIRPowerShellScripts/blob/main/SRUM-Repair.ps1)
+can be used to automate the repairing and parsing process (with `SrumECmd`).
+
 ### References
 
   - [SANS Internet Storm Center - Mark Baggett - System Resource Utilization Monitor](https://isc.sans.edu/diary/System+Resource+Utilization+Monitor/21927)
