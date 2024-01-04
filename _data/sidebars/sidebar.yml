@@ -84,6 +84,10 @@ entries:
         url: /windows_registry_overview.html
         output: web
 
+      - title: Timestamp
+        url: /windows_registry_timestamp.html
+        output: web
+
       - title: Tools
         url: /windows_registry_tools.html
         output: web
