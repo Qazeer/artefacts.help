@@ -8,6 +8,39 @@ entries:
     output: web
     folderitems:
 
+    - title: NTFS
+      type: subfolder
+      output: web
+      subfolderitems:
+
+      - title: $Bitmap
+        url: /windows_mft.html
+        output: web
+
+      - title: $I30
+        url: /windows_i30.html
+        output: web
+
+      - title: $LogFile
+        url: /windows_logfile.html
+        output: web
+
+      - title: $MFT
+        url: /windows_mft.html
+        output: web
+
+      - title: $MFTMir
+        url: /windows_mft.html
+        output: web
+
+      - title: $Secure
+        url: /windows_secure.html
+        output: web
+
+      - title: $UsnJrnl
+        url: /windows_usnjrnl.html
+        output: web
+
     - title: ETW
       type: subfolder
       output: web
@@ -57,46 +90,17 @@ entries:
         output: web
         subfolderitems:
 
-        - title: SYSTEM - ComputerName
-          url: /windows_registry_systeminfo.html#hklmsystem---computername
+        - title: ComputerName
+          url: /windows_registry_systeminfo.html#computername
           output: web
 
-        - title: SOFTWARE - CurrentVersion
-          url: /windows_registry_systeminfo.html#hklmsoftware---currentversion
+        - title: CurrentVersion
+          url: /windows_registry_systeminfo.html#currentversion
           output: web
 
-    - title: NTFS
-      type: subfolder
-      output: web
-      subfolderitems:
-
-      - title: $Bitmap
-        url: /windows_mft.html
-        output: web
-
-      - title: $I30
-        url: /windows_i30.html
-        output: web
-
-      - title: $LogFile
-        url: /windows_logfile.html
-        output: web
-
-      - title: $MFT
-        url: /windows_mft.html
-        output: web
-
-      - title: $MFTMir
-        url: /windows_mft.html
-        output: web
-
-      - title: $Secure
-        url: /windows_secure.html
-        output: web
-
-      - title: $UsnJrnl
-        url: /windows_usnjrnl.html
-        output: web
+        - title: Security - Policy
+          url: /windows_registry_systeminfo.html#security---policy
+          output: web
 
     - title: Amcache
       url: /windows_amcache.html
@@ -146,43 +150,43 @@ entries:
       url: /windows_activities_cache.html
       output: web
 
-  - title: By category
+  - title: By tag
     output: web
     folderitems:
 
-    - title: NTFS filesystem
+    - title: 'Type - NTFS'
       url: /tag_windows_ntfs_filesystem.html
       output: web
 
-    - title: ETW
+    - title: 'Type - ETW'
       url: /tag_windows_etw.html
       output: web
 
-    - title: Registry
+    - title: 'Type - Registry'
       url: /tag_windows_registry.html
       output: web
 
-    - title: File knowledge
+    - title: 'Category - File knowledge'
       url: /tag_windows_file_knowledge.html
       output: web
 
-    - title: Files and folders access
+    - title: 'Category - Files and folders access'
       url: /tag_windows_files_and_folders_access.html
       output: web
 
-    - title: Program execution
+    - title: 'Category - Program execution'
       url: /tag_windows_program_execution.html
       output: web
 
-    - title: Browsing history
+    - title: 'Category - Browsing history'
       url: /tag_windows_browsing_history.html
       output: web
 
-    - title: Network usage
+    - title: 'Category - Network usage'
       url: /tag_windows_network_usage.html
       output: web
 
-    - title: Lateral movement
+    - title: 'Category - Lateral movement'
       type: subfolder
       output: web
       subfolderitems:
@@ -199,7 +203,7 @@ entries:
         url: /tag_windows_lateral_movement_src.html
         output: web
 
-    - title: Local persistence
+    - title: 'Category - Local persistence'
       url: /tag_windows_local_persistence.html
       output: web
 
