@@ -110,6 +110,38 @@ entries:
           url: /windows_registry_systeminfo.html#security---policy
           output: web
 
+        - title: TimeZoneInformation
+          url: /windows_registry_systeminfo.html#timezoneinformation
+          output: web
+
+        - title: Select
+          url: /windows_registry_systeminfo.html#select
+          output: web
+
+        - title: Network interfaces (Interfaces)
+          url: /windows_registry_systeminfo.html#network-interfaces-interfaces
+          output: web
+
+        - title: Network interfaces (NetworkList)
+          url: /windows_registry_systeminfo.html#network-interfaces-networklist
+          output: web
+
+        - title: LanmanServer\Shares
+          url: /windows_registry_systeminfo.html#lanmanservershares
+          output: web
+
+        - title: FirewallPolicy
+          url: /windows_registry_systeminfo.html#firewallpolicy
+          output: web
+
+        - title: Installed applications (App Paths)
+          url: /windows_registry_systeminfo.html#installed-applications-app-paths
+          output: web
+
+        - title: Installed applications (Uninstall)
+          url: /windows_registry_systeminfo.html#installed-applications-uninstall
+          output: web
+
     - title: Amcache
       url: /windows_amcache.html
       output: web
@@ -172,6 +204,10 @@ entries:
 
     - title: 'Type - Registry'
       url: /tag_windows_registry.html
+      output: web
+
+    - title: 'Category - System information'
+      url: /tag_windows_system_information.html
       output: web
 
     - title: 'Category - File knowledge'
