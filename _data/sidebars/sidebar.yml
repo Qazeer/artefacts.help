@@ -207,6 +207,10 @@ entries:
       url: /tag_windows_local_persistence.html
       output: web
 
+    - title: 'Category - Defense evasion'
+      url: /tag_windows_defense_evasion.html
+      output: web
+
 - title: sidebar
   product: Linux
   folders:
