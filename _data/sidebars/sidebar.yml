@@ -142,6 +142,10 @@ entries:
           url: /windows_registry_systeminfo.html#installed-applications-uninstall
           output: web
 
+      - title: Shellbags
+        url: /windows_registry_shellbags.html
+        output: web
+
     - title: Amcache
       url: /windows_amcache.html
       output: web
