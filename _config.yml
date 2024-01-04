@@ -35,7 +35,7 @@ exclude:
 
 feedback_subject_line: artefacts.help
 
-feedback_email: qazeer@protonmail.com
+feedback_email: qazeer<at>protonmail<dot>com
 # used as a contact email for the Feedback link in the top navigation bar
 
 # feedback_disable: true

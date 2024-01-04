@@ -444,6 +444,11 @@ span.projectTitle {
     font-size:12px;
 }
 
+.footerHomeLinks {
+    display: flex;
+    justify-content: space-between;
+}
+
 img.screenshotSmall {
     max-width: 300px;
 }
