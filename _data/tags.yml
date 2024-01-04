@@ -5,6 +5,7 @@ allowed-tags:
   - windows_ntfs_filesystem
   - windows_etw
   - windows_registry
+  - windows_system_information
   - windows_file_knowledge
   - windows_files_and_folders_access
   - windows_program_execution
