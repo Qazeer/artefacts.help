@@ -41,6 +41,10 @@ entries:
         url: /windows_usnjrnl.html
         output: web
 
+      - title: MACB timestamps
+        url: /windows_macb_timestamps.html
+        output: web
+
     - title: ETW
       type: subfolder
       output: web
