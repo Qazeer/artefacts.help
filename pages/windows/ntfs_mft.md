@@ -1,5 +1,5 @@
 ---
-title: NTFS $MFT, $MFTMir, and $Bitmap
+title: NTFS - $MFT, $MFTMir, and $Bitmap
 summary: 'The Master File Table (MFT) is the main element of any NTFS partition and contain a file record for all existing (and very recently deleted) files written on the partition.\n\nThe $MFTMirr file is the first entry in the MFT and contains the first 4 entries of the MFT as a recovery mechanism.\n\nThe $Bitmap file tracks the allocation status (allocated or unused) of the clusters of the volume.'
 keywords: Filesystem, MFT, MFTMir, LogFile, Bitmap, $MFT, $MFTMir, $Bitmap
 tags:

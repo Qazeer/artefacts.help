@@ -1,5 +1,5 @@
 ---
-title: NTFS $Secure
+title: NTFS - $Secure
 summary: 'The $Secure file contains the security descriptor for all the files and folders on a NTFS volume.'
 keywords: Filesystem, Secure, $Secure
 tags:

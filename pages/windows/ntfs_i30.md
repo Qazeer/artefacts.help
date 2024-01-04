@@ -1,5 +1,5 @@
 ---
-title: 'NTFS $I30 ($INDEX_ROOT, $INDEX_ALLOCATION, and $Bitmap)'
+title: 'NTFS - $I30 ($INDEX_ROOT, $INDEX_ALLOCATION, and $Bitmap)'
 summary: 'The NTFS index attributes $INDEX_ROOT and $INDEX_ALLOCATION are MFT attributes that represent directories and store index records.\n\nEach file in a directory is associated with an index record. The record contains information on the file it references in a $FILE_NAME (0x30) attribute: file name, size, parent directory and a set of MACB timestamps (copied from the MFT file record $STANDARD_INFORMATION of the file).'
 keywords: '$I30, I30, 0x30, index attributes, index record, $INDEX_ROOT, INDEX_ROOT, $INDEX_ALLOCATION, INDEX_ALLOCATION, $FILE_NAME, FILE_NAME, $Bitmap, Bitmap'
 tags:

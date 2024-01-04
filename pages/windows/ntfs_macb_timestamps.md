@@ -1,5 +1,5 @@
 ---
-title: NTFS MACB timestamps and timestomping
+title: NTFS - MACB timestamps and timestomping
 summary: 'On NTFS filesystems, each file posses (at least) two attributes that hold (among other information) Modification, Access, Change and Birth (MACB) timestamps: $STANDARD_INFORMATION and $FILENAME attributes.\n\nThe $STANDARD_INFORMATION and $FILENAME timestamps are not updated similarly depending on the operation.\n\nTimestomping is the action of modifying the timestamps of a file, generally to evade detection.\n\nTimestomping may be detected using a number of techniques:\n - Identifying $STANDARD_INFORMATION timestamps older than $FILENAME timestamps.\n - Using UsnJrnl records.\n - Identifying non nano-second precise $STANDARD_INFORMATION timestamps.\n - Using MFT entry numbers.\n\nHowever each technique is prone to false-positives and false-negatives.'
 keywords: Filesystem, MACB timestamps, STANDARD_INFORMATION, $STANDARD_INFORMATION, FILENAME, $FILENAME, timestomping
 tags:
@@ -110,7 +110,7 @@ Note that in addition to being the ones that can be easily modified, the
 the ones (generally) displayed by the `Windows Explorer`.
 
 Most of timestomping detections below rely on information stored in the `$MFT`
-file. Refer to the [$MFT page](./mft.md) for more information on how to
+file. Refer to the [$MFT page](./ntfs_mft.md) for more information on how to
 parse the `$MFT` artefact.
 
 #### $STANDARD_INFORMATION timestamps older than $FILENAME timestamps
@@ -147,8 +147,8 @@ record to be logged in the `UsnJrnl`.
 This detection method is however prone to false-negatives as the `UsnJrnl` has
 usually limited historical data.
 
-Refer to the [`$UsnJrnl` page](./usnjrnl.md) for more information on how to
-parse the `UsnJrnl` artefact.
+Refer to the [`$UsnJrnl` page](./ntfs_usnjrnl.md) for more information on how
+to parse the `UsnJrnl` artefact.
 
 #### Non nano-second precise $STANDARD_INFORMATION timestamps
 
