@@ -142,6 +142,10 @@ entries:
           url: /windows_registry_systeminfo.html#installed-applications-uninstall
           output: web
 
+      - title: BAM / DAM
+        url: /windows_registry_bam_dam.html
+        output: web
+
       - title: MUICache
         url: /windows_registry_muicache.html
         output: web
