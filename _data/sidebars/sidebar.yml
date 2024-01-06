@@ -190,6 +190,10 @@ entries:
       url: /windows_pca.html
       output: web
 
+    - title: PowerShell ConsoleHost_history
+      url: /windows_consolehost_history.html
+      output: web
+
     - title: Prefetch
       url: /windows_prefetch.html
       output: web
