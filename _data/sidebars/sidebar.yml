@@ -75,6 +75,10 @@ entries:
           url: /windows_etw_authentication_dc_host.html
           output: web
 
+      - title: PowerShell activity
+        url: /windows_etw_powershell.html
+        output: web
+
     - title: Registry
       type: subfolder
       output: web
