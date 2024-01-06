@@ -186,6 +186,10 @@ entries:
       url: /windows_lnk.html
       output: web
 
+    - title: .NET CLR UsageLogs
+      url: /windows_net_clr_usagelogs.html
+      output: web
+
     - title: PCA
       url: /windows_pca.html
       output: web
