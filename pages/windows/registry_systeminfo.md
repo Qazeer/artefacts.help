@@ -5,7 +5,8 @@ keywords: 'ComputerName, CurrentVersion, Policy, TimeZoneInformation, Select, In
 tags:
   - windows_registry
   - windows_system_information
-last_updated: 2024-01-04
+location: 'HKLM\SYSTEM - ComputerName\n\nHKLM\SOFTWARE - CurrentVersion\n\nHKLM\SECURITY - Policy\n\nHKLM\SYSTEM - TimeZoneInformation\n\nHKLM\SYSTEM - Select\n\nHKLM\SYSTEM - Interfaces\n\nHKLM\SYSTEM - NetworkList\n\nHKLM\SYSTEM - LanmanServer\Shares\n\nHKLM\SYSTEM - FirewallPolicy\n\nHKLM\SOFTWARE & NTUSER - App Paths\n\nHKLM\SOFTWARE & NTUSER - Uninstall'
+last_updated: 2024-01-06
 sidebar: sidebar
 permalink: windows_registry_systeminfo.html
 folder: windows
