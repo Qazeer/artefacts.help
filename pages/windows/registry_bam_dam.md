@@ -5,7 +5,7 @@ keywords:
 tags:
   - windows_program_execution
   - windows_registry
-location: 'File: %SystemRoot%\System32\config\SYSTEM\n\nRegistry key:\nHKLM\SYSTEM\CurrentControlSet\Services\bam\UserSettings\<SID>\*\nHKLM\SYSTEM\CurrentControlSet\Services\dam\UserSettings\<SID>\*\n\nStarting from Windows 10 1809:\n HKLM\SYSTEM\CurrentControlSet\Services\bam\State\UserSettings\<SID>\*\nHKLM\SYSTEM\CurrentControlSet\Services\dam\State\UserSettings\<SID>\*'
+location: 'File: <SYSTEMROOT>\System32\config\SYSTEM\n\nRegistry key:\nHKLM\SYSTEM\CurrentControlSet\Services\bam\UserSettings\<SID>\*\nHKLM\SYSTEM\CurrentControlSet\Services\dam\UserSettings\<SID>\*\n\nStarting from Windows 10 1809:\n HKLM\SYSTEM\CurrentControlSet\Services\bam\State\UserSettings\<SID>\*\nHKLM\SYSTEM\CurrentControlSet\Services\dam\State\UserSettings\<SID>\*'
 last_updated: 2024-01-05
 sidebar: sidebar
 permalink: windows_registry_bam_dam.html
