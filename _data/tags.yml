@@ -9,6 +9,7 @@ allowed-tags:
   - windows_file_knowledge
   - windows_files_and_folders_access
   - windows_program_execution
+  - windows_powershell_activity
   - windows_browsing_history
   - windows_lateral_movement
   - windows_local_persistence

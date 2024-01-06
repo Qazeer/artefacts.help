@@ -5,6 +5,7 @@ keywords: 'PowerShell, Script Block Logging, Windows PowerShell.evtx, Microsoft-
 tags:
   - windows_etw
   - windows_program_execution
+  - windows_powershell
 location: 'Channels:\n\nWindows PowerShell.\n Events: 400, 403, 500, 501, 600, 800.\n\nMicrosoft-Windows-PowerShell\Operational.\nEvents: 4100, 4103, 4104, 40961, 40962, 53504.\n\nMicrosoft-Windows-AppLocker\MSI and Script.\nEvents: 8005, 8006.'
 last_updated: 2024-01-06
 sidebar: sidebar

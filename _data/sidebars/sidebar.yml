@@ -254,6 +254,10 @@ entries:
       url: /tag_windows_program_execution.html
       output: web
 
+    - title: 'Category - PowerShell activity'
+      url: /tag_windows_powershell_activity.html
+      output: web
+
     - title: 'Category - Browsing history'
       url: /tag_windows_browsing_history.html
       output: web
