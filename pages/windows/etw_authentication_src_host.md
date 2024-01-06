@@ -6,7 +6,7 @@ tags:
   - windows_etw
   - windows_lateral_movement
   - windows_lateral_movement_src
-location: 'Channel: Security'
+location: 'Channel: Security.\nEvents: 4648, 4624 (LogonType 9).'
 last_updated: 2024-01-02
 sidebar: sidebar
 permalink: windows_etw_authentication_src_host.html

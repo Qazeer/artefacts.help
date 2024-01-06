@@ -6,7 +6,7 @@ tags:
   - windows_etw
   - windows_lateral_movement
   - windows_lateral_movement_dst
-location: 'Channel: Security'
+location: 'Channel: Security.\nEvents: 4624, 4625, 4672, 4634, 4647, 4649, 4778, 4779, 4800, 4801, 4802, 4803, 5378.'
 last_updated: 2024-01-02
 sidebar: sidebar
 permalink: windows_etw_authentication_dst_host.html
