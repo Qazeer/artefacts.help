@@ -166,6 +166,10 @@ entries:
         url: /windows_registry_muicache.html
         output: web
 
+      - title: RecentApps
+        url: /windows_registry_recentapps.html
+        output: web
+
       - title: Shellbags
         url: /windows_registry_shellbags.html
         output: web
