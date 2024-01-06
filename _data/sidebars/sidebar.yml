@@ -146,6 +146,10 @@ entries:
         url: /windows_registry_bam_dam.html
         output: web
 
+      - title: FeatureUsage
+        url: /windows_registry_featureusage.html
+        output: web
+
       - title: MUICache
         url: /windows_registry_muicache.html
         output: web
