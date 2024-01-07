@@ -192,6 +192,10 @@ entries:
         url: /windows_registry_runmru.html
         output: web
 
+      - title: Services
+        url: /windows_registry_services.html
+        output: web
+
       - title: Shellbags
         url: /windows_registry_shellbags.html
         output: web
