@@ -158,6 +158,24 @@ entries:
         url: /windows_registry_bam_dam.html
         output: web
 
+      - title: ComDlg32
+        type: subfolder
+        url: /windows_registry_comdlg32.html
+        output: web
+        subfolderitems:
+
+        - title: OpenSaveMRU / OpenSavePidlMRU
+          url: /windows_registry_comdlg32.html#opensavemru--opensavepidlmru
+          output: web
+
+        - title: LastVisitedMRU / LastVisitedPidlMRU
+          url: /windows_registry_comdlg32.html#lastvisitedmru--lastvisitedpidlmru--lastvisitedpidlmrulegacy
+          output: web
+
+        - title: CIDSizeMRU
+          url: /windows_registry_comdlg32.html#cidsizemru
+          output: web
+
       - title: FeatureUsage
         url: /windows_registry_featureusage.html
         output: web
