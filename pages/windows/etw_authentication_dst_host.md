@@ -44,7 +44,7 @@ The `4624` event yields information such as:
     identify the `NTLM` version in use (`LM`, `NTLM V1`, `NTLM V2`).
   - The logon type in the `LogonType` field (detailed below).
   - The privileges level in the `ElevatedToken` field. If set to `%%1842`
-    (`Yes`), the session the event represents runs in a elevated context. The
+    (`Yes`), the session the event represents runs in an elevated context. The
     event can be correlated with the `Security` event `EID: 4672` to precisely
     identify the privilege tokens of the session.
   - The impersonation level of the event in the `ImpersonationLevel` field
@@ -58,7 +58,7 @@ The `LogonType` field provides information on how the logging was established:
 
 | Logon Type | Description |
 |------------|-------------|
-| 2          | Interactive logon. <br><br> *Logon type generated for on screen login at the keyboard as well as some remote access with specific tools. <br> Note that access made using `PsExec` with an user specified using the `-u` option will result in an interactive logon.* |
+| 2          | Interactive logon. <br><br> *Logon type generated for on screen login at the keyboard as well as some remote access with specific tools. <br> Note that access made using `PsExec` with a user specified using the `-u` option will result in an interactive logon.* |
 | 3          | Network logon (share access, etc.). <br><br> *Logon type generated for access over the network (access to `SMB` share, `PsExec`, `WMI` / `WinRM`, etc.).* |
 | 4          | Batch logon (scheduled task) |
 | 5          | Service logon (service startup) |

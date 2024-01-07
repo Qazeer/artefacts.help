@@ -28,7 +28,7 @@ system use).
 
 The `UsnJrnl` is composed of two named data streams:
 
-  - The `$Max` stream stores the meta data of the change.
+  - The `$Max` stream stores the metadata of the change.
 
   - The `$J`  stream stores the actual change log records.
 

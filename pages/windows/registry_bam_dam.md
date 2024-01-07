@@ -18,7 +18,7 @@ Introduced in `Windows 10`'s Fall Creators update - version 1709, the
 `Background Activity Moderator (BAM)` is a mostly undocumented feature that
 controls the programs executed in the background. The
 `Desktop Activity Moderator (DAM)` is a feature for devices supporting the
-"Connected Standby" mode (i.e when a device is turned on, but its display will
+"Connected Standby" mode (i.e. when a device is turned on, but its display will
 be turned off). As a result, the `BAM` registry keys will contain data on any
 devices, while `DAM` registry keys will only contain data on mobile devices.
 

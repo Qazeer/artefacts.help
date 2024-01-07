@@ -150,8 +150,10 @@ improving performance.
 
 #### [CLI] EvtxECmd
 
-`EvtxECmd` can be used to parse `EVTX` into CSV, JSON, or XML outputs, without
-doing a full per fields extract however.
+`EvtxECmd` can be used to parse `EVTX` into CSV, JSON, or XML outputs. However,
+contrary to `winlogbeat`, `EvtxECmd` does not extract the fields in a one to one
+manner, but groups the event payload into a limited number of fields (in order
+to support CSV output).
 
 Associated `KAPE` modules: `EvtxECmd` and `EvtxECmd_RDP`.
 

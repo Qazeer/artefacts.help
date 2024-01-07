@@ -75,7 +75,7 @@ on the version of the Windows operating system in use:
     represents the insertion position in the `Shimcache`.
     **The lower the value, generally the more recently the program was
     shimmed.** However, `Shimcache` entries can sometimes be updated in place,
-    with out generating a new entry with a lower cache entry position.
+    without generating a new entry with a lower cache entry position.
 
   - From `Windows Vista` / `Windows Server 2008` up to `Windows 8.1` /
     `Windows Server 2012 R2`, the (undocumented) `Insert Flag` flag which, when

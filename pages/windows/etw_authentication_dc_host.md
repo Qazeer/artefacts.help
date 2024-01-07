@@ -29,6 +29,6 @@ login session in this scenario, no `4624` or `4625` events will be logged.**
 
 **However, for a remote interactive logon on a domain-joined destination host,
 a `4624` event of LogonType `3` (and `4768` + `4769` events) will be logged on
-a Domain Controller** (potentially different than the one that processed the
+a Domain Controller** (potentially different from the one that processed the
 authentication from the source host) originating from the destination host (as
 part of the interactive session opening process).

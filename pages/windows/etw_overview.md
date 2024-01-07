@@ -25,7 +25,7 @@ PowerShell activity, etc.
 
 Events can eventually be written to event log `channels` (assimilable to the
 log file names), `event tracing` log files, or both. The provider itself
-defines the event log `channel(s)` to which events should be written (trough
+defines the event log `channel(s)` to which events should be written (through
 its ["instrumentation manifest" for manifested-based providers](https://learn.microsoft.com/en-us/windows/win32/wes/defining-channels)).
 Providers can define new `channels` or import existing `channels`. While the
 provider may use different `channels` for different events, each event can only

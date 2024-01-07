@@ -1,6 +1,6 @@
 ---
 title: Registry - Shellbags
-summary: 'The Shellbags are Windows Registry keys designed as an user experience enhancing feature to keep track of Windows explorer graphical display settings on a folder-by-folder basis.\n\nShellbags contain folders and network shares to which a given user has navigated (using the Windows Explorer), but not the content of a directory. Files will thus not be referenced and subdirectories will only be referenced if they were navigated into.\n\nShellbag entries are stored in registry as a tree-like hierarchical data structure, allowing to reconstitute the browsed directories arborescence.\n\nInformation of interest, for each Shellbags entry on a given target / directory:\n\n- Target name and absolute path.\n\n- Target Modified, Access, and Created (MAC) timestamps (in UTC) retrieved from the $MFT at the Shellbag entry creation (and not further updated).\n\n- The order in which the sub targets of a target were accessed (maintained in a MRUList list).\n\nAdditionally, the first and last interacted timestamps can be indirectly deducted for some targets.'
+summary: 'The Shellbags are Windows Registry keys designed as a user experience enhancing feature to keep track of Windows explorer graphical display settings on a folder-by-folder basis.\n\nShellbags contain folders and network shares to which a given user has navigated (using the Windows Explorer), but not the content of a directory. Files will thus not be referenced and subdirectories will only be referenced if they were navigated into.\n\nShellbag entries are stored in registry as a tree-like hierarchical data structure, allowing to reconstitute the browsed directories arborescence.\n\nInformation of interest, for each Shellbags entry on a given target / directory:\n\n- Target name and absolute path.\n\n- Target Modified, Access, and Created (MAC) timestamps (in UTC) retrieved from the $MFT at the Shellbag entry creation (and not further updated).\n\n- The order in which the sub-targets of a target were accessed (maintained in a MRUList list).\n\nAdditionally, the first and last interacted timestamps can be indirectly deducted for some targets.'
 keywords: Shellbags, BagMRU, ShellBagsExplorer, SBECmd, MRUListEx
 tags:
   - windows_registry
@@ -14,7 +14,7 @@ folder: windows
 
 ### Overview
 
-The `Shellbags` are `Windows Registry keys` designed as an user experience
+The `Shellbags` are `Windows Registry keys` designed as a user experience
 enhancing feature to keep track of Windows explorer graphical display settings
 on a folder-by-folder basis. For instance, a `Shellbag` entry is used to store
 the `View` mode of a folder (details, list, small / medium / large icons) as
@@ -54,7 +54,7 @@ different level of data depending on the activity):
 
 `Shellbag` entries are stored in registry as a tree-like data structure, with
 the root target having the topmost `BagMRU` key. This allows the reconstitution
-of the browsed directories arborescence. Each sub-target (sub directory for
+of the browsed directories arborescence. Each sub-target (subdirectory for
 example) of the parent target are then represented with both:
 
   - A registry subkey, named with a numerical value (starting from `0`).
@@ -64,8 +64,8 @@ example) of the parent target are then represented with both:
     target's name.
 
 Each `Shellbag` `BagMRU` registry key also contains a `MRUListEx` value, that
-maintains the entries visited order, i.e the order in which the sub targets of
-a target were accessed (the last sub target accessed having a `MRU position`
+maintains the entries visited order, i.e. the order in which the sub-targets of
+a target were accessed (the last sub-target accessed having a `MRU position`
 of 0).
 
 For example, `My Computer` will be associated with the topmost `BagMRU` key,
@@ -76,7 +76,7 @@ was accessed third, and so on and so forth. A hierarchical view of the
 As the `Shellbags` entries are stored in user's specific registry hives,
 **targets** (folders, `Control Panel` interfaces, etc.) **access can be tied
 to a given user** through its `Shellbags`. `Shellbags` entries are populated
-only upon interaction (i.e are not prepopulated), the mere presence of a
+only upon interaction (i.e. are not prepopulated), the mere presence of a
 `Shellbag` entry for a target is thus evidence that the user interacted with
 the given target. `Shellbags` entries are not automatically deleted upon
 deletion of the related folders and can thus be a **source of historical
@@ -92,31 +92,31 @@ forensic interest:
     updated).
 
   - Each entry in `ShellBags` `BagMRU` maintain a `MRUListEx` list, which
-    records **the order in which the sub targets of a target were accessed**
-    (the last sub target accessed having a `MRU position` of 0).
+    records **the order in which the sub-targets of a target were accessed**
+    (the last sub-target accessed having a `MRU position` of 0).
 
 The **first and last interacted timestamps** can be **indirectly deducted
 for some targets**:
 
   - The `First Interacted` timestamp can be inferred for some targets thanks to
     the tree like data structure of `ShellBags` entry. Indeed, for entries that
-    do not have subkeys (i.e directory for which no subdirectory were accessed)
+    do not have subkeys (i.e. directory for which no subdirectory were accessed)
     the `First Interacted` timestamp is equal to the key's `LastWriteTime`
     timestamp. This is due to the fact that the key is created when a target is
     first accessed, and further activity for that target (such as display
     settings modifications) will only update the key's values. In such
     circumstances, the `LastWriteTime` timestamp reflect the timestamp of the
     key initial creation (as it is not updated upon updates to a key's values).
-    When a subkey is created for the target (i.e when a subdirectory is
+    When a subkey is created for the target (i.e. when a subdirectory is
     accessed for that particular directory), the timestamp becomes unreliable
     as it reflect the creation of the subkey.
 
-  - The `Last Interacted` timestamp can be deducted for **the sub target that
+  - The `Last Interacted` timestamp can be deducted for **the sub-target that
     was last interacted with**. Indeed, as each `Shellbag` entry corresponds to
     a registry key, the key's `LastWriteTime` timestamp indicates when the
     `Shellbag` entry was last updated. The child-bag / sub-target that was last
     interacted with being known (`MRU position` of 0), this timestamp
-    correspond to the last interaction timestamp for the sub target that was
+    correspond to the last interaction timestamp for the sub-target that was
     last interacted with.
 
 Note however that major updates of the Windows operating system may result in

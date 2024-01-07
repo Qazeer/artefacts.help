@@ -20,7 +20,7 @@ desktop applications to new versions of the Windows operating system (like the
 
 `PCA` only hold information about executions of programs with a graphical
 interface, installed or from a portable executable, or command line programs
-executed as GUI programs (such as by double clicking on the CLI executable
+executed as GUI programs (such as by double-clicking on the CLI executable
 from `Windows Explorer`).
 
 ### Information of interest
@@ -38,7 +38,7 @@ The information stored by the `PCA` is split in 3 text based files:
 
   - `PcaGeneralDb0.txt` and `PcaGeneralDb1.txt`:
 
-    - Less entries than in the `PcaAppLaunchDic.txt` file, with most entries
+    - Fewer entries than in the `PcaAppLaunchDic.txt` file, with most entries
       seemingly related to non `0x0` execution exit code.
 
     - One entry per line, containing the following information in a pipe

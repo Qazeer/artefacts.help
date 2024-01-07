@@ -29,7 +29,7 @@ Globally, the following points should be noted:
     move with the date of the operation itself but are not reliability updated
     on regular file operations (access, modification, rename, deletion).
     **However as the `$FILENAME` `MAB` timestamps are updated / copied from the
-    `$STANDARD_INFORMATION` `MAB` timestamps on file rename or volume-local
+    `$STANDARD_INFORMATION` `MAB` timestamps, on file rename or volume-local
     file move, they are prone to false-negatives.** Indeed, by timestomping the
     `$STANDARD_INFORMATION` timestamps then renaming or moving the file, the
     `$FILENAME` timestamps will be indirectly timestomped as well.
@@ -41,7 +41,7 @@ Globally, the following points should be noted:
 
   - On local file moves (on the same `NTFS` partition), the
     `$STANDARD_INFORMATION` `C` `$FILENAME` `C` timestamps are updated with the
-    timestamp of the move). On file moves (between `NTFS` partitions), the
+    timestamp of the move. On file moves (between `NTFS` partitions), the
     `$STANDARD_INFORMATION` `AC` timestamps are updated, also with the
     timestamp of the move.
 
@@ -75,7 +75,7 @@ Additionally, another `$FILENAME` attribute can be found for each file in the
 directory index of their directory of residency. Indeed directory are stored
 on `NTFS` partitions as `B+ tree data structure` with the keys, representing
 files and subdirectories, stored as `$FILENAME` attributes. `MACB` timestamps
-for each files and subdirectories of a given directory can thus be found in the
+for each file and subdirectory of a given directory can thus be found in the
 directory index. The directory index are stored in `NTFS Index Attribute`
 files, also known as `INDX` files and named `$I30` on disk.
 
@@ -156,7 +156,7 @@ The timestomping tool used may have limitation on the time precision they
 it for timestomped timestamps. For example, the tool may only allow precision
 down to the second level, while the `$STANDARD_INFORMATION` timestamps are
 precise down to the ten millionths of a second. In such case, the timestomped
-timestamps will be padded with zeros in place of the actual milli-seconds:
+timestamps will be padded with zeros in place of the actual milliseconds:
 `YYYY-MM-DD hh:mm:ss.0000000`.
 
 This detection method is however prone to false-positives as some utilities or

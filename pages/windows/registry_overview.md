@@ -1,6 +1,6 @@
 ---
 title: Registry - Overview
-summary: 'The Registry is a feature to store settings, for the operating system and applications, in system-wide or per users hierarchical databases or hives.\n\nBefore being written / committed to a file on disk, registry modifications can be written to Registry Transaction logs (such as SYSTEM.LOG1 and SYSTEM.LOG2 for the SYSTEM registry hive).'
+summary: 'The Registry is a feature to store settings, for the operating system and applications, in system-wide or per-users hierarchical databases or hives.\n\nBefore being written / committed to a file on disk, registry modifications can be written to Registry Transaction logs (such as SYSTEM.LOG1 and SYSTEM.LOG2 for the SYSTEM registry hive).'
 keywords: 'HKEY_LOCAL_MACHINE, HKLM, SYSTEM, SOFTWARE, SAM, HKEY_CURRENT_USER, HKCU, NTUSER.dat, UsrClass, Registry Transaction logs, SYSTEM.LOG'
 tags:
   - windows_registry
@@ -13,7 +13,7 @@ folder: windows
 
 The **Windows Registry is a Windows feature to store low-level settings**, for
 the operating system and for applications (that opt to use the registry), **in
-the form of system-wide or per users hierarchical databases or hives**.
+the form of system-wide or per-users hierarchical databases or hives**.
 
 A registry hive is a group of keys, subkeys, and values in the registry, with
 supporting file(s) on disk. Registry hives are loaded in memory upon system

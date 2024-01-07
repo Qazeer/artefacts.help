@@ -1,6 +1,6 @@
 ---
 title: Windows Search database
-summary: 'The Windows Search database provides an index to the Windows Search feature to improve search speed by indexing content from a subset of folders and files.\n\nInformation of interest: files and folders from the Users folders (file name, path, size, attributes, MAC timestamps, and sometimes part of the content of smaller files), Outlook mail data (timestamp of reception and possible mail content), OneNote notes title, and Internet explorer history.'
+summary: 'The Windows Search database provides an index to the Windows Search feature to improve search speed by indexing content from a subset of folders and files.\n\nInformation of interest: files and folders from the Users folders (file name, path, size, attributes, MAC timestamps, and sometimes part of the content of smaller files), Outlook mail data (timestamp of reception and possible mail content), OneNote notes title, and Internet Explorer history.'
 keywords: Search database, Windows.edb, Windows.db, Windows-gather.db
 tags:
   - windows_file_knowledge
@@ -37,7 +37,7 @@ By default, only items from the following sources are scanned and indexed:
 
   - OneNote notes title.
 
-  - Internet explorer history (URLs, timestamp of last visit).
+  - Internet Explorer history (URLs, timestamp of last visit).
 
 ### Tool(s)
 

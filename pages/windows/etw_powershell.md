@@ -27,9 +27,9 @@ a Microsoft pre-defined list).
 Upon executing any PowerShell command or script, either locally or using PS
 remoting, Windows may write events to the following files:
 
-  - `Windows PowerShell.evtx`
+  - `Windows PowerShell.evtx`.
 
-  - `Microsoft-Windows-PowerShell\Operational.evtx`
+  - `Microsoft-Windows-PowerShell\Operational.evtx`.
 
   - `Microsoft-Windows-PowerShell\Analytic.etl` (non default).
 
@@ -37,7 +37,7 @@ As PowerShell implements its remoting functionality through the `Windows Remote
 Management (WinRM)` service, remote PowerShell activity may induce events in
 the following files:
 
-  - `Microsoft-Windows-WinRM\Operational.evtx`
+  - `Microsoft-Windows-WinRM\Operational.evtx`.
 
   - `Microsoft-Windows-WinRM\Analytic.etl` (non default).
 

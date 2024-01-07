@@ -48,7 +48,7 @@ The following notable root keys can be of forensic interest:
     `AssociatedFileEntries` and `UnassociatedFileEntries`):
 
     - Data about program executions if they are shimmed, programs part of an
-      installed application, or programs part of scanned directories (with out
+      installed application, or programs part of scanned directories (without
       requiring execution of the associated programs).
 
     - Data available (depending on the `Amcache` libraries version): executable

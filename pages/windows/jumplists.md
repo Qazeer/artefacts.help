@@ -1,6 +1,6 @@
 ---
 title: Jumplists
-summary: 'Introduced in Windows 7, Jumplists are linked to a taskbar user experience-enhancing feature that allows users to "jump" to files, folders or others elements by right clicking on open applications in the Windows taskbar.\n\nInformation of interest: target file absolute path, size, attributes, and Modified, Access, and Birth timestamps (updated whenever the file is "jumped" to).'
+summary: 'Introduced in Windows 7, Jumplists are linked to a taskbar user experience-enhancing feature that allows users to "jump" to files, folders or others elements by right-clicking on open applications in the Windows taskbar.\n\nInformation of interest: target file absolute path, size, attributes, and Modified, Access, and Birth timestamps (updated whenever the file is "jumped" to).'
 keywords: Jumplists
 tags:
   - windows_files_and_folders_access
@@ -16,7 +16,7 @@ folder: windows
 
 Introduced in `Windows 7`, `Jumplists` are linked to a taskbar user
 experience-enhancing feature that allows users to "jump" to files, folders
-or others elements by right clicking on open applications in the `Windows
+or others elements by right-clicking on open applications in the `Windows
 taskbar`. The `Windows Explorer`'s `Quick Access` feature also stores entries
 in `Jumplists`.
 
