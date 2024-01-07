@@ -188,6 +188,10 @@ entries:
         url: /windows_registry_recentapps.html
         output: web
 
+      - title: RunMRU
+        url: /windows_registry_runmru.html
+        output: web
+
       - title: Shellbags
         url: /windows_registry_shellbags.html
         output: web
