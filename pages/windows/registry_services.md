@@ -40,8 +40,8 @@ service name root key):
     loading services from `DLL` files. Services are organized into related
     `Service Host Groups`, and each group runs inside a different instance of
     the `Service Host` process.
-    The list of services defined in a `Service Host Group` is set in the ``
-    registry key.
+    The list of services defined in a `Service Host Group` is set in the
+    `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost` registry key.
 
     Two other argument may be specified to the `Service Host` process:
       - `-s <SERVICE_NAME>`: to only load the specified service from the
