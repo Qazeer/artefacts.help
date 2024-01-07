@@ -200,6 +200,10 @@ entries:
         url: /windows_registry_userassist.html
         output: web
 
+      - title: WordWheelQuery
+        url: /windows_registry_wordwheelquery.html
+        output: web
+
     - title: Amcache
       url: /windows_amcache.html
       output: web
