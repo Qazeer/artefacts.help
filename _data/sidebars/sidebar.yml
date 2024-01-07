@@ -248,6 +248,10 @@ entries:
       url: /windows_ual.html
       output: web
 
+    - title: WebCacheV01
+      url: /windows_webcachev01.html
+      output: web
+
     - title: Windows Search Database
       url: /windows_search_db.html
       output: web
