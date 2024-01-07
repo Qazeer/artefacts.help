@@ -120,7 +120,7 @@ for some targets**:
     last interacted with.
 
 Note however that major updates of the Windows operating system may result in
-modification of `ShellBags` entries, resulting in updated last written
+modification of `ShellBags` entries, resulting in updated last write
 timestamp.
 
 ### Tool(s)
