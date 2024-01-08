@@ -79,6 +79,23 @@ entries:
           url: /windows_etw_authentication_dc_host.html
           output: web
 
+      - title: Remote Desktop
+        type: subfolder
+        output: web
+        subfolderitems:
+
+        - title: Destination host
+          url: /windows_etw_remote_desktop_dst_host.html
+          output: web
+
+        - title: Source host
+          url: /windows_etw_remote_desktop_src_host.html
+          output: web
+
+        - title: Remote Desktop Gateway
+          url: /windows_etw_remote_desktop_rdg_host.html
+          output: web
+
       - title: Process creation
         url: /windows_etw_process_creation.html
         output: web
@@ -332,6 +349,23 @@ entries:
       - title: Source host
         url: /tag_windows_lateral_movement_src.html
         output: web
+
+      - title: Remote Desktop
+        type: subfolder
+        output: web
+        subfolderitems:
+
+        - title: All
+          url: /tag_windows_remote_desktop.html
+          output: web
+
+        - title: Destination host
+          url: /tag_windows_remote_desktop_dst.html
+          output: web
+
+        - title: Source host
+          url: /tag_windows_remote_desktop_src.html
+          output: web
 
     - title: 'Category - Local persistence'
       url: /tag_windows_local_persistence.html
