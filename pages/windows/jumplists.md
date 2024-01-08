@@ -5,6 +5,7 @@ keywords: Jumplists
 tags:
   - windows_files_and_folders_access
   - windows_file_knowledge
+  - windows_usb_activity
 location: 'AutomaticDestinations:\n<SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations\<APP_ID>.automaticDestinations-ms\n\nCustomDestinations:\n<SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Roaming\Microsoft\Windows\Recent\CustomDestinations\<APP_ID>.customDestinations-ms'
 last_updated: 2023-12-31
 sidebar: sidebar
@@ -51,6 +52,16 @@ file referenced in an application's `AutomaticDestinations` /
     updated whenever the file is "jumped" to.
 
   - the **number of times the target file was "jumped" to**.
+
+  - Whether the **target file was stored locally or on a remote network share**
+    through the specification of a `LocalPath` or `NetworkPath`.
+
+  - Occasionally **information on the volume that stored the target file**:
+    drive type (fixed vs removable storage media), serial number, and label /
+    name if any.
+
+  - Occasionally **information on the host on which the shortcut file is
+    present**: system's NetBIOS hostname and MAC address.
 
 As `JumpLists` are linked to an application, through an `AppId`, knowledge of
 the application that was used to open the files can be deducted if the
