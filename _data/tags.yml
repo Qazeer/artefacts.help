@@ -14,3 +14,4 @@ allowed-tags:
   - windows_lateral_movement
   - windows_local_persistence
   - windows_defense_evasion
+  - windows_usb_activity

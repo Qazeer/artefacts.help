@@ -312,6 +312,10 @@ entries:
       url: /tag_windows_network_usage.html
       output: web
 
+    - title: 'Category - USB activity'
+      url: /tag_windows_usb_activity.html
+      output: web
+
     - title: 'Category - Lateral movement'
       type: subfolder
       output: web
