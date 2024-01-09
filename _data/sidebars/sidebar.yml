@@ -209,6 +209,10 @@ entries:
         url: /windows_registry_runmru.html
         output: web
 
+      - title: Scheduled tasks (Taskcache)
+        url: /windows_registry_scheduled_tasks.html
+        output: web
+
       - title: Services
         url: /windows_registry_services.html
         output: web
