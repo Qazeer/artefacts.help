@@ -4,6 +4,8 @@ summary: 'The Services registry key hold the configuration information of the in
 keywords: 'Services, installed services, windows service, svchost'
 tags:
   - windows_local_persistence
+  - windows_lateral_movement
+  - windows_lateral_movement_dst
   - windows_registry
 location: 'File: <SYSTEMROOT>\System32\config\SYSTEM\n\nRegistry keys: HKLM\SYSTEM\CurrentControlSet\Services\<SERVICE_NAME>'
 last_updated: 2024-01-07
