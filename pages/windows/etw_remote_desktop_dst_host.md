@@ -27,3 +27,9 @@ folder: windows
 | `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `23: Remote Desktop Services: Session logoff succeeded` |
 | `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `25: Remote Desktop Services: Session reconnection succeeded` <br> Events with a source network address set to `LOCAL` can sometimes be generated for console, non `Remote Desktop` logins. |
 | `Microsoft-Windows-RemoteDesktopServices-RdpCoreTS/Operational` | Introduced in `Windows Server 2012`. <br><br> Default configuration. | Event `131: The server accepted a new TCP connection from client <IP>`. <br><br> Only indicates a network access to the `Remote Desktop` service. <br><br> For the aforementioned events, a `Source Network Address` of `::%16777216` could indicate that a `ngrok` tunnel was used to make `Remote Desktop` access. |
+
+### Tool(s)
+
+The [`LogParser`'s KAPE module `LogParser_RDPUsageEvents`](./windows_etw_tools#cli-logparser)
+can be used to parse EVTX files and extract the aforementioned `Remote Desktop`
+events into a CSV timeline.

@@ -109,3 +109,9 @@ following privileges:
 
 The `SubjectLogonId` field can be correlated with the `Security` event
 `EID: 4624` in order to retrieve more information on the logon session.
+
+### Tool(s)
+
+The [`LogParser`'s KAPE module `LogParser_LogonLogoffEvents`](./windows_etw_tools#cli-logparser)
+can be used to parse `Security.evtx` file(s) and extract the aforementioned
+authentication events into a CSV timeline.
