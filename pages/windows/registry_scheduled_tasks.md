@@ -4,10 +4,10 @@ summary: 'Scheduled tasks are used to automatically perform a task on the system
     stop), and trigger(s) and action(s).\n\nThe lifecycle timestamps, trigger(s), and action(s) are in binary, non human readable format.'
 keywords:
 tags:
+  - windows_registry
   - windows_local_persistence
   - windows_lateral_movement
   - windows_lateral_movement_dst
-  - windows_registry
 location: 'File: <SYSTEMROOT>\System32\config\SOFTWARE\n\nRegistry keys:\nHKLM\Software\Microsoft\Windows NT\CurrentVersion\Schedule\Taskcache\Tasks\<TASK_GUID>\nHKLM\Software\Microsoft\Windows NT\CurrentVersion\Schedule\Taskcache\Tree\<TASK_NAME>'
 last_updated: 2024-01-09
 sidebar: sidebar

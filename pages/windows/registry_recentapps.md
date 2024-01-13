@@ -3,9 +3,9 @@ title: Registry - RecentApps
 summary: 'Introduced in Windows 10 1607 and removed in Windows 10 1709 (with the key not present on subsequent versions), the RecentApps is an undocumented registry key that tracks program executions and files accessed by the tracked programs.\n\nInformation of interest: filename, last access timestamp, and run count execution of the application.\n\nAdditionally, 10 files accessed by the application (not necessarily the last files accessed) are tracked. For each file, the file name and file full path are referenced and the last access timestamp can be deduced (from the last write timestamp of the associated registry key).'
 keywords: 'RecentApps'
 tags:
+  - windows_registry
   - windows_program_execution
   - windows_files_and_folders_access
-  - windows_registry
 location: 'File: <SYSTEMDRIVE>:\Users\<USERNAME>\NTUSER.dat\n\nRegistry key:\nHKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search\RecentApps\<GUID>'
 last_updated: 2024-01-06
 sidebar: sidebar

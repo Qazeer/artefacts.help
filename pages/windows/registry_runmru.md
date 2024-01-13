@@ -3,9 +3,9 @@ title: Registry - RunMRU
 summary: 'The RunMRU registry tracks items launched from the Windows Run launcher (Windows + R shortcut).\n\nInformation of interest: values entered (program names, files / folders, URL, ...) in the Windows Run launcher, if associated with a successful launch.\n\nValues are ordered in a most recently used list. The timestamp of launch of the most recently launched item can thus be deduced from the last write timestamp of the registry key.'
 keywords: 'RunMRU, MRU, MRUList'
 tags:
+  - windows_registry
   - windows_program_execution
   - windows_files_and_folders_access
-  - windows_registry
 location: 'File: <SYSTEMDRIVE>:\Users\<USERNAME>\NTUSER.dat\n\nRegistry key:\nHKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RunMRU'
 last_updated: 2024-01-07
 sidebar: sidebar

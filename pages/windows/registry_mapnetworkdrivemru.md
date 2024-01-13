@@ -3,10 +3,10 @@ title: Registry - Map Network Drive MRU
 summary: 'The Map Network Drive MRU registry key references the recently used network shares.\n\nInformation of interest: UNC path of the network shares (such as "<IP | HOSTNAME>\<SHARE_NAME>").\n\nValues are ordered in a most recently used list. The timestamp of access of the most recently access share can thus be deduced from the last write timestamp of the registry key.'
 keywords: 'Map Network Drive MRU, Network share, MRUList'
 tags:
+  - windows_registry
   - windows_system_information
   - windows_lateral_movement
   - windows_lateral_movement_src
-  - windows_registry
 location: 'File:\n<SYSTEMDRIVE>:\Users\<USERNAME>\NTUSER.dat.\n\nRegistry key:\nHKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Map Network Drive MRU'
 last_updated: 2024-01-13
 sidebar: sidebar

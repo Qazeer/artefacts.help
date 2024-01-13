@@ -3,8 +3,8 @@ title: Registry - User Assist
 summary: 'The UserAssist registry key references GUI program executions, and, starting from Windows 7, shortcut executions.\n\nInformation of interest: full path of the executed program / shortcut (encoded in ROT13), sometimes the timestamp of the last execution, an unreliable run counter and focus count and time.'
 keywords:
 tags:
-  - windows_program_execution
   - windows_registry
+  - windows_program_execution
 location: 'File: <SYSTEMDRIVE>:\Users\<USERNAME>\NTUSER.dat\n\nRegistry key:\nHKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\<GUID>\Count\n\nWindows Xp:\n{75048700-EF1F-11D0-9888-006097DEACF9} (GUI program execution).\n\nStarting from Windows 7:\n{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA} (GUI program execution).\n{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F} (shortcut execution).'
 last_updated: 2024-01-05
 sidebar: sidebar

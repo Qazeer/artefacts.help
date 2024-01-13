@@ -3,9 +3,9 @@ title: Registry - Common Dialogs (ComDlg32)
 summary: 'The registry keys under ComDlg32 are linked to the Common Dialogs boxes, such as the "Open" and "Save as" dialog boxes.\n\nOpenSaveMRU / OpenSavePidlMRU information of interest: full path of the last 20 files, for each file extension, opened or saved through a Common Dialogs box.\n\nLastVisitedMRU / LastVisitedPidlMRU / LastVisitedPidlMRULegacy information of interest: some of the programs used to open / save the files tracked in the OpenSaveMRU / OpenSavePidlMRU registry key. The application filename and last folder accessed through a dialog box is tracked. The created and last accessed timestamps of each subfolder in the path of the last accessed folder are also stored.\n\nCIDSizeMRU information of interest: filename of the applications linked to Common Dialogs activity.'
 keywords: 'Common Dialogs, ComDlg32, OpenSaveMRU, OpenSavePidlMRU, LastVisitedMRU, LastVisitedPidlMRU, LastVisitedPidlMRULegacy, CIDSizeMRU'
 tags:
+  - windows_registry
   - windows_files_and_folders_access
   - windows_program_execution
-  - windows_registry
 location: 'File: <SYSTEMDRIVE>:\Users\<USERNAME>\NTUSER.dat\n\nRegistry subkeys under:\nHKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\\n\nOpenSaveMRU / OpenSavePidlMRU\n\nLastVisitedMRU / LastVisitedPidlMRU / LastVisitedPidlMRULegacy\n\nCIDSizeMRU'
 last_updated: 2024-01-07
 sidebar: sidebar

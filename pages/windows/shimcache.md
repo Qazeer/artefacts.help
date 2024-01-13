@@ -3,9 +3,9 @@ title: Application Compatibility Cache / Shimcache
 summary: 'Application compatibility feature that aim to maintain support of existing software to new versions of the Windows operating system.\n\nA Shimcache entry is created whenever a program is executed from a specific path. However, starting from Windows Vista and Windows Server 2008, entries may also be created for files in a directory that is accessed interactively.\n\nStores up to 1024 entries starting from the Windows Vista and Windows Server 2008 operating systems.\n\nInformation of interest: file full path, LastModifiedTime ($Standard_Information) timestamp of the file at the time of execution, the cache entry position (insertion position in the Shimcache), and from Windows Vista / Windows Server 2008 up to Windows 8.1 / Windows Server 2012 R2, an (undocumented) execution flag.'
 keywords: Shimcache, Application Compatibility Cache, shimming
 tags:
+  - windows_registry
   - windows_program_execution
   - windows_file_knowledge
-  - windows_registry
 location: 'SYSTEM registry hive.\n\nRegistry keys:\n\n>= Windows Server 2003 and Windows XP 64-bit:\nHKLM\SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCache\AppCompatCache\n\nWindows XP 32-bit:\nHKLM\SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatibility\AppCompatCache'
 last_updated: 2024-01-01
 sidebar: sidebar
