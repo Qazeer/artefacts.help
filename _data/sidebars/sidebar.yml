@@ -205,6 +205,10 @@ entries:
         url: /windows_registry_muicache.html
         output: web
 
+      - title: Map Network Drive MRU
+        url: /windows_registry_mapnetworkdrivemru.html
+        output: web
+
       - title: RecentApps
         url: /windows_registry_recentapps.html
         output: web
