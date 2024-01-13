@@ -301,6 +301,19 @@ entries:
       url: /windows_activities_cache.html
       output: web
 
+    - title: Third-party softwares
+      type: subfolder
+      output: web
+      subfolderitems:
+
+      - title: RULER Project - Anti-virus
+        external_url: https://ruler-project.github.io/ruler-project/RULER/av/
+        output: web
+
+      - title: RULER Project - Remote Monitoring and Management
+        external_url: https://ruler-project.github.io/ruler-project/RULER/remote/
+        output: web
+
   - title: By tag
     output: web
     folderitems:
