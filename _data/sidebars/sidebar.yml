@@ -175,6 +175,52 @@ entries:
           url: /windows_registry_systeminfo.html#installed-applications-uninstall
           output: web
 
+      - title: Devices and USB activity
+        type: subfolder
+        url: /windows_registry_usb_activity.html
+        output: web
+        subfolderitems:
+
+        - title: Windows devices terminology
+          url: /windows_devices_terminology.html
+          output: web
+
+        - title: Enum\USB
+          url: /windows_registry_usb_activity.html#enumusb
+          output: web
+
+        - title: Enum\USBSTOR
+          url: /windows_registry_usb_activity.html#enumusbstor
+          output: web
+
+        - title: Enum\SWD\WPDBUSENUM
+          url: /windows_registry_usb_activity.html#enumswdwpdbusenum
+          output: web
+
+        - title: MountedDevices
+          url: /windows_registry_usb_activity.html#mounteddevices
+          output: web
+
+        - title: DeviceClasses
+          url: /windows_registry_usb_activity.html#deviceclasses
+          output: web
+
+        - title: Windows Portable Devices
+          url: /windows_registry_usb_activity.html#windows-portable-devices
+          output: web
+
+        - title: VolumeInfoCache
+          url: /windows_registry_usb_activity.html#volumeinfocache
+          output: web
+
+        - title: EMDMgmt
+          url: /windows_registry_usb_activity.html#emdmgmt
+          output: web
+
+        - title: MountPoints2
+          url: /windows_registry_mountpoints2.html
+          output: web
+
       - title: BAM / DAM
         url: /windows_registry_bam_dam.html
         output: web
