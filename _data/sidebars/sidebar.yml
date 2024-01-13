@@ -104,6 +104,10 @@ entries:
         url: /windows_etw_powershell.html
         output: web
 
+      - title: Network shares access
+        url: /windows_etw_network_shares.html
+        output: web
+
     - title: Registry
       type: subfolder
       output: web
