@@ -327,6 +327,10 @@ entries:
       url: /windows_recycle_bin.html
       output: web
 
+    - title: Setupapi logs
+      url: /windows_setupapi_logs.html
+      output: web
+
     - title: Shimcache
       url: /windows_shimcache.html
       output: web
