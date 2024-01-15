@@ -108,6 +108,10 @@ entries:
         url: /windows_etw_network_shares.html
         output: web
 
+      - title: Devices and USB activity
+        url: /windows_etw_usb_activity.html
+        output: web
+
     - title: Registry
       type: subfolder
       output: web
