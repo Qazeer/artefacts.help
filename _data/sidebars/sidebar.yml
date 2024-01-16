@@ -283,6 +283,10 @@ entries:
         url: /windows_registry_shellbags.html
         output: web
 
+      - title: TypedURLs
+        url: /windows_registry_typedurls.html
+        output: web
+
       - title: UserAssist
         url: /windows_registry_userassist.html
         output: web
