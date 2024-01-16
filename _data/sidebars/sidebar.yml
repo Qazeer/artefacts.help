@@ -339,6 +339,10 @@ entries:
       url: /windows_srum.html
       output: web
 
+    - title: Thumbs.db / Thumbcache
+      url: /windows_thumbs-db_thumbcache.html
+      output: web
+
     - title: UAL / SUM
       url: /windows_ual.html
       output: web
