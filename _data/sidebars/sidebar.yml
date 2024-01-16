@@ -462,6 +462,10 @@ entries:
       url: /tag_windows_defense_evasion.html
       output: web
 
+    - title: 'Category - Miscellaneous'
+      url: /tag_windows_misc.html
+      output: web
+
 - title: sidebar
   product: Linux
   folders:

@@ -5,6 +5,7 @@ keywords: Thumbs.db, Thumbcache, picture, thumbnail, preview
 tags:
   - windows_files_and_folders_access
   - windows_file_knowledge
+  - windows_misc
 location: 'Thumbs.db:\nIndividual hidden files in their associated folders.\n\nStarting from Windows Vista, Thumbcache:\n<SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Local\Microsoft\Windows\Explorer\thumbcache_<RESOLUTION>.db files.'
 last_updated: 2024-01-16
 sidebar: sidebar
