@@ -351,6 +351,10 @@ entries:
       url: /windows_webcachev01.html
       output: web
 
+    - title: Windows Push Notifications (wpndatabase.db)
+      url: /windows_wpndatabase_db.html
+      output: web
+
     - title: Windows Search Database
       url: /windows_search_db.html
       output: web
