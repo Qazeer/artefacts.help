@@ -380,6 +380,39 @@ entries:
         external_url: https://ruler-project.github.io/ruler-project/RULER/remote/
         output: web
 
+      - title: Web browsers
+        type: subfolder
+        output: web
+        subfolderitems:
+
+        - title: Overview
+          url: /windows_web_browsers.html#overview
+          output: web
+
+        - title: Internet Explorer
+          url: /windows_web_browsers.html#internet-explorer
+          output: web
+
+        - title: Edge (Legacy)
+          url: /windows_web_browsers.html#edge-legacy
+          output: web
+
+        - title: Edge (Chronium-based)
+          url: /windows_web_browsers.html#edge-chronium-based
+          output: web
+
+        - title: Google Chrome
+          url: /windows_web_browsers.html#google-chrome
+          output: web
+
+        - title: Mozilla Firefox
+          url: /windows_web_browsers.html#mozilla-firefox
+          output: web
+
+        - title: Tools
+          url: /windows_web_browsers.html#tools
+          output: web
+
   - title: By tag
     output: web
     folderitems:
