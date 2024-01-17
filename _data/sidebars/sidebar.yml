@@ -147,6 +147,10 @@ entries:
           url: /windows_registry_systeminfo.html#security---policy
           output: web
 
+        - title: ProfileList
+          url: /windows_registry_systeminfo.html#profilelist
+          output: web
+
         - title: TimeZoneInformation
           url: /windows_registry_systeminfo.html#timezoneinformation
           output: web

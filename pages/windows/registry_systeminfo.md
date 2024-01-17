@@ -1,11 +1,11 @@
 ---
 title: Registry - System Information
-summary: 'Various information about the local system as stored in the registry: computer hostname and domain, network interfaces, system timezone, exposed network shares, firewall status and rules, installed applications, etc.'
-keywords: 'ComputerName, CurrentVersion, Policy, TimeZoneInformation, Select, Interfaces, NetworkList, FirewallPolicy, App Paths, Uninstall'
+summary: 'Various information about the local system as stored in the registry: computer hostname and domain, network interfaces, system timezone, exposed network shares, firewall status and rules, SID of users that have interactively logged-in, installed applications, etc.'
+keywords: 'ComputerName, CurrentVersion, Policy, ProfileList, TimeZoneInformation, Select, Interfaces, NetworkList, FirewallPolicy, App Paths, Uninstall'
 tags:
   - windows_registry
   - windows_system_information
-location: 'HKLM\SYSTEM - ComputerName\n\nHKLM\SOFTWARE - CurrentVersion\n\nHKLM\SECURITY - Policy\n\nHKLM\SYSTEM - TimeZoneInformation\n\nHKLM\SYSTEM - Select\n\nHKLM\SYSTEM - Interfaces\n\nHKLM\SYSTEM - NetworkList\n\nHKLM\SYSTEM - LanmanServer\Shares\n\nHKLM\SYSTEM - FirewallPolicy\n\nHKLM\SOFTWARE & NTUSER - App Paths\n\nHKLM\SOFTWARE & NTUSER - Uninstall'
+location: 'HKLM\SYSTEM - ComputerName\n\nHKLM\SOFTWARE - CurrentVersion\n\nHKLM\SECURITY - Policy\n\nHKLM\SOFTWARE - ProfileList\n\nHKLM\SYSTEM - TimeZoneInformation\n\nHKLM\SYSTEM - Select\n\nHKLM\SYSTEM - Interfaces\n\nHKLM\SYSTEM - NetworkList\n\nHKLM\SYSTEM - LanmanServer\Shares\n\nHKLM\SYSTEM - FirewallPolicy\n\nHKLM\SOFTWARE & NTUSER - App Paths\n\nHKLM\SOFTWARE & NTUSER - Uninstall'
 last_updated: 2024-01-06
 sidebar: sidebar
 permalink: windows_registry_systeminfo.html
@@ -26,6 +26,11 @@ folder: windows
 
 | Hive | Description | Location |
 | `HKLM\SECURITY` | Basic information on the system: <br><br> - Computer name and `SID`. <br><br> - Computer's domain and domain `SID` (for domain-joined hosts). | File: `%SystemRoot%\System32\config\SECURITY` <br><br> Registry keys under `HKLM\SECURITY\Policy`: <br><br> - `PolAcDmN`: computer name <br><br> - `PolAcDmS`: computer `SID` <br><br> - `PolDnDDN`: computer's domain name <br><br> - `PolPrDmS`: computer's domain `SID` |
+
+### ProfileList
+
+| Hive | Description | Location |
+| `HKLM\SOFTWARE` | `SID` to user profile folder correspondence for both local and domain accounts that have interactively logged on the system. Each account is referenced by a dedicated subkey under `ProfileList`, named after the user `SID`. <br><br> The user profile folder is referenced in the `ProfileImagePath` value under the per-user sunkey, and can be used to determine the account username. <br><br> The last write timestamp of each key indicates when the associated user last logged on the system. | File: `%SystemRoot%\System32\config\SOFTWARE` <br><br> Registry key: `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList` |
 
 ### TimeZoneInformation
 
