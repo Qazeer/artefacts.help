@@ -287,6 +287,10 @@ entries:
         url: /windows_registry_shellbags.html
         output: web
 
+      - title: Terminal Server Client\Servers
+        url: /windows_registry_terminalserverclient.html
+        output: web
+
       - title: TypedURLs
         url: /windows_registry_typedurls.html
         output: web
