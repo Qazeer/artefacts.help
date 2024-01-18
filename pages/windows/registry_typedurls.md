@@ -1,6 +1,6 @@
 ---
 title: Registry - TypedURLs
-summary: 'The TypedURLs registry tracks URL entered (typed, pasted, or auto-completed) in the Internet Explorer (IE) web browser search bar. Web searches are not stored, only the URLs entered are tracked.\n\nInformation of interest: URL entered in the IE search bar.\n\nValues are stored in inverse chronological order. The timestamp of last visit of the most recently visited URL can thus be deduced from the last write timestamp of the registry key.'
+summary: 'The TypedURLs registry key tracks URL entered (typed, pasted, or auto-completed) in the Internet Explorer (IE) web browser search bar. Web searches are not stored, only the URLs entered are tracked.\n\nInformation of interest: URL entered in the IE search bar.\n\nValues are stored in inverse chronological order. The timestamp of last visit of the most recently visited URL can thus be deduced from the last write timestamp of the registry key.'
 keywords: 'TypedURLs, URL, Internet Explorer, IE, MRUList'
 tags:
   - windows_registry
@@ -14,9 +14,9 @@ folder: windows
 
 ### Overview
 
-The `TypedURLs` registry tracks URLs entered (typed, pasted, or auto-completed)
-in the `Internet Explorer (IE)` web browser search bar. Web searches are not
-stored, only the URLs entered are tracked.
+The `TypedURLs` registry key tracks URLs entered (typed, pasted, or
+auto-completed) in the `Internet Explorer (IE)` web browser search bar. Web
+searches are not stored, only the URLs entered are tracked.
 
 Starting with `IE8`, entries are added / updated in near real-time.
 
