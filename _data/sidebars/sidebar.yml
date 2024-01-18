@@ -331,6 +331,10 @@ entries:
       url: /windows_prefetch.html
       output: web
 
+    - title: RDP Bitmap Cache
+      url: /windows_rdp_bitmap_cache.html
+      output: web
+
     - title: RecentFileCache
       url: /windows_amcache.html
       output: web
