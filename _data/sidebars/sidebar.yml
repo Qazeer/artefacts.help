@@ -116,6 +116,10 @@ entries:
         url: /windows_etw_services.html
         output: web
 
+      - title: Windows Scheduled Tasks
+        url: /windows_etw_scheduled_task.html
+        output: web
+
     - title: Registry
       type: subfolder
       output: web

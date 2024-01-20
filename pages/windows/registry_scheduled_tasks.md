@@ -59,7 +59,9 @@ GUID root key `Schedule\Taskcache\Tasks\<TASK_GUID>`:
     stop in the `DynamicInfo` value (in binary format).
 
   - The task trigger(s) (`Triggers` value) and action(s) (`Actions` value) in
-    binary, non human readable format.
+    binary, non human readable format. A single scheduled task can be
+    associated with one or multiple trigger(s) and one or multiple action(s).
+    A single task can thus execute multiple distinct executables.
 
   - The task security descriptor (in `SDDL` notation), in the
     `SecurityDescriptor` value.
