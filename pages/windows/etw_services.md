@@ -16,6 +16,18 @@ folder: windows
 
 ### Overview
 
+Windows services are programs that operate in the background and conform to the
+interface rules and protocols of the `Service Control Manager (SCM)` (the
+component responsible for managing Windows services). Services can be
+implemented as binaries or `Dynamic Link Libraries (DLL)`. The services
+implemented as `DLL` are loaded and executed by an instance of the
+`Service Host` (`svchost.exe`) process.
+
+Refer to the [registry Windows services page](./registry_services.md) for more
+information on Windows services.
+
+### Services Windows events
+
 | Channel | Conditions | Events |
 |---------|------------|--------|
 | `System` <br><br> Provider: `Service Control Manager`. | Default configuration. | Event `7045: A service was installed in the system`. <br><br> Logged whenever a Windows service is created on the machine. <br><br> Information of interest: <br> - Domain and username of the user that installed the service (often the `NT AUTHORITY\SYSTEM` account). <br> - Name, binary path, type, start type and executing account of the created service. |

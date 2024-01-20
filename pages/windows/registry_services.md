@@ -16,6 +16,13 @@ folder: windows
 
 ### Overview
 
+Windows services are programs that operate in the background and conform to the
+interface rules and protocols of the `Service Control Manager (SCM)` (the
+component responsible for managing Windows services). Services can be
+implemented as binaries or `Dynamic Link Libraries (DLL)`. The services
+implemented as `DLL` are loaded and executed by an instance of the
+`Service Host` (`svchost.exe`) process.
+
 The `Services` registry key **hold the configuration information of the
 installed Windows services**: name, display name, image path, start mode,
 service type, required privileges if any, etc.
