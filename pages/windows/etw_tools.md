@@ -1,7 +1,7 @@
 ---
 title: ETW - Tools
 summary: 'Tools for processing ETW and EVTX files, including: wevtutil, Get-WinEvent, LogParser, Winlogbeat, EvtxECmd, Chainsaw, Hayabusa, and Velociraptor.'
-keywords: 'Event Tracing for Windows tools, ETW tools, EVTX tools, EVTX parsing, Event Viewer, Event Log Explorer, wevtutil, Get-WinEvent, LogParser, LogParser_LogonLogoffEvents, Winlogbeat, EvtxECmd, Chainsaw, Hayabusa, Velociraptor'
+keywords: 'Event Tracing for Windows tools, ETW tools, EVTX tools, EVTX parsing, Event Viewer, Event Log Explorer, wevtutil, Get-WinEvent, LogParser, LogParser_LogonLogoffEvents, Winlogbeat, EvtxECmd, Chainsaw, Hayabusa, Velociraptor, Sigma, sigma rules'
 tags:
   - windows_etw
 last_updated: 2024-01-02
