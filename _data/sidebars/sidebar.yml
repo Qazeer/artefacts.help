@@ -163,6 +163,10 @@ entries:
           url: /windows_registry_systeminfo.html#profilelist
           output: web
 
+        - title: SAM - Local users
+          url: /windows_registry_systeminfo.html#sam---local-users
+          output: web
+
         - title: TimeZoneInformation
           url: /windows_registry_systeminfo.html#timezoneinformation
           output: web
