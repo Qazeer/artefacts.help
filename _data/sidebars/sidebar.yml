@@ -245,6 +245,10 @@ entries:
           url: /windows_registry_mountpoints2.html
           output: web
 
+      - title: Auto-Start Extensibility Points
+        url: /windows_registry_asep.html
+        output: web
+
       - title: BAM / DAM
         url: /windows_registry_bam_dam.html
         output: web
