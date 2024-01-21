@@ -96,6 +96,10 @@ entries:
           url: /windows_etw_remote_desktop_rdg_host.html
           output: web
 
+      - title: Users and security groups
+        url: /windows_etw_users_and_groups.html
+        output: web
+
       - title: Process creation
         url: /windows_etw_process_creation.html
         output: web
@@ -104,7 +108,7 @@ entries:
         url: /windows_etw_powershell.html
         output: web
 
-      - title: Network shares access
+      - title: Network shares
         url: /windows_etw_network_shares.html
         output: web
 
