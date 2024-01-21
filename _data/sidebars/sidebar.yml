@@ -271,6 +271,10 @@ entries:
         url: /windows_registry_featureusage.html
         output: web
 
+      - title: Map Network Drive MRU
+        url: /windows_registry_mapnetworkdrivemru.html
+        output: web
+
       - title: MountPoints2
         url: /windows_registry_mountpoints2.html
         output: web
@@ -279,8 +283,8 @@ entries:
         url: /windows_registry_muicache.html
         output: web
 
-      - title: Map Network Drive MRU
-        url: /windows_registry_mapnetworkdrivemru.html
+      - title: PortProxy
+        url: /windows_registry_portproxy.html
         output: web
 
       - title: RecentApps
