@@ -3,10 +3,10 @@ repository: Qazeer/artefacts.help
 output: web
 # this property is useful for conditional filtering of content that is separate from the PDF.
 
-topnav_title: art [e | é] facts . help
+topnav_title: art [i | e] facts . help
 # this appears on the top navigation bar next to the home button
 
-site_title: artefacts.help
+site_title: artifacts.help
 # this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
 company_name: Thomas DIOT (Qazeer)
@@ -33,9 +33,9 @@ exclude:
   - vendor
 # these are the files and directories that jekyll will exclude from the build
 
-feedback_subject_line: artefacts.help
+feedback_subject_line: artifacts.help
 
-feedback_email: qazeer<at>protonmail<dot>com
+feedback_email: qazeer@protonmail.com
 # used as a contact email for the Feedback link in the top navigation bar
 
 # feedback_disable: true
@@ -82,7 +82,7 @@ defaults:
 sidebars:
 - sidebar
 
-description: "artefacts.help"
+description: "artifacts.help / artefacts.help"
 # the description is used in the feed.xml file
 
 # needed for sitemap.xml file only

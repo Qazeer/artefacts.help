@@ -4,9 +4,9 @@ permalink: index.html
 layout: default
 ---
 
-### About artefacts.help
+### About artifacts.help / artefacts.help
 
-The repository behind the `artefacts.help` can be found at:
+The repository behind `artifacts.help` / `artefacts.help` can be found at:
 `https://github.com/Qazeer/artefacts.help`.
 
 Offsec counter-part: `https://notes.qazeer.io/`.
