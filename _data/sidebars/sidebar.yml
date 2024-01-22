@@ -124,6 +124,10 @@ entries:
         url: /windows_etw_scheduled_task.html
         output: web
 
+      - title: Registry ASEP
+        url: /windows_etw_registry_asep.html
+        output: web
+
     - title: Registry
       type: subfolder
       output: web
