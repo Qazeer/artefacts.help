@@ -14,6 +14,9 @@ allowed-tags:
   - windows_remote_desktop
   - windows_remote_desktop_src
   - windows_remote_desktop_dst
+  - windows_powershell_remoting
+  - windows_powershell_remoting_dst
+  - windows_powershell_remoting_src
   - windows_local_persistence
   - windows_defense_evasion
   - windows_usb_activity
