@@ -96,6 +96,19 @@ entries:
           url: /windows_etw_remote_desktop_rdg_host.html
           output: web
 
+      - title: PowerShell remoting
+        type: subfolder
+        output: web
+        subfolderitems:
+
+        - title: Destination host
+          url: /windows_etw_powershell_remoting_dst_host.html
+          output: web
+
+        - title: Source host
+          url: /windows_etw_powershell_remoting_src_host.html
+          output: web
+
       - title: Users and security groups
         url: /windows_etw_users_and_groups.html
         output: web
