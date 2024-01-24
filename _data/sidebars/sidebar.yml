@@ -141,6 +141,10 @@ entries:
         url: /windows_etw_registry_asep.html
         output: web
 
+      - title: WMI
+        url: /windows_etw_wmi.html
+        output: web
+
     - title: Registry
       type: subfolder
       output: web
@@ -419,6 +423,23 @@ entries:
     - title: Windows Timeline / ActivitiesCache
       url: /windows_activities_cache.html
       output: web
+
+    - title: WMI
+      type: subfolder
+      output: web
+      subfolderitems:
+
+      - title: Process
+        url: /windows_wmi_process.html
+        output: web
+
+      - title: ETW events
+        url: /windows_etw_wmi.html
+        output: web
+
+      - title: WMI Event Subscription
+        url: /windows_wmi_event_subscription.html
+        output: web
 
     - title: Third-party softwares
       type: subfolder
