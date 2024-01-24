@@ -569,6 +569,27 @@ entries:
           url: /tag_windows_remote_desktop_src.html
           output: web
 
+      - title: PowerShell remoting
+        type: subfolder
+        output: web
+        subfolderitems:
+
+        - title: All
+          url: /tag_windows_powershell_remoting.html
+          output: web
+
+        - title: Destination host
+          url: /tag_windows_powershell_remoting_dst.html
+          output: web
+
+        - title: Source host
+          url: /tag_windows_powershell_remoting_src.html
+          output: web
+
+      - title: WMI
+        url: /tag_windows_wmi.html
+        output: web
+
     - title: 'Category - Local persistence'
       url: /tag_windows_local_persistence.html
       output: web
