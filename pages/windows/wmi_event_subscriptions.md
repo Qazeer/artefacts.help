@@ -20,9 +20,9 @@ folder: windows
 
 Permanent event subscriptions are composed of:
 
-  - An `event filter`, which is the event of interest that will trigger the
-    consumer. Such event can be, for example, a logon success or system
-    startup.
+  - An `event filter` (`__EventFilter `), which is the event of interest that
+    will trigger the consumer. Such event can be, for example, a logon success
+    or system startup.
 
   - An `event consumer`, which is the action to perform upon trigger of the
     event filter.
@@ -45,6 +45,14 @@ Permanent event subscriptions are composed of:
 
   - A `filter to consumer binding` (`FilterToConsumerBinding`) which is the
     registration mechanism binding an event filter to an event consumer.
+
+`WMI Event Subscription` can be of two types:
+
+  - `Temporary`: only active as long as the process that created the
+    subscription is active and run under the privilege of the creating process.
+
+  - `Permanent`: stored in the `CIM` database on disk and run under
+    `NT AUTHORITY\SYSTEM` privileges.
 
 ### WMI repository files
 
@@ -110,3 +118,5 @@ python3 samples/dump_class_layout.py win7 "<WMI_REPOSITORY_FOLDER>" "<ROOT\cimv2
   - [Network Security Ninja - WMI Forensics](https://netsecninja.github.io/dfir-notes/wmi-forensics/)
 
   - [SANS - Chad Tilbury - Investigating WMI Attacks](https://www.youtube.com/watch?v=aBQ1vEjK6v4)
+
+  - [darkoperator - Carlos PEREZ - Basics of Tracking WMI Activity](https://www.darkoperator.com/blog/2017/10/14/basics-of-tracking-wmi-activity)
