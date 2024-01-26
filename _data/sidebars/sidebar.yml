@@ -58,6 +58,10 @@ entries:
         url: /windows_etw_tools.html
         output: web
 
+      - title: Events integrity
+        url: /windows_etw_integrity.html
+        output: web
+
       - title: System uptime
         url: /windows_system_uptime.html
         output: web
