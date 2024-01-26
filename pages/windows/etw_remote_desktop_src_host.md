@@ -1,6 +1,6 @@
 ---
 title: ETW - Remote Desktop - Source host
-summary: 'Source host of a Remote Desktop access.\n\nMain events:\n\nChannel: Microsoft-WindowsTerminalServicesRDPClient/Operational.\nEvent ID 1024: "RDP ClientActiveX is trying to connect to the server (<HOSTNAME>)".\nEvent ID 1102: "The client has initiated a multi-transport connection to the server <IP>".\nEvent ID 1029: "Base64(SHA256(UserName)) is = <HASH>".'
+summary: 'Source host initiating a Remote Desktop access.\n\nMain events:\n\nChannel: Microsoft-WindowsTerminalServicesRDPClient/Operational.\nEvent ID 1024: "RDP ClientActiveX is trying to connect to the server (<HOSTNAME>)".\nEvent ID 1102: "The client has initiated a multi-transport connection to the server <IP>".\nEvent ID 1029: "Base64(SHA256(UserName)) is = <HASH>".'
 keywords: RDP, Remote Desktop, Terminal Services, RDPClient, ClientActiveX
 tags:
   - windows_etw
