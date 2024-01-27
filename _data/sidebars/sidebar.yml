@@ -1,17 +1,13 @@
-entries:
-
-- title: sidebar
-  product: Windows
-  folders:
+- title: Windows
+  children:
 
   - title: All
     output: web
-    folderitems:
+    children:
 
     - title: NTFS
-      type: subfolder
       output: web
-      subfolderitems:
+      children:
 
       - title: $Bitmap
         url: /windows_mft.html
@@ -46,9 +42,8 @@ entries:
         output: web
 
     - title: ETW
-      type: subfolder
       output: web
-      subfolderitems:
+      children:
 
       - title: Overview
         url: /windows_etw_overview.html
@@ -67,9 +62,8 @@ entries:
         output: web
 
       - title: Authentication
-        type: subfolder
         output: web
-        subfolderitems:
+        children:
 
         - title: Destination host
           url: /windows_etw_authentication_dst_host.html
@@ -84,9 +78,8 @@ entries:
           output: web
 
       - title: Remote Desktop
-        type: subfolder
         output: web
-        subfolderitems:
+        children:
 
         - title: Destination host
           url: /windows_etw_remote_desktop_dst_host.html
@@ -101,9 +94,8 @@ entries:
           output: web
 
       - title: PowerShell remoting
-        type: subfolder
         output: web
-        subfolderitems:
+        children:
 
         - title: Destination host
           url: /windows_etw_powershell_remoting_dst_host.html
@@ -150,9 +142,8 @@ entries:
         output: web
 
     - title: Registry
-      type: subfolder
       output: web
-      subfolderitems:
+      children:
 
       - title: Overview
         url: /windows_registry_overview.html
@@ -167,10 +158,8 @@ entries:
         output: web
 
       - title: System information
-        type: subfolder
-        url: /windows_registry_systeminfo.html
         output: web
-        subfolderitems:
+        children:
 
         - title: ComputerName
           url: /windows_registry_systeminfo.html#computername
@@ -225,10 +214,8 @@ entries:
           output: web
 
       - title: Devices and USB activity
-        type: subfolder
-        url: /windows_registry_usb_activity.html
         output: web
-        subfolderitems:
+        children:
 
         - title: Windows devices terminology
           url: /windows_devices_terminology.html
@@ -279,10 +266,9 @@ entries:
         output: web
 
       - title: ComDlg32
-        type: subfolder
         url: /windows_registry_comdlg32.html
         output: web
-        subfolderitems:
+        children:
 
         - title: OpenSaveMRU / OpenSavePidlMRU
           url: /windows_registry_comdlg32.html#opensavemru--opensavepidlmru
@@ -429,9 +415,8 @@ entries:
       output: web
 
     - title: WMI
-      type: subfolder
       output: web
-      subfolderitems:
+      children:
 
       - title: Process
         url: /windows_wmi_process.html
@@ -446,9 +431,8 @@ entries:
         output: web
 
     - title: Third-party softwares
-      type: subfolder
       output: web
-      subfolderitems:
+      children:
 
       - title: RULER Project - Anti-virus
         external_url: https://ruler-project.github.io/ruler-project/RULER/av/
@@ -459,9 +443,8 @@ entries:
         output: web
 
       - title: Web browsers
-        type: subfolder
         output: web
-        subfolderitems:
+        children:
 
         - title: Overview
           url: /windows_web_browsers.html#overview
@@ -493,7 +476,7 @@ entries:
 
   - title: By tag
     output: web
-    folderitems:
+    children:
 
     - title: 'Type - NTFS'
       url: /tag_windows_ntfs_filesystem.html
@@ -515,7 +498,7 @@ entries:
       url: /tag_windows_file_knowledge.html
       output: web
 
-    - title: 'Category - Files and folders access'
+    - title: 'Category - Files and children access'
       url: /tag_windows_files_and_folders_access.html
       output: web
 
@@ -540,9 +523,8 @@ entries:
       output: web
 
     - title: 'Category - Lateral movement'
-      type: subfolder
       output: web
-      subfolderitems:
+      children:
 
       - title: All
         url: /tag_windows_lateral_movement.html
@@ -557,9 +539,8 @@ entries:
         output: web
 
       - title: Remote Desktop
-        type: subfolder
         output: web
-        subfolderitems:
+        children:
 
         - title: All
           url: /tag_windows_remote_desktop.html
@@ -574,9 +555,8 @@ entries:
           output: web
 
       - title: PowerShell remoting
-        type: subfolder
         output: web
-        subfolderitems:
+        children:
 
         - title: All
           url: /tag_windows_powershell_remoting.html
@@ -606,10 +586,9 @@ entries:
       url: /tag_windows_misc.html
       output: web
 
-- title: sidebar
-  product: Linux
-  folders:
+- title: Linux
+  children:
 
-  - title: All
+  - title: Coming soon!
+    url: /linux.html
     output: web
-    folderitems:

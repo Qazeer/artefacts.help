@@ -65,10 +65,6 @@ body {
 .gi-4x{font-size: 4em;}
 .gi-5x{font-size: 5em;}
 
-
-
-
-
 .breadcrumb > .active {color: #777 !important;}
 
 /* make room for the nav bar */
@@ -309,6 +305,7 @@ a.accordion-toggle, a.accordion-collapsed {
 }
 
 /* navgoco sidebar styles (customized) */
+
 .nav, .nav ul, .nav li {
     list-style: none;
 }
@@ -1016,7 +1013,6 @@ span.label.label-primary {
     background-color: #f0ad4e;
 }
 .col-lg-12 .nav li a {background-color: white}
-
 
 .nav li.active > a.subfoldersTitle {
     background-color: whitesmoke;

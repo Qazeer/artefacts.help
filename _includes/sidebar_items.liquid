@@ -1,0 +1,22 @@
+{% comment %} Adapted from https://github.com/Mellow-3D/mellow-3d.github.io sidebar. {% endcomment %}
+
+{% assign pageurl = page.url | split: "/" %}
+
+{% for item in include.menuitems %}
+  {% if item.output contains "web" %}
+  <li class="{% if item.children.size > 0 %}subfolders{% endif %}{% if item.url contains page.url %}active{% endif %}">
+    {% if item.url %}
+      <a class="page-link" href="{{item.url}}">{{item.title}}</a>
+    {% elsif item.external_url %}
+      <li><a title="{{item.title}}" href="{{item.external_url}}" target="_blank" rel="noopener">{{item.title}}</a></li>
+    {% else %}
+      <a class="subfolders" href="#">{{item.title}}</a>
+    {% endif %}
+      {% if item.children.size > 0 %}
+      <ul class="nav">
+          {% include sidebar_items.liquid menuitems=item.children %}
+      </ul>
+      {% endif %}
+  </li>
+  {% endif %}{% comment %} /"if web" {% endcomment %}
+{% endfor %}{% comment %} /each item {% endcomment %}
