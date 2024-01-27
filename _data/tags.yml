@@ -22,3 +22,4 @@ allowed-tags:
   - windows_defense_evasion
   - windows_usb_activity
   - windows_misc
+  - aws
