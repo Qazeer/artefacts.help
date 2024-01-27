@@ -592,3 +592,39 @@
   - title: Coming soon!
     url: /linux.html
     output: web
+
+- title: AWS
+  children:
+
+  - title: Required privileges
+    url: /aws_required_privileges.html
+    output: web
+
+  - title: Basic security review
+    url: /aws_security_review.html
+    output: web
+
+  - title: AWS logs
+    output: web
+    children:
+
+    - title: Overview
+      url: /aws_logs_overview.html
+      output: web
+
+    - title: Logs search and collection
+      output: web
+      url: /aws_logs_collection_tools.html
+      children:
+
+    - title: CloudTrail logs analysis
+      output: web
+      children:
+
+      - title: Key fields
+        url: /aws_cloudtrail.html#key-fields
+        output: web
+
+      - title: Notable API / events
+        url: /aws_cloudtrail.html#notable-api--events
+        output: web
