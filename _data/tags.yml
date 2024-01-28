@@ -23,3 +23,5 @@ allowed-tags:
   - windows_usb_activity
   - windows_misc
   - aws
+  - azure_logs
+  - azure_security_review
