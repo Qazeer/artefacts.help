@@ -403,6 +403,14 @@
       url: /windows_webcachev01.html
       output: web
 
+    - title: Windows Defender
+      output: web
+      children:
+
+      - title: ETW events
+        url: /windows_etw_windows_defender.html
+        output: web
+
     - title: Windows Push Notifications (wpndatabase.db)
       url: /windows_wpndatabase_db.html
       output: web
