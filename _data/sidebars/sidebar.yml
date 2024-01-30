@@ -411,6 +411,10 @@
         url: /windows_etw_windows_defender.html
         output: web
 
+      - title: Microsoft Support logs
+        url: /windows_defender_support_logs.html
+        output: web
+
     - title: Windows Push Notifications (wpndatabase.db)
       url: /windows_wpndatabase_db.html
       output: web
