@@ -1,5 +1,5 @@
 ---
-title: "Windows - Local Persistence"
+title: "Windows - Local persistence"
 tagName: windows_local_persistence
 search: exclude
 permalink: tag_windows_local_persistence.html

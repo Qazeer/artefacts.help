@@ -511,7 +511,7 @@
       url: /tag_windows_file_knowledge.html
       output: web
 
-    - title: 'Category - Files and children access'
+    - title: 'Category - Files and folders access'
       url: /tag_windows_files_and_folders_access.html
       output: web
 
@@ -603,9 +603,81 @@
   output: web
   children:
 
-  - title: Coming soon!
+  - title: Work in progress!
     url: /linux.html
     output: web
+
+  - title: All
+    output: web
+    children:
+
+  - title: By tag
+    output: web
+    children:
+
+    - title: 'Type - Filesystem'
+      url: /tag_linux_filesystem.html
+      output: web
+
+    - title: 'Type - Logging framework'
+      url: /tag_linux_logging_frameworks.html
+      output: web
+
+    - title: 'Category - System information'
+      url: /tag_linux_system_information.html
+      output: web
+
+    - title: 'Category - File knowledge'
+      url: /tag_linux_file_knowledge.html
+      output: web
+
+    - title: 'Category - Files and folders access'
+      url: /tag_linux_files_and_folders_access.html
+      output: web
+
+    - title: 'Category - Program execution'
+      url: /tag_linux_program_execution.html
+      output: web
+
+    - title: 'Category - Lateral movement'
+      output: web
+      children:
+
+      - title: All
+        url: /tag_linux_lateral_movement.html
+        output: web
+
+      - title: Destination host
+        url: /tag_linux_lateral_movement_dst.html
+        output: web
+
+      - title: Source host
+        url: /tag_linux_lateral_movement_src.html
+        output: web
+
+      - title: SSH
+        output: web
+        children:
+
+        - title: All
+          url: /tag_linux_ssh.html
+          output: web
+
+        - title: Destination host
+          url: /tag_linux_ssh_dst.html
+          output: web
+
+        - title: Source host
+          url: /tag_linux_ssh_src.html
+          output: web
+
+    - title: 'Category - Local persistence'
+      url: /tag_linux_local_persistence.html
+      output: web
+
+    - title: 'Category - Defense evasion'
+      url: /tag_linux_defense_evasion.html
+      output: web
 
 - title: Azure / Office365
   output: web

@@ -25,3 +25,17 @@ allowed-tags:
   - aws
   - azure_logs
   - azure_security_review
+  - linux_filesystem
+  - linux_logging_frameworks
+  - linux_system_information
+  - linux_file_knowledge
+  - linux_files_and_folders_access
+  - linux_program_execution
+  - linux_lateral_movement
+  - linux_lateral_movement_src
+  - linux_lateral_movement_dst
+  - linux_ssh
+  - linux_ssh_src
+  - linux_ssh_dst
+  - linux_local_persistence
+  - linux_defense_evasion
