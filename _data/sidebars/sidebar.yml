@@ -611,6 +611,10 @@
     output: web
     children:
 
+    - title: Linux Audit system
+      url: /linux_audit_framework.html
+      output: web
+
   - title: By tag
     output: web
     children:
