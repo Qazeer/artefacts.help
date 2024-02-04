@@ -33,6 +33,9 @@ layout: default
    {% if page.location %}
     <div class="location">{{ page.location | escape | replace: '\n', '<br>' }}</div>
    {% endif %}
+   {% if page.default_location %}
+    <div class="default_location">{{ page.default_location | escape | replace: '\n', '<br>' }}</div>
+   {% endif %}
 
     {% unless page.toc == false %}
     {% include toc.html %}

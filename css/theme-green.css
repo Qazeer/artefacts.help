@@ -1,4 +1,4 @@
-.location {
+.location, .default_location {
     color: #808080;
     border-left: 5px solid #E50E51;
     font-size:16px;
