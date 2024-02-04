@@ -611,6 +611,14 @@
     output: web
     children:
 
+    - title: System information
+      output: web
+      children:
+
+      - title: User and group identifiers
+        url: /linux_user_and_group_identifiers.html
+        output: web
+
     - title: Linux Audit system
       url: /linux_audit_framework.html
       output: web

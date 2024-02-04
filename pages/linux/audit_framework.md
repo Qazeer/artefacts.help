@@ -7,7 +7,7 @@ tags:
   - linux_program_execution
   - linux_files_and_folders_access
   - linux_file_knowledge
-location: 'auditd daemon configuration:\n/etc/audit/auditd.conf\n\nAudit rules:\n/etc/audit/audit.rules\n/etc/audit/rules.d/\n\nAudit logs:\n/var/log/audit.log*\n/var/log/audit/audit.log.*.gz'
+default_location: 'auditd daemon configuration:\n/etc/audit/auditd.conf\n\nAudit rules:\n/etc/audit/audit.rules\n/etc/audit/rules.d/\n\nAudit logs:\n/var/log/audit.log*\n/var/log/audit/audit.log.*.gz'
 last_updated: 2024-02-03
 sidebar: sidebar
 permalink: linux_audit_framework.html
@@ -34,7 +34,10 @@ daemon can also received events from other system components, such as `pam` or
 #### Audit rules
 
 The `Linux Audit` system operates on rules, that define what records will be
-captured in the audit logs.
+captured in the audit logs. Audit rules are defined in the
+`/etc/audit/audit.rules` file or in the `/etc/audit/rules.d/` directory. One
+rule is defined on a single line, as it was arguments to the `auditctl`
+utility.
 
 As the events generated are dependent on the audit rules configured, it is
 recommended to first review the rules defined on the system before analyzing
@@ -42,9 +45,6 @@ the audit logs. By default, no audit rules are configured, apart from eventual
 control rules often specific to the Linux distribution used. If no rules are
 configured, other components (`pam`, `sshd`, etc.) may still be sending events
 to the `auditd` daemon.
-
-Audit rules are defined in the `/etc/audit/audit.rules` file or in the
-`/etc/audit/rules.d/` directory.
 
 There are three types of audit rules:
 
@@ -97,6 +97,7 @@ environnement and applications running on each system.
 An `auditd` event can be split in multiple records. Each record of the same
 event shares the same timestamp (in the `epoch` format) and same unique
 identifier. Each record is associated with a [given type](#record-types).
+Records can be sometimes separated by hundreds other unrelated records.
 
 The records are formatted as series of `FIELD = VALUE` pairs separated by a
 space. The available fields for `auditd` records, and their description, can be
@@ -145,6 +146,10 @@ More record types are listed in the
 [RedHat documentation](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security_guide/sec-audit_record_types).
 
 #### Notable fields
+
+  - The [user and group identifiers (`uid` / `gid`, `euid` / `egid`, `ruid` /
+    `rgid`, `suid` / `sgid`, and `fsuid` / `fsgidof`)](./user_and_group_identifiers.md)
+    of the process.
 
   - `auid`: `audit identifier` that, if present, identify the initial `uid` of
     the user (from the initial process). The `auid` remains the same even if
