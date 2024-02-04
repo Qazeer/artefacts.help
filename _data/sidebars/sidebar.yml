@@ -126,6 +126,10 @@
         url: /windows_etw_usb_activity.html
         output: web
 
+      - title: Windows Defender
+        url: /windows_etw_windows_defender.html
+        output: web
+
       - title: Windows Services
         url: /windows_etw_services.html
         output: web

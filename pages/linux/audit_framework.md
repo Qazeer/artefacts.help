@@ -147,9 +147,9 @@ More record types are listed in the
 
 #### Notable fields
 
-  - The [user and group identifiers (`uid` / `gid`, `euid` / `egid`, `ruid` /
-    `rgid`, `suid` / `sgid`, and `fsuid` / `fsgidof`)](./user_and_group_identifiers.md)
-    of the process.
+  - The [user and group identifiers](./user_and_group_identifiers.md)
+    (`uid` / `gid`, `euid` / `egid`, `ruid` / `rgid`, `suid` / `sgid`, and
+    `fsuid` / `fsgidof`) of the process.
 
   - `auid`: `audit identifier` that, if present, identify the initial `uid` of
     the user (from the initial process). The `auid` remains the same even if
