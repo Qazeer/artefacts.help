@@ -1,7 +1,7 @@
 ---
 title: Linux Audit framework (audit logs)
-summary: 'The Linux Audit system is an non-default auditing and logging framework that can be configured to log multiple type of operations, such as authentication successes or failures, process executions, file accesses, user commands executed in a TTY, etc.\n\nThe Linux Audit framework implements kernel-mode hooks to monitor user-mode processes and generate audit telemetry. The auditd daemon is the main user-mode component of the Linux Audit framework, that receives audit messages sent by the kernel and other components (such as pam).\n\nThe Linux Audit system operates on rules, that define what records will be captured in the audit logs. If no rules are defined, which is the case by default, only distribution specific records and telemetry from other components may be logged to audit log file by the auditd daemon.\n\nDepending on the rule configured, multiple events can be generated for the same operation. An event can be split in multiple records, with each record of the same event sharing the same timestamp and same unique identifier.\n\nEach record is associated with a given type: USER_LOGIN_SUCCESS, EXECVE, SYSCALL, OPENAT, USER_CMD, TTY, SOCKADDR, etc.'
-keywords:
+summary: 'The Linux Audit system is an non-default auditing and logging framework that can be configured to log multiple type of operations, such as authentication successes or failures, process executions, file accesses, user commands executed in a TTY, etc.\n\nThe Linux Audit framework implements kernel-mode hooks to monitor user-mode processes and generate audit telemetry. The auditd daemon is the main user-mode component of the Linux Audit framework, that receives audit messages sent by the kernel and other components (such as pam).\n\nThe Linux Audit system operates on rules, that define what records will be captured in the audit logs. If no rules are defined, which is the case by default, only distribution specific records and telemetry from other components may be logged to audit log file by the auditd daemon.\n\nDepending on the rule configured, multiple events can be generated for the same operation. An event can be split in multiple records, with each record of the same event sharing the same timestamp and same unique identifier.\n\nEach record is associated with a given type: USER_AUTH, USER_LOGIN, EXECVE, SYSCALL, OPENAT, PROCTITLE, USER_CMD, TTY, SOCKADDR, etc.'
+keywords: Linux Audit, audit, auditd, audit rules, auditctl, aureport, ausearch, audit.log, auditd.conf, audit.rules, auid, USER_AUTH, USER_LOGIN, EXECVE, SYSCALL, OPENAT, PROCTITLE, USER_CMD, TTY, SOCKADDR, msg
 tags:
   - linux_logging_frameworks
   - linux_program_execution
@@ -133,7 +133,7 @@ The `type` field contains the type of the record:
 
 | Operation | Field type(s) |
 |-----------|---------------|
-| User authentication and access | `USER_LOGIN_SUCCESS` <br> `USER_LOGIN_FAILED` <br> `USER_AUTH_SUCCESS` <br> `USER_AUTH_FAILED` <br> `USER_START_SUCCESS` <br> `USER_START_FAILED` <br> `SESSION_TERMINATED` |
+| User authentication and access | `USER_AUTH` <br> `USER_LOGIN` <br> `USER_LOGIN_SUCCESS` <br> `USER_LOGIN_FAILED` <br> `USER_AUTH_SUCCESS` <br> `USER_AUTH_FAILED` <br> `USER_START_SUCCESS` <br> `USER_START_FAILED` <br> `SESSION_TERMINATED` |
 | Process execution | `EXECVE` <br> `SYSCALL` |
 | Filesystem access | `PATH` <br> *For relative or absolute file access.* <br><br> `CWD` <br> *Current working directory, useful to reconstruct full path if a relative path has been recorded in `PATH` records.* <br><br> `OPENAT` |
 | Commands entered in a `TTY` console | `TTY` |
@@ -171,6 +171,64 @@ More record types are listed in the
     of the syscall, represented by unsigned long long integers and as such
     cannot be used to determine the values taken by the arguments.
 
+### Tool(s)
+
+#### aureport and ausearch utilities
+
+The `aureport` and `ausearch` utilities are packaged with the `Linux Audit`
+framework and can be used to analyze the `auditd` log files. `aureport`
+produces a synthesis of events, while `ausearch` can be used to search and
+filter the events.
+
+```bash
+# -i / --interpret: decodes some non-human readable values, such as epoch timestamps and hex encoded PROCTITLE commands, to plain-text.
+# However, the uid are resolved based on the current system local accounts, potentially resulting in incoherent usernames.
+
+# The -ts / --start and -te / --end: can be used to filter events based on their timestamp.
+# The timestamp format depends on the local LC_TIME environment variable. For en_US.utf8 locale, the timestamp format is: MM/DD/YYYY hh:mm:ss.
+
+# aureport.
+
+# Displays the time range covered by each input file.
+aureport -if <INPUT_FILE | INPUT_DIRECTORY> -t
+
+# Generates a global synthesis: number of logins / authentications, failed logins / authentications, process and commands executed, tty keystrokes entered, etc.
+aureport -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY>
+
+# Generates a report on user logins (type=USER_LOGIN) with -l or authentications (type=USER_AUTH) with -au.
+aureport -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> -l
+aureport -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> -au
+
+# Generates a report on the local accounts activity (creation or modification).
+aureport -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> -m
+
+# Generates a report on program executions, which includes the session and auid of each process.
+aureport -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> -x
+
+# Generates a report on TTY keystrokes (type=TTY) entered with TTY or commands (type=USER_CMD) with --comm.
+aureport -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> --tty
+aureport -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> --comm
+
+# Generates a report on file access.
+aureport -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> -f
+
+# ausearch.
+
+# Filters on the specified event / message type (TTY, USER_CMD, EXECVE, PATH, USER_AUTH, etc.).
+ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY>
+
+# Filters on the specified user identifier (across uid, euid, and auid).
+ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> -ua "<UID>"
+
+# Filters on the specified session or terminal identifier.
+ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> --session <SESSION_ID>
+ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> --terminal <TERMINAL_ID>
+
+# Filters on the specified process identifier (PID) or parent process identifier (PPID).
+ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> -p <PID>
+ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> -pp <PID>
+```
+
 ### References
 
   - [RedHat - Chapter 7. System Auditing](https://access.redhat.com/documentation/fr-fr/red_hat_enterprise_linux/6/html/security_guide/chap-system_auditing)
@@ -182,3 +240,7 @@ More record types are listed in the
   - [Neo23x0 - auditd](https://github.com/Neo23x0/auditd/blob/master/audit.rules)
 
   - [serverfault - What does auditd log by default (i.e. when no rules are defined?)](https://serverfault.com/questions/774862/what-does-auditd-log-by-default-i-e-when-no-rules-are-defined)
+
+  - [Linux man - aureport(8)](https://linux.die.net/man/8/aureport)
+
+  - [Linux man - ausearch(8)](https://man7.org/linux/man-pages/man8/ausearch.8.html)
