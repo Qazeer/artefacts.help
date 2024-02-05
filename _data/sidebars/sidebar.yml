@@ -623,9 +623,13 @@
         url: /linux_user_and_group_identifiers.html
         output: web
 
-    - title: Linux Audit system
-      url: /linux_audit_framework.html
+    - title: Logging frameworks
       output: web
+      children:
+
+      - title: Linux Audit system
+        url: /linux_audit_framework.html
+        output: web
 
   - title: By tag
     output: web
