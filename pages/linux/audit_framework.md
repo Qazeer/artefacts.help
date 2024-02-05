@@ -1,7 +1,7 @@
 ---
 title: Linux Audit framework (audit logs)
 summary: 'The Linux Audit system is an non-default auditing and logging framework that can be configured to log multiple type of operations, such as authentication successes or failures, process executions, file accesses, user commands executed in a TTY, etc.\n\nThe Linux Audit framework implements kernel-mode hooks to monitor user-mode processes and generate audit telemetry. The auditd daemon is the main user-mode component of the Linux Audit framework, that receives audit messages sent by the kernel and other components (such as pam).\n\nThe Linux Audit system operates on rules, that define what records will be captured in the audit logs. If no rules are defined, which is the case by default, only distribution specific records and telemetry from other components may be logged to audit log file by the auditd daemon.\n\nDepending on the rule configured, multiple events can be generated for the same operation. An event can be split in multiple records, with each record of the same event sharing the same timestamp and same unique identifier.\n\nEach record is associated with a given type: USER_AUTH, USER_LOGIN, EXECVE, SYSCALL, OPENAT, PROCTITLE, USER_CMD, TTY, SOCKADDR, etc.'
-keywords: Linux Audit, audit, auditd, audit rules, auditctl, aureport, ausearch, audit.log, auditd.conf, audit.rules, auid, USER_AUTH, USER_LOGIN, EXECVE, SYSCALL, OPENAT, PROCTITLE, USER_CMD, TTY, SOCKADDR, msg
+keywords: Linux Audit, audit, auditd, audit rules, auditctl, aureport, ausearch, audit.log, auditd.conf, audit.rules, auid, USER_AUTH, USER_LOGIN, EXECVE, SYSCALL, OPENAT, PROCTITLE, USER_CMD, TTY, SOCKADDR, msg, dissect, target-query, sigma, Zircolite, ChopChopGo
 tags:
   - linux_logging_frameworks
   - linux_program_execution
@@ -227,6 +227,41 @@ ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTOR
 # Filters on the specified process identifier (PID) or parent process identifier (PPID).
 ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> -p <PID>
 ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> -pp <PID>
+```
+
+#### dissect target-query
+
+The `target-query` tool, of the
+[`dissect` Python framework](https://docs.dissect.tools/en/latest/index.html),
+can be used to parse `audit` logs in `CSV` or `JSON` outputs. The fields
+will be partially decoded, as hex-encoded `PROCTITLE` commands are for instance
+not decoded to ascii.
+
+```bash
+# If processing an input folder directly, the folder may need to be placed in a tar archive.
+
+target-query -f audit <TARGET> | rdump <--csv | --json | --jsonlines>
+```
+
+#### Sigma-based analysis with Zircolite and ChopChopGo
+
+The [`Zircolite`](https://github.com/wagga40/Zircolite) Python script (or
+standalone compiled binaries) and / or the
+[`ChopChopGo`](https://github.com/M00NLIG7/ChopChopGo) Go tool can be used to
+parse and process `audit` logs using
+[`Sigma`](https://github.com/SigmaHQ/sigma) rules, to generate a detection
+timeline of notable and potentially suspicious activity.
+
+It should be noted however that `Sigma` rules for Linux are nowhere near the
+comprehensiveness level of `Sigma` rules for Windows, and only support basic
+detection.
+
+```bash
+# Prints the summary of the detections and outputs detailed results to a JSON file (by default).
+python3 zircolite.py --auditd --ruleset rules/rules_linux.json [--csv] -e <AUDIT_LOG_FILE | AUDIT_LOG_FOLDER>
+
+# Prints the detections in an ascii array by default, output format can be changed to JSON or CSV.
+ChopChopGo -target auditd -rules ./rules/linux/auditd/ [-out <csv | json>] -file <AUDIT_LOG_FILE>
 ```
 
 ### References
