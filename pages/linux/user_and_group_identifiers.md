@@ -4,6 +4,7 @@ summary: 'Each process is associated with a set of user and group identifiers: u
 keywords:
 tags:
   - linux_system_information
+location: 'User identifiers (uid) to textual usernames mapping:\n/etc/passwd\n\nGroup identifiers (gid) to textual group names mapping:\n/etc/group'
 last_updated: 2024-02-04
 sidebar: sidebar
 permalink: linux_user_and_group_identifiers.html
