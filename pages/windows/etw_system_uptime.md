@@ -8,7 +8,7 @@ tags:
 location: 'File: System.evtx.\n\nChannels:\n\nUser32.\nEvents: 1074.\n\nMicrosoft-Windows-Kernel-General.\nEvents: 12, 13.\n\nMicrosoft-Windows-Kernel-Power.\nEvents: 41, 42, 109.\n\nMicrosoft-Windows-Power-Troubleshooter.\nEvents: 1.\n\nEventLog.\nEvents: 6013, 6005, 6006.'
 last_updated: 2024-01-06
 sidebar: sidebar
-permalink: windows_system_uptime.html
+permalink: windows_etw_system_uptime.html
 folder: windows
 ---
 

@@ -59,7 +59,7 @@
         output: web
 
       - title: System uptime
-        url: /windows_system_uptime.html
+        url: /windows_etw_system_uptime.html
         output: web
 
       - title: Authentication
