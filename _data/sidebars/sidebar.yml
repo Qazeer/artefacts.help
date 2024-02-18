@@ -427,6 +427,10 @@
         url: /windows_defender_detectionhistory.html
         output: web
 
+      - title: Quarantine
+        url: /windows_defender_quarantine.html
+        output: web
+
     - title: Windows Push Notifications (wpndatabase.db)
       url: /windows_wpndatabase_db.html
       output: web
