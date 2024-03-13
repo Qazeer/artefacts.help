@@ -351,6 +351,10 @@
       url: /windows_amcache.html
       output: web
 
+    - title: Hiberfil.sys
+      url: /windows_hiberfilsys.html
+      output: web
+
     - title: Jumplists
       url: /windows_jumplists.html
       output: web
