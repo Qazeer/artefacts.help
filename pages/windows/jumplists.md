@@ -6,6 +6,7 @@ keywords: Jumplists
 tags:
   - windows_files_and_folders_access
   - windows_file_knowledge
+  - windows_program_execution
   - windows_remote_desktop
   - windows_remote_desktop_src
   - windows_usb_activity
@@ -25,6 +26,7 @@ taskbar`. The `Windows Explorer`'s `Quick Access` feature also stores entries
 in `Jumplists`.
 
 Two forms of `Jumplists` are created:
+
   - automatic entries for recently accessed items, stored in
     `*.automaticDestinations-ms` files.
 
@@ -35,6 +37,7 @@ Two forms of `Jumplists` are created:
 Each application `AutomaticDestinations` and `CustomDestinations` `JumpLists`
 information are thus stored in two unique and separated files, of different
 format:
+
   - `AutomaticDestinations` `JumpLists` files are stored as
     `AUTOMATICDESTINATIONS-MS` file, in the `MS OLE Structured Storage` format.
     This file format contains multiple streams, each stream composed of data
@@ -45,9 +48,16 @@ format:
 
 ### Information of interest
 
+As `JumpLists` are linked to an application, through an `AppId`, knowledge of
+the application that was used to open the files can be deducted if the
+application associated to the `AppId` is known. A number of `AppId` are
+documented in
+[`EricZimmerman` 's `JumpList` GitHub repository](https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Resources/AppIDs.txt).
+
 `JumpLists` hold information similar in nature to `shortcut files` for each
 file referenced in an application's `AutomaticDestinations` /
 `CustomDestinations` `JumpLists`:
+
   - the target file's **absolute path, size and attributes** (hidden,
     read-only, etc.).
 
@@ -66,11 +76,21 @@ file referenced in an application's `AutomaticDestinations` /
   - Occasionally **information on the host on which the shortcut file is
     present**: system's NetBIOS hostname and MAC address.
 
-As `JumpLists` are linked to an application, through an `AppId`, knowledge of
-the application that was used to open the files can be deducted if the
-application associated to the `AppId` is known. A number of `AppId` is
-documented in
-[`EricZimmerman` 's `JumpList` GitHub repository](https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Resources/AppIDs.txt).
+The timestamps of the `AutomaticDestinations` and `CustomDestinations`
+`JumpList` files themselves can be an indicator of when the application
+associated with the `JumpList` file was interacted with, depending on how the
+application handles and makes use of `JumpLists`:
+
+  - The birth timestamp of the `JumpList` files can be an indicator of when the
+    application was first executed (by the user associated with the `JumpList`
+    files), if the application automatically populates `JumpList` items upon
+    its first launch.
+
+  - The last write timestamp is an indicator of when the
+    `AutomaticDestinations` or `CustomDestinations` `JumpLists` were last
+    updated. For applications that automatically and regularly update their
+    `JumpLists`, this can be an indicator of when the application was last
+    used (by the user associated with the `JumpList` files).
 
 Specific applications may define custom `JumpLists` entries that store
 information of forensic interest. For example, the `Google Chrome` and
