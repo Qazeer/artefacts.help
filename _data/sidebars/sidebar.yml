@@ -838,3 +838,12 @@
       - title: Notable API / events
         url: /aws_cloudtrail.html#notable-api--events
         output: web
+
+- title: Others
+
+  output: web
+  children:
+
+  - title: VMware ESXi
+    url: /vmware_esxi.html
+    output: web
