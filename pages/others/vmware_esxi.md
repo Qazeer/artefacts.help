@@ -4,12 +4,38 @@ summary: 'VMware ESXi run a Syslog service that logs messages from the kernel an
 keywords: Vmware, vSphere, ESX, ESXi, vCenter, VMkernel, logdir, scratch, vmsyslog.conf, support bundle, shell.log, auth.log, hostd.log, vmware.log, vpxa.log, vmware-hostd, Vimsvc, WebMKS, snapshot, MKSScreenShotMgr, DFIR4vSphere, Start-ESXi_Investigation, Start-VC_Investigation, ESXBundle, VCBundle
 tags:
   - hypervisors
-default_location: 'Authentication logs:\n/var/run/log/auth.log\n\nESXi host agent logs:\n/var/run/log/hostd.log\n\nESXi Shell logs:\n/var/run/log/shell.log\n\n vCenter Server agent logs:\n/var/run/log/vpxa.log\n\nPer virtual machines logs:\n/vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log'
+default_location: 'SSH authentication logs:\n/var/run/log/auth.log\n\nESXi host agent logs:\n/var/run/log/hostd.log\n\nESXi Shell logs:\n/var/run/log/shell.log\n\n vCenter Server agent logs:\n/var/run/log/vpxa.log\n\nPer virtual machines logs:\n/vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log'
 last_updated: 2024-06-02
 sidebar: sidebar
 permalink: vmware_esxi.html
 folder: others
 ---
+
+### VMware ESXi access
+
+`ESXi` host can be accessed and managed using a number of methods.
+
+| Access method | Description | Port |
+|---------------|-------------|------|
+| `ESXi Host Client` | Web management interface accessible over `HTTPS`. Access through the web interface are often leveraged to enable `SSH`. | `TCP` 443 |
+| `Secure Shell (SSH)` | `SSH` access to execute commands locally on the `ESXi` host through the `ESXi Shell`. `SSH` is commonly leveraged by threat actors to perform operations on the `ESXi` host, including power-off and encryption of virtual machines's virtual disk `vmdk` for ransomware operators. | 22 |
+| `Direct Console User Interface (DCUI)` | Text-based console accessible from the physical console attached to the `ESXi` host. | - |
+| [vSphere Web Services API](https://developer.broadcom.com/xapis/vsphere-web-services-api/7.0U2/) | API exposed as a Web service to manage `vCenter` instances and `ESXi` hosts, including life-cycle operations on virtual machines. | 443 |
+
+#### Microsoft Active Directory Domain Services integration
+
+`ESXi` hosts can be joined to an `Active Directory` domain. If an `ESXi` host
+is joined to an `AD` domain, members of the `AD` group defined in the
+`Config.HostAgent.plugins.hostsvc.esxAdminsGroup` parameter will have full
+administrative access to the host. By default, the `esxAdminsGroup` parameter
+is set to `ESX Admins`.
+
+The `esxAdminsGroup` parameter can be consulted and set in the
+`ESXi Host Client` web management interface: "Managed" -> "Advanced Settings"
+-> "Config.HostAgent.plugins.hostsvc.esxAdminsGroup". The value is stored in
+the `/etc/vmware/configstore/current-store-1` configuration file.
+Additionally, for offline analysis, the `esxAdminsGroup` parameter value is
+retrieved in a support bundle collection .
 
 ### VMware ESXi logs
 
@@ -33,9 +59,9 @@ configured and accessed / collected.*
 | Component | Location | Details |
 |-----------|----------|---------|
 | Authentication | `<LOG_DIR>/auth.log` | Events related to authentication to the local `ESXi` host. <br><br> **Includes events from the `sshd` daemon for remote access.** |
-| ESXi host agent | `<LOG_DIR>/hostd.log` | Events from the `vmware-hostd` host / management daemon, that is responsible for most of the operations on the `ESXi` host and its associated virtual machines. <br><br> **Include events on VM creation, power on / off, deletion, snapshot operations, etc.** |
+| ESXi host agent | `<LOG_DIR>/hostd.log` | Events from the `vmware-hostd` host / management daemon, that is responsible for most of the operations on the `ESXi` host and its associated virtual machines. <br><br> **Include events:** <br> - **On authentications**, for SSH and other access types that are not recorded in auth.log, such as access through the web management interface ESXi Host Client, PowerCLI, programming language SDK, etc. <br> - **On virtual machine life-cycle operations**, such as VM creation, power on / off, deletion, snapshot operations. <br> - **On PowerCLI guest operations**, such as files transfer and command executions notably. <br> - etc. |
 | ESXi Shell | `<LOG_DIR>/shell.log` | Events for shell related activity. <br><br> **Include events for every commands entered in the `ESXi Shell`, shell session lifecycle, enabling / disabling of SSH access, etc.** |
-| Virtual machines | `/vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log` | Per virtual machine events on the VM life-cycle operations. <br><br> **Include events for VM configuration changes, `Vmware WebMKS` console access, snapshot operations, etc.** |
+| Virtual machines | `/vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log` | Per virtual machine events on the VM life-cycle operations. <br><br> **Include events for VM configuration changes, snapshot operations, `Vmware WebMKS` console access, guest operations (files transfer and command executions notably) through PowerCLI, etc.** |
 | vCenter Server agent | `<LOG_DIR>/vpxa.log` | Events related to the ESXi agent that communicates with vCenter Servers (if the ESXi host is managed by vCenter). |
 | Install and updates | `<LOG_DIR>/esxupdate.log` | Install and updates related events. |
 
@@ -43,6 +69,8 @@ Additionally, for environments with `vCenter`, `VI events` can also be a great
 source of information (on every `vSphere API` calls made through `vCenter`).
 
 #### Events related to various operations
+
+**Authentication to the ESXi host**
 
 {% include note.html content="SSH access (as root)." %}
 
@@ -64,6 +92,14 @@ Source: hostd.log
 2023-12-05T14:31:48.557Z In(166) Hostd[1050748]: [Originator@6876 sub=Vimsvc opID=esxui-8c02-9b39 sid=52f0e556] [Auth]: User root
 2023-12-05T14:31:48.558Z In(166) Hostd[1050748]: [Originator@6876 sub=Vimsvc.ha-eventmgr opID=esxui-8c02-9b39 sid=52f0e556] Event 99 : User root@192.168.127.10 logged in as Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0
 ```
+
+{% include note.html content="Access through `PowerCLI`." %}
+
+```
+2024-06-03T19:58:26.435Z In(166) Hostd[1050278]: [Originator@6876 sub=Vimsvc.ha-eventmgr opID=c4c96306 sid=52018116] Event 220 : User root@192.168.127.13 logged in as PowerCLI/13.2.1.22851661
+```
+
+**Operations on the ESXi host itself**
 
 {% include note.html content="Enabling of SSH on the `ESXi` host." %}
 
@@ -95,6 +131,16 @@ Source: shell.log
 2023-12-05T17:42:32.948Z In(14) shell[1053659]: [root]: vim-cmd vmsvc/snapshot.create $vm_id
 ```
 
+{% include note.html content="Update of the \"Config.HostAgent.plugins.hostsvc.esxAdminsGroup\" parameter, setting the AD group with administrative access on the ESXI host to \"ESX Admins new\"." %}
+
+```
+Source: hostd.log
+
+2024-06-02T21:19:01.386Z In(166) Hostd[1050738]: [Originator@6876 sub=Hostsvc.AppConfigOptionsProvider(Config.HostAgent.) opID=esxui-a003-5e51 sid=5295925c user=root] Set called with key 'Config.HostAgent.plugins.hostsvc.esxAdminsGroup' value '"ESX Admins new"'
+```
+
+**Operations on Guest virtual machines**
+
 {% include note.html content="Snapshot of a virtual machine." %}
 
 ```
@@ -104,7 +150,7 @@ Source: shell.log (if conducted through ESXi shell)
 ```
 
 ```
-Source: vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been snapshot)
+Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been snapshot)
 
 2023-12-05T17:42:40.666Z In(05) vmx vim-cmd-09-a45d SnapshotVMX_TakeSnapshot start: 'snapshot_exfill', deviceState=1, lazy=1, quiesced=0, forceNative=0, tryNative=1, saveAllocMaps=0
 2023-12-05T17:42:40.680Z In(05) vcpu-0 vim-cmd-09-a45d MainMem: Writing full memory image, '/vmfs/volumes/643a85c2-3920a51f-8175-48210b361288/Base-WindowsServer2019/Base-WindowsServer2019-Snapshot2.vmem'
@@ -115,7 +161,7 @@ Source: vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been s
 {% include note.html content="Access to a virtual machine description page through the `ESXi` web management interface `ESXi Host Client`." %}
 
 ```
-Source: vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been snapshot)
+Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been snapshot)
 
 2023-12-05T17:59:05.961Z In(05) vmx - MKSVMX: Vigor requested a screenshot
 2023-12-05T17:59:05.961Z In(05) svga - MKSScreenShotMgr: Taking a screenshot
@@ -124,7 +170,7 @@ Source: vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been s
 {% include note.html content="Access to a virtual machine login screen by launching the remote console through `ESXi` web management interface `ESXi Host Client`, bypassing possible network filtering. <br><br> Only indicates that an access was made to the guest host login screen, not necessarily that a successful login occurred (that would result on a logon `Type 2` / `Interactive` `4624` event on a Windows guest host)." %}
 
 ```
-Source: vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been snapshot)
+Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been snapshot)
 
 2023-12-05T18:02:22.340Z In(05) vmx - VigorTransportProcessClientPayload: opID=e0ada929 seq=8511: Receiving MKS.IssueTicket request.
 2023-12-05T18:02:22.341Z In(05) vmx e0ada929 Issuing new webmks ticket 2d0378... (120 seconds)
@@ -132,6 +178,67 @@ Source: vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been s
 2023-12-05T18:02:23.807Z In(05) mks - MKSRemoteMgr: AddRemoteConsole (numConsoles=0)
 2023-12-05T18:02:23.807Z In(05) mks - SOCKET 7 (119) Creating VNC remote connection.
 2023-12-05T18:02:23.807Z In(05) svga - MVNCEncode: Number of screens changed from 0 to 1
+```
+
+{% include note.html content="Transfer of a file to a guest virtual machine (from a controlled system) using `PowerCLI`'s `Copy-VMGuestFile` cmdlet. <br><br> Command example: <br> `Copy-VMGuestFile -LocalToGuest -VM \"<VM_NAME>\" -GuestUser \"<USERNAME>\" -GuestPassword \"<PASSWORD>\" -Source \"<SOURCE_FILE>\" -Destination \"<DESTINATION_FULL_PATH>\"`." %}
+
+```
+Source: hostd.log
+
+2024-06-03T22:46:09.892Z In(166) Hostd[1050233]: [Originator@6876 sub=Vimsvc.ha-eventmgr] Event 229 : Guest operation Initiate File Transfer To Guest performed on Virtual machine <VIRTUAL_MACHINE_NAME>.
+2024-06-03T22:46:09.969Z In(166) Hostd[1050237]: [Originator@6876 sub=Guestsvc.GuestFileHandler] Guest File Path is <DESTINATION_FULL_PATH>
+```
+
+```
+Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM to which the file was transferred)
+
+2024-06-03T22:45:46.667Z In(05) vmx - VigorTransportProcessClientPayload: opID=c4c964e7 seq=845: Receiving GuestOps.InitiateFileTransferToGuest request.
+2024-06-03T22:45:46.679Z In(05) vcpu-1 - VigorTransport_ServerSendResponse opID=c4c964e7 seq=845: Completed GuestOps request.
+```
+
+{% include note.html content="Download of a file from a guest virtual machine (to a local controlled system) using `PowerCLI`'s `Copy-VMGuestFile` cmdlet. <br><br> Command example: <br> `Copy-VMGuestFile -GuestToLocal -VM \"<VM_NAME>\" -GuestUser \"<USERNAME>\" -GuestPassword \"<PASSWORD>\" -Source \"<SOURCE_FULL_PATH>\" -Destination \"<DESTINATION_FOLDER | DESTINATION_FILE>\"`." %}
+
+```
+Source: hostd.log
+
+2024-06-04T21:53:35.264Z In(166) Hostd[1050265]: [Originator@6876 sub=Vimsvc.ha-eventmgr] Event 243 : Guest operation Initiate File Transfer From Guest performed on Virtual machine <VIRTUAL_MACHINE_NAME>.
+2024-06-04T21:53:35.409Z In(166) Hostd[1050754]: [Originator@6876 sub=Guestsvc.GuestFileHandler] Guest File Path is <SOURCE_FULL_PATH>
+```
+
+```
+Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM from which the file was downloaded)
+
+2024-06-04T21:53:35.220Z In(05) vmx - VigorTransportProcessClientPayload: opID=c4c9713c seq=3576: Receiving GuestOps.InitiateFileTransferFromGuest request.
+2024-06-04T21:53:35.263Z In(05) vcpu-1 - VigorTransport_ServerSendResponse opID=c4c9713c seq=3576: Completed GuestOps request with messages.
+```
+
+{% include note.html content="Execute a command on a guest virtual machine using `PowerCLI`'s `Invoke-VMScript` cmdlet. **The command executed is not logged in ESXi logs.** <br><br> The cmdlet first create a temporary file to store (in real-time) the script `stdout` / `stderr` output, execute the given command, retrieve the temporary file to display the script console output on the local machine, and delete the temporary file. <br><br> Command example: <br> `Invoke-VMScript -VM \"<VM_NAME>\" -GuestUser \"<USERNAME>\" -GuestPassword \"<PASSWORD>\" -ScriptText \"<COMMAND>\"`." %}
+
+```
+Source: hostd.log
+
+2024-06-04T21:58:00.913Z In(166) Hostd[1050740]: [Originator@6876 sub=Vimsvc.ha-eventmgr] Event 245 : Guest operation Create Temporary File performed on Virtual machine <VIRTUAL_MACHINE_NAME>.
+2024-06-04T21:58:00.975Z In(166) Hostd[1050232]: [Originator@6876 sub=Vimsvc.ha-eventmgr] Event 246 : Guest operation Start Program performed on Virtual machine <VIRTUAL_MACHINE_NAME>.
+2024-06-04T21:58:06.170Z In(166) Hostd[1050230]: [Originator@6876 sub=Vimsvc.ha-eventmgr] Event 249 : Guest operation Initiate File Transfer From Guest performed on Virtual machine <VIRTUAL_MACHINE_NAME>.
+2024-06-04T21:58:06.248Z In(166) Hostd[1050750]: [Originator@6876 sub=Guestsvc.GuestFileHandler] Guest File Path is C:\Users\vagrant\AppData\Local\Temp\powerclivmware151
+2024-06-04T21:58:06.364Z In(166) Hostd[1050232]: [Originator@6876 sub=Vimsvc.ha-eventmgr] Event 250 : Guest operation Delete File performed on Virtual machine <VIRTUAL_MACHINE_NAME>.
+```
+
+```
+Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM to which the file was transferred)
+
+2024-06-04T21:58:00.759Z In(05) vmx - VigorTransportProcessClientPayload: opID=c4c97156 seq=3930: Receiving GuestOps.CreateTemporaryFile request.
+2024-06-04T21:58:00.913Z In(05) vcpu-0 - VigorTransport_ServerSendResponse opID=c4c97156 seq=3930: Completed GuestOps request with messages.
+2024-06-04T21:58:00.929Z In(05) vmx - VigorTransportProcessClientPayload: opID=c4c97157 seq=3936: Receiving GuestOps.StartProgram request.
+2024-06-04T21:58:00.975Z In(05) vcpu-1 - VigorTransport_ServerSendResponse opID=c4c97157 seq=3936: Completed GuestOps request with messages.
+2024-06-04T21:58:00.993Z In(05) vmx - VigorTransportProcessClientPayload: opID=c4c97158 seq=3942: Receiving GuestOps.ListProcesses request.
+2024-06-04T21:58:01.013Z In(05) vcpu-1 - VigorTransport_ServerSendResponse opID=c4c97158 seq=3942: Completed GuestOps request with messages.
+2024-06-04T21:58:06.038Z In(05) vmx - VigorTransportProcessClientPayload: opID=c4c9715a seq=3948: Receiving GuestOps.ListProcesses request.
+2024-06-04T21:58:06.102Z In(05) vcpu-0 - VigorTransport_ServerSendResponse opID=c4c9715a seq=3948: Completed GuestOps request with messages.
+2024-06-04T21:58:06.123Z In(05) vmx - VigorTransportProcessClientPayload: opID=c4c9715b seq=3954: Receiving GuestOps.InitiateFileTransferFromGuest request.
+2024-06-04T21:58:06.169Z In(05) vcpu-0 - VigorTransport_ServerSendResponse opID=c4c9715b seq=3954: Completed GuestOps request with messages.
+2024-06-04T21:58:06.319Z In(05) vmx - VigorTransportProcessClientPayload: opID=c4c9715e seq=3966: Receiving GuestOps.DeleteFile request.
+2024-06-04T21:58:06.363Z In(05) vcpu-0 - VigorTransport_ServerSendResponse opID=c4c9715e seq=3966: Completed GuestOps request.
 ```
 
 ### Artifacts and logs collection
