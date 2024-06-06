@@ -71,8 +71,6 @@ backend and shares similar artefacts to `Google Chrome`.
 
 #### Google Chrome
 
-Browsing history: <USER_PROFILE>\History.\nCookies: <USER_PROFILE>\Cookies.\nCache: <USER_PROFILE>\Cache.\nSessions: <USER_PROFILE>\Sessions.\nSettings: <USER_PROFILE>\Preferences.\n
-
 | Type | Description | Location |
 |------|-------------|----------|
 | User profile(s) | - | `%LocalAppData%\Google\Chrome\User Data\<Default | Profile X>\*` <br><br> *With `X` ranging from one to n.* |
