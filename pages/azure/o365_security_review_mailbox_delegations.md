@@ -48,7 +48,8 @@ The available access rights are:
   - `ReadPermission`: read the permissions on the mailbox.
 
 The permissions defined on that level allow for emails viewing at the mailbox
-scope but do not allow sending emails (which is defined through the ).
+scope but do not allow sending emails (which is defined through the recipient
+`SendAs` and `SendOnBehalf` permissions).
 
 ```bash
 # Retrieves the access rights defined on the given mailbox.

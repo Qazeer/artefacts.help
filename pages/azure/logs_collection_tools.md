@@ -58,15 +58,19 @@ PowerShell module can be used to extract logs from Azure AD and Office365.
 Install-Module -Name ExchangeOnlineManagement
 Install-Module -Name AzureADPreview
 
+# Only required for cmdlets using the GraphAPI, such as Get-ADSignInLogsGraph or Get-ADAuditLogsGraph
+Install-Module Microsoft.Graph.Beta
+
 # The AzureADPreview module MUST be imported (in place of the AzureAD module), as Get-AzureADAuditSignInLogs is updated to allow the retrieval of all events (instead of 1.000 entries with the AzureAD version).
 Remove-Module -Name 'AzureAD' -Force
 Import-Module -Name 'AzureADPreview' -Force
 
 Import-Module .\Microsoft-Extractor-Suite.psd1
 
-# Connects to Office 365 and / or Azure.
+# Connects to Office 365, AzureAD, and / or Azure (depending on the collection targets).
 Connect-M365
 Connect-Azure
+Connect-AzureAZ
 
 # Retrieves the total number of records in the UAL per Record Type.
 # By default retrieve data for the last 90 days for all users.
@@ -87,12 +91,12 @@ Get-MailboxAuditLog -UserIds "<EMAIL | EMAILS_LIST>"
 # Retrieves all Azure AD sign-in logs.
 Get-ADSignInLogs
 # Retrieves Azure AD sign-in logs before and / or after the specified date(s) (no timestamp support, date with day precision only).
-Get-ADSignInLogs -Before <YYYY-MM-DD> -After <YYYY-MM-DD>
+Get-ADSignInLogs -StartDate <YYYY-MM-DD> -EndDate <YYYY-MM-DD>
 
 # Retrieves all Azure AD Audit logs.
 Get-ADAuditLogs
 # Retrieves Azure AD Audit logs before and / or after the specified date(s) (no timestamp support, date with day precision only).
-Get-ADAuditLogs -Before <YYYY-MM-DD> -After <YYYY-MM-DD>
+Get-ADAuditLogs -StartDate <YYYY-MM-DD> -EndDate <YYYY-MM-DD>
 ```
 
 ### [Azure AD, Office365, & Azure] DFIR-O365RC collector

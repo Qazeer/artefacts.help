@@ -23,6 +23,12 @@ Exchange Online instance:
     aforementioned groups through the
     [Exchange administration portal](https://admin.exchange.microsoft.com/).
 
+    If the required rights are not correctly granted to the user conducting the log collection, the following error will arise:
+    
+    ```
+    Search-UnifiedAuditLog : The term 'Search-UnifiedAuditLog' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+    ```
+
   - Azure subscription (for retrieving `Azure Activity logs` for the given
     subscription): `Log Analytics Reader` role.
 
