@@ -39,3 +39,4 @@ allowed-tags:
   - linux_ssh_dst
   - linux_local_persistence
   - linux_defense_evasion
+  - hypervisors

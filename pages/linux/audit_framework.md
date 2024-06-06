@@ -7,6 +7,8 @@ tags:
   - linux_program_execution
   - linux_files_and_folders_access
   - linux_file_knowledge
+  - linux_lateral_movement
+  - linux_lateral_movement_dst
 default_location: 'auditd daemon configuration:\n/etc/audit/auditd.conf\n\nAudit rules:\n/etc/audit/audit.rules\n/etc/audit/rules.d/\n\nAudit logs:\n/var/log/audit.log*\n/var/log/audit/audit.log.*.gz'
 last_updated: 2024-02-03
 sidebar: sidebar

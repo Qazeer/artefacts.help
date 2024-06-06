@@ -1,10 +1,14 @@
 ---
 title: Jumplists
-summary: 'Introduced in Windows 7, Jumplists are linked to a taskbar user experience-enhancing feature that allows users to "jump" to files, folders or others elements by right-clicking on open applications in the Windows taskbar.\n\nInformation of interest: target file absolute path, size, attributes, and Modified, Access, and Birth timestamps (updated whenever the file is "jumped" to).'
+summary: 'Introduced in Windows 7, Jumplists are linked to a taskbar user experience-enhancing feature that allows users to "jump" to files, folders or others elements by right-clicking on open applications in the Windows taskbar.\n\nInformation of interest: target file absolute path, size, attributes, and Modified, Access, and Birth timestamps (updated whenever the file is "jumped" to).\n\nRemote desktop connections made using the Windows built-in mstsc.exe client will generate an entry
+in the AutomaticDestinations JumpList that may reference the remote host.'
 keywords: Jumplists
 tags:
   - windows_files_and_folders_access
   - windows_file_knowledge
+  - windows_program_execution
+  - windows_remote_desktop
+  - windows_remote_desktop_src
   - windows_usb_activity
 location: 'AutomaticDestinations:\n<SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations\<APP_ID>.automaticDestinations-ms\n\nCustomDestinations:\n<SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Roaming\Microsoft\Windows\Recent\CustomDestinations\<APP_ID>.customDestinations-ms'
 last_updated: 2023-12-31
@@ -22,6 +26,7 @@ taskbar`. The `Windows Explorer`'s `Quick Access` feature also stores entries
 in `Jumplists`.
 
 Two forms of `Jumplists` are created:
+
   - automatic entries for recently accessed items, stored in
     `*.automaticDestinations-ms` files.
 
@@ -32,6 +37,7 @@ Two forms of `Jumplists` are created:
 Each application `AutomaticDestinations` and `CustomDestinations` `JumpLists`
 information are thus stored in two unique and separated files, of different
 format:
+
   - `AutomaticDestinations` `JumpLists` files are stored as
     `AUTOMATICDESTINATIONS-MS` file, in the `MS OLE Structured Storage` format.
     This file format contains multiple streams, each stream composed of data
@@ -42,9 +48,16 @@ format:
 
 ### Information of interest
 
+As `JumpLists` are linked to an application, through an `AppId`, knowledge of
+the application that was used to open the files can be deducted if the
+application associated to the `AppId` is known. A number of `AppId` are
+documented in
+[`EricZimmerman` 's `JumpList` GitHub repository](https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Resources/AppIDs.txt).
+
 `JumpLists` hold information similar in nature to `shortcut files` for each
 file referenced in an application's `AutomaticDestinations` /
 `CustomDestinations` `JumpLists`:
+
   - the target file's **absolute path, size and attributes** (hidden,
     read-only, etc.).
 
@@ -63,16 +76,37 @@ file referenced in an application's `AutomaticDestinations` /
   - Occasionally **information on the host on which the shortcut file is
     present**: system's NetBIOS hostname and MAC address.
 
-As `JumpLists` are linked to an application, through an `AppId`, knowledge of
-the application that was used to open the files can be deducted if the
-application associated to the `AppId` is known. A number of `AppId` is
-documented in
-[`EricZimmerman` 's `JumpList` GitHub repository](https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Resources/AppIDs.txt).
+The timestamps of the `AutomaticDestinations` and `CustomDestinations`
+`JumpList` files themselves can be an indicator of when the application
+associated with the `JumpList` file was interacted with, depending on how the
+application handles and makes use of `JumpLists`:
+
+  - The birth timestamp of the `JumpList` files can be an indicator of when the
+    application was first executed (by the user associated with the `JumpList`
+    files), if the application automatically populates `JumpList` items upon
+    its first launch.
+
+  - The last write timestamp is an indicator of when the
+    `AutomaticDestinations` or `CustomDestinations` `JumpLists` were last
+    updated. For applications that automatically and regularly update their
+    `JumpLists`, this can be an indicator of when the application was last
+    used (by the user associated with the `JumpList` files).
 
 Specific applications may define custom `JumpLists` entries that store
 information of forensic interest. For example, the `Google Chrome` and
 `Microsoft Edge` web browsers store the recently closed tabs in their
 respective `CustomDestinations` `JumpLists`.
+
+###### Remote Desktop Connection mstsc.exe
+
+Remote desktop connections made using the Windows built-in
+`Microsoft Terminal Server Client` client (`mstsc.exe`) will generate an entry
+in the `AutomaticDestinations` `JumpList`. The entries will be associated with
+the application identifier `1bc392b8e104a00e`.
+
+The arguments in the entry for a given connections will reference the remote
+host by hostname or IP address (`/v:"<HOSTNAME | IP>"`) or the `RDP File` used
+for the connection (`"<PATH>\<FILE>.rdp"`).
 
 ### Tool(s)
 
@@ -93,3 +127,5 @@ JLECmd.exe [-q --csv <CSV_DIRECTORY_OUTPUT>] -d <C:\Users\<USERNAME>\AppData\Roa
 ### References
 
   - [13Cubed - LNK Files and Jump Lists](https://www.youtube.com/watch?v=wu4-nREmzGM)
+
+  - [ZEROFOX - MARI DEGRAZIA - Remote Desktop Application vs MSTSC Forensics: The RDP Artifacts You Might Be Missing](https://www.zerofox.com/blog/remote-desktop-application-vs-mstsc-forensics-the-rdp-artifacts-you-might-be-missing/#jump-list-entries)
