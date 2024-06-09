@@ -150,6 +150,10 @@
         url: /windows_etw_wmi.html
         output: web
 
+      - title: Sigma rules
+        external_url: https://github.com/SigmaHQ/sigma
+        output: web
+
     - title: Registry
       output: web
       children:
