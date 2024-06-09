@@ -40,3 +40,4 @@ allowed-tags:
   - linux_local_persistence
   - linux_defense_evasion
   - hypervisors
+  - mailservers
