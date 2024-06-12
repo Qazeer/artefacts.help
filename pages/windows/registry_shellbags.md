@@ -54,29 +54,39 @@ different level of data depending on the activity):
 
 `Shellbag` entries are stored in registry as a tree-like data structure, with
 the root target having the topmost `BagMRU` key. This allows the reconstitution
-of the browsed directories arborescence. Each sub-target (subdirectory for
-example) of the parent target are then represented with both:
+of the browsed directories arborescence. **Each sub-target** (subdirectory for
+example) of the parent target **are then represented with both**:
 
-  - A registry subkey, named with a numerical value (starting from `0`).
+  - **A registry sub-key**, named with a numerical value (starting from `0`).
 
-  - A registry value (in the parent target's registry key), named with the same
-    numerical value and associated with binary data that notably contains the
-    target's name.
+  - **A registry value** (in the parent target's registry key), named with the
+    same numerical value and associated with binary data that notably contains
+    the target's name.
 
-Each `Shellbag` `BagMRU` registry key also contains a `MRUListEx` value, that
-maintains the entries visited order, i.e. the order in which the sub-targets of
-a target were accessed (the last sub-target accessed having a `MRU position`
-of 0).
+Each `Shellbag` `BagMRU` registry key also contains:
 
-For example, `My Computer` will be associated with the topmost `BagMRU` key,
-`C:` to `BagMRU\0` if it was access first, `C:\Users` to ` BagMRU\0\2` if it
-was accessed third, and so on and so forth. A hierarchical view of the
-`Shellbag` entries can thus be established.
+  - A `MRUListEx` value, that maintains the entries visited order, i.e. the
+    order in which the sub-targets of a target were accessed (the last
+    sub-target accessed having a `MRU position` of 0).
+
+    For example, `My Computer` will be associated with the topmost `BagMRU`
+    key, `C:` to `BagMRU\0` if it was accessed first (`0`), `C:\Users` to
+    `BagMRU\0\1` if `Users` was the second folder accessed under `C:\`
+    (`1`), `C:\Users\USERNAME` to `BagMRU\0\1\0` if `USERNAME` was the first
+    folder accessed under `C:\Users`, and so on and so forth. A
+    hierarchical view of the `Shellbag` entries can thus be established.
+
+  - A `NodeSlot` value, containing a numerical value that references the item
+    `Bags` sub-key. Each target is indeed associated with a sub-key under the
+    `HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags`
+    key. This sub-key, named with a numerical value value corresponding to the
+    `NodeSlot` of its associated target, contains the `Explorer` view settings
+    for the target.
 
 As the `Shellbags` entries are stored in user's specific registry hives,
 **targets** (folders, `Control Panel` interfaces, etc.) **access can be tied
 to a given user** through its `Shellbags`. `Shellbags` entries are populated
-only upon interaction (i.e. are not prepopulated), the mere presence of a
+only upon interaction (i.e. are not pre-populated), the mere presence of a
 `Shellbag` entry for a target is thus evidence that the user interacted with
 the given target. `Shellbags` entries are not automatically deleted upon
 deletion of the related folders and can thus be a **source of historical
@@ -98,26 +108,32 @@ forensic interest:
 The **first and last interacted timestamps** can be **indirectly deducted
 for some targets**:
 
-  - The `First Interacted` timestamp can be inferred for some targets thanks to
+  - The `First Interacted` timestamp can be deduced for some targets thanks to
     the tree like data structure of `ShellBags` entry. Indeed, for entries that
-    do not have subkeys (i.e. directory for which no subdirectory were accessed)
-    the `First Interacted` timestamp is equal to the key's `LastWriteTime`
-    timestamp. This is due to the fact that the key is created when a target is
-    first accessed, and further activity for that target (such as display
-    settings modifications) will only update the key's values. In such
+    do not have sub-keys (i.e. directory for which no subdirectory were
+    accessed) the `First Interacted` timestamp is equal to the key's
+    `LastWriteTime` timestamp. This is due to the fact that the key is created
+    when a target is first accessed, and further activity for that target will
+    not update the target `BagMRU` key's values or its sub-keys. Indeed
+    activities, such as `Explorer` display settings modifications, will update
+    the target `Bags` key only (and not its `BagMRU` key directly). In such
     circumstances, the `LastWriteTime` timestamp reflect the timestamp of the
-    key initial creation (as it is not updated upon updates to a key's values).
-    When a subkey is created for the target (i.e. when a subdirectory is
-    accessed for that particular directory), the timestamp becomes unreliable
-    as it reflect the creation of the subkey.
+    key initial creation.
 
-  - The `Last Interacted` timestamp can be deducted for **the sub-target that
-    was last interacted with**. Indeed, as each `Shellbag` entry corresponds to
+    When a sub-key is created for the target (i.e. when a subdirectory is
+    accessed for that particular directory), the timestamp becomes unreliable
+    as it reflect the creation of the sub-key.
+
+  - The `Last Interacted` timestamp can be deducted for the sub-target that was
+    last interacted with. Indeed, as each `Shellbag` entry corresponds to
     a registry key, the key's `LastWriteTime` timestamp indicates when the
-    `Shellbag` entry was last updated. The child-bag / sub-target that was last
-    interacted with being known (`MRU position` of 0), this timestamp
-    correspond to the last interaction timestamp for the sub-target that was
-    last interacted with.
+    `Shellbag` entry was last updated. As the key is only updated when (a newly
+    interacted with) sub-target is added (both as a sub-key and a numerical
+    value), the `LastWriteTime` timestamp of a key (with sub-keys) correspond
+    to the timestamp of creation of the last added sub-key. This last added
+    sub-key being known, by its `MRU position` of 0, the interaction timestamp
+    of the last interacted with child-bag / sub-target can thus be deduced (the
+    parent key `LastWriteTime` timestamp).
 
 Note however that major updates of the Windows operating system may result in
 modification of `ShellBags` entries, resulting in updated last write
@@ -142,6 +158,8 @@ SBECmd.exe --csv <CSV_DIRECTORY_OUTPUT> -l
 ```
 
 ### References
+
+  - [4n6k - Shellbags Forensics: Addressing a Misconception (interpretation, step-by-step testing, new findings, and more)](https://www.4n6k.com/2013/12/shellbags-forensics-addressing.html)
 
   - [SANS - Vincent Lo - Windows ShellBag Forensics in Depth](https://www.sans.org/reading-room/whitepapers/forensics/windows-shellbag-forensics-in-depth-34545)
 
