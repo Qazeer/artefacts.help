@@ -376,7 +376,7 @@
       output: web
 
     - title: PowerShell ConsoleHost_history
-      url: /windows_consolehost_history.html
+      url: /windows_powershell_consolehost_history.html
       output: web
 
     - title: Prefetch
