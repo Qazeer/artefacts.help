@@ -488,7 +488,7 @@
       children:
 
       - title: Processes
-        url: /windows_wmi_process.html
+        url: /windows_wmi_processes.html
         output: web
 
       - title: ETW events
