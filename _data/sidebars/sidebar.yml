@@ -411,11 +411,11 @@
         url: /windows_rdp_bitmap_cache.html
         output: web
 
-      - title: Terminal Server Client\Servers
+      - title: Registry - Terminal Server Client
         url: /windows_registry_terminalserverclient.html
         output: web
 
-      - title: Jumplists for mstsc.exe usage
+      - title: mstsc Jumplists
         url: /windows_jumplists.html
         output: web
 
