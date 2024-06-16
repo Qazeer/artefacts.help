@@ -387,9 +387,37 @@
       url: /windows_prefetch.html
       output: web
 
-    - title: RDP Bitmap Cache
-      url: /windows_rdp_bitmap_cache.html
+    - title: RDP
       output: web
+      children:
+
+      - title: Processes
+        url: /windows_rdp_processes.html
+        output: web
+
+      - title: ETW - Destination host
+        url: /windows_etw_remote_desktop_dst_host.html
+        output: web
+
+      - title: ETW - Source host
+        url: /windows_etw_remote_desktop_src_host.html
+        output: web
+
+      - title: ETW - Remote Desktop Gateway
+        url: /windows_etw_remote_desktop_rdg_host.html
+        output: web
+
+      - title: RDP Bitmap Cache
+        url: /windows_rdp_bitmap_cache.html
+        output: web
+
+      - title: Terminal Server Client\Servers
+        url: /windows_registry_terminalserverclient.html
+        output: web
+
+      - title: Jumplists for mstsc.exe usage
+        url: /windows_jumplists.html
+        output: web
 
     - title: RecentFileCache
       url: /windows_amcache.html
@@ -459,7 +487,7 @@
       output: web
       children:
 
-      - title: Process
+      - title: Processes
         url: /windows_wmi_process.html
         output: web
 

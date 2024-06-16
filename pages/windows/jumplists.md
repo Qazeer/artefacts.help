@@ -97,12 +97,12 @@ information of forensic interest. For example, the `Google Chrome` and
 `Microsoft Edge` web browsers store the recently closed tabs in their
 respective `CustomDestinations` `JumpLists`.
 
-###### Remote Desktop Connection mstsc.exe
+#### Remote Desktop Connection mstsc.exe
 
 Remote desktop connections made using the Windows built-in
-`Microsoft Terminal Server Client` client (`mstsc.exe`) will generate an entry
-in the `AutomaticDestinations` `JumpList`. The entries will be associated with
-the application identifier `1bc392b8e104a00e`.
+[`Microsoft Terminal Server Client` client (`mstsc.exe`)](./rdp_processes.md#source-host)
+will generate an entry in the `AutomaticDestinations` `JumpList`. The entries
+will be associated with the application identifier `1bc392b8e104a00e`.
 
 The arguments in the entry for a given connections will reference the remote
 host by hostname or IP address (`/v:"<HOSTNAME | IP>"`) or the `RDP File` used
