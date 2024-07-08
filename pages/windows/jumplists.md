@@ -40,11 +40,16 @@ format:
 
   - `AutomaticDestinations` `JumpLists` files are stored as
     `AUTOMATICDESTINATIONS-MS` file, in the `MS OLE Structured Storage` format.
-    This file format contains multiple streams, each stream composed of data
-    similar to `shortcut files (.LNK)`.
+    This file format notably contains a `DestList` stream that acts as a
+    `Most Recent Used (MRU)` list of `shortcut files (.LNK)`. Each entry in an
+    application `AutomaticDestinations` `JumpList` is stored as an entry in the
+    `DestList` stream, composed of metadata and a `LNK`-like structure.
 
   - `CustomDestinations` `JumpLists` are stored as `CUSTOMDESTINATIONS-MS`
     file, also assimilable to a series of `shortcut files`.
+
+Applications may handle `Jumplists` differently, with different entries being
+created / updated on different actions by specific applications.
 
 ### Information of interest
 
@@ -68,6 +73,13 @@ file referenced in an application's `AutomaticDestinations` /
 
   - Whether the **target file was stored locally or on a remote network share**
     through the specification of a `LocalPath` or `NetworkPath`.
+
+  - For `AutomaticDestinations` `JumpLists` (only), each entry is also
+    associated with two additional timestamps: the created and last modified
+    timestamps of the entry in the `DestList` stream. The last modified
+    timestamp is updated whenever the entry is interacted with (file opened,
+    `RDP` session established, etc.). The created timestamp does not however
+    appear to be reliable.
 
   - Occasionally **information on the volume that stored the target file**:
     drive type (fixed vs removable storage media), serial number, and label /
@@ -101,8 +113,13 @@ respective `CustomDestinations` `JumpLists`.
 
 Remote desktop connections made using the Windows built-in
 [`Microsoft Terminal Server Client` client (`mstsc.exe`)](./rdp_processes.md#source-host)
-will generate an entry in the `AutomaticDestinations` `JumpList`. The entries
-will be associated with the application identifier `1bc392b8e104a00e`.
+will generate an entry in the `AutomaticDestinations` `JumpList`. An entry is
+only created / updated if the `RDP` session was successfully authenticated and
+established (even if `Network Level Authentication (NLA)` is disabled). The
+entries will be associated with the application identifier `1bc392b8e104a00e`.
+
+The `DestList` last modified timestamp indicates the last time the connection
+with the remote host was successfully established.
 
 The arguments in the entry for a given connections will reference the remote
 host by hostname or IP address (`/v:"<HOSTNAME | IP>"`) or the `RDP File` used
@@ -129,3 +146,5 @@ JLECmd.exe [-q --csv <CSV_DIRECTORY_OUTPUT>] -d <C:\Users\<USERNAME>\AppData\Roa
   - [13Cubed - LNK Files and Jump Lists](https://www.youtube.com/watch?v=wu4-nREmzGM)
 
   - [ZEROFOX - MARI DEGRAZIA - Remote Desktop Application vs MSTSC Forensics: The RDP Artifacts You Might Be Missing](https://www.zerofox.com/blog/remote-desktop-application-vs-mstsc-forensics-the-rdp-artifacts-you-might-be-missing/#jump-list-entries)
+
+  - [Windows 10 Jump List and Link File Artifacts - Saved, Copied and Moved](https://dfir.pubpub.org/pub/wfuxlu9v/release/1)
