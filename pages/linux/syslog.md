@@ -176,7 +176,7 @@ different default configurations, with different default log file locations.
 
 #### Syslog message formats
 
-The `syslog` message format depend on the `syslog` version in use:
+The `syslog` message format depend on the `syslog` / `rsyslog` version in use:
 
   - `RFC3164` (`legacy-syslog` / `BSD-syslog`) format:
 
@@ -195,6 +195,103 @@ The `syslog` message format depend on the `syslog` version in use:
 
 In both formats, the `<MESSAGE>` is freely specified by the originating
 process and does not follow a standard.
+
+#### auth facility
+
+{% include note.html content="Successful SSH authentication (using a private key). `syslog` format." %}
+
+```
+Jan 31 18:07:28 hostname sshd[1715]: Accepted publickey for user from 1.2.3.4 port 33830 ssh2: RSA SHA256:XXX
+Jan 31 18:07:28 hostname sshd[1715]: pam_unix(sshd:session): session opened for user user by (uid=0)
+```
+
+{% include note.html content="Authentication failure: wrong username. `syslog` format." %}
+
+```
+Aug  4 08:33:44 hostname sshd[2498]: Invalid user admin from 1.2.3.4 port 45843
+Aug  4 08:33:44 hostname sshd[2498]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=1.2.3.4
+```
+
+{% include note.html content="Authentication failure: wrong password. `rsyslog` format." %}
+
+```
+2024-07-23T23:08:09.264429-01:00 hostname sshd[1748729]: Failed password for root from 1.2.3.4 port 35190 ssh2
+```
+
+#### authpriv facility
+
+{% include note.html content="sudo execution (by user `user` to `root`, executing `/bin/bash`). `syslog` format." %}
+
+```
+Aug  3 10:22:41 hostname sudo[33630]: user : TTY=pts/0 ; PWD=/home/user ; USER=root ; COMMAND=/bin/bash
+Aug  3 10:22:41 hostname sudo[33630]: pam_unix(sudo-i:session): session opened for user root by (uid=0)
+Aug  3 10:36:35 hostname sudo[33630]: pam_unix(sudo-i:session): session closed for user root
+```
+
+{% include note.html content="Creation of a new user (`new_user`). `syslog` format." %}
+
+```
+Aug  4 02:59:18 hostname useradd[2979]: new user: name=new_user, UID=1001, GID=1001, home=/home/new_user, shell=/bin/bash
+```
+
+{% include note.html content="Creation of a new group (`new_group`). `syslog` format." %}
+
+```
+Aug  4 02:58:05 hostname useradd[2979]: new group: name=new_group, GID=1001
+```
+
+{% include note.html content="Password change for user `user`. `syslog` format." %}
+
+```
+Aug  4 05:53:11 hostname passwd[2934]: pam_unix(passwd:chauthtok): password changed for user
+```
+
+{% include note.html content="Password change for user `user`. `syslog` format." %}
+
+```
+Aug  4 02:59:40 hostname usermod[2999]: add 'tuser' to group 'wheel'
+Aug  4 02:59:40 hostname usermod[2999]: add 'tuser' to shadow group 'wheel'
+```
+
+#### cron facility
+
+{% include note.html content="Execution of the daily cron job `logrotate`, define through a script (`logrotate`) under `cron.daily`. `syslog` format." %}
+
+```
+Aug  4 08:32:07 hostname run-parts[2473]: (/etc/cron.daily) starting logrotate
+Aug  4 08:32:07 hostname run-parts[2473]: (/etc/cron.daily) finished logrotate
+```
+
+{% include note.html content="Execution of `/root/.script.sh` from a cron task (defined in `/var/spool/cron/root`). `syslog` format." %}
+
+```
+Aug  4 10:30:01 hostname CROND[25488]: (root) CMD (/root/.script.sh)
+```
+
+#### kern facility
+
+The `kern` `Facility` is used by the Linux kernel to emit messages. While the
+kernel messages are usually of limited forensics interest (depending on the
+investigation type), the following information may be found in `kern` logs:
+
+  - Kernel version and command line.
+
+  - `init` parameters.
+
+  - Details on hardware components (CPU, physical RAM, PCI bus and devices,
+    etc.) and storage devices (SATA, NVMe, etc.).
+
+  - Basic information on Ethernet interfaces (notably including name and `MAC`
+    address).
+
+  - Details on USB devices plugged (notably including vendor and product
+    identifiers, serial number).
+
+  - ...
+
+For an easier analysis, it is possible to separate kernel messages generated
+during the system boot from the messages generated during system operations
+(that can indicate changes to the initial system configuration).
 
 ### References
 
