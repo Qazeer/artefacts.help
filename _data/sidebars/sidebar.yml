@@ -691,6 +691,10 @@
         url: /linux_audit_framework.html
         output: web
 
+    - title: Shell histories
+      url: /linux_shell_histories.html
+      output: web
+
   - title: By tag
     output: web
     children:
