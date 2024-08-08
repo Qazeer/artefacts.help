@@ -695,6 +695,10 @@
       url: /linux_shell_histories.html
       output: web
 
+    - title: wget HSTS history
+      url: /wget_hsts_history.html
+      output: web
+
   - title: By tag
     output: web
     children:
@@ -761,6 +765,10 @@
 
     - title: 'Category - Defense evasion'
       url: /tag_linux_defense_evasion.html
+      output: web
+
+    - title: 'Category - Miscellaneous'
+      url: /tag_linux_misc.html
       output: web
 
 - title: Azure / Office365
