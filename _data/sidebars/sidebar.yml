@@ -907,3 +907,7 @@
   - title: VMware ESXi
     url: /vmware_esxi.html
     output: web
+
+  - title: SMTP email headers
+    url: /email_headers.html
+    output: web
