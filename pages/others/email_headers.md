@@ -118,8 +118,8 @@ The following `mechanisms` are supported:
 | `include:<DOMAIN>` | Evaluate the `SPF` policy of the specified domain, returning a `PASS` / `Neutral` / `Fail` / `Softfail` result (or an error). <br><br> Only `PASS` result will however be processed, effectively stopping the following mechanisms evaluation. Non-matched results will resume processing of the other further mechanisms. |
 | `a[:<DOMAIN>]` | Check if the sender email server `IP` address is included in the `A` or `AAAA` `DNS` records of the `MAIL FROM` / `HELO` domain or the domain specified in the mechanism. |
 | `mx[:<DOMAIN>]` | Check if the sender email server `IP` address is included in the `MX` `DNS` records of the `MAIL FROM` / `HELO` domain or the domain specified in the mechanism. |
-| `ip4:<IPV4 \| IPV4_CIDR>` | Check if the sender email server `IP` address is the specified IPv4 address or in the specified IPv4 address range. |
-| `ip6:<IPV6 \| IPV6_CIDR>` | Check if the sender email server `IP` address is the specified IPv6 address or in the specified IPv6 address range. |
+| `ip4:<IPV4 | IPV4_CIDR>` | Check if the sender email server `IP` address is the specified IPv4 address or in the specified IPv4 address range. |
+| `ip6:<IPV6 | IPV6_CIDR>` | Check if the sender email server `IP` address is the specified IPv6 address or in the specified IPv6 address range. |
 
 The `qualifiers` determine the comportment the receiving email server should
 follow if the `mechanism` match. The following `qualifiers` are supported:

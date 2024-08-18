@@ -303,7 +303,7 @@ during the system boot from the messages generated during system operations
 
   - [Quest - Syslog message formats (4282913)](https://support.oneidentity.com/kb/4282913/syslog-message-formats)
 
-  - [Solarwinds - The syslog protocol — Legacy](https://documentation.solarwinds.com/en/success_center/kss/content/kss_adminguide_syslog_protocol.htm)
+  - [Solarwinds - The syslog protocol - Legacy](https://documentation.solarwinds.com/en/success_center/kss/content/kss_adminguide_syslog_protocol.htm)
 
   - [Open Group Base Specifications Issue 6 - syslog.h](https://pubs.opengroup.org/onlinepubs/009695399/functions/syslog.html)
 

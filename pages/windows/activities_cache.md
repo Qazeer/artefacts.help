@@ -131,4 +131,4 @@ WxTCmd.exe -f <ActivitiesCache.db | ACTIVITIESCACHE_DB_FILE> --csv <OUTPUT_DIREC
 
   - [InverseCos - How to Perform Clipboard Forensics: ActivitiesCache.db, Memory Forensics and Clipboard History](https://www.inversecos.com/2022/05/how-to-perform-clipboard-forensics.html)
 
-  - [Forensic Focus - Windows 10 Activity Timeline: An Investigator’s Gold Mine](https://www.forensicfocus.com/webinars/windows-10-activity-timeline-an-investigators-gold-mine/)
+  - [Forensic Focus - Windows 10 Activity Timeline: An Investigator's Gold Mine](https://www.forensicfocus.com/webinars/windows-10-activity-timeline-an-investigators-gold-mine/)

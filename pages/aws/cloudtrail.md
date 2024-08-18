@@ -91,7 +91,7 @@ the following fields of interest:
 
   - [SEKOIA - CloudTrail](https://docs.sekoia.io/xdr/features/collect/integrations/cloud_and_saas/aws/aws_cloudtrail/)
 
-  - [AWS - Journalisation des appels d’API Lambda avec CloudTrail](https://docs.aws.amazon.com/fr_fr/lambda/latest/dg/logging-using-cloudtrail.html)
+  - [AWS - Journalisation des appels d'API Lambda avec CloudTrail](https://docs.aws.amazon.com/fr_fr/lambda/latest/dg/logging-using-cloudtrail.html)
 
   - [easttimor - AWS Incident Response](https://easttimor.github.io/aws-incident-response/)
 

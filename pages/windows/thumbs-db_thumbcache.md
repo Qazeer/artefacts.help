@@ -44,7 +44,7 @@ share directory.
 
 Each thumbnail created in a directory is represented in the `Thumbs.db` file as
 a small `JPEG` file, regardless of the file's original format. The images are
-resized to 96 × 96 pixels by default. As each `Thumbs.db` file is associated
+resized to 96 x 96 pixels by default. As each `Thumbs.db` file is associated
 with a given directory, the location of the cached thumbnails can be easily
 deduced.
 

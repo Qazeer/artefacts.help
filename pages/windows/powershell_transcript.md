@@ -55,7 +55,7 @@ execution.
     `PowerShell profile` to be automatically executed upon new `PowerShell`
     session. The `PowerShell profile` can however be trivially bypassed by
     launching a session with out loading the profile
-    (`powershell.exe –NoProfile`).
+    (`powershell.exe -NoProfile`).
 
   - Through `Group Policy`: Computer configuration -> Polices -> Administrative
     Templates -> Windows Components -> Windows PowerShell ->

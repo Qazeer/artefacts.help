@@ -84,4 +84,4 @@ value will hide the scheduled task, from utilities such as `schtasks` or the
 
   - [WithSecure - Riccardo Ancarani - Scheduled Task Tampering](https://labs.withsecure.com/publications/scheduled-task-tampering)
 
-  - [cyber.wtf - Luca Ebach - Windows Registry Analysis – Today’s Episode: Tasks](https://cyber.wtf/2022/06/01/windows-registry-analysis-todays-episode-tasks/)
+  - [cyber.wtf - Luca Ebach - Windows Registry Analysis - Today's Episode: Tasks](https://cyber.wtf/2022/06/01/windows-registry-analysis-todays-episode-tasks/)

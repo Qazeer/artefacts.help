@@ -95,6 +95,6 @@ PECmd.exe [-q --csv <CSV_DIRECTORY_OUTPUT>] -d <C:\Windows\Prefetch | C:\ | DIRE
 
 ### References
 
-  - [Forensic Focus - Oleg Skulkin - Hunting For Attackers’ Tactics And Techniques With Prefetch Files](https://www.forensicfocus.com/articles/hunting-for-attackers-tactics-and-techniques-with-prefetch-files/)
+  - [Forensic Focus - Oleg Skulkin - Hunting For Attackers' Tactics And Techniques With Prefetch Files](https://www.forensicfocus.com/articles/hunting-for-attackers-tactics-and-techniques-with-prefetch-files/)
 
   - [13Cubed - Prefetch Deep Dive](https://www.youtube.com/watch?v=f4RAtR_3zcs)

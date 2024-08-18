@@ -139,7 +139,7 @@ vol.py -f <MEMORY_IMAGE> --profile=<PROFILE> shimcache
 
   - [FireEye - Shimcache whitepaper](https://www.fireeye.com/content/dam/fireeye-www/services/freeware/shimcache-whitepaper.pdf)
 
-  - [Alex Ionescu - Secrets of the Application Compatilibity Database (SDB) – Part 1](http://www.alex-ionescu.com/?p=39)
+  - [Alex Ionescu - Secrets of the Application Compatilibity Database (SDB) - Part 1](http://www.alex-ionescu.com/?p=39)
 
   - [LIFARS - Amcache and Shimcache Forensics](https://lifars.com/wp-content/uploads/2017/03/Technical_tool_Amcache_Shimcache.pdf)
 

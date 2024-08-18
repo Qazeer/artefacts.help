@@ -181,7 +181,7 @@ SSDs).
 
   - [dfir.ru - MSUHANOV - $STANDARD_INFORMATION vs. $FILE_NAME](https://dfir.ru/2021/01/10/standard_information-vs-file_name/)
 
-  - [dfir.ru - MSUHANOV - The “Last Access” updates are almost back](https://dfir.ru/2018/12/08/the-last-access-updates-are-almost-back/)
+  - [dfir.ru - MSUHANOV - The "Last Access" updates are almost back](https://dfir.ru/2018/12/08/the-last-access-updates-are-almost-back/)
 
   - [Matt B - A Journey into NTFS: Part 4](https://bromiley.medium.com/a-journey-into-ntfs-part-4-f2865c39ac83)
 

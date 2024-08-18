@@ -104,7 +104,7 @@ require `Audit Process Creation` to be enabled, can `powershell.exe` execution.
 
 ### References
 
-  - [Microsoft - PowerShell ♥ the Blue Team](https://devblogs.microsoft.com/powershell/powershell-the-blue-team/)
+  - [Microsoft - PowerShell the Blue Team](https://devblogs.microsoft.com/powershell/powershell-the-blue-team/)
 
   - [Black Hat USA 2014 - Mandiant - Ryan Kazanciyan, Matt Hastings - Investigating PowerShell Attacks](https://www.blackhat.com/docs/us-14/materials/us-14-Kazanciyan-Investigating-Powershell-Attacks.pdf)
 
@@ -114,7 +114,7 @@ require `Audit Process Creation` to be enabled, can `powershell.exe` execution.
 
   - [JPCERT - Invoke-Mimikatz (PowerSploit)](http://jpcertcc.github.io/ToolAnalysisResultSheet/details/PowerSploit_Invoke-Mimikatz.htm)
 
-  - [EVENTSENTRY BLOG - ingmar.koecher - From PowerShell to P0W3rH3LL – Auditing PowerShell](https://www.eventsentry.com/blog/2018/01/powershell-p0wrh11-securing-powershell.html)
+  - [EVENTSENTRY BLOG - ingmar.koecher - From PowerShell to P0W3rH3LL - Auditing PowerShell](https://www.eventsentry.com/blog/2018/01/powershell-p0wrh11-securing-powershell.html)
 
   - [](https://www.powershellmagazine.com/2014/07/16/investigating-powershell-attacks/)
 

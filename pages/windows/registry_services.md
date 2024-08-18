@@ -84,7 +84,7 @@ service name root key):
 
   - [Microsoft - Service host grouping in Windows 10](https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring)
 
-  - [Nasreddine Bencherchali - Demystifying the “SVCHOST.EXE” Process and Its Command Line Options](https://nasbench.medium.com/demystifying-the-svchost-exe-process-and-its-command-line-options-508e9114e747)
+  - [Nasreddine Bencherchali - Demystifying the "SVCHOST.EXE" Process and Its Command Line Options](https://nasbench.medium.com/demystifying-the-svchost-exe-process-and-its-command-line-options-508e9114e747)
 
   - [Superuser - What command line options are available to svchost.exe?](https://superuser.com/questions/391864/what-command-line-options-are-available-to-svchost-exe)
 

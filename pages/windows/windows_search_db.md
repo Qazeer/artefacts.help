@@ -47,4 +47,4 @@ By default, only items from the following sources are scanned and indexed:
 
 ### References
 
-  - [SANS DFIR Summit 2023 - Phalgun Kulkarni & Julia Paluch - Windows Search Index: The Forensic Artifact You’ve Been Searching For](https://www.youtube.com/watch?v=X4WTcRdIDAM)
+  - [SANS DFIR Summit 2023 - Phalgun Kulkarni & Julia Paluch - Windows Search Index: The Forensic Artifact You've Been Searching For](https://www.youtube.com/watch?v=X4WTcRdIDAM)
