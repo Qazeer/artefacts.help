@@ -699,6 +699,10 @@
       url: /wget_hsts_history.html
       output: web
 
+    - title: utmp, wtmp, and btmp
+      url: /utmp_wtmp_btmp.html
+      output: web
+
   - title: By tag
     output: web
     children:
