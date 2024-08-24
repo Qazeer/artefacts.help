@@ -695,12 +695,20 @@
       url: /linux_shell_histories.html
       output: web
 
-    - title: wget HSTS history
-      url: /wget_hsts_history.html
+    - title: SSH
       output: web
+      children:
+
+      - title: SSH known_hosts
+        url: /ssh_known_hosts.html
+        output: web
 
     - title: utmp, wtmp, and btmp
       url: /utmp_wtmp_btmp.html
+      output: web
+
+    - title: wget HSTS history
+      url: /wget_hsts_history.html
       output: web
 
   - title: By tag
