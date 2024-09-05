@@ -659,6 +659,14 @@
       url: /tag_windows_misc.html
       output: web
 
+  - title: Windows server roles
+    output: web
+    children:
+
+    - title: Microsoft Exchange
+      url: /microsoft_exchange.html
+      output: web
+
 - title: Linux
   output: web
   children:
@@ -791,6 +799,14 @@
       url: /tag_linux_misc.html
       output: web
 
+  - title: Linux based appliances
+    output: web
+    children:
+
+    - title: VMware ESXi
+      url: /vmware_esxi.html
+      output: web
+
 - title: Azure / Office365
   output: web
   children:
@@ -919,14 +935,6 @@
 
   output: web
   children:
-
-  - title: Microsoft Exchange
-    url: /microsoft_exchange.html
-    output: web
-
-  - title: VMware ESXi
-    url: /vmware_esxi.html
-    output: web
 
   - title: SMTP email headers
     url: /email_headers.html
