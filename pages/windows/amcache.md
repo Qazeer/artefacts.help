@@ -131,4 +131,4 @@ The following notable root keys can be of forensic interest:
 
 ### References
 
-[ANSSI's ANALYSIS OF THE AMCACHE v2 white paper](https://www.ssi.gouv.fr/uploads/2019/01/anssi-coriin_2019-amcache_investigation.pdf)
+  - [ANSSI - Blanche Lagny - ANALYSIS OF THE AMCACHE v2 white paper](https://cyber.gouv.fr/sites/default/files/2019/01/anssi-coriin_2019-analysis_amcache.pdf)
