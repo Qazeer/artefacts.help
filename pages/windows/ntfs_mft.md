@@ -58,6 +58,11 @@ A file record (`FILE0` data structure) notably includes:
 
   - The file size.
 
+  - The `entry` and `sequence` number of the record.
+
+  - The `entry` and `sequence` number of the parent record, allowing the
+    reconstruction of the file location.
+
   - The file unique (under the `NTFS` volume) `Security ID` in the
     `$STANDARD_INFORMATION` attribute.
 
@@ -80,6 +85,9 @@ A file record (`FILE0` data structure) notably includes:
    directly deleted during the file deletion process. Metadata information, and
    content for `MFT` resident files, can thus be retrieved for recently deleted
    files (as long as the `file record` is not overwritten by a new entry).
+
+   Additionally, the `entry` number of the record remains unchanged, the
+   `sequence` number is simply incremented by one upon the file deletion.
 
 #### $STANDARD_INFORMATION vs $FILE_NAME
 
