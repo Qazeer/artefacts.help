@@ -42,3 +42,4 @@ allowed-tags:
   - linux_misc
   - hypervisors
   - mailservers
+  - network

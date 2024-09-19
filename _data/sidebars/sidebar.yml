@@ -936,6 +936,10 @@
   output: web
   children:
 
+  - title: Network PCAP
+    url: /network_pcap.html
+    output: web
+
   - title: SMTP email headers
     url: /email_headers.html
     output: web
