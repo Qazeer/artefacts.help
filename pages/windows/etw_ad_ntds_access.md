@@ -58,7 +58,7 @@ the `Domain Controllers`, `ENTERPRISE DOMAIN CONTROLLERS`, `Domain Admins`,
 
 | Channel | Conditions | Events |
 |---------|------------|--------|
-| `Security` | Default configuration. <br><br> Events will be generated only if the operation was not conducted under a `Domain Controller` identity. | Upon replication operations, such as the retrieval of Active Directory secrets (`DCSync` attack), the following event will be generated: <br><br> - Event `4662`: `An operation was performed on an object` with the `Property` attribute equal to the `GUID `1131f6aa-9c07-11d1-f79f-00c04fc2dcd2` or `1131f6ad-9c07-11d1-f79f-00c04fc2dcd2``. |
+| `Security` | Default configuration. <br><br> Events will be generated only if the operation was not conducted under a `Domain Controller` identity. | Upon replication operations, such as the retrieval of Active Directory secrets (`DCSync` attack), the following event will be generated: <br><br> - Event `4662`: `An operation was performed on an object` with the `Property` attribute equal to the `GUID` `1131f6aa-9c07-11d1-f79f-00c04fc2dcd2` or `1131f6ad-9c07-11d1-f79f-00c04fc2dcd2`. |
 
 ### ntdsutil usage
 

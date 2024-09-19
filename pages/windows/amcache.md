@@ -80,7 +80,7 @@ The following notable root keys can be of forensic interest:
       application).
 
   - `InventoryDeviceContainer` and `InventoryDevicePnp` (`AmcacheParser`
-    outputs ``DeviceContainers`` and `DevicePnp`):
+    outputs `DeviceContainers` and `DevicePnp`):
 
     - Data about devices plugged in on the system.
 
