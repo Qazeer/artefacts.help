@@ -663,6 +663,26 @@
     output: web
     children:
 
+    - title: Active Directory Domain Services
+      output: web
+      children:
+
+        - title: Domain Controllers authentication
+          url: /windows_etw_authentication_dc_host.html
+          output: web
+
+        - title: UAL / SUM
+          url: /windows_ual.html
+          output: web
+
+        - title: AD NTDS dumping
+          url: /windows_etw_ad_ntds_dumping.html
+          output: web
+
+        - title: Active Directory persistence
+          external_url: https://github.com/Qazeer/FarsightAD/blob/main/SANS_DFIR_Summit_2022-Hunting_for_Active_Directory_persistence-v1.2.pdf
+          output: web
+
     - title: Microsoft Exchange
       url: /microsoft_exchange.html
       output: web
