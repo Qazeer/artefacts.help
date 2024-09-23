@@ -212,7 +212,7 @@ Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM from which the
 2024-06-04T21:53:35.263Z In(05) vcpu-1 - VigorTransport_ServerSendResponse opID=c4c9713c seq=3576: Completed GuestOps request with messages.
 ```
 
-{% include note.html content="Execute a command on a guest virtual machine using `PowerCLI`'s `Invoke-VMScript` cmdlet. **The command executed is not logged in ESXi logs.** <br><br> The cmdlet first create a temporary file to store (in real-time) the script `stdout` / `stderr` output, execute the given command, retrieve the temporary file to display the script console output on the local machine, and delete the temporary file. <br><br> Command example: <br> `Invoke-VMScript -VM \"<VM_NAME>\" -GuestUser \"<USERNAME>\" -GuestPassword \"<PASSWORD>\" -ScriptText \"<COMMAND>\"`." %}
+{% include note.html content="Execution of a command on a guest virtual machine using `PowerCLI`'s `Invoke-VMScript` cmdlet. **The command executed is not logged in ESXi logs.** <br><br> The cmdlet first create a temporary file to store (in real-time) the script `stdout` / `stderr` output, execute the given command, retrieve the temporary file to display the script console output on the local machine, and delete the temporary file. <br><br> Command example: <br> `Invoke-VMScript -VM \"<VM_NAME>\" -GuestUser \"<USERNAME>\" -GuestPassword \"<PASSWORD>\" -ScriptText \"<COMMAND>\"`." %}
 
 ```
 Source: hostd.log

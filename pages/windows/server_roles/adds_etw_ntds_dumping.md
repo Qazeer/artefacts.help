@@ -4,11 +4,11 @@ summary: 'Secrets stored in the Active Directory database (ntds.dit) can be retr
 keywords: Active Directory, Domain Controllers, NTDS, ntds.dit, DRSUAPI, DCSync, 4662, 1131f6aa-9c07-11d1-f79f-00c04fc2dcd, 1131f6ad-9c07-11d1-f79f-00c04fc2dcd2, ntdsutil, ESENT, 325, 326, 327, 206
 tags:
   - windows_etw
-  - windows_misc
+  - windows_active_directory
 location: 'DCSync (DRSUAPI):\nChannel: Security.\nEvent: 4662 (Property "1131f6aa-9c07-11d1-f79f-00c04fc2dcd" or "1131f6ad-9c07-11d1-f79f-00c04fc2dcd2").\n\n NTDS export using ntdsutil:\nChannel: ESENT (Application.evtx).\nEvents: 206, 325, 326, 327'
 last_updated: 2024-07-09
 sidebar: sidebar
-permalink: windows_etw_ad_ntds_dumping.html
+permalink: adds_etw_ntds_dumping.html
 folder: windows
 ---
 
