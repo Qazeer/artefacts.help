@@ -5,6 +5,7 @@ keywords: User Access Logging, SUM, UAL, DNS, Current.mdb
 tags:
   - windows_lateral_movement
   - windows_lateral_movement_dst
+  - windows_active_directory
 location: 'Files under <SYSTEMROOT>\System32\Logfiles\SUM\ folder:\n\nCurrent.mdb (data for the last 24-hours).\nUp to three "<GUID>.mdb" files (current year and history up to 2 years).\nSystemidentity.mdb (mapping on roles GUIDs and names).'
 last_updated: 2024-01-01
 sidebar: sidebar

@@ -5,6 +5,7 @@ keywords: Security, Authentication, Active Directory, Domain Services, Domain Co
 tags:
   - windows_etw
   - windows_lateral_movement
+  - windows_active_directory
 location: 'Channel: Security.\nEvents: 4776, 4768, 4769, 4771, 4624, 4625.'
 last_updated: 2024-01-02
 sidebar: sidebar

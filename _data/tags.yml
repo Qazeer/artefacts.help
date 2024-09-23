@@ -1,45 +1,46 @@
 allowed-tags:
-  - windows_ntfs_filesystem
-  - windows_etw
-  - windows_registry
-  - windows_system_information
-  - windows_file_knowledge
-  - windows_files_and_folders_access
-  - windows_program_execution
-  - windows_powershell_activity
-  - windows_browsing_history
-  - windows_lateral_movement
-  - windows_lateral_movement_src
-  - windows_lateral_movement_dst
-  - windows_remote_desktop
-  - windows_remote_desktop_src
-  - windows_remote_desktop_dst
-  - windows_powershell_remoting
-  - windows_powershell_remoting_dst
-  - windows_powershell_remoting_src
-  - windows_wmi
-  - windows_local_persistence
-  - windows_defense_evasion
-  - windows_usb_activity
-  - windows_misc
   - aws
   - azure_logs
   - azure_security_review
-  - linux_filesystem
-  - linux_logging_frameworks
-  - linux_system_information
+  - hypervisors
+  - linux_defense_evasion
   - linux_file_knowledge
   - linux_files_and_folders_access
-  - linux_program_execution
+  - linux_filesystem
   - linux_lateral_movement
-  - linux_lateral_movement_src
   - linux_lateral_movement_dst
-  - linux_ssh
-  - linux_ssh_src
-  - linux_ssh_dst
+  - linux_lateral_movement_src
   - linux_local_persistence
-  - linux_defense_evasion
+  - linux_logging_frameworks
   - linux_misc
-  - hypervisors
+  - linux_program_execution
+  - linux_ssh
+  - linux_ssh_dst
+  - linux_ssh_src
+  - linux_system_information
   - mailservers
   - network
+  - windows_active_directory
+  - windows_browsing_history
+  - windows_defense_evasion
+  - windows_etw
+  - windows_file_knowledge
+  - windows_files_and_folders_access
+  - windows_lateral_movement
+  - windows_lateral_movement_dst
+  - windows_lateral_movement_src
+  - windows_local_persistence
+  - windows_misc
+  - windows_ntfs_filesystem
+  - windows_powershell_activity
+  - windows_powershell_remoting
+  - windows_powershell_remoting_dst
+  - windows_powershell_remoting_src
+  - windows_program_execution
+  - windows_registry
+  - windows_remote_desktop
+  - windows_remote_desktop_dst
+  - windows_remote_desktop_src
+  - windows_system_information
+  - windows_usb_activity
+  - windows_wmi

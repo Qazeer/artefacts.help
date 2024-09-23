@@ -659,6 +659,10 @@
       url: /tag_windows_misc.html
       output: web
 
+    - title: 'Category - Active Directory'
+      url: /tag_windows_active_directory.html
+      output: web
+
   - title: Windows server roles
     output: web
     children:
