@@ -74,7 +74,7 @@ tables being of interest:
      activity ID will be created in the `Activity_PackageId` table, one for
      each program / application related to the activity.
 
-###### Clipboard activity
+#### Clipboard activity
 
 The `Activity` / `ActivityOperation` tables reference clipboard activity
 through two activity types: `10` and `16`. The events will be stored for
