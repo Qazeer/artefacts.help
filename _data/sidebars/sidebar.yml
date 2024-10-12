@@ -736,15 +736,19 @@
       children:
 
       - title: SSH known_hosts
-        url: /ssh_known_hosts.html
+        url: /linux_ssh_known_hosts.html
         output: web
 
     - title: utmp, wtmp, and btmp
-      url: /utmp_wtmp_btmp.html
+      url: /linux_utmp_wtmp_btmp.html
+      output: web
+
+    - title: viminfo
+      url: /linux_viminfo.html
       output: web
 
     - title: wget HSTS history
-      url: /wget_hsts_history.html
+      url: /linux_wget_hsts_history.html
       output: web
 
   - title: By tag
