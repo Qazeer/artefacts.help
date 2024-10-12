@@ -55,7 +55,7 @@ on Windows server with minimal user activity.
 
 ### Information of interest
 
-Each `Shimcache` entries contain the following information, varying depending
+Each `Shimcache` entry contains the following information, varying depending
 on the version of the Windows operating system in use:
 
   - The associated **file full path**.

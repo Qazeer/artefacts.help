@@ -21,7 +21,7 @@ can be restored, or deleted permanently, by the end user. It is thus possible
 to recover the files put in quarantine by `Windows Defender` for further
 investigations.
 
-Additionally, `Windows Defender` stores some metadata on each detection under
+Additionally, `Windows Defender` stores some metadata on every detection under
 the `Windows Defender\Quarantine` folder. The information is similarly stored
 in RC4-encrypted files.
 
@@ -32,8 +32,9 @@ The quarantined files are stored under:
 The `RC4` key used to encrypt the file is hardcoded (in the `mpengine.dll`
 `DLL`).
 
-The metadata on each detection are stored under:
+The metadata of every detections are stored under:
 `%SystemDrive%\ProgramData\Microsoft\Windows Defender\Quarantine\Entries`.
+
 For each quarantined file, its associated metadata notably includes:
 
   - The original file path of the file.

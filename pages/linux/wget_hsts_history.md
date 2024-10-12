@@ -7,7 +7,7 @@ tags:
 default_location: '~/.wget-hsts'
 last_updated: 2024-08-09
 sidebar: sidebar
-permalink: wget_hsts_history.html
+permalink: linux_wget_hsts_history.html
 folder: linux
 ---
 
@@ -31,7 +31,7 @@ requests to that particular website in `HTTPS`.
 `wget`'s `HSTS` history is implemented as a plaintext file, with one entry per
 line.
 
-For each entry, the following notable information are available:
+For each entry, the following notable information is available:
 
   - Domain name of the website accessed.
 

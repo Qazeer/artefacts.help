@@ -35,7 +35,7 @@ Two forms of `Jumplists` are created:
     `Windows taskbar` or an application's `Jumplist`.
 
 Each application `AutomaticDestinations` and `CustomDestinations` `JumpLists`
-information are thus stored in two unique and separated files, of different
+information is thus stored in two unique and separated files, of different
 format:
 
   - `AutomaticDestinations` `JumpLists` files are stored as

@@ -10,7 +10,7 @@ tags:
 default_location: 'System-wide:\n /etc/ssh/known_hosts\n\n User scoped:\n ~/.ssh/known_hosts'
 last_updated: 2024-08-24
 sidebar: sidebar
-permalink: ssh_known_hosts.html
+permalink: linux_ssh_known_hosts.html
 folder: linux
 ---
 
@@ -83,7 +83,7 @@ hashed if `HashKnownHosts` is set to "yes" in the `SSH` client `ssh_config`
 configuration file. Only one hashed hostname may appear on a single line. The
 lines containing an hashed hostname start with `|1|`.
 
-Even if the hosts information are hashed, the following command can be used to
+Even if the hosts information is hashed, the following command can be used to
 check whether the specified hostname is present in the given known hosts file:
 
 ```bash

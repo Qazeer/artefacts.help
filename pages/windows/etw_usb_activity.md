@@ -1,7 +1,7 @@
 ---
 title: ETW - Devices and USB activity
 summary: 'For devices and USB activity.\n\nVarious events are generated for devices and USB activity, split across a number of channels. More events
-and information are available on recent versions of the Windows operating system.\n\nUsing known variables about a given device, found for example in the Windows registry, events can be used to determine timestamps of activity for the device, such as when the device was first plugged, last plugged and unplugged.\n\nAdditionally, supplementary information about devices can be retrieved from events, such as device storage sizes and an extract of their partition table.'
+and information is available on recent versions of the Windows operating system.\n\nUsing known variables about a given device, found for example in the Windows registry, events can be used to determine timestamps of activity for the device, such as when the device was first plugged, last plugged and unplugged.\n\nAdditionally, supplementary information about devices can be retrieved from events, such as device storage sizes and an extract of their partition table.'
 keywords: 'USB, Devices, Microsoft-Windows-Storage-ClassPnP/Operational, 507, 500, 502, 503, 504, 505, 506, 510, Microsoft-Windows-Kernel-PnP/Device Configuration, 400, 401, 410, 411, 420, 430, Microsoft-Windows-Kernel-PnP/Device Management, 1010, Microsoft-Windows-Partition/Diagnostic, 1006, Microsoft-Windows-Ntfs/Operational, 142, 4, 9, 10, 300, 303'
 tags:
   - windows_etw
@@ -52,7 +52,7 @@ the [Windows devices terminology page](./devices_terminology.md).
 
 | Channel | Conditions | Events |
 |---------|------------|--------|
-| Provider: `Microsoft-Windows-Kernel-PnP`. <br><br> Channel: `Microsoft-Windows-Kernel-PnP/Device Management`. | Introduced in Windows 11. | The `Microsoft-Windows-Kernel-PnP/Device Management` channel contains information for all plug and play devices, not limited to USB storage devices. <br><br> Event `1010: Device <DEVICE> has been surprise removed as it is reported as missing on the bus`. <br><br> The event is reliably generated when a device is removed / unplugged without prior ejection. Additionally, subsequent immediate event(s) are generated for each of the device volume. <br><br> Relevant information: <br> - For USB storage device: `vendor ID (VID)`, `product ID (PID)`, (registry) `serial number` or location information. Example: `USB\VID_18A5&PID_0302\1601000001586259`. <br> - For volumes: the `volume GUID` of the volume. Example: `STORAGE\Volume\<GUID>`. |
+| Provider: `Microsoft-Windows-Kernel-PnP`. <br><br> Channel: `Microsoft-Windows-Kernel-PnP/Device Management`. | Introduced in Windows 11. | The `Microsoft-Windows-Kernel-PnP/Device Management` channel contains information for all plug and play devices, not limited to USB storage devices. <br><br> Event `1010: Device <DEVICE> has been surprise removed as it is reported as missing on the bus`. <br><br> The event is reliably generated when a device is removed / unplugged without prior ejection. Additionally, subsequent immediate event(s) are generated for each removal of the device volume. <br><br> Relevant information: <br> - For USB storage device: `vendor ID (VID)`, `product ID (PID)`, (registry) `serial number` or location information. Example: `USB\VID_18A5&PID_0302\1601000001586259`. <br> - For volumes: the `volume GUID` of the volume. Example: `STORAGE\Volume\<GUID>`. |
 
 ### Microsoft-Windows-Partition/Diagnostic
 

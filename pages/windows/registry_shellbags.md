@@ -55,7 +55,7 @@ different level of data depending on the activity):
 `Shellbag` entries are stored in registry as a tree-like data structure, with
 the root target having the topmost `BagMRU` key. This allows the reconstitution
 of the browsed directories arborescence. **Each sub-target** (subdirectory for
-example) of the parent target **are then represented with both**:
+example) of the parent target **is then represented with both**:
 
   - **A registry sub-key**, named with a numerical value (starting from `0`).
 
@@ -92,7 +92,7 @@ the given target. `Shellbags` entries are not automatically deleted upon
 deletion of the related folders and can thus be a **source of historical
 information**.
 
-Each `Shellbags` entry for a given target yield the following information of
+Each `Shellbags` entry for a given target yields the following information of
 forensic interest:
 
   - The **target name and absolute path**.

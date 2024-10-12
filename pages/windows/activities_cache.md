@@ -87,7 +87,7 @@ devices" clipboard settings are both enabled. The later setting is only
 available for Microsoft or Azure AD synchronized accounts (and thus not
 available for local or simple Active Directory domain accounts).
 
-If the pre-requisites are meet, an activity type `10` should be logged
+If the prerequisites are meet, an activity type `10` should be logged
 immediately after an activity type `16`, allowing correlation of the two
 events.
 
@@ -95,7 +95,7 @@ The following information of interest is available for activity type `10`
 events:
 
   - The timestamp at which the data was copied (in the `CreatedTime` column, as
-    an epoch timestamp).
+    an `epoch` timestamp).
 
   - The content of the clipboard, encoded in base64 (in the `ClipboardPayload`
     column).
@@ -104,7 +104,7 @@ The following information of interest is available for activity type `16`
 events:
 
   - The timestamp at which the data was copied (in the `CreatedTime` column, as
-    an epoch timestamp).
+    an `epoch` timestamp).
 
   - The application from which the data was copied (in the `AppId` column).
 

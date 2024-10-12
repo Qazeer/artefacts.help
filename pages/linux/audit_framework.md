@@ -96,8 +96,8 @@ environnement and applications running on each system.
 
 #### auditd events versus records
 
-An `auditd` event can be split in multiple records. Each record of the same
-event shares the same timestamp (in the `epoch` format) and same unique
+An `auditd` event can be split in multiple records. All records of the same
+event share the same timestamp (in the `epoch` format) and same unique
 identifier. Each record is associated with a [given type](#record-types).
 Records can be sometimes separated by hundreds other unrelated records.
 

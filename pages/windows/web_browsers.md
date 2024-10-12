@@ -1,6 +1,6 @@
 ---
 title: Web browsers
-summary: 'The web browsers related artefacts can be split in the following categories:\n\n- User profile: web browsers, such as Chronium-based browsers (Chrome, Edge) and Firefox, implement a profile feature to store users settings, history, favorites, etc. The databases and files that store these information are usually stored under a user specific profile folder.\n\n- History: web browsing history and download history.\n\n- Cookies: web browsing cookies (session tokens).\n\n- Cache: cache of resources downloaded from accessed websites.\n\n- Sessions: tabs and windows from a browsing session.\n\n- Settings: configuration settings.'
+summary: 'The web browsers related artefacts can be split in the following categories:\n\n- User profile: web browsers, such as Chronium-based browsers (Chrome, Edge) and Firefox, implement a profile feature to store users settings, history, favorites, etc. The databases and files that store these information is usually stored under a user specific profile folder.\n\n- History: web browsing history and download history.\n\n- Cookies: web browsing cookies (session tokens).\n\n- Cache: cache of resources downloaded from accessed websites.\n\n- Sessions: tabs and windows from a browsing session.\n\n- Settings: configuration settings.'
 keywords:
 tags:
   - windows_browsing_history
@@ -17,7 +17,7 @@ The web browsers related artefacts can be split in the following categories:
 
   - User profile: web browsers, such as `Chronium`-based browsers and
     `Firefox`, implement a profile feature to store user's settings, history,
-    favorites, etc. The databases and files that store these information are
+    favorites, etc. The databases and files that store these information is
     usually stored under a user specific profile folder.
 
   - History: web browsing history and download history.

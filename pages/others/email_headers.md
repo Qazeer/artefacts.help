@@ -65,7 +65,7 @@ mechanism can be used to detect / prevent spoofing of the `From` header.
 
 #### MTA Received headers
 
-A `Received` header is added to the email envelope headers by each
+A `Received` header is added to the email envelope headers by every
 `Message Transfer Agent (MTA)` that relayed the email. `Received` headers are
 ordered in reverse chronological order, with the last `Received` header
 corresponding to the one added first by the `MTA` closer to the email sender

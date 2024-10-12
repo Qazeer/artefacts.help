@@ -43,11 +43,11 @@ The **creation and modification timestamps of the shortcut file itself** will
 usually respectively indicate **when the target file was first and last
 opened** for automatically created `shortcut files`.
 
-Each shortcut file additionally yield the following information:
+Each shortcut file additionally yields the following information:
 
   - The **target file's absolute path, size and attributes** (hidden,
-    read-only, etc.). The size and attributes are updated at each access to the
-    target file (that induce an update to the `shortcut file`).
+    read-only, etc.). The size and attributes are updated upon every access to
+    the target file (that induce an update to the `shortcut file`).
 
   - The **target file and the `shortcut file`** (source) itself **`Modified,
     Access, and Created (MAC)` timestamps at the time of the last access to the

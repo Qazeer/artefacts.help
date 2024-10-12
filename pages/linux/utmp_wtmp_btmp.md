@@ -8,7 +8,7 @@ tags:
 default_location: 'Linux:\n /var/run/utmp\n /var/log/wtmp\n /var/log/btmp\n\n Solaris:\n (deprecated) /var/adm/utmp\n /var/adm/utmpx\n (deprecated) /var/adm/wtmp\n /var/adm/wtmpx\n\n FreeBSD 9.0:\n /var/run/utx.active (utmp equivalent)\n /var/log/utx.log (wtmp equivalent)'
 last_updated: 2024-08-18
 sidebar: sidebar
-permalink: utmp_wtmp_btmp.html
+permalink: linux_utmp_wtmp_btmp.html
 folder: linux
 ---
 
