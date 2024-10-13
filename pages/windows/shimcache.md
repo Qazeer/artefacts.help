@@ -1,13 +1,13 @@
 ---
 title: Application Compatibility Cache / Shimcache
-summary: 'Application compatibility feature that aim to maintain support of existing software to new versions of the Windows operating system.\n\nA Shimcache entry is created whenever a program is executed from a specific path. However, starting from Windows Vista and Windows Server 2008, entries may also be created for files in a directory that is accessed interactively.\n\nStores up to 1024 entries starting from the Windows Vista and Windows Server 2008 operating systems.\n\nInformation of interest: file full path, LastModifiedTime ($Standard_Information) timestamp of the file at the time of execution, the cache entry position (insertion position in the Shimcache), and from Windows Vista / Windows Server 2008 up to Windows 8.1 / Windows Server 2012 R2, an (undocumented) execution flag.'
-keywords: Shimcache, Application Compatibility Cache, shimming
+summary: 'Application compatibility feature that aim to maintain support of existing software to new versions of the Windows operating system.\n\nA Shimcache entry is created whenever a program is executed from a specific path. However, starting from Windows Vista and Windows Server 2008, entries may also be created for files in a directory that is accessed interactively.\n\nStores up to 1024 entries starting from the Windows Vista and Windows Server 2008 operating systems.\n\nInformation of interest: file full path, LastModifiedTime ($Standard_Information) timestamp of the file at the time of execution, the cache entry position (insertion position in the Shimcache), and from Windows Vista / Windows Server 2008 up to Windows 8.1 / Windows Server 2012 R2, an (undocumented) execution flag.\n\n  While the insert / execution flag is no longer present starting from Windows 10 / Windows Server 2016, the last 4 bytes of an entry can be an indicator of execution, for non-native Windows binaries, if set to 1.'
+keywords: Shimcache, Application Compatibility Cache, shimming, insert flag, execution flag
 tags:
   - windows_registry
   - windows_program_execution
   - windows_file_knowledge
 location: 'SYSTEM registry hive.\n\nRegistry keys:\n\n>= Windows Server 2003 and Windows XP 64-bit:\nHKLM\SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCache\AppCompatCache\n\nWindows XP 32-bit:\nHKLM\SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatibility\AppCompatCache'
-last_updated: 2024-01-01
+last_updated: 2024-10-13
 sidebar: sidebar
 permalink: windows_shimcache.html
 folder: windows
@@ -47,8 +47,8 @@ thus only stored in memory.**
 While the `Shimcache` entry is not removed upon deletion of the associated
 file, `Shimcache` entries may be overwritten and information lost as the oldest
 entries are replaced by new data. A maximum of 96 `Shimcache` entries are
-stored in `Windows XP` / `Windows Server 2003` and up to 1024 entries starting
-can be stored starting from the `Windows Vista` and `Windows Server 2008`
+stored in `Windows XP`, up to 512 entries on `Windows Server 2003`, and up to
+1024 entries starting with the `Windows Vista` and `Windows Server 2008`
 operating systems. `Shimcache` entries roll over depending on the level of
 activity on the system, with historical data that can extend up to a few months
 on Windows server with minimal user activity.
@@ -79,11 +79,18 @@ on the version of the Windows operating system in use:
 
   - From `Windows Vista` / `Windows Server 2008` up to `Windows 8.1` /
     `Windows Server 2012 R2`, the (undocumented) `Insert Flag` flag which, when
-    set, seems to indicate that the entry was executed. This flag is no
-    longer present starting from `Windows 10` / `Windows Server 2016`, and thus
-    a `Shimcache` entry does not necessarily reflect an execution** (as entries
-    may also be created for files in a directory that is accessed
-    interactively).
+    set, seems to indicate that the entry was executed.
+
+    While the insert / execution flag is no longer present starting from
+    `Windows 10` / `Windows Server 2016`, the last 4 bytes of the entry can be
+    an indicator of execution: if the last 4 bytes of the entry are equal to
+    `01 00 00 00`, the binary was executed. However, this appears to only apply
+    to non-native Windows binaries. Additionally, relying on the last 4 bytes
+    can be prone to false-negatives, as executed programs might not necessarily
+    have their entry's last 4 bytes set to `0x1`. This technique can thus be
+    used to validate that a (non-native Windows) binary has been executed, but
+    cannot be used to rule out execution of a given binary present in the
+    `Shimcache`.
 
   - On `Windows XP 32-bit`, the file `Last Update Time` timestamp.
 
@@ -144,3 +151,7 @@ vol.py -f <MEMORY_IMAGE> --profile=<PROFILE> shimcache
   - [LIFARS - Amcache and Shimcache Forensics](https://lifars.com/wp-content/uploads/2017/03/Technical_tool_Amcache_Shimcache.pdf)
 
   - [WithSecure - Markus Tuominen & Mehmet Mert Surmeli - Unleashing the Power of Shimcache with Chainsaw](https://labs.withsecure.com/tools/chainsaw-analyse-shimcache)
+
+  - [13Cubed - Shimcache Execution Is Back - What You Need to Know!](https://www.youtube.com/watch?v=DsqKIVcfA90)
+
+  - [Mike nullsec.us - AppCompatCache Deep Dive](https://nullsec.us/windows-10-11-appcompatcache-deep-dive/)
