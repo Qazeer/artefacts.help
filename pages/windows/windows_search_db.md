@@ -24,13 +24,21 @@ By default, only a subset of folders and files are indexed (to reduce the
 Windows Search database size and CPU usage). The folders scanned and number of
 items indexed can be consulted in the "Windows search settings" menu.
 
+From `Windows Vista` / `Windows Server 2008` to `Windows 10` /
+`Windows Server 2019`, the `Windows Search` used an
+`Extensible Storage Engine (ESE)` database (`Windows.edb`). Starting with
+`Windows 11` / `Windows Server 2022`, the `Windows Search` switched to two
+`SQLite` databases (`Windows.db` and `Windows-gather.db`).
+
 ### Information of interest
 
 By default, only items from the following sources are scanned and indexed:
 
-  - Files and folders from the Users folders.
+  - Files and folders from the folders `C:\Users\*` (excluding `AppData`
+    directories) and `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\*`
+    (which include startup `LNK` files).
 
-    - Data available: file name, path, size, attributes, `MAC` timestamps.
+    > Data available: file name, path, size, attributes, `MAC` timestamps.
       For small file, part of the content of the file may be indexed as well.
 
   - Outlook mail data (with timestamp of reception, possible mail content).
@@ -41,10 +49,22 @@ By default, only items from the following sources are scanned and indexed:
 
 ### Tool(s)
 
-  - [Search Index DB Reporter (SIDR)](https://github.com/strozfriedberg/sidr)
+The [Search Index DB Reporter (SIDR)](https://github.com/strozfriedberg/sidr)
+utility (`SIDRWindowsIndexSearchParser` KAPE module) can be used to parse the
+`Windows Search` database (in both `ESE` and `SQLite` formats).
 
-  - [WinSearchDBAnalyzer](https://github.com/moaistory/WinSearchDBAnalyzer)
+```bash
+# Recursively scan the <INPUT_DIRECTORY> for Windows.edb and Windows.db files.
+
+sidr.exe -f <json | csv> <INPUT_DIRECTORY> -o <DESTINATION_DIRECTORY>
+```
+
+Alternatively, the [WinSearchDBAnalyzer](https://github.com/moaistory/WinSearchDBAnalyzer)
+graphical utility can be used to parse and explore the `Windows Search`, in
+`ESE` database format only.
 
 ### References
 
   - [SANS DFIR Summit 2023 - Phalgun Kulkarni & Julia Paluch - Windows Search Index: The Forensic Artifact You've Been Searching For](https://www.youtube.com/watch?v=X4WTcRdIDAM)
+
+  - [Aon - Phalgun Kulkarni, Julia Paluch - Windows Search Index: The forensic artifact you’ve been searching for](https://www.aon.com/cyber-solutions/aon_cyber_labs/windows-search-index-the-forensic-artifact-youve-been-searching-for/)
