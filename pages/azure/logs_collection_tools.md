@@ -71,6 +71,7 @@ Import-Module .\Microsoft-Extractor-Suite.psd1
 Connect-M365
 Connect-Azure
 Connect-AzureAZ
+Connect-MgGraph
 
 # Retrieves the total number of records in the UAL per Record Type.
 # By default retrieve data for the last 90 days for all users.

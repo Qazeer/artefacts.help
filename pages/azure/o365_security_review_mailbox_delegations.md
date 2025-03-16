@@ -158,3 +158,16 @@ ForEach ($MailBox in $MailBoxes) {
   }
 }
 ```
+
+### Automated collection
+
+[`Microsoft-Extractor-Suite`](./logs_collection_tools.md#azure-ad-office365--azure-microsoft-extractor-suite)'s
+[`Get-MailboxPermissions`](https://microsoft-365-extractor-suite.readthedocs.io/en/latest/functionality/M365/MailboxDelegatedPermissions.html)
+PowerShell cmdlet can be used to enumerate the Mailbox and Recipient (or
+`SendAs`) access rights / permissions:
+
+```bash
+Get-MailboxPermissions
+
+Get-MailboxPermissions -UserIds "<EMAIL | EMAILS_LIST>"
+```
