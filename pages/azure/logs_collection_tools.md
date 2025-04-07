@@ -27,7 +27,7 @@ for paged queries. Requests that would return a large number of events should
 thus automated (for instance with `DFIR-O365RC` or `Microsoft-Extractor-Suite`).
 
 ```bash
-# If necessary, install and / or import the ExchangeOnlineManagement module.
+# If necessary, install and/or import the ExchangeOnlineManagement module.
 Install-Module ExchangeOnlineManagement
 Import-Module ExchangeOnlineManagement
 
@@ -58,7 +58,7 @@ PowerShell module can be used to extract logs from Azure AD and Office365.
 Install-Module -Name ExchangeOnlineManagement
 Install-Module -Name AzureADPreview
 
-# Only required for cmdlets using the GraphAPI, such as Get-ADSignInLogsGraph or Get-ADAuditLogsGraph
+# Only required for cmdlets using the GraphAPI, such as Get-EntraSignInLogsGraph or Get-EntraAuditLogsGraph
 Install-Module Microsoft.Graph.Beta
 
 # The AzureADPreview module MUST be imported (in place of the AzureAD module), as Get-AzureADAuditSignInLogs is updated to allow the retrieval of all events (instead of 1.000 entries with the AzureAD version).
@@ -67,42 +67,48 @@ Import-Module -Name 'AzureADPreview' -Force
 
 Import-Module .\Microsoft-Extractor-Suite.psd1
 
-# Connects to Office 365, AzureAD, and / or Azure (depending on the collection targets).
+# Connects to Office 365, AzureAD, and/or Azure (depending on the collection targets).
 Connect-M365
 Connect-Azure
 Connect-AzureAZ
+Connect-MgGraph
+
+# Retrieves all Azure AD sign-in logs.
+Get-EntraSignInLogs
+# Retrieves Azure AD sign-in logs before and/or after the specified date(s) (no timestamp support, date with day precision only).
+Get-EntraSignInLogs -StartDate <YYYY-MM-DD> -EndDate <YYYY-MM-DD>
+
+# Retrieves all Azure AD Audit logs.
+Get-EntraAuditLogs
+# Retrieves Azure AD Audit logs before and/or after the specified date(s) (no timestamp support, date with day precision only).
+Get-EntraAuditLogs -StartDate <YYYY-MM-DD> -EndDate <YYYY-MM-DD>
 
 # Retrieves the total number of records in the UAL per Record Type.
 # By default retrieve data for the last 90 days for all users.
 Get-UALStatistics
-# For the specified user(s) and / or in the given timeframe.
+# For the specified user(s) and/or in the given timeframe.
 Get-UALStatistics -UserIds "<EMAIL>" -StartDate <YYYY-MM-DDT00:00:00Z> -EndDate <YYYY-MM-DDT00:00:00Z>
 
 # Retrieves all UAL data.
 # By default retrieve data for the last 90 days for all users.
-Get-UALAll [-Output JSON]
-# For the specified user(s) and / or in the given timeframe.
-Get-UALAll [-Output JSON] -UserIds "<EMAIL | EMAILS_LIST>" -StartDate <YYYY-MM-DDT00:00:00Z> -EndDate <YYYY-MM-DDT00:00:00Z>
+Get-UAL [-Output JSON]
+# For the specified user(s) andor in the given timeframe.
+Get-UAL [-Output JSON] -UserIds "<EMAIL | EMAILS_LIST>" -StartDate <YYYY-MM-DDT00:00:00Z> -EndDate <YYYY-MM-DDT00:00:00Z>
 
 # Retrieves MailBox audit logs for the specified or all mailboxes.
 Get-MailboxAuditLog [-StartDate <YYYY-MM-DDT00:00:00Z>] [-EndDate <YYYY-MM-DDT00:00:00Z>]
 Get-MailboxAuditLog -UserIds "<EMAIL | EMAILS_LIST>"
 
-# Retrieves all Azure AD sign-in logs.
-Get-ADSignInLogs
-# Retrieves Azure AD sign-in logs before and / or after the specified date(s) (no timestamp support, date with day precision only).
-Get-ADSignInLogs -StartDate <YYYY-MM-DD> -EndDate <YYYY-MM-DD>
-
-# Retrieves all Azure AD Audit logs.
-Get-ADAuditLogs
-# Retrieves Azure AD Audit logs before and / or after the specified date(s) (no timestamp support, date with day precision only).
-Get-ADAuditLogs -StartDate <YYYY-MM-DD> -EndDate <YYYY-MM-DD>
+# Retrieves Message Trace logs for the specified or all mailboxes.
+# Uses Get-MessageTraceV2 to retrieve by default 90 days of message trace data, with  pagination (5000 records per page) and the 10-day query window allowed by the cmdlet.
+Get-MessageTraceLog [-StartDate <YYYY-MM-DDT00:00:00Z>] [-EndDate <YYYY-MM-DDT00:00:00Z>]
+Get-MessageTraceLog -UserIds "<EMAIL | EMAILS_LIST>"
 ```
 
 ### [Azure AD, Office365, & Azure] DFIR-O365RC collector
 
 [`DFIR-O365RC`](https://github.com/ANSSI-FR/DFIR-O365RC) is a PowerShell module
-that implement a number of cmdlets to retrieve Office 365 / Azure logs. As
+that implement a number of cmdlets to retrieve Office 365Azure logs. As
 `DFIR-O365RC` supports PowerShell Core, it can be used on both Windows or Linux
 endpoints.
 
@@ -171,7 +177,7 @@ $StartDateLimited = $EndDate.adddays(-<DAYS>)
 Get-O365Full -StartDate [$StartDate90 | $StartDateLimited] -Enddate $EndDate
 
 # Get Defender for Office 365 logs, from Office 365 Unified audit logs.
-# Defender logs require an E5 license or a license plan with Microsoft Defender for Office 365 / cloud app security.
+# Defender logs require an E5 license or a license plan with Microsoft Defender for Office 365cloud app security.
 Get-DefenderforO365 -StartDate $StartDate90 -Enddate $EndDate
 
 # Search for activity related to a particular user, IP address or freetext query in the Office 365 Unified audit logs.
@@ -218,7 +224,7 @@ resource(s) level can be either:
 Once a `storage account` or `Log Analytics workspace` has been created, the
 procedure to export logs from different sources is as follow:
 
-  - `AzureAD` tenant logs (sign-ins and audit logs) - P1 / P2 license required:
+  - `AzureAD` tenant logs (sign-ins and audit logs) - P1P2 license required:
 
     ```
     Azure Active Directory portal
