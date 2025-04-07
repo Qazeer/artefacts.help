@@ -43,7 +43,7 @@ aws iam list-policies --query 'Policies[*].[PolicyName, Arn]' --output text
 # Lists the metadata of the specified IAM policy.
 aws iam list-policies --query 'Policies[?PolicyName==`<POLICY_NAME>`]'
 
-# Retrieves the IAM policies associated with the specified user / group / role.
+# Retrieves the IAM policies associated with the specified user/group/role.
 # Inline IAM policies embedded in the specified IAM user.
 aws iam list-user-policies --user-name "<USERNAME>"
 # IAM policies attached to the specified IAM user.
@@ -66,8 +66,8 @@ aws s3 ls
 # Retrieves more detailed (compared to s3 ls) information on a bucket (and bucket files).
 aws s3api list-objects --bucket <BUCKET_NAME>
 
-# Download / upload files from / to a S3 bucket.
-# Source / destination for s3://<BUCKET> or local path.
+# Download/upload files from/to a S3 bucket.
+# Source/destination for s3://<BUCKET> or local path.
 aws s3 cp [--recursive] <SOURCE> <DEST>
 ```
 

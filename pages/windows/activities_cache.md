@@ -1,6 +1,6 @@
 ---
 title: Windows 10 Timeline / ActivitiesCache.db
-summary: 'Introduced in Windows 10 version 1803, the Windows Activity history tracks a number of operations on the system: programs used, local files opened, SharePoint documents consulted, and websites browsed (using Internet Explorer / Microsoft Edge Legacy).\n\nThe ActivitiesCache.db database only stores data for the last 30 days by default.\n\nInformation of interest, that depends on the activity type: start and end times of the activity (in UTC), executable full path for program execution, file name / SharePoint link for files accessed using certain programs, created and last modified timestamp of the associated file, etc.\n\nThe history of the clipboard data may also be stored for a short amount of time (approximately 12 hours) in non default configuration.'
+summary: 'Introduced in Windows 10 version 1803, the Windows Activity history tracks a number of operations on the system: programs used, local files opened, SharePoint documents consulted, and websites browsed (using Internet Explorer/Microsoft Edge Legacy).\n\nThe ActivitiesCache.db database only stores data for the last 30 days by default.\n\nInformation of interest, that depends on the activity type: start and end times of the activity (in UTC), executable full path for program execution, file name/SharePoint link for files accessed using certain programs, created and last modified timestamp of the associated file, etc.\n\nThe history of the clipboard data may also be stored for a short amount of time (approximately 12 hours) in non default configuration.'
 keywords: Windows 10 Timeline, ActivitiesCache.db, ActivitiesCache
 tags:
   - windows_program_execution
@@ -33,9 +33,9 @@ The `ActivitiesCache.db` only stores data for the last 30 days by default.
 The `ActivitiesCache.db` is composed of a number of tables, with the following
 tables being of interest:
 
-  - `Activity` / `ActivityOperation` tables.
+  - `Activity`/`ActivityOperation` tables.
 
-    - Data about various activities for different operation / activity type:
+    - Data about various activities for different operation/activity type:
       - Program execution and opening of a file (5, `ExecuteOpen`)
       - Copy-pasting from a program (`CopyPaste`)
       - Application "in focus" (`InFocus`)
@@ -46,7 +46,7 @@ tables being of interest:
         the activity (in `UTC`).
       - The activity ID (GUID).
       - Executable full path for program execution.
-      - For certain programs, the accessed file name and path and / or
+      - For certain programs, the accessed file name and path and/or
         associated SharePoint link.
       - Created and last modified timestamp of the associated file (local or
         on SharePoint).
@@ -60,23 +60,23 @@ tables being of interest:
 
   - `Activity_PackageId`:
 
-    - Data about the application(s) / program(s) linked to a specific activity
+    - Data about the application(s)/program(s) linked to a specific activity
       (identified by its activity ID).
 
     - Data available:
       - The activity ID (GUID).
-      - The application name / program filename.
+      - The application name/program filename.
       - Eventual program full path.
       - Activity expiration timestamp (timestamp of occurrence + 30 days by
         default).
 
    - Upon occurrence of an activity, one or multiple entries sharing the same
      activity ID will be created in the `Activity_PackageId` table, one for
-     each program / application related to the activity.
+     each program/application related to the activity.
 
 #### Clipboard activity
 
-The `Activity` / `ActivityOperation` tables reference clipboard activity
+The `Activity`/`ActivityOperation` tables reference clipboard activity
 through two activity types: `10` and `16`. The events will be stored for
 approximately 12 hours after the operation.
 

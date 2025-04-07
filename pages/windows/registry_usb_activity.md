@@ -47,7 +47,7 @@ Each USB device is associated with a dedicated subkey under the `Enum\USB`
 key. This subkey is named after the device `vendor ID (VID)` and
 `product ID (PID)` of the device. For example: `VID_1B1C&PID_4242`.
 
-FUnderneath the `VID` / `PID` subkey, another subkey is named after the
+FUnderneath the `VID`/`PID` subkey, another subkey is named after the
 `instance ID` of the device (referencing either the device's `serial number` or
 location information).
 
@@ -63,7 +63,7 @@ values and under the `Properties` and `Device Parameters` subkeys, notably:
     references three child subkeys of interest, each containing a timestamp
     value:
       - `0064` (starting from Windows 7): timestamp of when the device was
-        first plugged-in / installed.
+        first plugged-in/installed.
 
       - `0066` (starting from Windows 8): timestamp of when the device was last
         connected.
@@ -141,10 +141,10 @@ Each device is associated with a separate binary value, composed of:
 
   - The device `volume GUID` (as the key's value name).
 
-  - The `device / hardware  ID`, `instance ID`, and `device interface class`
+  - The `device/hardware  ID`, `instance ID`, and `device interface class`
     `GUID` in a `#` separated string (as the key's value data).
 
-      - The `device ID` / `hardware ID` references the vendor and product
+      - The `device ID`/`hardware ID` references the vendor and product
         names.
 
       - The `instance ID` contains the device's `serial number` or location
@@ -181,7 +181,7 @@ For examples:
 
 Under each `device classes` `GUID` subkey, the devices of the given type are
 referenced as their own subkey, whose name is a `#` separated string composed
-of the `device / hardware ID`, `instance ID`, and `device interface class`
+of the `device/hardware ID`, `instance ID`, and `device interface class`
 `GUID` of the device.
 
 Example of a `{53f56307-b6bf-11d0-94f2-00a0c91efb8b}` subkey (physical
@@ -193,7 +193,7 @@ Example of a `{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}` subkey (logical volume): <
 
 ### Windows Portable Devices
 
-{% include note.html content="`Windows Portable Devices` can be used to identity a volume friendly name from (a) a device `serial number` / location information or (b) a `volume id` (and vice versa)." %}
+{% include note.html content="`Windows Portable Devices` can be used to identity a volume friendly name from (a) a device `serial number`/location information or (b) a `volume id` (and vice versa)." %}
 
 | Hive | Location |
 | `HKLM\SOFTWARE` | File: `%SystemRoot%\System32\config\SOFTWARE`. <br><br> Registry key: `HKLM\SOFTWARE\Microsoft\Windows NT\Windows Portable Devices`. |
@@ -240,7 +240,7 @@ corresponding drive letter:
   - The volume friendly name in the `VolumeLabel` value.
 
   - The associated [drive type](https://learn.microsoft.com/en-us/dotnet/api/system.io.drivetype)
-    in the `DriveType` value. Both hard disks / SSDs and storage devices (such
+    in the `DriveType` value. Both hard disks/SSDs and storage devices (such
     as USB keys) appear to be associated with the value `3` (on Windows 10).
 
 The last written timestamp of the key is an indicator of when a volume was last

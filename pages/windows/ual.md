@@ -66,7 +66,7 @@ contain multiple information of interest:
     accounts of domain-joined computers also authenticate on `AD DS`.
 
 Each entry in the `CLIENTS` table is composed of a unique set of a Windows
-Server role, a client's domain / username, and a source `IP` address.
+Server role, a client's domain/username, and a source `IP` address.
 
 The `DNS` table of the aforementioned database files contain information about
 `DNS` resolutions: hostname, associated `IP` address, and timestamp of last

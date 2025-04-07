@@ -11,7 +11,7 @@ permalink: azure_required_privileges.html
 folder: azure
 ---
 
-The following privileges / roles are required in the Azure AD tenant and
+The following privileges/roles are required in the Azure AD tenant and
 Exchange Online instance:
 
   - Azure AD tenant: `Global Reader` ("Lecteur Général") role.
@@ -38,5 +38,5 @@ Exchange Online instance:
 Note that accessing Azure AD logs through the `MS Graph API` requires at least
 **one user with an Azure `AD Premium P1` or `AD Premium P2` license**. These
 license can be included in other license plans, such as
-`Microsoft 365 E3 / E5 / F3`. The other to which is associated the license does
+`Microsoft 365 E3/E5/F3`. The other to which is associated the license does
 not matter.

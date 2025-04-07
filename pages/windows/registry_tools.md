@@ -10,7 +10,7 @@ permalink: windows_registry_tools.html
 folder: windows
 ---
 
-### RegistryExplorer / RECmd
+### RegistryExplorer/RECmd
 
 [`RegistryExplorer`](https://www.sans.org/tools/registry-explorer/) and
 [`RECmd`](https://github.com/EricZimmerman/RECmd) are tools developed by Eric
@@ -21,7 +21,7 @@ parse registry hives to CSV or JSON outputs.
 `RegistryExplorer` can process registry hive files or directly access the
 registry of the current live system. Additionally, both the `RegistryExplorer`
 / `RECmd` utilities can apply transaction log files, for example
-`ntuser.dat.LOG1`, to identify and recover deleted keys / values.
+`ntuser.dat.LOG1`, to identify and recover deleted keys/values.
 
 `RegistryExplorer` implements a number of
 [bookmarks](https://github.com/EricZimmerman/RegistryExplorerBookmarks) of

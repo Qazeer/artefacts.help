@@ -1,6 +1,6 @@
 ---
 title: Office365 - Exchange workload (Mailbox and ExchangeAdmin audit logs)
-summary: 'The Exchange workload regroup events from the Mailbox and ExchangeAdmin audit logs.\n\nThe Mailbox audit logs include events on mailbox activity, such as MailboxLogin, MailItemsAccessed (for E5 users), SendAs, SendOnBehalf, MoveToDeletedItems, SoftDelete / HardDelete, etc.\n\nThe ExchangeAdmin audit logs include events on administrative actions, such as Set-Mailbox, New-InboxRule, Add-MailboxPermission, Add-RecipientPermission, etc.'
+summary: 'The Exchange workload regroup events from the Mailbox and ExchangeAdmin audit logs.\n\nThe Mailbox audit logs include events on mailbox activity, such as MailboxLogin, MailItemsAccessed (for E5 users), SendAs, SendOnBehalf, MoveToDeletedItems, SoftDelete/HardDelete, etc.\n\nThe ExchangeAdmin audit logs include events on administrative actions, such as Set-Mailbox, New-InboxRule, Add-MailboxPermission, Add-RecipientPermission, etc.'
 keywords: Exchange, Unified Audit Logs, UAL, Mailbox, Mailbox Audit Log, MailboxLogin, MailItemsAccessed, FolderBind, MessageBind, Create, Send, SendAs, SendOnBehalf, MoveToDeletedItems, SoftDelete, HardDelete, Set-Mailbox, New-InboxRule, Set-InboxRule, UpdateInboxRules, New-TransportRule, Remove-InboxRule, Disable-InboxRule, Add-MailboxPermission, Add-RecipientPermission, Set-OwaMailboxPolicy
 tags:
   - azure_logs

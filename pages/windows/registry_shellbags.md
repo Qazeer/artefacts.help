@@ -1,6 +1,6 @@
 ---
 title: Registry - Shellbags
-summary: 'The Shellbags are Windows Registry keys designed as a user experience enhancing feature to keep track of Windows explorer graphical display settings on a folder-by-folder basis.\n\nShellbags contain folders and network shares to which a given user has navigated (using the Windows Explorer), but not the content of a directory. Files will thus not be referenced and subdirectories will only be referenced if they were navigated into.\n\nShellbag entries are stored in registry as a tree-like hierarchical data structure, allowing to reconstitute the browsed directories arborescence.\n\nInformation of interest, for each Shellbags entry on a given target / directory:\n\n- Target name and absolute path.\n\n- Target Modified, Access, and Created (MAC) timestamps (in UTC) retrieved from the $MFT at the Shellbag entry creation (and not further updated).\n\n- The order in which the sub-targets of a target were accessed (maintained in a MRUList list).\n\nAdditionally, the first and last interacted timestamps can be indirectly deducted for some targets.'
+summary: 'The Shellbags are Windows Registry keys designed as a user experience enhancing feature to keep track of Windows explorer graphical display settings on a folder-by-folder basis.\n\nShellbags contain folders and network shares to which a given user has navigated (using the Windows Explorer), but not the content of a directory. Files will thus not be referenced and subdirectories will only be referenced if they were navigated into.\n\nShellbag entries are stored in registry as a tree-like hierarchical data structure, allowing to reconstitute the browsed directories arborescence.\n\nInformation of interest, for each Shellbags entry on a given target/directory:\n\n- Target name and absolute path.\n\n- Target Modified, Access, and Created (MAC) timestamps (in UTC) retrieved from the $MFT at the Shellbag entry creation (and not further updated).\n\n- The order in which the sub-targets of a target were accessed (maintained in a MRUList list).\n\nAdditionally, the first and last interacted timestamps can be indirectly deducted for some targets.'
 keywords: Shellbags, BagMRU, ShellBagsExplorer, SBECmd, MRUListEx
 tags:
   - windows_registry
@@ -17,7 +17,7 @@ folder: windows
 The `Shellbags` are `Windows Registry keys` designed as a user experience
 enhancing feature to keep track of Windows explorer graphical display settings
 on a folder-by-folder basis. For instance, a `Shellbag` entry is used to store
-the `View` mode of a folder (details, list, small / medium / large icons) as
+the `View` mode of a folder (details, list, small/medium/large icons) as
 well as the column displayed (entry names, dates, sizes, etc.) and their order.
 
 `Shellbags` contain folders and network shares to which a given user has
@@ -132,7 +132,7 @@ for some targets**:
     value), the `LastWriteTime` timestamp of a key (with sub-keys) correspond
     to the timestamp of creation of the last added sub-key. This last added
     sub-key being known, by its `MRU position` of 0, the interaction timestamp
-    of the last interacted with child-bag / sub-target can thus be deduced (the
+    of the last interacted with child-bag/sub-target can thus be deduced (the
     parent key `LastWriteTime` timestamp).
 
 Note however that major updates of the Windows operating system may result in

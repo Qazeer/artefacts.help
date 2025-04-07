@@ -58,7 +58,7 @@ aws configure
 # -w <local | cloud>: defines if the results should stored in an S3 bucket only or if the results should also be downloaded to the local storage.
 python3 main.py [-r <REGION> | -A <REGION>] -w <local | cloud>
 
-# Downloads locally the exported / collected elements from invictus-aws.py.
+# Downloads locally the exported/collected elements from invictus-aws.py.
 aws s3 cp --recursive s3://<INVICTUS_BUCKET> <EXPORT_FOLDER>
 ```
 
@@ -77,7 +77,7 @@ awslogs groups
 # Lists the streams in the specified log group.
 awslogs streams <LOG_GROUP>
 
-# Retrieves the logs in all or the specified log group / stream.
-# The start / end filtering support multiple filtering options: DD/MM/YYYY HH:mm, <INT><m | h | d | w>.
+# Retrieves the logs in all or the specified log group/stream.
+# The start/end filtering support multiple filtering options: DD/MM/YYYY HH:mm, <INT><m | h | d | w>.
 awslogs get <ALL | LOG_GROUP> <ALL | LOG_GROUP_STREAM> -s <START> -e <END>
 ```

@@ -1,6 +1,6 @@
 ---
 title: .NET CLR UsageLogs
-summary: 'Following the execution (or in-memory injection) of a .NET assembly, the Common Language Runtime (CLR) creates a Usage Log file whose named is based on the name of the executed assembly.\n\nInformation of interest: the filename of the log file match the name of the assembly / binary executed.\nThe file creation timestamp corresponds to the first time the associated assembly was executed and the file last modification timestamp corresponds to the last execution time of the assembly.'
+summary: 'Following the execution (or in-memory injection) of a .NET assembly, the Common Language Runtime (CLR) creates a Usage Log file whose named is based on the name of the executed assembly.\n\nInformation of interest: the filename of the log file match the name of the assembly/binary executed.\nThe file creation timestamp corresponds to the first time the associated assembly was executed and the file last modification timestamp corresponds to the last execution time of the assembly.'
 keywords:
 tags:
   - windows_program_execution
@@ -22,7 +22,7 @@ not be written if the process does not gracefully exit.
 
 ### Information of interest
 
-**The filename of the log file match the name of the assembly / binary
+**The filename of the log file match the name of the assembly/binary
 executed.**
 
 The **file creation timestamp corresponds to the first time the associated

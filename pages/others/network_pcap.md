@@ -31,7 +31,7 @@ combine `tshark` filters and statistic computation.
 #### `Wireshark` and `tshark` tips
 
   - To easily identify a field name (for later filtering for instance), it is
-    possible to select / hover over the field in `Wireshark`, and the field
+    possible to select/hover over the field in `Wireshark`, and the field
     name will be displayed in the
     [status bar](https://www.wireshark.org/docs/wsug_html_chunked/ChUseStatusbarSection.html)
     left side.
@@ -70,7 +70,7 @@ tshark -n [-i <NETWORK_INTERFACE> | -r <INPUT_FILE>] [-2 -R '<READ_FILTER>'] -q 
 
 #### `tshark` command examples
 
-Example of useful `tshark` commands with display / read filters (that may also
+Example of useful `tshark` commands with display/read filters (that may also
 be used in `Wireshark`) and statistic expressions:
 
 | tshark command | Description |
@@ -81,7 +81,7 @@ be used in `Wireshark`) and statistic expressions:
 | `tshark -nr <INPUT_FILE> -2 -R 'ip.src.addr == <SRC_IP> && ip.dst.addr in {10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16}' -q -z io,phs` <br><br> `tshark -nr <INPUT_FILE> -2 -R 'ip.src.addr == <IP> && ip.dst.addr in {10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16}' -q -z endpoints,ip` | Displays basic metrics (frames and bytes exchanged) per protocol (`io,phs`) or per remote hosts (`endpoints,ip`) for the given `IP` source `SRC_IP` to all private hosts. |
 | `tshark -nr <INPUT_FILE> --export-objects smb,<OUTPUT_FOLDER>` <br><br> `tshark -nr <INPUT_FILE> --export-objects http,<OUTPUT_FOLDER>` | Extracts the files found in the `SMB` or `HTTP` streams to disk. |
 | `tshark -nr <INPUT_FILE> -Y 'dns || udp.dstport == 53 || tcp.dstport == 53' -T fields -e ip.src -e dns.qry.name | sort -u` | Extracts `DNS` queries made per host. |
-| `tshark -nr <INPUT_FILE> -Y 'tls.handshake.type eq 1'` <br><br> `tshark -nr <INPUT_FILE> -Y 'tls.handshake.type eq 1' -T fields -e ip.src -e tls.handshake.extensions_server_name | sort -u` | Lists / extracts the `TLS` `Client Hello` requests, that may contain [`Server Name Indication` (`SNI`)](https://www.cloudflare.com/learning/ssl/what-is-sni/) referencing the requested domain. <br><br> `Client Hello` requests can be listed or the `SNI` specified extracted per host. |
+| `tshark -nr <INPUT_FILE> -Y 'tls.handshake.type eq 1'` <br><br> `tshark -nr <INPUT_FILE> -Y 'tls.handshake.type eq 1' -T fields -e ip.src -e tls.handshake.extensions_server_name | sort -u` | Lists/extracts the `TLS` `Client Hello` requests, that may contain [`Server Name Indication` (`SNI`)](https://www.cloudflare.com/learning/ssl/what-is-sni/) referencing the requested domain. <br><br> `Client Hello` requests can be listed or the `SNI` specified extracted per host. |
 | `tshark -nr <INPUT_FILE> -Y 'http && http.request.method in {"GET", "POST"}'` | Extracts `GET` and `POST` `HTTP` requests. |
 | `tshark -nr <INPUT_FILE> -Y 'http' -T fields -e http.host -e http.user_agent | sort -u` | Extracts the `User-Agents` (uniquely) used in `HTTP` requests per host. |
 

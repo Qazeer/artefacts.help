@@ -150,8 +150,8 @@ More record types are listed in the
 #### Notable fields
 
   - The [user and group identifiers](./user_and_group_identifiers.md)
-    (`uid` / `gid`, `euid` / `egid`, `ruid` / `rgid`, `suid` / `sgid`, and
-    `fsuid` / `fsgidof`) of the process.
+    (`uid`/`gid`, `euid`/`egid`, `ruid`/`rgid`, `suid`/`sgid`, and
+    `fsuid`/`fsgidof`) of the process.
 
   - `auid`: `audit identifier` that, if present, identify the initial `uid` of
     the user (from the initial process). The `auid` remains the same even if
@@ -159,7 +159,7 @@ More record types are listed in the
     utilities start a new process with updated `uid`, `euid`, `ruid`, and
     `suid`).
 
-    **An `auid` not equal to the event's `uid` / `ruid` can thus be an
+    **An `auid` not equal to the event's `uid`/`ruid` can thus be an
     indication of privilege escalation through `sudo` or `su`.**
 
   - `tty` and `ses`: respectively the terminal and session from which the
@@ -169,7 +169,7 @@ More record types are listed in the
     stored in hexadecimal format. Keyword search on parameter values can thus
     be more complex and require adapted tooling.
 
-  - For `SYSCALL` records, the `aX` field(s) define the arguments / parameters
+  - For `SYSCALL` records, the `aX` field(s) define the arguments/parameters
     of the syscall, represented by unsigned long long integers and as such
     cannot be used to determine the values taken by the arguments.
 
@@ -194,7 +194,7 @@ filter the events.
 # Displays the time range covered by each input file.
 aureport -if <INPUT_FILE | INPUT_DIRECTORY> -t
 
-# Generates a global synthesis: number of logins / authentications, failed logins / authentications, process and commands executed, tty keystrokes entered, etc.
+# Generates a global synthesis: number of logins/authentications, failed logins/authentications, process and commands executed, tty keystrokes entered, etc.
 aureport -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY>
 
 # Generates a report on user logins (type=USER_LOGIN) with -l or authentications (type=USER_AUTH) with -au.
@@ -216,7 +216,7 @@ aureport -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTOR
 
 # ausearch.
 
-# Filters on the specified event / message type (TTY, USER_CMD, EXECVE, PATH, USER_AUTH, etc.).
+# Filters on the specified event/message type (TTY, USER_CMD, EXECVE, PATH, USER_AUTH, etc.).
 ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY>
 
 # Filters on the specified user identifier (across uid, euid, and auid).
@@ -248,7 +248,7 @@ target-query -f audit <TARGET> | rdump <--csv | --json | --jsonlines>
 #### Sigma-based analysis with Zircolite and ChopChopGo
 
 The [`Zircolite`](https://github.com/wagga40/Zircolite) Python script (or
-standalone compiled binaries) and / or the
+standalone compiled binaries) and/or the
 [`ChopChopGo`](https://github.com/M00NLIG7/ChopChopGo) Go tool can be used to
 parse and process `audit` logs using
 [`Sigma`](https://github.com/SigmaHQ/sigma) rules, to generate a detection

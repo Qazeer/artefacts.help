@@ -59,7 +59,7 @@ The `LogonType` field provides information on how the logging was established:
 | Logon Type | Description |
 |------------|-------------|
 | 2          | Interactive logon. <br><br> *Logon type generated for on screen login at the keyboard as well as some remote access with specific tools. <br> Note that access made using `PsExec` with a user specified using the `-u` option will result in an interactive logon.* |
-| 3          | Network logon (share access, etc.). <br><br> *Logon type generated for access over the network (access to `SMB` share, `PsExec`, `WMI` / `WinRM`, etc.).* |
+| 3          | Network logon (share access, etc.). <br><br> *Logon type generated for access over the network (access to `SMB` share, `PsExec`, `WMI`/`WinRM`, etc.).* |
 | 4          | Batch logon (scheduled task) |
 | 5          | Service logon (service startup) |
 | 7          | Unlock (on screen unlocking) |

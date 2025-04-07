@@ -60,7 +60,7 @@ service name root key):
 
   - The service type:
     - `0x1`: Kernel driver.
-    - `0x2` / `0x8`: File system driver.
+    - `0x2`/`0x8`: File system driver.
     - `0x10`: Standard Windows service that runs in a process by itself.
     - `0x20`: Windows service that can share a process with other services.
     - `0x50`: "USER_OWN_PROCESS TEMPLATE".

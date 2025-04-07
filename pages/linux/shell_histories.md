@@ -24,7 +24,7 @@ Two built-in commands can be used to interact with the shell history:
 
   - `history`: listing of shell history commands.
 
-  - `fc`: accessing commands from the history to edit and / or execute a past
+  - `fc`: accessing commands from the history to edit and/or execute a past
     command.
 
 The behavior of the `history` feature can be modified by setting a number of

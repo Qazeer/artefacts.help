@@ -24,7 +24,7 @@ host screen was reached, i.e. `Network Level Authentication` succeed (if the
 remote host requires `NLA`) and the certificate warning has been accepted (if a
 warning was displayed).
 
-Entries are added / updated in near real-time.
+Entries are added/updated in near real-time.
 
 ### Information of interest
 

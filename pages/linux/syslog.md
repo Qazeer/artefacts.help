@@ -1,13 +1,13 @@
 ---
 title: Syslog
-summary: 'Syslog, also known as "legacy-syslog" or "BSD-syslog", is a logging framework defined in RFC3164 then RFC5424 (IETF-syslog). syslog-ng and rsyslog extended the initial syslog protocol, and all three versions continue to be developed as separate projects, growing separately and in parallel.\n\nsyslog logs events / messages from various system components, notably on:\n - Successful authentication and failed authentication attempts.\n - sudo usage.\n - Kernel and hardware component activities.\n - cron jobs and mail activity (sendmail).\n - ...\n\nsyslog relies on "Facilities" to classify and separate log messages from their originating subsystem / components (kernel, cron, user, mail, ...). The facilities are associated with actions in syslog configuration files, to log the messages to a file on disk, send them over the network, or display them to end-users.\n\nThe syslog log file locations are fully dependant on the syslog configuration and differ between Linux distribution and syslog implementation.'
+summary: 'Syslog, also known as "legacy-syslog" or "BSD-syslog", is a logging framework defined in RFC3164 then RFC5424 (IETF-syslog). syslog-ng and rsyslog extended the initial syslog protocol, and all three versions continue to be developed as separate projects, growing separately and in parallel.\n\nsyslog logs events/messages from various system components, notably on:\n - Successful authentication and failed authentication attempts.\n - sudo usage.\n - Kernel and hardware component activities.\n - cron jobs and mail activity (sendmail).\n - ...\n\nsyslog relies on "Facilities" to classify and separate log messages from their originating subsystem/components (kernel, cron, user, mail, ...). The facilities are associated with actions in syslog configuration files, to log the messages to a file on disk, send them over the network, or display them to end-users.\n\nThe syslog log file locations are fully dependant on the syslog configuration and differ between Linux distribution and syslog implementation.'
 keywords: syslog, RFC3164, RFC5424, syslog-ng, rsyslog, Facility, Severity, Priority, auth, cron, kernel
 tags:
   - linux_logging_frameworks
   - linux_lateral_movement
   - linux_lateral_movement_dst
   - linux_local_persistence
-default_location: 'Configuration files and directories:\n - /etc/syslog.conf\n - /etc/rsyslog.conf\n - /etc/rsyslog.d/*.conf\n - /etc/syslog-ng.conf\n - /etc/syslog-ng/*\n\nMain syslog log files:\n - auth / authpriv: (Debian / Ubuntu) /var/log/auth.log | (RedHat / Centos) /var/log/secure\n - All except auth and authpriv: /var/log/syslog\n - All except auth, authpriv, and mail: (RedHat / Centos) /var/log/messages\n- cron: /var/log/cron.log\n- mail: /var/log/mail.log\n - Linux kernel: /var/log/kern.log\n - User: /var/log/user.log'
+default_location: 'Configuration files and directories:\n - /etc/syslog.conf\n - /etc/rsyslog.conf\n - /etc/rsyslog.d/*.conf\n - /etc/syslog-ng.conf\n - /etc/syslog-ng/*\n\nMain syslog log files:\n - auth/authpriv: (Debian/Ubuntu) /var/log/auth.log | (RedHat/Centos) /var/log/secure\n - All except auth and authpriv: /var/log/syslog\n - All except auth, authpriv, and mail: (RedHat/Centos) /var/log/messages\n- cron: /var/log/cron.log\n- mail: /var/log/mail.log\n - Linux kernel: /var/log/kern.log\n - User: /var/log/user.log'
 last_updated: 2024-07-24
 sidebar: sidebar
 permalink: linux_syslog.html
@@ -25,7 +25,7 @@ While `journald` (part of `systemd`) is a more modern approach to logging, that
 address some of `syslog` shortcomings, `syslog` (or one of its variation) is
 still in use today on many Linux distributions.
 
-`syslog` logs events / messages from various system components, notably on:
+`syslog` logs events/messages from various system components, notably on:
   - Successful authentication and failed authentication attempts.
   - `sudo` usage.
   - Kernel and hardware component activities.
@@ -53,7 +53,7 @@ projects, growing separately and in parallel.
 #### syslog Facility, Severity, and Priority
 
 `syslog` relies on `Facility` to classify and separate log messages from their
-originating subsystem / components (kernel, cron, user, mail, ...). The
+originating subsystem/components (kernel, cron, user, mail, ...). The
 `Facility` are numbered, from 0 and 23 inclusive, with the levels ranging from
 16 to 22 reserved for locally used facilities.
 
@@ -161,7 +161,7 @@ configuration, and the configuration files should thus first be
 reviewed. Additionally, Linux distribution and `syslog` implementation leverage
 different default configurations, with different default log file locations.
 
-| Facility | Debian / Ubuntu default | RedHat / CentOs default |
+| Facility | Debian/Ubuntu default | RedHat/CentOs default |
 |----------|-------------------------|-------------------------|
 | all | `/var/log/syslog` (except auth related messages) | `/var/log/syslog` (except auth related messages) <br> `/var/log/messages` (except auth and mail related messages) |
 | `auth` | `/var/log/auth.log` | `/var/log/secure` |
@@ -176,9 +176,9 @@ different default configurations, with different default log file locations.
 
 #### Syslog message formats
 
-The `syslog` message format depend on the `syslog` / `rsyslog` version in use:
+The `syslog` message format depend on the `syslog`/`rsyslog` version in use:
 
-  - `RFC3164` (`legacy-syslog` / `BSD-syslog`) format:
+  - `RFC3164` (`legacy-syslog`/`BSD-syslog`) format:
 
     `<Mmm dd hh:mm:ss> <HOSTNAME> <PROCESS>[<PID>]: <MESSAGE>`
 

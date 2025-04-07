@@ -23,7 +23,7 @@ run.
 
 Whether the `Prefect` feature is enabled is configured by the
 `EnablePrefetcher` registry key:
-  - `0` / undefined: disabled (default on Windows Server operating systems).
+  - `0`/undefined: disabled (default on Windows Server operating systems).
     **`Prefetch` is thus disabled by default on Windows Server operating
     systems**.
   - `0x1`: Partially enabled (application prefetching only).

@@ -39,7 +39,7 @@ deleted upon system boot. The `BAM` thus provides limited information on
 historic execution of programs.
 
 No entries are created in the `BAM` keys for executables on removable media
-and / or on network shares.
+and/or on network shares.
 
 ### References
 

@@ -1,6 +1,6 @@
 ---
 title: NTFS - UsnJrnl
-summary: 'The USN Journal is a feature of NTFS, activated by default on Vista and later, which maintains a record of changes made to the NTFS volume.\n\n The $J stream stores the actual change log records, with usually historical data of the last few days.\n\n Each change log record is notably composed of: the timestamp, filename, and reason / operation of the change.\n\n Additionally, each change log record contains the MFT "entry" and "sequence" numbers and the direct parent "entry" and "sequence" numbers of the file concerned by the change, making it is possible to retrieve the location of the file using the MFT. The UsnJrnl can be "rewinded" to exhaustively and accurately rebuild the location of every files in the journal.'
+summary: 'The USN Journal is a feature of NTFS, activated by default on Vista and later, which maintains a record of changes made to the NTFS volume.\n\n The $J stream stores the actual change log records, with usually historical data of the last few days.\n\n Each change log record is notably composed of: the timestamp, filename, and reason/operation of the change.\n\n Additionally, each change log record contains the MFT "entry" and "sequence" numbers and the direct parent "entry" and "sequence" numbers of the file concerned by the change, making it is possible to retrieve the location of the file using the MFT. The UsnJrnl can be "rewinded" to exhaustively and accurately rebuild the location of every files in the journal.'
 keywords: Filesystem, NTFS, UsnJrnl, USN, Journal
 tags:
   - windows_ntfs_filesystem
@@ -38,7 +38,7 @@ Each change log record is notably composed of:
 
   - The timestamp of the change.
 
-  - The reason / operation of the record (`USN_REASON_FILE_CREATE`,
+  - The reason/operation of the record (`USN_REASON_FILE_CREATE`,
     `USN_REASON_FILE_DELETE`, `USN_REASON_DATA_OVERWRITE`,
     `USN_REASON_RENAME_NEW_NAME`, etc.).
 

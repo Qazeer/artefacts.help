@@ -18,7 +18,7 @@ The `TypedURLs` registry key tracks URLs entered (typed, pasted, or
 auto-completed) in the `Internet Explorer (IE)` web browser search bar. Web
 searches are not stored, only the URLs entered are tracked.
 
-Starting with `IE8`, entries are added / updated in near real-time.
+Starting with `IE8`, entries are added/updated in near real-time.
 
 ### Information of interest
 

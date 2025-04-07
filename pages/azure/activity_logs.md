@@ -1,6 +1,6 @@
 ---
-title: Azure activity / subscription logs
-summary: 'The Azure activity / subscription logs record activity in an Azure subscription, such as resource modification, virtual machine creation and start, etc.'
+title: Azure activity/subscription logs
+summary: 'The Azure activity/subscription logs record activity in an Azure subscription, such as resource modification, virtual machine creation and start, etc.'
 keywords: activity, subscription, identity.claims, UPN, callerIpAddress, resourceId, operationName, correlationId
 tags:
   - azure_logs
@@ -12,7 +12,7 @@ folder: azure
 
 ### Activity log key fields
 
-The key fields in the subscription / activity log schema are:
+The key fields in the subscription/activity log schema are:
 
   - `identity.claims`: nested JSON with information about the identity that
     performed the action and its authentication method.

@@ -54,13 +54,13 @@ placed in the `/var/log/` folder.
 
 *The `<LOG_DIR>` below can be mapped to `/scratch/log/`, `/var/run/log/`,
 `/vmfs/volumes/<UID>/log/`, or a custom directory depending on how the logs are
-configured and accessed / collected.*
+configured and accessed/collected.*
 
 | Component | Location | Details |
 |-----------|----------|---------|
 | Authentication | `<LOG_DIR>/auth.log` | Events related to authentication to the local `ESXi` host. <br><br> **Includes events from the `sshd` daemon for remote access.** |
-| ESXi host agent | `<LOG_DIR>/hostd.log` | Events from the `vmware-hostd` host / management daemon, that is responsible for most of the operations on the `ESXi` host and its associated virtual machines. <br><br> **Include events:** <br> - **On authentications**, for SSH and other access types that are not recorded in auth.log, such as access through the web management interface ESXi Host Client, PowerCLI, programming language SDK, etc. <br> - **On virtual machine life-cycle operations**, such as VM creation, power on / off, deletion, snapshot operations. <br> - **On PowerCLI guest operations**, such as files transfer and command executions notably. <br> - etc. |
-| ESXi Shell | `<LOG_DIR>/shell.log` | Events for shell related activity. <br><br> **Include events for every commands entered in the `ESXi Shell`, shell session lifecycle, enabling / disabling of SSH access, etc.** |
+| ESXi host agent | `<LOG_DIR>/hostd.log` | Events from the `vmware-hostd` host/management daemon, that is responsible for most of the operations on the `ESXi` host and its associated virtual machines. <br><br> **Include events:** <br> - **On authentications**, for SSH and other access types that are not recorded in auth.log, such as access through the web management interface ESXi Host Client, PowerCLI, programming language SDK, etc. <br> - **On virtual machine life-cycle operations**, such as VM creation, power on/off, deletion, snapshot operations. <br> - **On PowerCLI guest operations**, such as files transfer and command executions notably. <br> - etc. |
+| ESXi Shell | `<LOG_DIR>/shell.log` | Events for shell related activity. <br><br> **Include events for every commands entered in the `ESXi Shell`, shell session lifecycle, enabling/disabling of SSH access, etc.** |
 | Virtual machines | `/vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log` | Per virtual machine events on the VM life-cycle operations. <br><br> **Include events for VM configuration changes, snapshot operations, `Vmware WebMKS` console access, guest operations (files transfer and command executions notably) through PowerCLI, etc.** |
 | vCenter Server agent | `<LOG_DIR>/vpxa.log` | Events related to the ESXi agent that communicates with vCenter Servers (if the ESXi host is managed by vCenter). |
 | Install and updates | `<LOG_DIR>/esxupdate.log` | Install and updates related events. |
@@ -212,7 +212,7 @@ Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM from which the
 2024-06-04T21:53:35.263Z In(05) vcpu-1 - VigorTransport_ServerSendResponse opID=c4c9713c seq=3576: Completed GuestOps request with messages.
 ```
 
-{% include note.html content="Execution of a command on a guest virtual machine using `PowerCLI`'s `Invoke-VMScript` cmdlet. **The command executed is not logged in ESXi logs.** <br><br> The cmdlet first create a temporary file to store (in real-time) the script `stdout` / `stderr` output, execute the given command, retrieve the temporary file to display the script console output on the local machine, and delete the temporary file. <br><br> Command example: <br> `Invoke-VMScript -VM \"<VM_NAME>\" -GuestUser \"<USERNAME>\" -GuestPassword \"<PASSWORD>\" -ScriptText \"<COMMAND>\"`." %}
+{% include note.html content="Execution of a command on a guest virtual machine using `PowerCLI`'s `Invoke-VMScript` cmdlet. **The command executed is not logged in ESXi logs.** <br><br> The cmdlet first create a temporary file to store (in real-time) the script `stdout`/`stderr` output, execute the given command, retrieve the temporary file to display the script console output on the local machine, and delete the temporary file. <br><br> Command example: <br> `Invoke-VMScript -VM \"<VM_NAME>\" -GuestUser \"<USERNAME>\" -GuestPassword \"<PASSWORD>\" -ScriptText \"<COMMAND>\"`." %}
 
 ```
 Source: hostd.log

@@ -1,11 +1,11 @@
 ---
 title: SMTP email headers
-summary: 'An email object contains an envelope and a content. The envelope is the information that the email client and server use to send the email to the correct recipient(s). The email content is composed of the header section and the email body.\n\n A number of email envelope and content headers are common / mandatory for the email lifecycle, and some headers can be of precious forensics value. Additionally, some headers are linked to optional security mechanisms (SPF, DKIM, and DMARC) that can help detect illegitimate / spoofed emails.'
+summary: 'An email object contains an envelope and a content. The envelope is the information that the email client and server use to send the email to the correct recipient(s). The email content is composed of the header section and the email body.\n\n A number of email envelope and content headers are common/mandatory for the email lifecycle, and some headers can be of precious forensics value. Additionally, some headers are linked to optional security mechanisms (SPF, DKIM, and DMARC) that can help detect illegitimate/spoofed emails.'
 keywords: SMTP, mail, email, envelope, content, headers, Message Transfer Agent, MTA, MAIL FROM, RCPT TO, Return-Path, From, Reply-To, SPF, DKIM, DMARC
 tags:
   - network
   - mailservers
-location: 'Email sender: Return-Path, From, and Reply-To headers. The Return-Path header can be protected against spoofing with SPF. The From header can be protected using DMARC (with SPF and / or DKIM).\n\n Originating server and MTA: Received header(s).\n\n Email legitimacy and anti-spoofing mechanisms, with associated headers:\n\n SPF: validate that the originating server is authorized to send emails for the sender domain.\n\n DKIM header: digitally sign (part of) the email using a public key associated with the sender domain.\n\n DMARC: extends SPF and DKIM by indicating to the receiver the actions to follow (block the email and notify an alerting address for example) if receiving an email with no or a failed SPK / DKIM authentication. Additionally, DMARC check the consistency of the domains from the "From" header, the DKIM signature, and the SMTP "MAIL FROM" command.'
+location: 'Email sender: Return-Path, From, and Reply-To headers. The Return-Path header can be protected against spoofing with SPF. The From header can be protected using DMARC (with SPF and/or DKIM).\n\n Originating server and MTA: Received header(s).\n\n Email legitimacy and anti-spoofing mechanisms, with associated headers:\n\n SPF: validate that the originating server is authorized to send emails for the sender domain.\n\n DKIM header: digitally sign (part of) the email using a public key associated with the sender domain.\n\n DMARC: extends SPF and DKIM by indicating to the receiver the actions to follow (block the email and notify an alerting address for example) if receiving an email with no or a failed SPK/DKIM authentication. Additionally, DMARC check the consistency of the domains from the "From" header, the DKIM signature, and the SMTP "MAIL FROM" command.'
 last_updated: 2024-08-09
 sidebar: sidebar
 permalink: email_headers.html
@@ -29,10 +29,10 @@ of header fields, which can be displayed to end-users in their email client.
 For instance, the email content `From` header is used to display the email
 sender in email clients. The email body is the actual content of the email.
 
-A number of email envelope and content headers are common / mandatory for the
+A number of email envelope and content headers are common/mandatory for the
 email lifecycle, and some headers can be of precious forensics value.
 Additionally, some headers are linked to optional security mechanisms (`SPF`,
-`DKIM`, and `DMARC`) that can help detect illegitimate / spoofed emails.
+`DKIM`, and `DMARC`) that can help detect illegitimate/spoofed emails.
 
 ### Email original sender
 
@@ -61,7 +61,7 @@ fails, the `Return-Path` header may have been spoofed as well.
 
 Note that the
 `Domain-based Message Authentication Reporting and Conformance (DMARC)`
-mechanism can be used to detect / prevent spoofing of the `From` header.
+mechanism can be used to detect/prevent spoofing of the `From` header.
 
 #### MTA Received headers
 
@@ -71,7 +71,7 @@ ordered in reverse chronological order, with the last `Received` header
 corresponding to the one added first by the `MTA` closer to the email sender
 (and the first appearing `Received` header corresponding to the `MTA` closer to
 destination). The last `Received` header (placed the closest from the
-`From` / `To` headers and the message body) can thus be used to identify the
+`From`/`To` headers and the message body) can thus be used to identify the
 `MTA` from which the email originated. The reputation and legitimacy of the
 sender `MTA`, in the email context, can be analysed to determine the legitimacy
 of the email.
@@ -92,7 +92,7 @@ Received: from XXX.PROD.OUTLOOK.COM
 
 `Sender Policy Framework (SPF)` is an email authentication mechanism, defined
 in [RFC 7208](https://datatracker.ietf.org/doc/html/rfc7208), designed to
-detect and / or block spoofed emails by detecting illegitimate sender servers.
+detect and/or block spoofed emails by detecting illegitimate sender servers.
 More specifically, the `SPF` mechanism will validate the domains a mail server
 can send emails for (through the `MAIL FROM` envelope header of an email).
 
@@ -101,7 +101,7 @@ for their domain names. `SPF` relies on specific `DNS` `TXT` records, that
 identify authorized servers and the comportment the receiver should follow in
 case of an email reception from a non authorized server.
 
-`SPK` `DNS` records follow the format below, with mechanisms / rules evaluated
+`SPK` `DNS` records follow the format below, with mechanisms/rules evaluated
 from left-to-right and stopping on the first match (except for the `INCLUDE`
 mechanism).
 
@@ -116,9 +116,9 @@ The following `mechanisms` are supported:
 | Mechanism | Description |
 |-----------|-------------|
 | `all` | Always matches. |
-| `include:<DOMAIN>` | Evaluate the `SPF` policy of the specified domain, returning a `PASS` / `Neutral` / `Fail` / `Softfail` result (or an error). <br><br> Only `PASS` result will however be processed, effectively stopping the following mechanisms evaluation. Non-matched results will resume processing of the other further mechanisms. |
-| `a[:<DOMAIN>]` | Check if the sender email server `IP` address is included in the `A` or `AAAA` `DNS` records of the `MAIL FROM` / `HELO` domain or the domain specified in the mechanism. |
-| `mx[:<DOMAIN>]` | Check if the sender email server `IP` address is included in the `MX` `DNS` records of the `MAIL FROM` / `HELO` domain or the domain specified in the mechanism. |
+| `include:<DOMAIN>` | Evaluate the `SPF` policy of the specified domain, returning a `PASS`/`Neutral`/`Fail`/`Softfail` result (or an error). <br><br> Only `PASS` result will however be processed, effectively stopping the following mechanisms evaluation. Non-matched results will resume processing of the other further mechanisms. |
+| `a[:<DOMAIN>]` | Check if the sender email server `IP` address is included in the `A` or `AAAA` `DNS` records of the `MAIL FROM`/`HELO` domain or the domain specified in the mechanism. |
+| `mx[:<DOMAIN>]` | Check if the sender email server `IP` address is included in the `MX` `DNS` records of the `MAIL FROM`/`HELO` domain or the domain specified in the mechanism. |
 | `ip4:<IPV4 | IPV4_CIDR>` | Check if the sender email server `IP` address is the specified IPv4 address or in the specified IPv4 address range. |
 | `ip6:<IPV6 | IPV6_CIDR>` | Check if the sender email server `IP` address is the specified IPv6 address or in the specified IPv6 address range. |
 

@@ -25,10 +25,10 @@ The impact of a number of operations on each timestamps for the
 [SANS's `Windows Time Rules` poster](https://www.sans.org/security-resources/posters/windows-forensic-analysis/170/download).
 Globally, the following points should be noted:
 
-  - `$FILENAME` `MACB` timestamps are updated on file creation / copy / volume
+  - `$FILENAME` `MACB` timestamps are updated on file creation/copy/volume
     move with the date of the operation itself but are not reliability updated
     on regular file operations (access, modification, rename, deletion).
-    **However as the `$FILENAME` `MAB` timestamps are updated / copied from the
+    **However as the `$FILENAME` `MAB` timestamps are updated/copied from the
     `$STANDARD_INFORMATION` `MAB` timestamps, on file rename or volume-local
     file move, they are prone to false-negatives.** Indeed, by timestomping the
     `$STANDARD_INFORMATION` timestamps then renaming or moving the file, the
@@ -121,7 +121,7 @@ from `$STANDARD_INFORMATION` (easily modifiable) are older than the `$FILENAME`
 timestamps (not (easily) modifiable), the file timestamps may have been
 timestomped.
 
-****However, as the `$FILENAME` `MAB` timestamps are updated / copied from the
+****However, as the `$FILENAME` `MAB` timestamps are updated/copied from the
 `$STANDARD_INFORMATION` `MAB` timestamps on file rename or volume-local file
 move, `$FILENAME` timestamps can also be (undirectly) tampered.**
 
@@ -167,7 +167,7 @@ level.
 
 `$MFT` entry numbers grow sequentially, with older files generally having lower
 entry numbers than more recent files. The `$MFT` entry numbers should thus grow
-linearly with the `$STANDARD_INFORMATION` created / birth timestamp (with usual
+linearly with the `$STANDARD_INFORMATION` created/birth timestamp (with usual
 exceptions in the days-range: files older by a few days may have slightly
 higher entry numbers than relatively more recent files).
 

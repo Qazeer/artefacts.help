@@ -49,7 +49,7 @@ format:
     file, also assimilable to a series of `shortcut files`.
 
 Applications may handle `Jumplists` differently, with different entries being
-created / updated on different actions by specific applications.
+created/updated on different actions by specific applications.
 
 ### Information of interest
 
@@ -114,7 +114,7 @@ respective `CustomDestinations` `JumpLists`.
 Remote desktop connections made using the Windows built-in
 [`Microsoft Terminal Server Client` client (`mstsc.exe`)](./rdp_processes.md#source-host)
 will generate an entry in the `AutomaticDestinations` `JumpList`. An entry is
-only created / updated if the `RDP` session was successfully authenticated and
+only created/updated if the `RDP` session was successfully authenticated and
 established (even if `Network Level Authentication (NLA)` is disabled). The
 entries will be associated with the application identifier `1bc392b8e104a00e`.
 

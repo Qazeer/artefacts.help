@@ -40,15 +40,15 @@ commonly valuable data for forensics investigations:
 
     - Timestamp of the `SRUM` entry creation.
 
-    - Full path of the executable or application information / description for
+    - Full path of the executable or application information/description for
       built-in components.
 
     - User `SID` of the user executing the process.
 
     - Metrics on CPU usage (CPU time in foreground and background).
 
-    - Metrics on I/O operations (foreground / background number of read / write
-      operations and bytes read / written).
+    - Metrics on I/O operations (foreground/background number of read/write
+      operations and bytes read/written).
 
   - `App Timeline Provider` table (GUID
     `{5C8CF1C7-7257-4F13-B223-970EF5939312}`), that also tracks programs
@@ -77,7 +77,7 @@ commonly valuable data for forensics investigations:
 
     - Timestamp of the `SRUM` entry creation.
 
-    - Full path of the executable or application information / description for
+    - Full path of the executable or application information/description for
       built-in components.
 
     - Metrics on network data usage (bytes sent and receive on a given network

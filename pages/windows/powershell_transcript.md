@@ -86,7 +86,7 @@ include:
 
   - The `PowerShell` edition (`desktop`, `core`) and version used.
 
-  - Each commands entered / typed in the session, their working directory (as
+  - Each commands entered/typed in the session, their working directory (as
     the `PowerSehll` prompt is logged as well), and their respective `stdout`
     and `stderr` outputs.
 

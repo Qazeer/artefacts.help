@@ -1,6 +1,6 @@
 ---
 title: Thumbs.db and Thumbcache
-summary: 'The Thumbs.db and Thumbcache files contain cached thumbnail previews for files (pictures, some document and media file types) in folders that were interactively accessed with the Windows Explorer. Some document types, such as PDF files, will have their first page as their thumbnail preview.\n\nThe cached thumbnail previews persist even after deletion of the associated files.\n\nThe Thumbs.db files are stored in their associated folders, with one individual Thumbs.db file per folder. Since Windows Vista, Thumbs.db files are only generated for access through UNC paths (in the remote / share directory).\n\nStarting with Windows Vista, the Thumbcache files centralize thumbnails in a central location. Each Thumbcache file, labeled "thumbcache_<RESOLUTION>.db", contains thumbnails from all locations. The location of the file linked to a thumbnail is not stored in the Thumbcache file. However, an unique identifier may be used to retrieve the location of the associated file (mostly for non deleted files).'
+summary: 'The Thumbs.db and Thumbcache files contain cached thumbnail previews for files (pictures, some document and media file types) in folders that were interactively accessed with the Windows Explorer. Some document types, such as PDF files, will have their first page as their thumbnail preview.\n\nThe cached thumbnail previews persist even after deletion of the associated files.\n\nThe Thumbs.db files are stored in their associated folders, with one individual Thumbs.db file per folder. Since Windows Vista, Thumbs.db files are only generated for access through UNC paths (in the remote/share directory).\n\nStarting with Windows Vista, the Thumbcache files centralize thumbnails in a central location. Each Thumbcache file, labeled "thumbcache_<RESOLUTION>.db", contains thumbnails from all locations. The location of the file linked to a thumbnail is not stored in the Thumbcache file. However, an unique identifier may be used to retrieve the location of the associated file (mostly for non deleted files).'
 keywords: Thumbs.db, Thumbcache, picture, thumbnail, preview
 tags:
   - windows_files_and_folders_access
@@ -26,7 +26,7 @@ opposed to generating it every time the directory is accessed.
 
 For a `Thumbs.db` file to be generated in a given folder, or for entries to be
 added to the central `Thumbcache` files, the access must have been done with
-some sort of files' thumbnail / icon preview enabled.
+some sort of files' thumbnail/icon preview enabled.
 
 The cached thumbnail previews persist even after deletion of the associated
 files.
@@ -58,7 +58,7 @@ a central location. Each `Thumbcache` file, labeled
 
 The location of the file linked to a thumbnail is not stored in the
 `Thumbcache` file. However, each thumbnail in the `Thumbcache` file is
-associated with an unique identifier `ThumbnailcacheID`. This identifier / hash
+associated with an unique identifier `ThumbnailcacheID`. This identifier/hash
 can be used to retrieve the location of the associated file, mostly for non
 deleted files:
 

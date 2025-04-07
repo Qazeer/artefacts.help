@@ -16,7 +16,7 @@ folder: windows
 The `setupapi` logs are plaintext log files that track installation of devices
 and drivers on the system. The logs are rotated and preserved, so historical
 data dating back to the system install is usually available (if the logs were
-not deleted / tampered with).
+not deleted/tampered with).
 
 The terminology and more details on the various identifiers are available in
 the [Windows devices terminology page](./devices_terminology.md).

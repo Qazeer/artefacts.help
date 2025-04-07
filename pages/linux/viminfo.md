@@ -47,7 +47,7 @@ The `.viminfo` log file notably includes:
 
     The "jumplist" section stores, by default, up to 100 entries, so up to the
     last 50 files accessed. However, it appears that a single file access may
-    generate multiple sets of two identical opening / closing entries, reducing
+    generate multiple sets of two identical opening/closing entries, reducing
     the overall history available.
 
     Example of two entries associated with the first opening of the file
@@ -96,5 +96,5 @@ The `.viminfo` log file notably includes:
     and expressions entered in `vim`, in three distinct sections.
 
     Each entry in these histories is associated with an `epoch` timestamp
-    of occurrence. Only the last occurrence of a given command / search /
+    of occurrence. Only the last occurrence of a given command/search /
     expression is kept.

@@ -106,7 +106,7 @@ The following notable root keys can be of forensic interest:
   - `Programs` then `InventoryApplication` (`AmcacheParser` output
     `ProgramEntries`):
 
-    - Data about installed programs, as referenced in the `Uninstall` and / or
+    - Data about installed programs, as referenced in the `Uninstall` and/or
       a `Run` key of the `SOFTWARE` hive.
 
     - Data available: application name, executable full path and SHA1,

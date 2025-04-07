@@ -15,7 +15,7 @@ folder: windows
 ### Overview
 
 The `NTFS` `index attributes` are `MFT` attributes, of two distinct types,
-that index all the files / directories in a given directory (in a B-Tree data
+that index all the files/directories in a given directory (in a B-Tree data
 structure). Each directory is represented by one or more `index attributes`.
 The files and folders information displayed by the `Windows Explorer` are based
 on the index attribute(s) of the directory being accessed.

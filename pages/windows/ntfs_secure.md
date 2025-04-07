@@ -29,7 +29,7 @@ The `Security ID` of the file is referenced in the `MFT` file record associated
 with the file (in the `$STANDARD_INFORMATION` attribute). While no metadata
 information is present in the `$Secure` file (only the file's
 `security descriptor`), the file's `Security ID` can be used to map the file's
-information / data from the `MFT` to its `security descriptor` in the `$Secure`
+information/data from the `MFT` to its `security descriptor` in the `$Secure`
 file.
 
 The `security descriptor` (`SECURITY_DESCRIPTOR` data structure) references:

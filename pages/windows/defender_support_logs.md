@@ -284,7 +284,7 @@ Examples:
 renamed files. The "original" filename seems to be retrieved from the file
 `VERSIONINFO` header's `OriginalFilename` or `ProductName` field (if the
 `OriginalFilename` field is not specified). This event can thus be an indicator
-of file whose filename does not match their `OriginalFilename` / `ProductName`,
+of file whose filename does not match their `OriginalFilename`/`ProductName`,
 such as system utilities (such as `cmd.exe`) renamed by threat actors for
 defense evasion purposes.
 
@@ -306,7 +306,7 @@ Example:
 
 The 'RTP Perf Log' events reference the scan exclusion(s) configured for
 `Windows Defender` (and other settings and parameters) at the time of the
-event. Exclusions can be configured on process names / paths, folders, or file
+event. Exclusions can be configured on process names/paths, folders, or file
 extensions.
 
 ```

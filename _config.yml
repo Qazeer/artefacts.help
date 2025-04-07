@@ -82,7 +82,7 @@ defaults:
 sidebars:
 - sidebar
 
-description: "artifacts.help / artefacts.help"
+description: "artifacts.help/artefacts.help"
 # the description is used in the feed.xml file
 
 # needed for sitemap.xml file only

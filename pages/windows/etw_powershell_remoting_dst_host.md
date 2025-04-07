@@ -26,7 +26,7 @@ folder: windows
 | `Windows PowerShell` | Default configuration (starting with PowerShell 2.0). | Event `600: Provider "<PROVIDER_NAME>" is Started`. <br><br> Logs the start and stop of a PowerShell provider, with the `HostName` field set to `ServerRemoteHost` for `WinRM` session. <br><br> Additionally, the provider `WSMan` ("Provider WSMan Is Started") is loaded in case of a `WinRM` session. |
 
 More information on the PowerShell code executed can be available if
-`Module Logging` and / or `Script Block Logging` are enabled. For more
+`Module Logging` and/or `Script Block Logging` are enabled. For more
 information, refer to the [PowerShell activity page](./etw_powershell.md).
 
 ### References

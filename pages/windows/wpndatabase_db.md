@@ -1,6 +1,6 @@
 ---
 title: Windows Push Notifications (wpndatabase.db)
-summary: 'Introduced in Windows 10, the Windows Push Notification service allows applications to deliver / push notifications, notably in the form of "Toast" notifications (pop-up box that can appear at the bottom right of the screen).\n\nEach notification is associated with a dedicated entry in the Notification table of the wpndatabase.db database, with a system-wide database instance (for global notifications) and per-user database instances (for per-user notifications).\n\nInformation of interest: the arrival and expiry time of the notification, as
+summary: 'Introduced in Windows 10, the Windows Push Notification service allows applications to deliver/push notifications, notably in the form of "Toast" notifications (pop-up box that can appear at the bottom right of the screen).\n\nEach notification is associated with a dedicated entry in the Notification table of the wpndatabase.db database, with a system-wide database instance (for global notifications) and per-user database instances (for per-user notifications).\n\nInformation of interest: the arrival and expiry time of the notification, as
 well as a "payload" associated with the notification. For Toast notifications, the payload contains the content of the notification (such as message content for Instant Messaging applications).\n\nThe notifications are short-lived and deleted from the database after their expiry time or following a user acknowledgement, thus providing very limited historical data.'
 keywords: notification, Windows Push Notifications, WPN, wpndatabase, instant messaging, instant message, Teams, Slack, Discord, Badge, Tile, Toast
 tags:
@@ -15,7 +15,7 @@ folder: windows
 ### Overview
 
 Introduced in Windows 10, the Windows Push Notification service allows
-applications to deliver / push notifications, in three different forms:
+applications to deliver/push notifications, in three different forms:
 
   - `Badge`, tiny symbol that appears in the corner of an application's taskbar
     / hidden icon.
@@ -56,7 +56,7 @@ clearing from the Windows Action Center). The `wpndatabase.db` database thus
 provided very limited historical data.
 
 More information might be retrievable in the `Write-Ahead Logging (WAL)` file
-`wpndatabase.db-wal` and / or carved from the database (using tools such as
+`wpndatabase.db-wal` and/or carved from the database (using tools such as
 [`bring2lite`](https://github.com/bring2lite/bring2lite) or
 [`fqlite`](https://github.com/pawlaszczyk/fqlite)).
 

@@ -68,7 +68,7 @@ The persistent `WMI Event Subscription` are written to disk in the
   - `INDEX.BTR`: paged file in B-tree structure, "used to efficiently lookup
     CIM entities in the objects.data file".
 
-  - `MAPPING<1-3>.MAP`: correlate / map pages from `OBJECTS.DATA` and
+  - `MAPPING<1-3>.MAP`: correlate/map pages from `OBJECTS.DATA` and
     `INDEX.BTR`.
 
 All three files are required to properly conduct forensics analysis on WMI
