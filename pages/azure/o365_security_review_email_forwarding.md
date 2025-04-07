@@ -37,12 +37,22 @@ Get-InboxRule -Mailbox <EMAIL> | Select-Object Identity,Name,Enabled,Description
 
 # List all mailboxes's Inbox rules with ForwardTo, RedirectTo, ForwardAsAttachmentTo, or DeleteMessage actions.
 
-$Mailboxes = Get-Mailbox
+$Mailboxes = Get-Mailbox -ResultSize Unlimited
 Foreach ($Mailbox in $Mailboxes) {
     Get-InboxRule -Mailbox $Mailbox.Name |
     Where-Object {($Null -ne $_.ForwardTo) -or ($Null -ne $_.RedirectTo) -or ($Null -ne $_.ForwardAsAttachmentTo) -or ($True -eq $_.DeleteMessage) } |
-    Select-Object Identity,Name,PrimarySmtpAddress,Enabled,ForwardAsAttachmentTo,ForwardTo,RedirectTo
+    Select-Object Identity,Name,PrimarySmtpAddress,Enabled,ForwardAsAttachmentTo,ForwardTo,RedirectTo,DeleteMessage
 }
+```
+
+[`Microsoft-Extractor-Suite`](./logs_collection_tools.md#azure-ad-office365--azure-microsoft-extractor-suite)'s
+[`Show-MailboxRules`](https://microsoft-365-extractor-suite.readthedocs.io/en/latest/functionality/M365/InboxRules.html)
+PowerShell cmdlet can be used to enumerate Mailbox Inbox rules with:
+
+```bash
+Show-MailboxRules
+
+Show-MailboxRules -UserIds "<EMAIL | EMAILS_LIST>"
 ```
 
 ### Mailbox Mail Flow / Transport rules
@@ -59,4 +69,13 @@ Get-TransportRule | Select-Object *
 
 # List all Mail Flow / Transport rules that send a copy of received emails.
 Get-TransportRule | Where-Object { ($Null -ne $_.BlindCopyTo) } | Select-Object *
+```
+
+[`Microsoft-Extractor-Suite`](./logs_collection_tools.md#azure-ad-office365--azure-microsoft-extractor-suite)'s
+[`Show-TransportRules`](https://microsoft-365-extractor-suite.readthedocs.io/en/latest/functionality/M365/TransportRules.html)
+PowerShell cmdlet can be used to enumerate the `Transport rules` with
+output formatting:
+
+```bash
+Show-TransportRules
 ```

@@ -47,3 +47,14 @@ Get-MailboxAuditBypassAssociation -Identity <EMAIL> | Select-Object Id,Distingui
 # Retrieves mailbox auditing settings, including the operations logged for the specified mailbox.
 Get-Mailbox -Identity <EMAIL> | Select-Object Identity,Name,AuditEnabled,DefaultAuditSet,AuditLogAgeLimit,AuditOwner,AuditDelegate,AuditAdmin | ConvertTo-Json
 ```
+
+[`Microsoft-Extractor-Suite`](./logs_collection_tools.md#azure-ad-office365--azure-microsoft-extractor-suite)'s
+[`Get-MailboxAuditStatus`](https://microsoft-365-extractor-suite.readthedocs.io/en/latest/functionality/M365/MailboxAuditStatus.html)
+PowerShell cmdlet can be used to automate the retrieval of the mailboxes audit
+settings:
+
+```bash
+Get-MailboxAuditStatus
+
+Get-MailboxAuditStatus -UserIds "<EMAIL | EMAILS_LIST>"
+```
