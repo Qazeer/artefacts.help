@@ -65,6 +65,25 @@ and may vary between distributions and `utmp.h` versions/implementations.
 `*tmp` login records are not stored in clear-text and must be parsed with
 adequate utilities:
 
+  - The built-in `last` (for `wtmp`), `lastb` (for `btmp`), and `w`/`who`
+    (for `utmp`) utilities for live systems and exported `*tmp` log files.
+
+    ```
+    # Live system wtmp file. 
+    last --time-format=iso
+    # Specified wtmp file.
+    last --time-format=iso -f <INPUT_WTMP_FILE>
+
+    # Live system btmp file.
+    lastb --time-format=iso
+    # Specified btmp file.
+    lastb --time-format=iso -f <INPUT_BTMP_FILE>
+
+    # Live system utmp file.
+    w
+    who
+    ``` 
+
   - The `utmpdump` utility can be used to parse `*tmp` logs into an ascii
     table.
 
