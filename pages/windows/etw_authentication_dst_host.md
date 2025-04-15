@@ -7,7 +7,7 @@ tags:
   - windows_lateral_movement
   - windows_lateral_movement_dst
 location: 'Channel: Security.\nEvents: 4624, 4625, 4672, 4634, 4647, 4649, 4778, 4779, 4800, 4801, 4802, 4803, 5378.'
-last_updated: 2024-01-02
+last_updated: 2025-04-16
 sidebar: sidebar
 permalink: windows_etw_authentication_dst_host.html
 folder: windows
@@ -64,7 +64,7 @@ The `LogonType` field provides information on how the logging was established:
 | 5          | Service logon (service startup) |
 | 7          | Unlock (on screen unlocking) |
 | 8          | NetworkCleartext authentication (usually HTTP basic authentication) |
-| 9          | NewCredentials authentication (does not seem to be in use) |
+| 9          | NewCredentials authentication ([client-side for `runas /NetOnly` usage](./etw_authentication_src_host.md#overview)) |
 | 10         | RemoteInteractive authentication (Terminal Services, Remote Desktop or Remote Assistance) |
 | 11         | CachedInteractive authentication (logging using cached credentials when a domain controller cannot be reached) |
 
@@ -115,3 +115,7 @@ The `SubjectLogonId` field can be correlated with the `Security` event
 The [`LogParser`'s KAPE module `LogParser_LogonLogoffEvents`](./windows_etw_tools#cli-logparser)
 can be used to parse `Security.evtx` file(s) and extract the aforementioned
 authentication events into a CSV timeline.
+
+### References
+
+  - [CyberSafe - Zissi Skarzhinski - Windows Logon Types and how they contribute to SOC Analyst](https://cybersafe.co.il/wp-content/uploads/2021/11/LOGON-types-compressed_compressed.pdf)
