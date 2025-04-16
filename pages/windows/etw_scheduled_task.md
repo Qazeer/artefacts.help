@@ -7,6 +7,7 @@ tags:
   - windows_lateral_movement
   - windows_lateral_movement_dst
   - windows_local_persistence
+  - windows_local_persistence_user
 location: 'Channel: Microsoft-Windows-TaskScheduler/Operational (channel not enabled by default).\nEvents: 100, 102, 103, 106, 107, 108, 110, 118, 119, 129, 140, 141, 200, 201.\n\nChannel: Security (events not enabled by default).\nEvents: 4698, 4699, 4700, 4701, 4702.'
 last_updated: 2024-01-19
 sidebar: sidebar

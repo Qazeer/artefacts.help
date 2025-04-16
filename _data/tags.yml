@@ -30,6 +30,7 @@ allowed-tags:
   - windows_lateral_movement_dst
   - windows_lateral_movement_src
   - windows_local_persistence
+  - windows_local_persistence_user
   - windows_misc
   - windows_ntfs_filesystem
   - windows_powershell_activity

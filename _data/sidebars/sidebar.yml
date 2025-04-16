@@ -651,9 +651,17 @@
         url: /tag_windows_wmi.html
         output: web
 
-    - title: 'Category - Local persistence'
-      url: /tag_windows_local_persistence.html
+    - title: Category - Local persistence
       output: web
+      children:
+
+      - title: 'All'
+        url: /tag_windows_local_persistence.html
+        output: web
+
+      - title: 'User-scoped (without requiring admin privileges)'
+        url: /tag_windows_local_persistence_user.html
+        output: web
 
     - title: 'Category - Defense evasion'
       url: /tag_windows_defense_evasion.html

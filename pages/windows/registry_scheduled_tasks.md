@@ -6,6 +6,7 @@ keywords:
 tags:
   - windows_registry
   - windows_local_persistence
+   - windows_local_persistence_user
   - windows_lateral_movement
   - windows_lateral_movement_dst
 location: 'File: <SYSTEMROOT>\System32\config\SOFTWARE\n\nRegistry keys:\nHKLM\Software\Microsoft\Windows NT\CurrentVersion\Schedule\Taskcache\Tasks\<TASK_GUID>\nHKLM\Software\Microsoft\Windows NT\CurrentVersion\Schedule\Taskcache\Tree\<TASK_NAME>'

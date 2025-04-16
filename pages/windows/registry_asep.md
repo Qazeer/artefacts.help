@@ -6,6 +6,7 @@ keywords: ASEP, Auto-Start Extensibility Points, Run, RunOnce, Winlogon, Startup
 tags:
   - windows_registry
   - windows_local_persistence
+  - windows_local_persistence_user
 location: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\nHKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\n\nHKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce\nHKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce\n\nHKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Shell\nHKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Shell\n\nHKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\nHKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\n\nHKLM\SOFTWARE\Policies\Microsoft\Windows\System\Scripts\Startup\nHKCU\SOFTWARE\Policies\Microsoft\Windows\System\Scripts\Startup\n\nHKLM\SOFTWARE\Policies\Microsoft\Windows\System\Scripts\Logon\nHKCU\SOFTWARE\Policies\Microsoft\Windows\System\Scripts\Logon\n\n...'
 last_updated: 2024-01-22
 sidebar: sidebar

@@ -1,10 +1,12 @@
 ---
 title: Shortcut files / LNK
-summary: 'Shortcut files (*.lnk) are Windows Shell Items that reference to an original file, folder, or application.\n\nWhile LNK files can be created manually, Windows also creates LNK files under numerous user activities, such as opening of a non-executable file.\n\nInformation of interest, per LNK file:\n - Target file absolute path, size and attributes.\n - Target file Modified, Access, and Created (MAC) timestamps at the time of the last access.\n - Sometimes information on the volume that stored the target file (local or network share, serial number, and label).\n - Additionally, for automatically created LNK, the creation and modification timestamps of the LNK itself will usually indicate when the target file was first and last opened.'
-keywords: 'LNK, Shortcut files, Recent, Startup'
+summary: 'Shortcut files (*.lnk) are Windows Shell Items that reference to an original file, folder, or application.\n\nWhile LNK files can be created manually, Windows also creates LNK files under numerous user activities, such as opening of a non-executable file.\n\nInformation of interest, per LNK file:\n - Target file absolute path, size and attributes.\n - Target file Modified, Access, and Created (MAC) timestamps at the time of the last access.\n - Sometimes information on the volume that stored the target file (local or network share, serial number, and label).\n - Additionally, for automatically created LNK, the creation and modification timestamps of the LNK itself will usually indicate when the target file was first and last opened.\n\nShortcut files can also be automatically executed upon an interactive user logon, by being placed under the system-wide Startup folder (under %ALLUSERSPROFILE%) or the user-scoped Startup folders (under each user %APPDATA% folder).'
+keywords: 'LNK, Shortcut files, Recent, Startup, Startup folder, Start Menu'
 tags:
   - windows_files_and_folders_access
   - windows_file_knowledge
+  - windows_local_persistence
+  - windows_local_persistence_user
 location: 'Automatically created LNK on files access:\n<SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Roaming\Microsoft\Windows\Recent\*.lnk\n\nAutomatically created LNK for documents opened using Microsoft Office products:\n<SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Roaming\Microsoft\Office\Recent\*.lnk\n\nOther common LNK location:\n\nUsers Desktop folder:\n<SYSTEMDRIVE>:\Users\<USERNAME>\Desktop\*.lnk\n\nStartup folders:\n<SYSTEMDRIVE>:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\*.lnk\n<SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\*.lnk'
 last_updated: 2024-01-03
 sidebar: sidebar
@@ -62,6 +64,18 @@ Each shortcut file additionally yields the following information:
 
   - Occasionally **information on the host on which the shortcut file is
     present**: system's NetBIOS hostname and MAC address.
+
+### Startup Folders
+
+`Shortcut files` can also be automatically executed upon an interactive user
+logon, by being placed under the `Startup` folders. An user interactive logon
+is required for the entries to be executed, a system boot or a network logon
+will not trigger execution of the `Startup` folders entries.
+
+There is a system-wide `Startup` folder (under `%ALLUSERSPROFILE%`) and
+user-scoped `Startup` folders (under each user `%APPDATA%` folder). While
+administrative privileges are required to create an entry in the system-wide
+`startup folder`, regular user can add entries in their own `startup folder`. 
 
 ### Tool(s)
 
