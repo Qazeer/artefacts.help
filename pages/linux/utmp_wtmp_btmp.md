@@ -68,7 +68,7 @@ adequate utilities:
   - The built-in `last` (for `wtmp`), `lastb` (for `btmp`), and `w`/`who`
     (for `utmp`) utilities for live systems and exported `*tmp` log files.
 
-    ```
+    ```bash
     # Live system wtmp file. 
     last --time-format=iso
     # Specified wtmp file.

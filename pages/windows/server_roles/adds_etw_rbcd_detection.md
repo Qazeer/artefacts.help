@@ -26,7 +26,7 @@ A valid `TGT` is necessary to request `service tickets`, which in turn grant
 access to service accounts (user or machine domain accounts that have a
 `ServicePrincipalName (SPN)`).
 
-###### Unconstrained, constrained and resource-based constrained delegations
+#### Unconstrained, constrained and resource-based constrained delegations
 
 Three types of delegation are implemented in the (Microsoft Active Directory)
 `Kerberos` protocol:
@@ -81,7 +81,7 @@ In summary, the services a service account can request `S4U2proxy`
   `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute the `SPN` of the
   requesting service.
 
-###### Service-for-User-to-Self (S4U2self)
+#### Service-for-User-to-Self (S4U2self)
 
 In order to provide protocol transition, Microsoft implemented the `S4U2self`
 extension into the `Kerberos` protocol. This extension makes `Kerberos`
@@ -127,7 +127,7 @@ requested user and can be used:
     in their `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute the service
     emitting the `S4U2self` `service ticket`.
 
-###### Accounts that cannot be delegated
+#### Accounts that cannot be delegated
 
 Domain users can be protected from `Kerberos` delegation by either being:
   - configured as non-delegable (`"Account is sensitive and cannot be
@@ -137,7 +137,7 @@ Domain users can be protected from `Kerberos` delegation by either being:
 
 ### RBCD attack Windows events
 
-###### Modification of a `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute
+#### Modification of a `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute
 
 The first step of the `resource-based constrained delegation (RBCD)` attack is
 usually the modification of an object's
@@ -148,7 +148,7 @@ associated `5136` ETW event:
 |---------|------------|--------|
 | `Security` | Default configuration. | Upon modification of the `msDS-AllowedToActOnBehalfOfOtherIdentity`, the following event will be generated: <br><br> - Event `5136`: `A directory service object was modified` with the `Attribute` field equal to `msDS-AllowedToActOnBehalfOfOtherIdentity`. |
 
-###### S4U2self and S4U2Proxy service ticket requests
+#### S4U2self and S4U2Proxy service ticket requests
 
 The exploitation of the configured delegation relies on a first
 `Service for User to Self` (`S4U2Self`) request and a subsequent

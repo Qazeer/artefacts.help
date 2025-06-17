@@ -8,7 +8,7 @@ location: 'Replicated attributes of interest: - adminCount\n - lastLogonTimestam
 last_updated: 2024-09-25
 sidebar: sidebar
 permalink: adds_replication_metadata.html
-folder: others
+folder: windows
 ---
 
 ### Overview
@@ -75,7 +75,7 @@ interest for digital forensics and incident response purposes.
 | `userPrincipalName` | User or computer accounts. | Setting or modification of an user or computer account's `userPrincipalName`, potentially related to certificate-authentication attacks.  |
 | ... | ... | ... |
 
-###### lastLogon v. lastLogonTimestamp
+#### lastLogon v. lastLogonTimestamp
 
 Every account in Active Directory, be it an user or computer account, has both
 a `lastLogon` and a `lastLogonTimestamp` attributes.
