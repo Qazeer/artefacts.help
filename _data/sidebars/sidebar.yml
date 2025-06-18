@@ -711,6 +711,10 @@
       url: /microsoft_exchange.html
       output: web
 
+    - title: Microsoft Remote Access VPN
+      external_url: https://web.archive.org/web/20230829211307/https://www.synacktiv.com/publications/forensic-aspects-of-microsoft-remote-access-vpn
+      output: web
+
 - title: Linux
   output: web
   children:
