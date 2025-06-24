@@ -731,6 +731,10 @@
       output: web
       children:
 
+      - title: Basic information
+        url: /linux_basic_information.html
+        output: web
+
       - title: User and group identifiers
         url: /linux_user_and_group_identifiers.html
         output: web
