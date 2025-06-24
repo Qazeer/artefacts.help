@@ -707,6 +707,10 @@
           external_url: https://github.com/Qazeer/FarsightAD/blob/main/SANS_DFIR_Summit_2022-Hunting_for_Active_Directory_persistence-v1.2.pdf
           output: web
 
+    - title: Active Directory Certificate Services
+      url: /adcs.html
+      output: web
+    
     - title: Microsoft Exchange
       url: /microsoft_exchange.html
       output: web
