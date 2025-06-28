@@ -1,11 +1,11 @@
 ---
 title: Active Directory Certificate Services
 summary: 'Active Directory Certificate Services (AD CS) is a Windows Server role for issuing and managing Public Key Infrastructure (PKI) certificates used in secure communication and authentication protocols.\n\n In the last few years, a number of possible AD CS misconfigurations, leading to privilege escalation and persistence in an Active Directory environment, have been published by security researchers and exploited by threat actors.\n\n'
-keywords: Active Directory, Active Directory Certificate Services, ADCS, AD CS, FarsightAD, ESC1, ESC8, ntml relay, certificates, certificate templates, templates
+keywords: Active Directory, Active Directory Certificate Services, ADCS, AD CS, FarsightAD, ESC1, ESC8, ntml relay, certificates, certificate templates, templates, X.509, X509, X.509v3, X509Certificate2, SubjectAltName, EnhancedKeyUsageList, SerialNumber, userCertificate, Get-X509CertificateStringFromUserCertificate, Export-ADHuntingPrincipalsCertificates
 tags:
   - windows_active_directory
 location: ''
-last_updated: 2024-06-14
+last_updated: 2024-06-29
 sidebar: sidebar
 permalink: adcs.html
 folder: windows
@@ -191,6 +191,78 @@ retrieve timestamps of last modification for critical attributes
 Export-ADHuntingADCSCertificateTemplates [-Server <DC_IP | DC_HOSTNAME>] [-Credential <PS_CREDENTIAL>] [-ADDriveName <AD_DRIVE_NAME>] [-OutputFolder <OUTPUT_FOLDER>] [-ExportType <CSV | JSON>]
 ```
 
+### Certificate requests investigation
+
+#### AD userCertificate attribute
+
+The `userCertificate` attribute of a user / computer object is a multi-value
+attribute that contains the public key of X.509 certificates issued to the
+principal through `AD CS`. The `userCertificate` attribute is composed of an
+array of nested byte arrays, containing the certificate objects.
+
+The public key of the certificate issued to a principal is stored in this
+attribute only if the `Publish to Active Directory` is set in the
+`Certificate Template` associated with the certificate. This setting is
+configured by default for some certificate templates.
+
+The following PowerShell cmdlet, from
+[`FarsightAD`](https://github.com/Qazeer/FarsightAD), can be used to parse
+a (single) `userCertificate` attribute:
+
+```
+function Get-X509CertificateStringFromUserCertificate {
+<#
+.SYNOPSIS
+
+Return a formatted string constructed from an object's userCertificate attribute.
+
+.PARAMETER userCertificate
+
+Specifies the Certificates attribute.
+
+.OUTPUTS
+
+[string]
+
+#>
+
+    Param(
+        [Parameter(Mandatory=$True)] $userCertificate
+    )
+    
+    $CertificatesString = ""
+    
+    for ($i = 0; $i -lt $userCertificate.Count; $i++) {
+        # Requires PowerShell >= v5.
+        # New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($userCertificate[$i]) bugs in PowerShell v7+.
+        $X509Certificate = [System.Security.Cryptography.X509Certificates.X509Certificate2]::new([byte[]] $userCertificate[$i])
+        $EnhancedKeyUsageListString = If ($X509Certificate.EnhancedKeyUsageList) { [string]::join("-", $X509Certificate.EnhancedKeyUsageList) } Else { "None" }
+        $X509CertificateAsString = [string]::Format("SerialNumber={0}|Subject={1}|NotBefore={2}|NotAfter={3}|EnhancedKeyUsageList={4}", $X509Certificate.SerialNumber, $X509Certificate.Subject, $X509Certificate.NotBefore, $X509Certificate.NotAfter, $EnhancedKeyUsageListString)
+        $CertificatesString += "$X509CertificateAsString;"
+    }
+
+    return $CertificatesString
+}
+
+$account = Get-ADObject -Properties userCertificate [...]
+Get-X509CertificateStringFromUserCertificate -userCertificate $account.userCertificate
+```
+
+Additionally, `FarsightAD`'s `Export-ADHuntingPrincipalsCertificates` can be
+used to enumerate and parse users / computers certificates, identifying
+certificates valid for client authentication. A number of parameters are
+retrieved for each certificate: certificate validity timestamps,
+certificate purpose, certificate subject and eventual `SubjectAltName(s)`.
+
+The cmdlet highlights `SubjectAltName` that do not match the associated account
+`UPN` and will attempt to determine if the `SubjectAltName` is linked to a
+privileged account. The last modification timestamp, from AD replication data,
+is also retrieved for all `userCertificate` attributes.
+
+```bash
+Export-ADHuntingPrincipalsCertificates [-Server <DC_IP | DC_HOSTNAME>] [-Credential <PS_CREDENTIAL>] [-OutputFolder <OUTPUT_FOLDER>] [-ExportType <CSV | JSON>]
+```
+
 ### References
 
   - [Wavestone - Jean Marsault - Microsoft ADCS – Abusing PKI in Active Directory Environment](https://www.riskinsight-wavestone.com/en/2021/06/microsoft-adcs-abusing-pki-in-active-directory-environment/)
@@ -206,3 +278,5 @@ Export-ADHuntingADCSCertificateTemplates [-Server <DC_IP | DC_HOSTNAME>] [-Crede
   - [Sysadmins LV - Vadims Podans - Constraining Extended Key Usages in Microsoft Windows](https://www.sysadmins.lv/blog-en/constraining-extended-key-usages-in-microsoft-windows.aspx)
 
   - [KEYFACTOR Hidden Dangers: Certificate Subject Alternative Names (SANs)](https://www.keyfactor.com/blog/hidden-dangers-certificate-subject-alternative-names-sans/)
+
+  - [decoder - A "deep dive" in Cert Publishers Group](https://decoder.cloud/2023/11/20/a-deep-dive-in-cert-publishers-group/)
