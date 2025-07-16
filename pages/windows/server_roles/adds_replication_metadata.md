@@ -1,7 +1,7 @@
 ---
 title: Active Directory Domain Services (Domain Controllers) replication metadata
 summary: 'The Active Directory replication metadata hold information about change made on an Active Directory object. The replication metadata is used by the Domain Controllers to replicate modifications and, as so, only attributes that are replicated will be logged in the replication metadata.\n Every object within Active Directory stores replication metadata, in their "msDS-ReplAttributeMetaData" (for regular attributes) and "msDS-ReplValueMetaData" (for linked attributes) attributes.'
-keywords: Active Directory, Active Directory Domain Services, Domain Controllers, DC, replication metadata, msDS-ReplAttributeMetaData, msDS-ReplValueMetaData, pszAttributeName, dwVersion, ftimeLastOriginatingChange, pszLastOriginatingDsaDN, uuidLastOriginatingDsaInvocationID, ftimeCreated, ftimeDeleted, lastLogonTimestamp, lastLogon, repadmin, ADTimeline, FarsightAD
+keywords: Active Directory, Active Directory Domain Services, Domain Controllers, DC, replication metadata, msDS-ReplAttributeMetaData, msDS-ReplValueMetaData, pszAttributeName, dwVersion, ftimeLastOriginatingChange, pszLastOriginatingDsaDN, uuidLastOriginatingDsaInvocationID, ftimeCreated, ftimeDeleted, lastLogonTimestamp, lastLogon, repadmin, Get-ADReplicationAttributeMetadata, ADTimeline, FarsightAD, esentutl, dsamain.exe
 tags:
   - windows_active_directory
 location: 'Replicated attributes of interest: - adminCount\n - lastLogonTimestamp\n - member\n - msDS-AllowedToDelegateTo\n - nTSecurityDescriptor\n - primaryGroupID\n - scriptPath\n - servicePrincipalName\n - sIDHistory\n - userPrincipalName'
@@ -138,18 +138,56 @@ existing objects will be enumerated.
 
 ```bash
 .\AD-timeline.ps1 -Server <GLOBAL_CATALOG_FQDN>
-
-# Offline mode, with the NTDS database being mounted using dsamain (requires AD LDS and RSAT to be installed)
-# If it also necessary for the AD WS service to be running, which may not be the case by default.
-
-dsamain.exe -dbpath <NTDS_DIT_PATH> -ldapport 3266 -allownonadminaccess
-
-.\AD-timeline.ps1 -server "127.0.0.1:3266"
 ```
 
 The [`FarsightAD`](https://github.com/Qazeer/FarsightAD) cmdlets uses
 replication metadata to enrich the persistence review with timestamps of
 last modification for the attributes enumerated.
+
+#### NTDS offline mode
+
+An exported `ntds.dit` database file can be mounted using `dsamain`, to then be
+queried (in LDAP or with PowerShell cmdlets through `AD Web Services`). For
+instance, `Get-ADReplicationAttributeMetadata` or `ADTimeline` can be used on a
+"mounted" `ntds.dit` database to retrieve AD replication metadata.
+
+The following pre-requisites are required to mount a `ntds.dit` database:
+
+  1. The Windows Server major version used must be superior or equal to the
+     Windows Server version of the Domain Controller the `ntds.dit` is coming
+     from.
+
+  2. The `Active Directory Lightweight Directory Services` (`AD LDS`) server
+     role must be installed.
+
+  3. The `Remote Server Administration Tools` (`RSAT`) must be installed and
+     the `Active Directory Web Services` service enabled and running.
+
+     Note: the `ADWS` service may need to be restarted after "mounting" the
+     `ntds` database.
+     
+     ```bash
+     Set-Service -Name "ADWS" -StartupType Manual
+
+     Stop-Service -Name "ADWS"
+     Start-Service -Name "ADWS"
+     ```
+
+```bash
+# If needed, for instance if the ntds database was exported while the AD DS service was running, the ntds must be repaired.
+# /r: Replays the last transaction logs (files "edb*.log") from the current folder, if any, to apply the last AD objects changes.
+# /p: Repairs the ntds.dit database.
+# /d: Defragments the ntds.dit database, which can help with reliability and speed of queries.
+esentutl /r edb
+esentutl /p ntds.dit
+esentutl /d ntds.dit
+
+# Mount the specified ntds database, exposing a LDAP service on port 3266 (and allowing access through the ADWS service).
+dsamain.exe -dbpath <NTDS_DIT_PATH> -ldapport 3266 -allownonadminaccess
+
+Get-ADReplicationAttributeMetadata -Server "127.0.0.1:3266" -IncludeDeletedObjects –ShowAllLinkedValues "<DISTINGUISHED_NAME>"
+.\AD-timeline.ps1 -server "127.0.0.1:3266"
+```
 
 ### References
 
