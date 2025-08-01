@@ -1,6 +1,6 @@
 ---
 title: Registry - System Information
-summary: 'Various information about the local system as stored in the registry: computer hostname and domain, local users, network interfaces, system timezone, exposed network shares, firewall status and rules, SID of users that have interactively logged-in, installed applications, etc.'
+summary: 'Various information about the local system are stored in the registry: computer hostname and domain, local users, network interfaces, system timezone, exposed network shares, firewall status and rules, SID of users that have interactively logged-in, installed applications, etc.'
 keywords: 'HKLM, SYSTEM, SAM, ComputerName, CurrentVersion, Policy, ProfileList, Users, TimeZoneInformation, Select, Interfaces, NetworkList, FirewallPolicy, App Paths, Uninstall'
 tags:
   - windows_registry
