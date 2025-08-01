@@ -118,6 +118,10 @@
         url: /windows_etw_powershell.html
         output: web
 
+      - title: AppLocker
+        url: /windows_etw_applocker.html
+        output: web
+
       - title: Network shares
         url: /windows_etw_network_shares.html
         output: web
