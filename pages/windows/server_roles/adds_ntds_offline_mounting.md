@@ -1,13 +1,13 @@
 ---
-title: Active Directory Domain Services NTDS offline mounting
+title: Procedure - Active Directory Domain Services NTDS offline mounting
 summary: 'An exported NTDS database file can be mounted using dsamain, to then be queried in LDAP or with PowerShell cmdlets through the "AD Web Services".\n\n '
 keywords: Active Directory, Active Directory Domain Services, Domain Controllers, DC, replication metadata, msDS-ReplAttributeMetaData, msDS-ReplValueMetaData, Get-ADReplicationAttributeMetadata, ADTimeline, FarsightAD, esentutl, dsamain.exe
 tags:
   - windows_active_directory
-location: 'NTDS database location: %SystemRoot%\ntds\NTDS.DIT\n\n Commands for offline mounting:\n esentutl /p <NTDS_DIT_PATH>\n dsamain.exe -dbpath <NTDS_DIT_PATH> -ldapport 3266 -allownonadminaccess'
-last_updated: 2024-07-21
+location: 'NTDS database location: %SystemRoot%/ntds\NTDS.DIT\n\n Commands for offline mounting:\n esentutl /p <NTDS_DIT_PATH>\n dsamain.exe -dbpath <NTDS_DIT_PATH> -ldapport 3266 -allownonadminaccess'
+last_updated: 2024-09-08
 sidebar: sidebar
-permalink: adds_replication_metadata.html
+permalink: adds_ntds_offline_mounting.html
 folder: windows
 ---
 
@@ -115,7 +115,7 @@ can be converted to JSON files compatible with `BloodHound` using
 [ADExplorerSnapshot.py](https://github.com/c3c/ADExplorerSnapshot.py):
 
 ```bash
-ADExplorer -> File -> COnnect -> Connect to: 127.0.0.1:3266, no username or password -> OK
+ADExplorer -> File -> Connect -> Connect to: 127.0.0.1:3266, no username or password -> OK
     Select the 127.0.0.1:3266 instance -> File -> Create snapshot -> Enter the desired snapshot filename -> OK
 
 ADExplorerSnapshot.py [-o <OUT_DIRECTORY>] -m BloodHound <ADEXPLORER_SNAPSHOT>

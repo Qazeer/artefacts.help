@@ -686,6 +686,10 @@
     - title: Active Directory Domain Services
       output: web
       children:
+        
+        - title: Procedure - NTDS offline mounting
+          url: /adds_ntds_offline_mounting.html
+          output: web
 
         - title: Domain Controllers authentication
           url: /windows_etw_authentication_dc_host.html
