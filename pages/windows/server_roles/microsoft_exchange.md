@@ -8,7 +8,7 @@ location: 'Exchange IIS logs:\n %SystemDrive%\inetpub\logs\LogFiles\W3SVC1 and W
 last_updated: 2024-06-09
 sidebar: sidebar
 permalink: microsoft_exchange.html
-folder: others
+folder: windows
 ---
 
 ### Overview

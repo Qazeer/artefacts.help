@@ -8,7 +8,7 @@ default_location: 'SSH authentication logs:\n/var/run/log/auth.log\n\nESXi host 
 last_updated: 2024-06-02
 sidebar: sidebar
 permalink: vmware_esxi.html
-folder: others
+folder: linux
 ---
 
 ### VMware ESXi access
