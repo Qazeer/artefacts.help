@@ -1004,6 +1004,10 @@
   output: web
   children:
 
+  - title: Procedure - Image acquisition and mounting
+    url: /procedure_image_acquisition_and_mounting.html
+    output: web
+  
   - title: Network PCAP
     url: /network_pcap.html
     output: web
