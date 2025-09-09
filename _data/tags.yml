@@ -45,3 +45,4 @@ allowed-tags:
   - windows_system_information
   - windows_usb_activity
   - windows_wmi
+  - procedures
