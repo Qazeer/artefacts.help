@@ -1,9 +1,10 @@
 ---
-title: Logs search and collection tools
+title: Procedure - Logs search and collection tools
 summary: 'The Azure logs (Azure AD sign-ins and audit logs, Office 365 Unified and Mailbox Audit Audit Logs, Azure Activity logs, etc.) can be collected using Microsoft PowerShell modules and third-party tools, such as DFIR-O365RC or Microsoft-Extractor-Suite.'
 keywords: Search-UnifiedAuditLog, DFIR-O365RC, Microsoft-Extractor-Suite, Log Analytics workspace, Diagnostic settings
 tags:
   - azure_logs
+  - procedures
 last_updated: 2024-01-28
 sidebar: sidebar
 permalink: azure_logs_collection_tools.html

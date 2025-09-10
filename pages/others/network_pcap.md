@@ -1,9 +1,10 @@
 ---
-title: Network PCAP
+title: Procedure - Network PCAP
 summary: 'Wireshark & tshark, Zeek, and ngrep usage.'
 keywords: PCAP, PCAP-NG, Wireshark, tshark, Zeek, Bro, ngrep
 tags:
   - network
+  - procedures
 last_updated: 2024-09-19
 sidebar: sidebar
 permalink: network_pcap.html

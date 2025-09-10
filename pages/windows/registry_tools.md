@@ -1,9 +1,10 @@
 ---
-title: Registry - Tools
+title: Procedure - Registry - Tools
 summary: 'Tools for processing the Windows Registry, including: RegistryExplorer, RECmd, and RegRipper.'
 keywords: 'Registry tools, RegistryExplorer, RECmd, RegistryPlugins, RECmd_AllBatchFiles, RegRipper'
 tags:
   - windows_registry
+  - procedures
 last_updated: 2024-01-03
 sidebar: sidebar
 permalink: windows_registry_tools.html

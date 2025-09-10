@@ -4,6 +4,7 @@ summary: 'An exported NTDS database file can be mounted using dsamain, to then b
 keywords: Active Directory, Active Directory Domain Services, Domain Controllers, DC, replication metadata, msDS-ReplAttributeMetaData, msDS-ReplValueMetaData, Get-ADReplicationAttributeMetadata, ADTimeline, FarsightAD, esentutl, dsamain.exe
 tags:
   - windows_active_directory
+  - procedures
 location: 'NTDS database location: %SystemRoot%/ntds\NTDS.DIT\n\n Commands for offline mounting:\n esentutl /p <NTDS_DIT_PATH>\n dsamain.exe -dbpath <NTDS_DIT_PATH> -ldapport 3266 -allownonadminaccess'
 last_updated: 2024-09-08
 sidebar: sidebar

@@ -1,9 +1,10 @@
 ---
-title: Logs search and collection tools
+title: Procedure - Logs search and collection tools
 summary: 'CloudTrail logs can be collected in specific region or across all regions using third-party tools, such as Invictus-AWS.'
 keywords: awsCloudTrailDownload, Invictus-AWS, awslogs
 tags:
   - aws
+  - procedures
 last_updated: 2024-01-27
 sidebar: sidebar
 permalink: aws_logs_collection_tools.html

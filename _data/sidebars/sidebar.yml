@@ -50,7 +50,7 @@
         url: /windows_etw_overview.html
         output: web
 
-      - title: Tools
+      - title: Procedure - Tools
         url: /windows_etw_tools.html
         output: web
 
@@ -174,7 +174,7 @@
         url: /windows_registry_timestamp.html
         output: web
 
-      - title: Tools
+      - title: Procedure - Tools
         url: /windows_registry_tools.html
         output: web
 
@@ -943,7 +943,7 @@
       url: /azure_logs_overview.html
       output: web
 
-    - title: Logs search and collection
+    - title: Procedure - Logs search and collection
       url: /azure_logs_collection_tools.html
       output: web
 
@@ -983,7 +983,7 @@
       url: /aws_logs_overview.html
       output: web
 
-    - title: Logs search and collection
+    - title: Procedure - Logs search and collection
       url: /aws_logs_collection_tools.html
       output: web
 
