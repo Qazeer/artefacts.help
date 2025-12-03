@@ -6,7 +6,7 @@ tags:
   - windows_etw
   - windows_lateral_movement
   - windows_lateral_movement_dst
-location: 'Channel: Security.\nEvents: 4624, 4625, 4672, 4634, 4647, 4649, 4778, 4779, 4800, 4801, 4802, 4803, 5378.'
+location: 'Channel: Security.\nEvents: 4624, 4625, 4672, 4634, 4647, 4649, 4778, 4779, 4800, 4801, 4802, 4803, 5378.\n\nChannel: Microsoft-Windows-SMBServer/Security.\nEvent: 551.'
 last_updated: 2025-04-16
 sidebar: sidebar
 permalink: windows_etw_authentication_dst_host.html
@@ -23,6 +23,7 @@ folder: windows
 | `Security` | Default configuration. | Event `4634: An account was logged off`. <br><br> Legacy: <br> Events `538: User Logoff`. |
 | `Security` | Default configuration. <br><br> Only logged on for `Interactive` and `RemoteInteractive` logons. | Event `4647: User initiated logoff`. <br><br> Legacy: <br> Events `551: User initiated logoff`. |
 | `Security` | Requires `Audit Other Logon/Logoff Events` to be enabled. | Event `4649: A replay attack was detected`. <br><br> Event `4778: A session was reconnected to a Window Station`. <br><br> Event `4779: A session was disconnected from a Window Station`. <br><br> Event `4800: The workstation was locked`. <br><br> Event `4801: The workstation was unlocked`. <br><br> Event `4802: The screen saver was invoked`. <br><br> Event `4803: The screen saver was dismissed`. <br><br> Event `5378: The requested credentials delegation was disallowed by policy`. <br><br> Event `5632: A request was made to authenticate to a wireless network`. <br><br> Event `5633: A request was made to authenticate to a wired network`. |
+| `Microsoft-Windows-SMBServer/Security` | Default configuration. <br><br> Introduced in `Windows 10 version 1507` and `Windows Server 2012R2 Update3`. | Event `551: SMB Session Authentication Failure`. <br><br> Generated upon failed login attempts over SMB. While invalid credentials are a common cause, other circumstances can also trigger events `551`. For instance, if the "Microsoft network server: Server SPN target name validation level" policy is enabled (`SmbServerNameHardeningLevel` registry key), an authentication relay attempts (mismatch between server target) can also generate this event. <br><br> Includes information about the client's IP address, username, and authentication error code. |
 
 ### Security Event ID 4624
 
@@ -119,3 +120,5 @@ authentication events into a CSV timeline.
 ### References
 
   - [CyberSafe - Zissi Skarzhinski - Windows Logon Types and how they contribute to SOC Analyst](https://cybersafe.co.il/wp-content/uploads/2021/11/LOGON-types-compressed_compressed.pdf)
+
+  - [nasbench - EVTX-ETW-Resources](github.com/nasbench/EVTX-ETW-Resources)
