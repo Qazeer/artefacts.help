@@ -4,6 +4,7 @@ summary: 'Active Directory Certificate Services (AD CS) is a Windows Server role
 keywords: Active Directory, Active Directory Certificate Services, ADCS, AD CS, FarsightAD, ESC1, ESC8, ntml relay, certificates, certificate templates, templates, X.509, X509, X.509v3, X509Certificate2, SubjectAltName, EnhancedKeyUsageList, SerialNumber, userCertificate, Get-X509CertificateStringFromUserCertificate, Export-ADHuntingPrincipalsCertificates
 tags:
   - windows_active_directory
+  - windows_server_roles
 location: ''
 last_updated: 2024-06-29
 sidebar: sidebar
@@ -302,6 +303,29 @@ is also retrieved for all `userCertificate` attributes.
 ```bash
 Export-ADHuntingPrincipalsCertificates [-Server <DC_IP | DC_HOSTNAME>] [-Credential <PS_CREDENTIAL>] [-OutputFolder <OUTPUT_FOLDER>] [-ExportType <CSV | JSON>]
 ```
+
+#### IIS logs (ESC8 NTLM relay attack)
+
+Microsoft IIS logs can be leveraged to investigate an
+[ESC8 NTLM relay attack](https://docs.specterops.io/ghostpack-docs/Certify.wik-mdx/esc8-ntlm-relay-to-ad-cs-http-endpoints)
+on a vulnerable AD CS web service endpoint.
+
+ESC8 is an AD CS misconfiguration caused by exposing ADCS web enrollment
+endpoint without HTTPS and Channel Binding enforcement. NTLM authentication
+requests can be relayed to the AD CS web service to obtain certificates on
+behalf of other domain principals.
+
+The IIS logs are stored under `XXX` and provide the following notable
+information:
+  - Source IP (`c-ip`).
+  - URI requested (`cs-uri-stem`).
+  - Eventual username (`cs-username`).
+  - User-Agent (`cs(User-Agent)`).
+  - HTTP return status code.
+
+Request to endpoints under `/certsrv/`, such as `/certsrv/certfnsh.asp` for the
+Certificate Signing Request, can be an indicator of certificate requests through
+the ADCS web enrollment.
 
 ### References
 

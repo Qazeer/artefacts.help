@@ -679,6 +679,10 @@
       url: /tag_windows_active_directory.html
       output: web
 
+    - title: 'Category - Server Roles'
+      url: /tag_windows_server_roles.html
+      output: web
+
   - title: Windows server roles
     output: web
     children:

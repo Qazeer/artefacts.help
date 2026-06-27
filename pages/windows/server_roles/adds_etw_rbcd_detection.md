@@ -5,6 +5,7 @@ keywords: Active Directory, Domain Controllers, Kerberos, RBCD, Delegations, Res
 tags:
   - windows_etw
   - windows_active_directory
+  - windows_server_roles
 location: 'Channel: Security.\nEvents: 5136 ("Attribute" field equal to "msDS-AllowedToActOnBehalfOfOtherIdentity"), 4769 (two separate events, for S4U2Self and S4U2Proxy requests, with the second event with a non-null "Transited Services" field).'
 last_updated: 2025-03-27
 sidebar: sidebar

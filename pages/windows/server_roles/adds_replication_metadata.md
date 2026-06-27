@@ -4,6 +4,7 @@ summary: 'The Active Directory replication metadata hold information about chang
 keywords: Active Directory, Active Directory Domain Services, Domain Controllers, DC, replication metadata, msDS-ReplAttributeMetaData, msDS-ReplValueMetaData, pszAttributeName, dwVersion, ftimeLastOriginatingChange, pszLastOriginatingDsaDN, uuidLastOriginatingDsaInvocationID, ftimeCreated, ftimeDeleted, lastLogonTimestamp, lastLogon, repadmin, Get-ADReplicationAttributeMetadata, ADTimeline, FarsightAD, esentutl, dsamain.exe
 tags:
   - windows_active_directory
+  - windows_server_roles
 location: 'Replicated attributes of interest:\n - adminCount\n - lastLogonTimestamp\n - member\n - msDS-AllowedToDelegateTo\n - nTSecurityDescriptor\n - primaryGroupID\n - scriptPath\n - servicePrincipalName\n - sIDHistory\n - userPrincipalName'
 last_updated: 2024-09-25
 sidebar: sidebar

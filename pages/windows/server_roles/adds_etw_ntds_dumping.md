@@ -5,6 +5,7 @@ keywords: Active Directory, Domain Controllers, NTDS, ntds.dit, DRSUAPI, DCSync,
 tags:
   - windows_etw
   - windows_active_directory
+  - windows_server_roles
 location: 'DCSync (DRSUAPI):\nChannel: Security.\nEvent: 4662 (Property "1131f6aa-9c07-11d1-f79f-00c04fc2dcd" or "1131f6ad-9c07-11d1-f79f-00c04fc2dcd2").\n\n NTDS export using ntdsutil:\nChannel: ESENT (Application.evtx).\nEvents: 206, 325, 326, 327'
 last_updated: 2024-07-09
 sidebar: sidebar

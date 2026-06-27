@@ -2,6 +2,7 @@ allowed-tags:
   - aws
   - azure_logs
   - azure_security_review
+  - databases
   - hypervisors
   - linux_defense_evasion
   - linux_file_knowledge
@@ -42,6 +43,7 @@ allowed-tags:
   - windows_remote_desktop
   - windows_remote_desktop_dst
   - windows_remote_desktop_src
+  - windows_server_roles
   - windows_system_information
   - windows_usb_activity
   - windows_wmi
