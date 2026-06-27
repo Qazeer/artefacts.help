@@ -50,17 +50,19 @@ Globally, the following points should be noted:
     `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsDisableLastAccessUpdate`
     registry key. The following values may be encountered:
 
-      - `0` (default on Windows XP), `80000000` (User managed), `80000002`
-        (System managed) means that last access updates are enabled. Starting
-        from `Windows Redstone 4` (`Build 1803` of 04/2018), last access
-        updates seem to be enabled (back) by default if the system partition
-        size is <= to 128 GiB. Starting from `Windows 10 20H1` (`Build 18970`
-        of 05/2020) last access updates seem to be enabled by default
-        independently of the system partition size.
+      - `0x0` (default on Windows XP), `0x80000000` / `2147483648` (User
+        managed), `0x80000002` / 2147483650 (System managed) means that last
+        access updates are enabled.
+        
+        Starting from `Windows Redstone 4` (`Build 1803` of 2018-04), last
+        access updates seem to be enabled (back) by default if the system
+        partition size is <= to 128 GiB. Starting from `Windows 10 20H1`
+        (`Build 18970` of 2020-05) last access updates seem to be enabled by
+        default independently of the system partition size.
 
       - `1` (default from Windows Vista to early Windows 10 versions),
-        `80000001` (User managed), `80000003` means that last access updates
-        are disabled.
+        `0x80000001` / `2147483649` (User managed), `0x80000003` / `2147483651`
+        means that last access updates are disabled.
 
 Depending on its filename length, a given file may have one or two `$FILENAME`
 attributes:

@@ -143,6 +143,23 @@ Right click device -> Acquire image
      files (`vmsm` for virtual memory or disk descriptor files) can be 
      required / relevant for analysis.  
 
+*Thick versus thin provisioning*
+
+For a thick provisioned virtual disk, the specified space is reserved directly
+upon the creation of the disk. Whereas, for a thin provisioned virtual disk,
+the allocated space will only grow over time as large as required for the data
+used by the virtual machine. However, as thin provisioning is a function of
+the `VMFS` filesystem, downloading a thin provisioned virtual disk (to a
+`ntfs`, `ext3/4`, etc.) will result in the full sized file. 
+
+Thick provisioned drives can be either "lazily" or "eagerly" zeroed. While in
+both configuration the desired size for this virtual disk is reserved directly
+upon creation, the way empty disk space is processed is different. In "eagerly"
+zeroed virtual disk, the unused space is zeroed directly at the time of
+creation, whereas for "lazily" zeroed virtual disk unallocated space remain
+untouched on the datastore until an I/O operation occurs for the virtual
+machine.
+
 *Impacts of snapshots on virtual drives*
 
 When taking a snapshot of a virtual machine, a new virtual drive will be
@@ -159,6 +176,22 @@ The following files are thus created after a snapshot is taken:
 
   - The disk descriptor file: `disk-X.vmdk`, such as `disk-000001.vmdk`
     (with `X` also being the snapshot number).
+
+The virtual machine logs, `vmware.log` and `vmware-XX.log` files, in the virtual
+machine folder in the datastore, can be used to determine which snapshot /
+virtual disk was used at a given time. The `scsi0:0.filename` log entry specify
+the virtual disk associated with the virtual machine at a boot event.
+Example: `2025-09-11T21:51:47.571Z In(05) vmx - DICT          scsi0:0.filename = "disk-000003.vmdk"`.
+
+The virtual disk of snapshots can be reassembled / reconsolidated using
+the 3rd-party open source script
+[`vmdksync`](https://github.com/mpalmer/vmdksync/blob/master/vmdksync)
+or the VMware `vmware-vdiskmanager.exe` utility. Some forensics tools, such as
+`X-ways`, can also be used to directly reassemble and mount snapshot virtual
+disks (if the parent virtual drive(s) are also available and, for some tools,
+already loaded).
+
+https://www.4n6k.com/2014/04/
 
 *Known limitations*
 
@@ -393,12 +426,19 @@ fdisk -l <IMAGE_FILE>
 sudo mount -o ro,loop,noload,noatime,noexec,[show_sys_files,streams_interace=windows,]offset=<OFFSET | $((<SECTOR_SIZE> * <PARTITION_START>))> <IMAGE_FILE> </mnt/ | MOUNT_POINT>
 ```
 
+### Automated script
+
+The [`ermount.sh`](https://github.com/dfir-scripts/EverReady-Disk-Mount/blob/master/ermount.sh)
+
 --------------------------------------------------------------------------------
 
 ## References
 
-https://www.linuxleo.com/Docs/LinuxLeo_4.95.1.pdf
+  - [Barry J. Grundy - The Law Enforcement and Forensic Examiner’s Introduction to Linux](https://www.linuxleo.com/Docs/LinuxLEO_4.98.pdf)
 
-https://tmairi.github.io/posts/forensic-aquisition-with-dd-tools/
 
-https://www.youtube.com/watch?v=FoEO9p-J15w
+  - [BlueMonkey 4n6 - CAINE 02 forensic imaging and cloning using Guymager](https://www.youtube.com/watch?v=FoEO9p-J15w)
+
+  - [Brendan Kinchla - Forensic Recovery of Evidence From Deleted VMware VSphere Hypervisor Virtual Machines](https://www.scribd.com/document/911111385/Forensic-Recovery-of-Evidence-From-Deleted-VMware-VSphere-Hypervisor-Virtual-Machines#content=query:eage,pageNum:16,indexOnPage:1,bestMatch:false)
+ 
+   - [Mickaël Walter - A quick walkthrough in the VMDK format](https://web.archive.org/web/20250802235346/https://www.mickaelwalter.fr/a-quick-walkthrough-in-the-vmdk-format/)

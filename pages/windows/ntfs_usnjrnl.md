@@ -42,8 +42,12 @@ Each change log record is notably composed of:
     `USN_REASON_FILE_DELETE`, `USN_REASON_DATA_OVERWRITE`,
     `USN_REASON_RENAME_NEW_NAME`, etc.).
 
-  - The filename of the file impacted by the change.
+  - The name of the file or folder impacted by the change.
 
+  - The [file attribute](https://learn.microsoft.com/en-us/windows/win32/fileio/file-attribute-constants)
+    of the entry, which can notably be used to determine whether an entry is a
+    file or a directory (`FILE_ATTRIBUTE_DIRECTORY`).
+ 
   - The `MFT` `entry` and `sequence` numbers of the file impacted by the change,
     as well as its parent's `MFT` `entry` and `sequence` numbers.
 
