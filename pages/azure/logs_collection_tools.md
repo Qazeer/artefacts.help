@@ -19,10 +19,10 @@ the UAL are stored in `UTC`). The results retrieved, by
 timezone. Timestamps should thus be provided directly in `UTC` or with timezone
 information.
 
-### [Office365] Unified audit and Mailbox Audit logs manual search
+### [Microsoft 365] Unified audit and Mailbox Audit logs manual search
 
 The `Search-UnifiedAuditLog` cmdlet of the `ExchangeOnlineManagement` module
-can be used to search and export the Office365 `Unified Audit Logs`. The cmdlet
+can be used to search and export the Microsoft 365 `Unified Audit Logs`. The cmdlet
 returns a maximum of 5000 results for direct queries, 50 000 (unsorted) results
 for paged queries. Requests that would return a large number of events should
 thus automated (for instance with `DFIR-O365RC` or `Microsoft-Extractor-Suite`).
@@ -32,7 +32,7 @@ thus automated (for instance with `DFIR-O365RC` or `Microsoft-Extractor-Suite`).
 Install-Module ExchangeOnlineManagement
 Import-Module ExchangeOnlineManagement
 
-# Connect to Office365.
+# Connect to Microsoft 365.
 Connect-ExchangeOnline
 
 # Retrieves events for the specified timeframe and accounts.
@@ -49,10 +49,10 @@ Search-UnifiedAuditLog -ResultSize 5000 -RecordType <RECORD_TYPES>
 Search-UnifiedAuditLog -ResultSize 5000 -Operations <OPERATIONS>
 ```
 
-### [Azure AD, Office365, & Azure] Microsoft-Extractor-Suite
+### [Azure AD, Microsoft 365, & Azure] Microsoft-Extractor-Suite
 
 The [`Microsoft-Extractor-Suite`](https://github.com/invictus-ir/Microsoft-Extractor-Suite)
-PowerShell module can be used to extract logs from Azure AD and Office365.
+PowerShell module can be used to extract logs from Azure AD and Microsoft 365.
 
 ```bash
 # If necessary, installs the required PowerShell modules.
@@ -106,7 +106,7 @@ Get-MessageTraceLog [-StartDate <YYYY-MM-DDT00:00:00Z>] [-EndDate <YYYY-MM-DDT00
 Get-MessageTraceLog -UserIds "<EMAIL | EMAILS_LIST>"
 ```
 
-### [Azure AD, Office365, & Azure] DFIR-O365RC collector
+### [Azure AD, Microsoft 365, & Azure] DFIR-O365RC collector
 
 [`DFIR-O365RC`](https://github.com/ANSSI-FR/DFIR-O365RC) is a PowerShell module
 that implement a number of cmdlets to retrieve Office 365Azure logs. As

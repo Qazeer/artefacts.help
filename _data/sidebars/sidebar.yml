@@ -883,7 +883,7 @@
       url: /vmware_esxi.html
       output: web
 
-- title: Azure / Office365
+- title: Azure / Microsoft 365
   output: web
   children:
 
@@ -891,16 +891,16 @@
     url: /azure_required_privileges.html
     output: web
 
-  - title: Office365 security review
+  - title: Microsoft 365 security review
     output: web
     children:
 
     - title: Licensing plans
-      url: /azure_o365_security_review_licensing_plans.html
+      url: /azure_m365_security_review_licensing_plans.html
       output: web
 
     - title: Mailbox auditing configuration
-      url: /azure_o365_security_review_mailbox_auditing_configuration.html
+      url: /azure_m365_security_review_mailbox_auditing_configuration.html
       output: web
 
     - title: Emails forwarding
@@ -908,15 +908,15 @@
       children:
 
       - title: Mailbox Email Forwarding
-        url: /azure_o365_security_review_email_forwarding.html#mailbox-email-forwarding
+        url: /azure_m365_security_review_email_forwarding.html#mailbox-email-forwarding
         output: web
 
       - title: Mailbox Inbox rules
-        url: /azure_o365_security_review_email_forwarding.html#mailbox-inbox-rules
+        url: /azure_m365_security_review_email_forwarding.html#mailbox-inbox-rules
         output: web
 
       - title: Mailbox Mail Flow / Transport rules
-        url: /azure_o365_security_review_email_forwarding.html#mailbox-mail-flow--transport-rules
+        url: /azure_m365_security_review_email_forwarding.html#mailbox-mail-flow--transport-rules
         output: web
 
     - title: Mailbox delegations
@@ -924,26 +924,26 @@
       children:
 
       - title: Overview
-        url: /azure_o365_security_review_mailbox_delegations.html#overview
+        url: /azure_m365_security_review_mailbox_delegations.html#overview
         output: web
 
       - title: Mailbox access rights / permissions
-        url: /azure_o365_security_review_mailbox_delegations.html#mailbox-access-rights--permissions
+        url: /azure_m365_security_review_mailbox_delegations.html#mailbox-access-rights--permissions
         output: web
 
       - title: Recipient access right / permission
-        url: /azure_o365_security_review_mailbox_delegations.html#recipient-or-sendas-access-right--permission
+        url: /azure_m365_security_review_mailbox_delegations.html#recipient-or-sendas-access-right--permission
         output: web
 
       - title: Folder-level permissions
-        url: /azure_o365_security_review_mailbox_delegations.html#folder-level-permissions
+        url: /azure_m365_security_review_mailbox_delegations.html#folder-level-permissions
         output: web
 
     - title: OAuth permissions
-      url: /azure_o365_security_review_oauth_permissions.html
+      url: /azure_m365_security_review_oauth_permissions.html
       output: web
 
-  - title: Azure / Office365 logs
+  - title: Azure / Microsoft 365 logs
     output: web
     children:
 
@@ -955,16 +955,20 @@
       url: /azure_logs_collection_tools.html
       output: web
 
-    - title: Office365 workloads logs
+    - title: Microsoft 365 workloads logs
       output: web
       children:
 
       - title: Exchange Online workload
-        url: /azure_o365_exchange_workload_logs.html
+        url: /azure_m365_exchange_workload_logs.html
+        output: web
+      
+      - title: SharePoint/OneDrive workloads
+        url: /azure_m365_sharepoint_onedrive_workload_logs.html
         output: web
 
       - title: Microsoft Flow workload
-        url: /azure_o365_microsoft_flow_logs.html
+        url: /azure_m365_microsoft_flow_logs.html
         output: web
 
     - title: Azure activity / subscription logs
