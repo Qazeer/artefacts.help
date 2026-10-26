@@ -1,6 +1,6 @@
 ---
 title: Syslog
-summary: 'Syslog, also known as "legacy-syslog" or "BSD-syslog", is a logging framework defined in RFC3164 then RFC5424 (IETF-syslog). syslog-ng and rsyslog extended the initial syslog protocol, and all three versions continue to be developed as separate projects, growing separately and in parallel.\n\nsyslog logs events/messages from various system components, notably on:\n - Successful authentication and failed authentication attempts.\n - sudo usage.\n - Kernel and hardware component activities.\n - cron jobs and mail activity (sendmail).\n - ...\n\nsyslog relies on "Facilities" to classify and separate log messages from their originating subsystem/components (kernel, cron, user, mail, ...). The facilities are associated with actions in syslog configuration files, to log the messages to a file on disk, send them over the network, or display them to end-users.\n\nThe syslog log file locations are fully dependant on the syslog configuration and differ between Linux distribution and syslog implementation.'
+summary: 'Syslog, also known as "legacy-syslog" or "BSD-syslog", is a logging framework defined in RFC3164 then RFC5424 (IETF-syslog). syslog-ng and rsyslog extended the initial syslog protocol, and all three versions continue to be developed as separate projects, growing separately and in parallel.\n\nsyslog logs events/messages from various system components, notably on:\n - Successful authentication and failed authentication attempts.\n - sudo usage.\n - Kernel and hardware component activities.\n - cron jobs and mail activity (sendmail).\n - ...\n\nsyslog relies on "Facilities" to classify and separate log messages from their originating subsystem/components (kernel, cron, user, mail, ...). The facilities are associated with actions in syslog configuration files, to log the messages to a file on disk, send them over the network, or display them to end-users.\n\nThe syslog log file locations are fully dependent on the syslog configuration and differ between Linux distribution and syslog implementation.'
 keywords: syslog, RFC3164, RFC5424, syslog-ng, rsyslog, Facility, Severity, Priority, auth, cron, kernel
 tags:
   - linux_logging_frameworks
@@ -21,8 +21,8 @@ framework started in 1980 and first defined in
 [`RFC3164`](https://datatracker.ietf.org/doc/html/rfc3164). The current and
 up-to-date version of `syslog` is often referred to as `IETF-syslog` and is
 defined in [`RFC5424`](https://tools.ietf.org/html/rfc5424).
-While `journald` (part of `systemd`) is a more modern approach to logging, that
-address some of `syslog` shortcomings, `syslog` (or one of its variation) is
+While `journald` (part of `systemd`) is a more modern approach to logging that
+addresses some of `syslog`'s shortcomings, `syslog` (or one of its variation) is
 still in use today on many Linux distributions.
 
 `syslog` logs events/messages from various system components, notably on:
@@ -42,7 +42,7 @@ features, such as transport over `TCP` (instead of `UDP` only initially), `TLS`
 encryption, advanced filtering, etc. `syslog-ng` uses a different configuration
 file format than `syslog`.
 
-`rsyslog`, started in 2004, also extends the initial  `syslog` protocol with
+`rsyslog`, started in 2004, also extends the initial `syslog` protocol with
 additional features, such as rule based filtering, incoming messages filtering
 and restrictions, etc. `rsyslog` uses the same configuration file format as
 `syslog`.
@@ -54,7 +54,7 @@ projects, growing separately and in parallel.
 
 `syslog` relies on `Facility` to classify and separate log messages from their
 originating subsystem/components (kernel, cron, user, mail, ...). The
-`Facility` are numbered, from 0 and 23 inclusive, with the levels ranging from
+`Facility` are numbered, from 0 to 23 inclusive, with the levels ranging from
 16 to 22 reserved for locally used facilities.
 
 The facilities are described in
@@ -129,7 +129,7 @@ by one or more spaces or tabs.
 The `selector` field consists of two parts: a `facility` and a `priority`,
 separated by a period ('.'). The `facility` and `priority` can be replaced by
 an asterisk, to match all `facilities` or all `priorities` respectively.
-Multiple `facilities` and `priorities` can be specified for in a single
+Multiple `facilities` and `priorities` can be specified in a single
 `selector`, using a comma-separated list (example: `auth,authpriv.*	`). All
 messages of the specified `priority`, and higher, for a given `facility` are
 logged according to the given `action`. The keyword `none` stands for no
@@ -156,7 +156,7 @@ mail.*				-/var/log/mail.log
 
 ### Default log files
 
-The `syslog` log file locations are fully dependant on the `syslog`
+The `syslog` log file locations are fully dependent on the `syslog`
 configuration, and the configuration files should thus first be
 reviewed. Additionally, Linux distribution and `syslog` implementation leverage
 different default configurations, with different default log file locations.
@@ -176,7 +176,7 @@ different default configurations, with different default log file locations.
 
 #### Syslog message formats
 
-The `syslog` message format depend on the `syslog`/`rsyslog` version in use:
+The `syslog` message format depends on the `syslog`/`rsyslog` version in use:
 
   - `RFC3164` (`legacy-syslog`/`BSD-syslog`) format:
 
@@ -255,7 +255,7 @@ Aug  4 02:59:40 hostname usermod[2999]: add 'tuser' to shadow group 'wheel'
 
 #### cron facility
 
-{% include note.html content="Execution of the daily cron job `logrotate`, define through a script (`logrotate`) under `cron.daily`. `syslog` format." %}
+{% include note.html content="Execution of the daily cron job `logrotate`, defined through a script (`logrotate`) under `cron.daily`. `syslog` format." %}
 
 ```
 Aug  4 08:32:07 hostname run-parts[2473]: (/etc/cron.daily) starting logrotate

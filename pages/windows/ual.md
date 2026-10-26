@@ -1,6 +1,6 @@
 ---
 title: User Access Logging / SUM
-summary: 'Introduced in Windows Server 2012 and enabled by default, User Access Logging (UAL) is a feature that consolidates data on user access to Windows Server roles (such as "Active Directory Domain Services" on Domain Controllers).\n\nUAL store data for the 2 years.\n\nInformation of interest:\n- Accessed Windows Server role (such as ADDS, CIFS, ADCS, etc.)\n- The client domain and username.\n The client IPv4 or IPv6 address.\n- First, last, and daily access timestamps.\n- Total number of access.\n\nAs machine accounts of domain-joined systems also authenticate to ADDS, UAL of Domain Controllers can be used to map hostnames with past IP addresses.'
+summary: 'Introduced in Windows Server 2012 and enabled by default, User Access Logging (UAL) is a feature that consolidates data on user access to Windows Server roles (such as "Active Directory Domain Services" on Domain Controllers).\n\nUAL stores up to 2 years of data.\n\nInformation of interest:\n- Accessed Windows Server role (such as ADDS, CIFS, ADCS, etc.)\n- The client domain and username.\n- The client IPv4 or IPv6 address.\n- First, last, and daily access timestamps.\n- Total number of accesses.\n\nAs machine accounts of domain-joined systems also authenticate to ADDS, UAL of Domain Controllers can be used to map hostnames with past IP addresses.'
 keywords: User Access Logging, SUM, UAL, DNS, Current.mdb
 tags:
   - windows_lateral_movement
@@ -18,18 +18,18 @@ folder: windows
 `User Access Logging (UAL)` is a feature introduced, and enabled by default, in
 `Windows Server 2012` that consolidates data on client activity. Among other
 information, user access on specific Windows Server roles (such as
-`Active Directory Domain Services` on Domain Controller) are logged by the
+`Active Directory Domain Services` on Domain Controllers) is logged by the
 `UAL`. The specific activity triggering an entry to be logged for a given role
 is not documented.
 
-On Domain Controllers, `UAL` thus yield information on **sessions opening on
+On Domain Controllers, `UAL` thus yields information on **sessions opening on
 domain-joined computers** (if the given DC was reached for authentication or
 `Group Policy` retrieval).
 
 The information is stored locally in up to five (5)
 `Extensible Storage Engine (ESE)` database files (`.mdb`):
 
-  - The `Current.mdb` file which contains data for the last 24-hour.
+  - The `Current.mdb` file which contains data for the last 24 hours.
 
   - Up to three `<GUID>.mdb` files, which contain data for an entire year
     (first to last day), going back to 2 years. The data in the `Current.mdb`
@@ -45,7 +45,7 @@ database files**.
 ### Information of interest
 
 The `CLIENTS` table of the `Current.mdb` and `<GUID>.mdb` database files
-contain multiple information of interest:
+contains several pieces of information of interest:
 
   - Accessed Windows Server role `GUID` and description. Among others, the
     following roles can be encountered:
@@ -57,18 +57,18 @@ contain multiple information of interest:
 
   - The client domain and username.
 
-  - Total number of access.
+  - Total number of accesses.
 
   - First, last, and daily access timestamps.
 
   - The client `IPv4` or `IPv6` address. On Domain Controllers, the hostname
-    associated the `IP` address at that time may be retrievable as machine
+    associated with the `IP` address at that time may be retrievable as machine
     accounts of domain-joined computers also authenticate on `AD DS`.
 
 Each entry in the `CLIENTS` table is composed of a unique set of a Windows
 Server role, a client's domain/username, and a source `IP` address.
 
-The `DNS` table of the aforementioned database files contain information about
+The `DNS` table of the aforementioned database files contains information about
 `DNS` resolutions: hostname, associated `IP` address, and timestamp of last
 resolution.
 
@@ -87,7 +87,7 @@ Get-UalOverview
 Get-UalUserAccess
 
 # Retrieves UAL data for client access by device for a given service, ordered by date (data stored in the CLIENTS table).
-# The cmdlets returns the date that the client accessed the service and how many times the client accessed the service during that day.
+# The cmdlet returns the date that the client accessed the service and how many times the client accessed the service during that day.
 Get-UalDailyAccess
 
 # Retrieves information on DNS resolutions (data stored in the DNS table).
@@ -115,7 +115,7 @@ esentutl.exe /p <Current.mdb | UAL_DB_FILE>
 ```
 
 The Windows operating system used to parse the `SUM` databases must be of the
-same major version, or of a more recent version, that the system from which the
+same major version, or of a more recent version, than the system from which the
 databases were acquired. For instance, `SUM` databases acquired from a
 `Windows Server 2022` operating system must be parsed on `Windows 11` or
 `Windows Server 2022`.

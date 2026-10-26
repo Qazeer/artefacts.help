@@ -19,11 +19,11 @@ folder: windows
 |---------|------------|--------|
 | `Security` | Default configuration. | [Event `4624: An account was successfully logged on`.](#security-event-id-4624) <br><br> Legacy: <br> Events `528: Successful Logon` and `540: Successful Network Logon`. |
 | `Security` | Default configuration. | Event `4625: An account failed to log on`. <br><br> Legacy: <br> Events `529`, `530`, `531`, `532`, `533`, `534`, `535`, `536`, `537`, and `539`. |
-| `Security` | Default configuration. <br><br> Only logged on for logon with elevated privileges. | [Event `4672: Special privileges assigned to new logon`.](#security-event-id-4672) <br><br> Legacy: <br> Events `576: Special privileges assigned to new logon`. |
+| `Security` | Default configuration. <br><br> Only logged for logons with elevated privileges. | [Event `4672: Special privileges assigned to new logon`.](#security-event-id-4672) <br><br> Legacy: <br> Events `576: Special privileges assigned to new logon`. |
 | `Security` | Default configuration. | Event `4634: An account was logged off`. <br><br> Legacy: <br> Events `538: User Logoff`. |
-| `Security` | Default configuration. <br><br> Only logged on for `Interactive` and `RemoteInteractive` logons. | Event `4647: User initiated logoff`. <br><br> Legacy: <br> Events `551: User initiated logoff`. |
+| `Security` | Default configuration. <br><br> Only logged for `Interactive` and `RemoteInteractive` logons. | Event `4647: User initiated logoff`. <br><br> Legacy: <br> Events `551: User initiated logoff`. |
 | `Security` | Requires `Audit Other Logon/Logoff Events` to be enabled. | Event `4649: A replay attack was detected`. <br><br> Event `4778: A session was reconnected to a Window Station`. <br><br> Event `4779: A session was disconnected from a Window Station`. <br><br> Event `4800: The workstation was locked`. <br><br> Event `4801: The workstation was unlocked`. <br><br> Event `4802: The screen saver was invoked`. <br><br> Event `4803: The screen saver was dismissed`. <br><br> Event `5378: The requested credentials delegation was disallowed by policy`. <br><br> Event `5632: A request was made to authenticate to a wireless network`. <br><br> Event `5633: A request was made to authenticate to a wired network`. |
-| `Microsoft-Windows-SMBServer/Security` | Default configuration. <br><br> Introduced in `Windows 10 version 1507` and `Windows Server 2012R2 Update3`. | Event `551: SMB Session Authentication Failure`. <br><br> Generated upon failed login attempts over SMB. While invalid credentials are a common cause, other circumstances can also trigger events `551`. For instance, if the "Microsoft network server: Server SPN target name validation level" policy is enabled (`SmbServerNameHardeningLevel` registry key), an authentication relay attempts (mismatch between server target) can also generate this event. <br><br> Includes information about the client's IP address, username, and authentication error code. |
+| `Microsoft-Windows-SMBServer/Security` | Default configuration. <br><br> Introduced in `Windows 10 version 1507` and `Windows Server 2012R2 Update3`. | Event `551: SMB Session Authentication Failure`. <br><br> Generated upon failed login attempts over SMB. While invalid credentials are a common cause, other circumstances can also trigger events `551`. For instance, if the "Microsoft network server: Server SPN target name validation level" policy is enabled (`SmbServerNameHardeningLevel` registry key), an authentication relay attempt (mismatch between server target) can also generate this event. <br><br> Includes information about the client's IP address, username, and authentication error code. |
 
 ### Security Event ID 4624
 
@@ -36,13 +36,13 @@ privileges assigned to new logon`.
 The `4624` event yields information such as:
   - The SID `SubjectUserSid`, account name `SubjectUserName`, and domain
     `SubjectDomainName` of the user logging in.
-  - the source machine hostname `WorkstationName`, IP `IpAddress` and port
+  - The source machine hostname `WorkstationName`, IP `IpAddress` and port
     `IpPort` if the event corresponds to remote login (otherwise the three
     aforementioned fields are set to `-`).
   - The authentication protocol in the `AuthenticationPackageName` field
-    (`NTLM`, `Kerberos` or `Negotiate `) used for the logging. If the logon is
+    (`NTLM`, `Kerberos` or `Negotiate`) used for the logon. If the logon is
     made through the `NTLM` protocol, the `LmPackageName` field precisely
-    identify the `NTLM` version in use (`LM`, `NTLM V1`, `NTLM V2`).
+    identifies the `NTLM` version in use (`LM`, `NTLM V1`, `NTLM V2`).
   - The logon type in the `LogonType` field (detailed below).
   - The privileges level in the `ElevatedToken` field. If set to `%%1842`
     (`Yes`), the session the event represents runs in an elevated context. The
@@ -50,12 +50,12 @@ The `4624` event yields information such as:
     identify the privilege tokens of the session.
   - The impersonation level of the event in the `ImpersonationLevel` field
     (detailed below).
-  - the `LogonID` field identifying the logon session, which can be correlated
+  - The `LogonID` field identifying the logon session, which can be correlated
     with various other `Security` events.
 
 #### LogonType
 
-The `LogonType` field provides information on how the logging was established:
+The `LogonType` field provides information on how the logon was established:
 
 | Logon Type | Description |
 |------------|-------------|
@@ -70,7 +70,7 @@ The `LogonType` field provides information on how the logging was established:
 | 11         | CachedInteractive authentication (logging using cached credentials when a domain controller cannot be reached) |
 
 **Interactive logons (`Logon type 2` and `Logon type 10`) will result in the
-storing of the given users secrets (`NTLM` hash or `Kerberos` tickets) in
+storing of the given users' secrets (`NTLM` hash or `Kerberos` tickets) in
 `LSASS` memory.** Knowing which users logged on interactively on a system can
 help determine which accounts could be compromised following the takeover of a
 system by an attacker.
@@ -83,8 +83,8 @@ The `ImpersonationLevel` field may take the following values:
 |------|----------------|-------------|
 | `-` | `SecurityAnonymous` | The server process cannot obtain security information about the client. |
 | `%%1832` | `Identification` | The server process can obtain information about the client but cannot impersonate the client and thus the client has no privileges. |
-| `%%1833 ` | `Impersonation` | The server process can obtain information and impersonate the client's security context on the local system. |
-| `%%1840 ` | `Delegation` | The server process can impersonate the client's security context on remote systems. |
+| `%%1833` | `Impersonation` | The server process can obtain information and impersonate the client's security context on the local system. |
+| `%%1840` | `Delegation` | The server process can impersonate the client's security context on remote systems. |
 
 ### Security Event ID 4672
 
@@ -113,7 +113,7 @@ The `SubjectLogonId` field can be correlated with the `Security` event
 
 ### Tool(s)
 
-The [`LogParser`'s KAPE module `LogParser_LogonLogoffEvents`](./windows_etw_tools#cli-logparser)
+The [`LogParser`'s KAPE module `LogParser_LogonLogoffEvents`](./etw_tools.md#cli-logparser)
 can be used to parse `Security.evtx` file(s) and extract the aforementioned
 authentication events into a CSV timeline.
 
@@ -121,4 +121,4 @@ authentication events into a CSV timeline.
 
   - [CyberSafe - Zissi Skarzhinski - Windows Logon Types and how they contribute to SOC Analyst](https://cybersafe.co.il/wp-content/uploads/2021/11/LOGON-types-compressed_compressed.pdf)
 
-  - [nasbench - EVTX-ETW-Resources](github.com/nasbench/EVTX-ETW-Resources)
+  - [nasbench - EVTX-ETW-Resources](https://github.com/nasbench/EVTX-ETW-Resources)

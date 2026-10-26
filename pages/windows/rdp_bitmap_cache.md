@@ -23,7 +23,7 @@ implemented to reduce the amount of data sent by the server to save bandwidth
 usage and improve user experience in case of a slow network connection.
 
 Bitmap caching can be deactivated client-side in `mstsc.exe` `Remote Desktop`
-client by deactivation the "Persistent bitmap caching" option.
+client by deactivating the "Persistent bitmap caching" option.
 
 ### Information of interest
 
@@ -55,20 +55,20 @@ A compiled version of the `bmc-tools` Python script (compiled with
 [bmc-tools-compiled](https://github.com/Qazeer/bmc-tools-compiled/) may also be
 used. The
 [`Execute-BmcTools.ps1`](https://gist.github.com/Qazeer/3a6d43a117bbece6d83e7e79687e0870)
-PowerShell script (`KAPE` module `PowerShell_Execute-BmcTools`) leverage the
+PowerShell script (`KAPE` module `PowerShell_Execute-BmcTools`) leverages the
 compiled version to recursively process the specified input folder to execute
 `bmc-tools.exe` over each `Bitmap Cache` subfolder(s) found.
 
 #### Screenshots and screen extracts reconstruction
 
 [`RdpCacheStitcher`](https://github.com/BSI-Bund/RdpCacheStitcher) provides a
-graphical interface to more easily assemble or "stich" together
-`RDP Bitmap Cache` titles, either manually or through an automatic feature
+graphical interface to more easily assemble or "stitch" together
+`RDP Bitmap Cache` tiles, either manually or through an automatic feature
 (that usually yields mixed results).
 
-The titles, as extracted by `bmc-tools` for instance, can be loaded by
+The tiles, as extracted by `bmc-tools` for instance, can be loaded by
 `RdpCacheStitcher` for analysis and to recompose screen extracts from the
-multiple titles available.
+multiple tiles available.
 
 ### References
 

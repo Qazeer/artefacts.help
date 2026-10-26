@@ -1,6 +1,6 @@
 ---
 title: Application Compatibility Cache / Shimcache
-summary: 'Application compatibility feature that aim to maintain support of existing software to new versions of the Windows operating system.\n\nA Shimcache entry is created whenever a program is executed from a specific path. However, starting from Windows Vista and Windows Server 2008, entries may also be created for files in a directory that is accessed interactively.\n\nStores up to 1024 entries starting from the Windows Vista and Windows Server 2008 operating systems.\n\nInformation of interest: file full path, LastModifiedTime ($Standard_Information) timestamp of the file at the time of execution, the cache entry position (insertion position in the Shimcache), and from Windows Vista / Windows Server 2008 up to Windows 8.1 / Windows Server 2012 R2, an (undocumented) execution flag.\n\n  While the insert/execution flag is no longer present starting from Windows 10 / Windows Server 2016, the last 4 bytes of an entry can be an indicator of execution, for non-native Windows binaries, if set to 1.'
+summary: 'Application compatibility feature that aims to maintain support of existing software to new versions of the Windows operating system.\n\nA Shimcache entry is created whenever a program is executed from a specific path. However, starting from Windows Vista and Windows Server 2008, entries may also be created for files in a directory that is accessed interactively.\n\nStores up to 1024 entries starting from the Windows Vista and Windows Server 2008 operating systems.\n\nInformation of interest: file full path, LastModifiedTime ($Standard_Information) timestamp of the file at the time of execution, the cache entry position (insertion position in the Shimcache), and from Windows Vista / Windows Server 2008 up to Windows 8.1 / Windows Server 2012 R2, an (undocumented) execution flag.\n\n  While the insert/execution flag is no longer present starting from Windows 10 / Windows Server 2016, the last 4 bytes of an entry can be an indicator of execution, for non-native Windows binaries, if set to 1.'
 keywords: Shimcache, Application Compatibility Cache, shimming, insert flag, execution flag
 tags:
   - windows_registry
@@ -30,15 +30,15 @@ As a part of this framework, the `Application Compatibility Database`
 references the applications that have known `shimming` solutions. Upon
 execution of an application, the `Shim Engine` will query this database to
 determine whether the applications require `shimming`. The `Shimcache` contains
-metadata about the files that have been subject to such lookup, for
-optimizing and improve the speed of eventual later lookups.
+metadata about the files that have been subject to such lookup, to
+optimize and improve the speed of later lookups.
 
 A `Shimcache` entry is created whenever a program is executed from a specific
 path. However, starting from the `Windows Vista` and `Windows Server 2008`
 operating systems, **entries may also be created for files in a directory that
 is accessed interactively**. Indeed, browsing a directory using `explorer.exe`
 will generate `Shimcache` entries for the executables stored within the
-directory (if the executable was visible in the `Windows Explorer` windows).
+directory (if the executable was visible in the `Windows Explorer` window).
 
 **`Shimcache` entries are only written to the registry upon shutdown of the
 system. The `Shimcache` entries generated since the last system boot are
@@ -68,7 +68,7 @@ on the version of the Windows operating system in use:
     insert/executed timestamp.
     [Some executables](https://github.com/WithSecureLabs/chainsaw/blob/master/analysis/shimcache_patterns.txt),
     such as `PsExesvc`, have their `LastModifiedTime` that corresponds to their
-    timestamp of execution (as the binary are automatically downloaded /
+    timestamp of execution (as the binaries are automatically downloaded /
     uploaded and executed).
 
   - The cache entry position, as a numerical value starting from 0, which
@@ -78,7 +78,7 @@ on the version of the Windows operating system in use:
     without generating a new entry with a lower cache entry position.
 
   - From `Windows Vista` / `Windows Server 2008` up to `Windows 8.1` /
-    `Windows Server 2012 R2`, the (undocumented) `Insert Flag` flag which, when
+    `Windows Server 2012 R2`, the (undocumented) `Insert Flag` which, when
     set, seems to indicate that the entry was executed.
 
     While the insert/execution flag is no longer present starting from
@@ -113,14 +113,14 @@ AppCompatCacheParser.exe --csv <OUTPUT_FOLDER>
 python ShimCacheParser.py --local -o <OUTPUT_FILE>
 
 # Parses the specified SYSTEM hive.
-# --nl: option to force the parsing of the hive even if the even is in a "dirty" state and no transaction logs are available.
+# --nl: option to force the parsing of the hive even if the hive is in a "dirty" state and no transaction logs are available.
 AppCompatCacheParser.exe [--nl] -f <SYSTEM_HIVE_FILE> --csv <OUTPUT_FOLDER>
 
 python ShimCacheParser.py [--hive <SYSTEM_HIVE_FILE> | --reg <EXPORTED_SYSTEM_FILE>] -o <OUTPUT_FILE>
 ```
 
 [Chainsaw](https://github.com/WithSecureLabs/chainsaw) can be used to draw a
-timestamp based timeline of `Shimcache` entries using
+timestamp-based timeline of `Shimcache` entries using
 [novel techniques](https://labs.withsecure.com/tools/chainsaw-analyse-shimcache).
 
 ```bash

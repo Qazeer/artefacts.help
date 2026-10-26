@@ -14,13 +14,13 @@ folder: windows
 ### Live system ETW providers and channels review
 
 ```bash
-# Lists the system's provider
+# Lists the system's providers.
 logman.exe query providers
 
 # Retrieves information about a provider, including its channel and the process sending events to it.
 logman.exe query providers "<PROVIDER_NAME>"
 
-# Lists the providers the specified process emit events to.
+# Lists the providers the specified process emits events to.
 logman query providers -pid <PID>
 
 # Lists the available `channels` and their associated event counts.
@@ -30,8 +30,8 @@ Get-WinEvent -ListLog *
 ### Live system events access
 
 The PowerShell cmdlet `Get-WinEvent` and the `wevtutil` utility can be used to
-list available event log files and filter event log, from both local or remote
-system.
+list available event log files and filter event logs, on both local and remote
+systems.
 
 The following commands can be used to enumerate the available event logs:
 
@@ -64,7 +64,7 @@ The following commands can be used to filter the event logs.
 
 The `wevtutil` utility supports only `XPath` queries. The
 `Windows Event Viewer` utility can be used to define a filter query through the
-graphical and more user-friendly interface and export the filter in to a
+graphical and more user-friendly interface and export the filter into an
 `XPath` format for use with `wevtutil`.
 
 ```bash
@@ -120,9 +120,9 @@ Notable `KAPE` modules available that leverage `LogParser`:
 `LogParser_DetailedNetworkShareAccess`.
 
 The following `LogParser.exe` query, as implemented in `KAPE` as the
-`Logon-Logoff-events` module, extract and parse multiple `Security` events
+`Logon-Logoff-events` module, extracts and parses multiple `Security` events
 related to Windows logon into an output `CSV` file. The following `events ID`
-are processed: 4624, 4625, 4634, 4647, 4648, 4772, 4778, 4779, 4800, 4801,
+are processed: 4624, 4625, 4634, 4647, 4648, 4672, 4778, 4779, 4800, 4801,
 4802, and 4803.
 
 This query can prove useful for analysis of events from both Domain Controllers
@@ -152,7 +152,7 @@ improving performance.
 #### [CLI] EvtxECmd
 
 `EvtxECmd` can be used to parse `EVTX` into CSV, JSON, or XML outputs. However,
-contrary to `winlogbeat`, `EvtxECmd` does not extract the fields in a one to one
+contrary to `winlogbeat`, `EvtxECmd` does not extract the fields in a one-to-one
 manner, but groups the event payload into a limited number of fields (in order
 to support CSV output).
 
@@ -162,7 +162,7 @@ Associated `KAPE` modules: `EvtxECmd` and `EvtxECmd_RDP`.
 # Processes all events in the specific evtx file or evtx files in the specified directory.
 EvtxECmd.exe [-f '<FILE>' | -d '<DIRECTORY>']  --csv '<OUTPUT_DIRECTORY_CSV>'
 
-# Filters the events to output based on a include list (--inc) or exclude list (--exc).
+# Filters the events to output based on an include list (--inc) or exclude list (--exc).
 EvtxECmd.exe [-f '<FILE>' | -d '<DIRECTORY>'] [--inc <LIST_EVENT_IDs> | --exc <LIST_EVENT_IDs>] --csv '<OUTPUT_DIRECTORY_CSV>'
 ```
 
@@ -177,8 +177,8 @@ suspicious activity.
 
 #### Velociraptor
 
-`Velociraptor` has built-in `EVTX` parsing capabilities and dedicated modules
-to event logs analysis, such as `Windows.EventLogs.CondensedAccountUsage`,
+`Velociraptor` has built-in `EVTX` parsing capabilities and dedicated artifacts
+for event log analysis, such as `Windows.EventLogs.CondensedAccountUsage`,
 `Windows.EventLogs.Chainsaw`, `Windows.EventLogs.Hayabusa`, etc.
 
 #### LogonTracer for logon-related events
@@ -197,7 +197,7 @@ Events can be filtered on a number of criteria:
   - If the authentication provider is `NTLM` (AuthName: NTLM).
   - The logon type: `RDP` (Logon type 10), `Network` (Logon type 3), `Batch`
     (Logon type 4), and `Service` (Logon type 5).
-  - If the logon was associated to special privileges (`event ID` 4672).
+  - If the logon was associated with special privileges (`event ID` 4672).
   - etc.
 
 ```bash
@@ -216,6 +216,6 @@ docker exec <CONTAINER_ID> python /usr/local/src/LogonTracer/logontracer.py --de
 # It is advised to add Security.evtx files through the web interface, exposed by default on the TCP port 8080.
 Upload Event Log (bottom left) -> Browse -> One or multiple files can be selected -> Upload
 
-# Alternatively, the Security.evtx files can be upload using the logontracer.py Python script.
+# Alternatively, the Security.evtx files can be uploaded using the logontracer.py Python script.
 python3 logontracer.py [-e <EVTX> | -x <EVTX_XML>] -z <TIME_ZONE> -u '<USERNAME>' -p '<PASSWORD>' -s <IP>
 ```

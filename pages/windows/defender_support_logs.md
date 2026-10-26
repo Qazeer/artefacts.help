@@ -1,6 +1,6 @@
 ---
 title: Windows Defender - Support logs
-summary: 'Windows Defender stores on disk a number of plain-text log files.\n\nAmong these log files, the Microsoft Protection Log (MPLog) log includes a number of event types related to past Windows Defender scanning activity and detections.\n\nThe MPLog can notably be a source of historical information on:\n - Program  and suspicious command line executions.\n - Files existence and access.\n - Windows Defender configuration state, detections, and other telemetry.'
+summary: 'Windows Defender stores on disk a number of plain-text log files.\n\nAmong these log files, the Microsoft Protection Log (MPLog) log includes a number of event types related to past Windows Defender scanning activity and detections.\n\nThe MPLog can notably be a source of historical information on:\n - Program and suspicious command line executions.\n - Files existence and access.\n - Windows Defender configuration state, detections, and other telemetry.'
 keywords:
 tags:
   - windows_program_execution
@@ -21,17 +21,17 @@ folder: windows
 
 | File | Description |
 |------|-------------|
-| `MPLog-YYMMDD-hhmmss.log` | The `Microsoft Protection Log` (`MPLog`) log includes a number of event types related to past `Windows Defender` scanning activity and detections, notably to permit the troubleshooting of performance issues related to real-time protection. <br><br> The `MPLog` can be a source of historical information on: <br> - Program  and suspicious command line executions. <br> - Files existence and access. <br> - `Windows Defender` configuration state and detections. |
-| `MPScanSkip-YYMMDD-hhmmss.log` | The `Microsoft Scan Skip` (`MPScanSkip`) log stores information on `Windows Defender` scans that were skipped or aborted. A scan can be aborted for a number of reason, including reaching the timeout limit. <br><br> The `MPScanSkip` log can be a source of historical information on files that were not, or partially, scanned by `Windows Defender`. |
+| `MPLog-YYMMDD-hhmmss.log` | The `Microsoft Protection Log` (`MPLog`) log includes a number of event types related to past `Windows Defender` scanning activity and detections, notably to permit the troubleshooting of performance issues related to real-time protection. <br><br> The `MPLog` can be a source of historical information on: <br> - Program and suspicious command line executions. <br> - Files existence and access. <br> - `Windows Defender` configuration state and detections. |
+| `MPScanSkip-YYMMDD-hhmmss.log` | The `Microsoft Scan Skip` (`MPScanSkip`) log stores information on `Windows Defender` scans that were skipped or aborted. A scan can be aborted for a number of reasons, including reaching the timeout limit. <br><br> The `MPScanSkip` log can be a source of historical information on files that were not, or partially, scanned by `Windows Defender`. |
 
 ### Microsoft Protection Log (MPLog)
 
-The `MPLog` log include a number of different event types, that can be of
+The `MPLog` log includes a number of different event types, that can be of
 interest for incident response investigations.
 
 #### Estimated performance impact events
 
-{% include note.html content="Estimated performance impact events can be used: <br> - As an evidence of process execution. <br> - To determine the (minimun) number of files accessed by a given process. <br> - To retrieve the path of a (single) file accessed by a given process." %}
+{% include note.html content="Estimated performance impact events can be used: <br> - As evidence of process execution. <br> - To determine the (minimum) number of files accessed by a given process. <br> - To retrieve the path of a (single) file accessed by a given process." %}
 
 The "Estimated performance impact" events track the performance impact of
 `Windows Defender` scans and can be a source of historical information on
@@ -62,13 +62,13 @@ Information of interest available, as stated in the
 | MaxTimeFile | The path of the file for which the longest scan time (of MaxTime duration) was recorded. | \Device\HarddiskVolume1\Downloads\binary.exe |
 | EstimatedImpact | "The percentage of time spent in scans for files accessed by this process out of the period in which this process experienced scan activity" | 100% |
 
-#### Real-time detections events
+#### Real-time detection events
 
-{% include note.html content="Detection-related events can be used to retrieve information on malware detections by `Windows Defender` (in complement to [`Microsoft-Windows-Windows Defender/Operational` ETW events](./etw_windows_defender.md#windows-defender-malware-detection-events)). The information available notably include the filepath of the file that raised the detection, and the threat type and name of the detection." %}
+{% include note.html content="Detection-related events can be used to retrieve information on malware detections by `Windows Defender` (in complement to [`Microsoft-Windows-Windows Defender/Operational` ETW events](./etw_windows_defender.md#windows-defender-malware-detection-events)). The information available notably includes the filepath of the file that raised the detection, and the threat type and name of the detection." %}
 
 Various events are emitted by `Windows Defender` following a detection. These
 events can be used to retrieve information on the detection, such as the
-malicious file path, acceding process, and remediation action taken by
+malicious file path, accessing process, and remediation action taken by
 `Windows Defender`.
 
 Examples:
@@ -131,7 +131,7 @@ End time:12-15-2022 11:27:46
 {% include note.html content="'Engine:command line reported' events can be used to track suspicious and potentially malicious command lines (as detected by `Windows Defender`)." %}
 
 `Windows Defender` records events on detection of suspicious and potentially
-malicious command line executions. Two level of criticality are indicated by
+malicious command line executions. Two levels of criticality are indicated by
 `Windows Defender`: `lowfi` and `threat`.
 
 Format:
@@ -162,7 +162,7 @@ Information of interest available:
 | ProcessID | The process's `Process ID (PID)`. |
 | ProcessCreationTime | The creation time of the process, in `Windows NT Time` format. |
 | Modules | Sometimes, the `Dynamic Link Libraries (DLL)` loaded by the process. |
-| Parents | The parent process's image path of the process. Additional image paths may sometimes be referenced, with out a clear link between the processes. For example: `Parents: C:\Program Files (x86)\XXX\userland-binary.exe:3052:2,Registry:104:2,C:\Windows\System32\lsass.exe:700:2` |
+| Parents | The parent process's image path of the process. Additional image paths may sometimes be referenced, without a clear link between the processes. For example: `Parents: C:\Program Files (x86)\XXX\userland-binary.exe:3052:2,Registry:104:2,C:\Windows\System32\lsass.exe:700:2` |
 
 Examples:
 
@@ -203,7 +203,7 @@ END BM telemetry
 `Windows Defender` seems to disable its "filter caching" on potentially
 suspicious files, generating an associated "Filter caching disabled" event.
 This event can be used to track (some) files that `Windows Defender` identified
-as suspicious (with out necessarily raising a detection alert). For instance,
+as suspicious (without necessarily raising a detection alert). For instance,
 "Filter caching disabled" events are raised on `PsExec` binary, some port
 scanning utilities (such as `netscan`), or some remote monitoring and
 management products. The feature, and associated event type, are not
@@ -219,7 +219,7 @@ Examples:
 
 ```
 2022-05-17T09:22:32.600Z Filter caching disabled for \Device\HarddiskVolume2\Users\<USERNAME>\Documents\1\PsExec.exe (runtime MpDisableCaching from 0x0)
-2022-05-17T09:41:48.226Z Filter caching disabled for \Device\HarddiskVolume2\Users\<USENRAME>\Documents\1\netscan.exe (runtime MpDisableCaching from 0x0)
+2022-05-17T09:41:48.226Z Filter caching disabled for \Device\HarddiskVolume2\Users\<USERNAME>\Documents\1\netscan.exe (runtime MpDisableCaching from 0x0)
 ```
 
 #### EMS Detection events
@@ -244,12 +244,12 @@ Example:
 
 #### "Issuing SDN query" events
 
-{% include note.html content="'Issuing SDN query' events can be used as an evidence of file existence, along with the file's `SHA1` and `SHA256` hashes." %}
+{% include note.html content="'Issuing SDN query' events can be used as evidence of file existence, along with the file's `SHA1` and `SHA256` hashes." %}
 
-`Windows Defender` seems to make "Cloud" query on suspicious files, generating
+`Windows Defender` seems to make "Cloud" queries on suspicious files, generating
 "Issuing SDN query" events. Other events may however be generated instead (as
 shown below) depending on the `Windows Defender` version. This event is likely
-to be dependant on the activation of "Cloud-delivered protection"
+to be dependent on the activation of "Cloud-delivered protection"
 (`SubmitSamplesConsent` set to `0x1`). The feature, and associated event type,
 are not documented.
 
@@ -262,10 +262,10 @@ Format:
 Examples:
 
 ```
-# SND query event.
+# SDN query event.
 2023-07-12T11:16:34.869Z SDN:Issuing SDN query for \Device\HarddiskVolume4\inetpub\wwwroot\file.asp (\Device\HarddiskVolume4\inetpub\wwwroot\file.asp) (sha1=12345678900b1a36ee0e7f932386ca1234567890, sha2=1234567899876543215059e9780f802a2f75b432b0d87a123456789987654321)
 
-# Cloud query events with out file information.
+# Cloud query events without file information.
 2023-12-18T18:41:02.439Z [Cloud] Engine is requesting config to do cloud query [regular network].
 2023-12-18T18:41:02.470Z [Cloud] SubmitReport(CMpSpyDssContext), ShouldSendEvenOnPaidNetworks: 1
 2023-12-18T18:41:02.470Z [Cloud] Start of cloud request. Passive mode: 0
@@ -284,7 +284,7 @@ Examples:
 renamed files. The "original" filename seems to be retrieved from the file
 `VERSIONINFO` header's `OriginalFilename` or `ProductName` field (if the
 `OriginalFilename` field is not specified). This event can thus be an indicator
-of file whose filename does not match their `OriginalFilename`/`ProductName`,
+of files whose filenames do not match their `OriginalFilename`/`ProductName`,
 such as system utilities (such as `cmd.exe`) renamed by threat actors for
 defense evasion purposes.
 
@@ -353,7 +353,7 @@ type parsed).
 
   - [Estimated performance impact events](#estimated-performance-impact-events).
 
-  - [Real-time detections events](#real-time-detections-events).
+  - [Real-time detection events](#real-time-detection-events).
 
   - [Suspicious command line events](#suspicious-command-line-events).
 

@@ -1,6 +1,6 @@
 ---
 title: Windows 10 Timeline / ActivitiesCache.db
-summary: 'Introduced in Windows 10 version 1803, the Windows Activity history tracks a number of operations on the system: programs used, local files opened, SharePoint documents consulted, and websites browsed (using Internet Explorer/Microsoft Edge Legacy).\n\nThe ActivitiesCache.db database only stores data for the last 30 days by default.\n\nInformation of interest, that depends on the activity type: start and end times of the activity (in UTC), executable full path for program execution, file name/SharePoint link for files accessed using certain programs, created and last modified timestamp of the associated file, etc.\n\nThe history of the clipboard data may also be stored for a short amount of time (approximately 12 hours) in non default configuration.'
+summary: 'Introduced in Windows 10 version 1803, the Windows Activity history tracks a number of operations on the system: programs used, local files opened, SharePoint documents consulted, and websites browsed (using Internet Explorer/Microsoft Edge Legacy).\n\nThe ActivitiesCache.db database only stores data for the last 30 days by default.\n\nInformation of interest, that depends on the activity type: start and end times of the activity (in UTC), executable full path for program execution, file name/SharePoint link for files accessed using certain programs, created and last modified timestamp of the associated file, etc.\n\nThe history of the clipboard data may also be stored for a short amount of time (approximately 12 hours) in a non-default configuration.'
 keywords: Windows 10 Timeline, ActivitiesCache.db, ActivitiesCache
 tags:
   - windows_program_execution
@@ -35,7 +35,7 @@ tables being of interest:
 
   - `Activity`/`ActivityOperation` tables.
 
-    - Data about various activities for different operation/activity type:
+    - Data about various activities for different operation/activity types:
       - Program execution and opening of a file (5, `ExecuteOpen`)
       - Copy-pasting from a program (`CopyPaste`)
       - Application "in focus" (`InFocus`)
@@ -53,7 +53,7 @@ tables being of interest:
       - The user's device timezone.
       - ...
 
-    - An activity data can be present in either or both tables depending on the
+    - Activity data can be present in either or both tables depending on the
       activity lifecycle. For example, a new activity will only be present in
       the `Activity` table, while an activity in the "upload queue" will be
       placed in the `ActivityOperation` table.
@@ -70,9 +70,9 @@ tables being of interest:
       - Activity expiration timestamp (timestamp of occurrence + 30 days by
         default).
 
-   - Upon occurrence of an activity, one or multiple entries sharing the same
-     activity ID will be created in the `Activity_PackageId` table, one for
-     each program/application related to the activity.
+    - Upon occurrence of an activity, one or multiple entries sharing the same
+      activity ID will be created in the `Activity_PackageId` table, one for
+      each program/application related to the activity.
 
 #### Clipboard activity
 
@@ -83,11 +83,11 @@ approximately 12 hours after the operation.
 The activity type `16` tracks use of the clipboard by an application, and is
 logged by default. The activity type `10` tracks the clipboard content, and is
 only logged if the non-default "Clipboard history" and "Sync across your
-devices" clipboard settings are both enabled. The later setting is only
+devices" clipboard settings are both enabled. The latter setting is only
 available for Microsoft or Azure AD synchronized accounts (and thus not
 available for local or simple Active Directory domain accounts).
 
-If the prerequisites are meet, an activity type `10` should be logged
+If the prerequisites are met, an activity type `10` should be logged
 immediately after an activity type `16`, allowing correlation of the two
 events.
 
@@ -109,7 +109,7 @@ events:
   - The application from which the data was copied (in the `AppId` column).
 
   - If the data was copied (`Copy`) or pasted (`Paste`) (in the `Group`
-    column). Only copy operation seem to generate an entry on recent versions
+    column). Only copy operations seem to generate an entry on recent versions
     of the Windows operating system however.
 
 ### Tool(s)

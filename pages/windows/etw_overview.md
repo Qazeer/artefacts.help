@@ -23,10 +23,10 @@ PowerShell activity, etc.
 
   - `Consumers`: consume the events in real time.
 
-Events can eventually be written to event log `channels` (assimilable to the
+Events can optionally be written to event log `channels` (comparable to the
 log file names), `event tracing` log files, or both. The provider itself
 defines the event log `channel(s)` to which events should be written (through
-its ["instrumentation manifest" for manifested-based providers](https://learn.microsoft.com/en-us/windows/win32/wes/defining-channels)).
+its ["instrumentation manifest" for manifest-based providers](https://learn.microsoft.com/en-us/windows/win32/wes/defining-channels)).
 Providers can define new `channels` or import existing `channels`. While the
 provider may use different `channels` for different events, each event can only
 be written to a single `channel` (as specified in the event's `event element`

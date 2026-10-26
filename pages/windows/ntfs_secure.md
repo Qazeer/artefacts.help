@@ -1,6 +1,6 @@
 ---
 title: NTFS - $Secure
-summary: 'The $Secure file contains the security descriptor for all the files and folders on a NTFS volume.'
+summary: 'The $Secure file contains the security descriptor for all the files and folders on an NTFS volume.'
 keywords: Filesystem, Secure, $Secure
 tags:
   - windows_ntfs_filesystem
@@ -14,7 +14,7 @@ folder: windows
 ### Overview
 
 The `$Secure` file contains the `security descriptor` for all the files and
-folders on a `NTFS` volume.
+folders on an `NTFS` volume.
 
 The `security descriptors` are stored within the `$SDS` named data stream of
 the `$Secure` file. The `$Secure` file additionally defines two other named

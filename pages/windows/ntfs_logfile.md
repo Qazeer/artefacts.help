@@ -18,13 +18,13 @@ folder: windows
 The `$LogFile` is part of a journaling feature of `NTFS`, activated by default,
 which maintains a low-level record of changes made to the `NTFS` volume.
 
-Every disk operation is journalized prior to being committed. In case of
+Every disk operation is journaled prior to being committed. In case of
 failure, such as a crash during an update, the `$LogFile` can be used to
 revert disk operations.
 
 ### Information of interest
 
-As low-level operations are journalized, the `$LogFile` contains very limited
+As low-level operations are journaled, the `$LogFile` contains very limited
 historical data, usually only of the last few hours at most.
 
 ### References

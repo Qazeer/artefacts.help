@@ -23,7 +23,7 @@ The key fields in the subscription/activity log schema are:
      - `identity.claims.groups`: the AzureAD groups of which the identity is a
        member.
 
-    - `identity.claims.ipaddr`: the IP address the identity authenticated from.
+     - `identity.claims.ipaddr`: the IP address the identity authenticated from.
 
   - `callerIpAddress`: the IP address the action was performed from.
 
@@ -47,5 +47,5 @@ The key fields in the subscription/activity log schema are:
 
   - `resultType` and `resultSignature` (more verbose): the result of the operation.
 
-  - `correlationId`: an unique identifier that can be used to map the different
+  - `correlationId`: a unique identifier that can be used to map the different
     events associated with a single operation.

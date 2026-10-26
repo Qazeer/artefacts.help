@@ -14,8 +14,8 @@ folder: others
 ### Wireshark & tshark
 
 [`Wireshark`](https://www.wireshark.org/) is a multi-platform network protocol
-analyzer that supports deep packets inspection for hundreds of network
-protocol. `tshark` is the command-line counterpart of `Wireshark`.
+analyzer that supports deep packet inspection for hundreds of network
+protocols. `tshark` is the command-line counterpart of `Wireshark`.
 
 `Wireshark` and `tshark` can capture network traffic from a live network
 interface or can read (and write) packets from a previously saved capture
@@ -43,7 +43,7 @@ combine `tshark` filters and statistic computation.
 
   - The "Find Packet" menu ("Ctrl + F" shortcut) can be used to search string /
     regex in packet (list and content). This feature can be combined with
-    display filters to limit the numbers of packets searched. A similar search
+    display filters to limit the number of packets searched. A similar search
     can be conducted with `tshark` using the display filter
     `'frame contains "<STRING>"'` (for string) or `'frame matches "<REGEX>"'`
     (for case-insensitive regular expression).
@@ -55,7 +55,7 @@ combine `tshark` filters and statistic computation.
 # -t ud: Displays the timestamp associated with the packet in UTC YYYY-MM-DD hh:mm:ss.SSSSSSSSS.
 # -Y <DISPLAY_FILTER>: Filters the displayed results using <DISPLAY_FILTER> ("display filter").
 # -2 -R <READ_FILTER>: Filters the results with <READ_FILTER>, allowing for 2 pass analysis.
-# -z <STATISTIC_EXPRESSION>: Computes statistic based on the specified expression.
+# -z <STATISTIC_EXPRESSION>: Computes statistics based on the specified expression.
 # -q: Limits stdout output, notably to avoid printing packets metadata for statistics (-z).
 # -T <json | PRINT_FORMAT>: Specifies the output print format. Defaults to "text".
 # -T fields -e <FIELD_1> ... -e <FIELD_N>: Extracts the specified fields.
@@ -79,7 +79,7 @@ be used in `Wireshark`) and statistic expressions:
 | `tshark -z help` | Lists the statistic expressions supported by `tshark`. |
 | `tshark -nr <INPUT_FILE> -Y 'frame contains "<STRING>"'` <br><br> `tshark -nr <INPUT_FILE> -Y 'frame matches "<REGEX>"'` | Searches the packets content for the specified string or case-insensitive regular expression. |
 | `tshark -qnr <INPUT_FILE> -z follow,<tcp | http>,ascii,<TCP_STREAM_NUMBER>` | Follows the specified `TCP` or `HTTP` stream, printing its content. |
-| `tshark -nr <INPUT_FILE> -2 -R 'ip.src.addr == <SRC_IP> && ip.dst.addr in {10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16}' -q -z io,phs` <br><br> `tshark -nr <INPUT_FILE> -2 -R 'ip.src.addr == <IP> && ip.dst.addr in {10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16}' -q -z endpoints,ip` | Displays basic metrics (frames and bytes exchanged) per protocol (`io,phs`) or per remote hosts (`endpoints,ip`) for the given `IP` source `SRC_IP` to all private hosts. |
+| `tshark -nr <INPUT_FILE> -2 -R 'ip.src.addr == <SRC_IP> && ip.dst.addr in {10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16}' -q -z io,phs` <br><br> `tshark -nr <INPUT_FILE> -2 -R 'ip.src.addr == <IP> && ip.dst.addr in {10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16}' -q -z endpoints,ip` | Displays basic metrics (frames and bytes exchanged) per protocol (`io,phs`) or per remote host (`endpoints,ip`) for the given `IP` source `SRC_IP` to all private hosts. |
 | `tshark -nr <INPUT_FILE> --export-objects smb,<OUTPUT_FOLDER>` <br><br> `tshark -nr <INPUT_FILE> --export-objects http,<OUTPUT_FOLDER>` | Extracts the files found in the `SMB` or `HTTP` streams to disk. |
 | `tshark -nr <INPUT_FILE> -Y 'dns || udp.dstport == 53 || tcp.dstport == 53' -T fields -e ip.src -e dns.qry.name | sort -u` | Extracts `DNS` queries made per host. |
 | `tshark -nr <INPUT_FILE> -Y 'tls.handshake.type eq 1'` <br><br> `tshark -nr <INPUT_FILE> -Y 'tls.handshake.type eq 1' -T fields -e ip.src -e tls.handshake.extensions_server_name | sort -u` | Lists/extracts the `TLS` `Client Hello` requests, that may contain [`Server Name Indication` (`SNI`)](https://www.cloudflare.com/learning/ssl/what-is-sni/) referencing the requested domain. <br><br> `Client Hello` requests can be listed or the `SNI` specified extracted per host. |
@@ -111,7 +111,7 @@ can be used to parse `PCAP` files and will produce
 [several `log` files](https://docs.zeek.org/en/current/log-formats.html#working-with-log-files)
 related to the network activity occurring in the `PCAP`.
 
-By default `zeek` will output `TSV` files, but also support `JSON` outputs.
+By default `zeek` will output `TSV` files, but also supports `JSON` outputs.
 
 ```bash
 # TSV formatted output files.
@@ -123,13 +123,13 @@ zeek -C -r <PCAP_FILE> LogAscii::use_json=T
 
 ### ngrep
 
-`ngrep` is an utility that can be used to combine `grep`-like expression
+`ngrep` is a utility that can be used to combine `grep`-like expression
 matching and
 [`BPF` filtering](https://www.tcpdump.org/manpages/pcap-filter.7.html)
 against network packets and `PCAP` files.
 
 `ngrep` can be used to filter packets into an output `pcap` file, for further
-analysis with tools supporting deep packets inspection (such as `Wireshark`).
+analysis with tools supporting deep packet inspection (such as `Wireshark`).
 
 ```bash
 # -W Specifies  an  alternate  manner  for displaying output packets matching the expression.
@@ -137,7 +137,7 @@ analysis with tools supporting deep packets inspection (such as `Wireshark`).
 #    The "none" displays the IP and source/destination header on one line, the payload on a second line.
 #    The "single" displays everything (header and payload) on a single line.
 
-ngrep [-i] [-W <normal | single | byline> | -O <OUTPUT_PCAP_FILE] -I <INPUT_PCAP_FILE> '<GREP_EXPRESSION>' '<BPF_FILTER>'
+ngrep [-i] [-W <normal | single | byline> | -O <OUTPUT_PCAP_FILE>] -I <INPUT_PCAP_FILE> '<GREP_EXPRESSION>' '<BPF_FILTER>'
 ```
 
 Example query to extract `GET` and `POST` `HTTP` requests from `10.0.0.5` to

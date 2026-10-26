@@ -17,10 +17,10 @@ Exchange Online instance:
 
   - Azure AD tenant: `Global Reader` ("Lecteur Général") role.
 
-  - Exchange Online environment: `View-Only Audit Logs` role
+  - Exchange Online environment: `View-Only Audit Logs`
     ("Journaux d’audit en affichage seul") role. This role is by default
     granted to the `Compliance Management` and `Organization Management` role
-    groups (for which members can be assigned). Members can be assigned to the
+    groups (to which members can be assigned). Members can be assigned to the
     aforementioned groups through the
     [Exchange administration portal](https://admin.exchange.microsoft.com/).
 
@@ -38,6 +38,6 @@ Exchange Online instance:
 
 Note that accessing Azure AD logs through the `MS Graph API` requires at least
 **one user with an Azure `AD Premium P1` or `AD Premium P2` license**. These
-license can be included in other license plans, such as
-`Microsoft 365 E3/E5/F3`. The other to which is associated the license does
+licenses can be included in other license plans, such as
+`Microsoft 365 E3/E5/F3`. The user to which the license is assigned does
 not matter.

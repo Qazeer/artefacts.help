@@ -1,6 +1,6 @@
 ---
 title: NTFS - MACB timestamps and timestomping
-summary: 'On NTFS filesystems, each file posses (at least) two attributes that hold (among other information) Modification, Access, Change and Birth (MACB) timestamps: $STANDARD_INFORMATION and $FILENAME attributes.\n\nThe $STANDARD_INFORMATION and $FILENAME timestamps are not updated similarly depending on the operation.\n\nTimestomping is the action of modifying the timestamps of a file, generally to evade detection.\n\nTimestomping may be detected using a number of techniques:\n - Identifying $STANDARD_INFORMATION timestamps older than $FILENAME timestamps.\n - Using UsnJrnl records.\n - Identifying non nano-second precise $STANDARD_INFORMATION timestamps.\n - Using MFT entry numbers.\n\nHowever each technique is prone to false-positives and false-negatives.'
+summary: 'On NTFS filesystems, each file possesses (at least) two attributes that hold (among other information) Modification, Access, Change and Birth (MACB) timestamps: $STANDARD_INFORMATION and $FILENAME attributes.\n\nThe $STANDARD_INFORMATION and $FILENAME timestamps are not updated similarly depending on the operation.\n\nTimestomping is the action of modifying the timestamps of a file, generally to evade detection.\n\nTimestomping may be detected using a number of techniques:\n - Identifying $STANDARD_INFORMATION timestamps older than $FILENAME timestamps.\n - Using UsnJrnl records.\n - Identifying non nano-second precise $STANDARD_INFORMATION timestamps.\n - Using MFT entry numbers.\n\nHowever each technique is prone to false-positives and false-negatives.'
 keywords: Filesystem, MACB timestamps, STANDARD_INFORMATION, $STANDARD_INFORMATION, FILENAME, $FILENAME, timestomping
 tags:
   - windows_ntfs_filesystem
@@ -14,19 +14,19 @@ folder: windows
 
 ### NTFS $STANDARD_INFORMATION & $FILENAME MACB timestamps
 
-On `NTFS` filesystems, each file posses (at least) two attributes that hold
+On `NTFS` filesystems, each file possesses (at least) two attributes that hold
 (among other information) `Modification, Access, Change and Birth (MACB)`
 timestamps:
   - `$STANDARD_INFORMATION`
   - `$FILENAME`
 
-The impact of a number of operations on each timestamps for the
-`$STANDARD_INFORMATION` and `$FILENAME` attributes are detailed in the
+The impact of a number of operations on each timestamp for the
+`$STANDARD_INFORMATION` and `$FILENAME` attributes is detailed in the
 [SANS's `Windows Time Rules` poster](https://www.sans.org/security-resources/posters/windows-forensic-analysis/170/download).
 Globally, the following points should be noted:
 
   - `$FILENAME` `MACB` timestamps are updated on file creation/copy/volume
-    move with the date of the operation itself but are not reliability updated
+    move with the date of the operation itself but are not reliably updated
     on regular file operations (access, modification, rename, deletion).
     **However as the `$FILENAME` `MAB` timestamps are updated/copied from the
     `$STANDARD_INFORMATION` `MAB` timestamps, on file rename or volume-local
@@ -56,7 +56,7 @@ Globally, the following points should be noted:
         
         Starting from `Windows Redstone 4` (`Build 1803` of 2018-04), last
         access updates seem to be enabled (back) by default if the system
-        partition size is <= to 128 GiB. Starting from `Windows 10 20H1`
+        partition size is <= 128 GiB. Starting from `Windows 10 20H1`
         (`Build 18970` of 2020-05) last access updates seem to be enabled by
         default independently of the system partition size.
 
@@ -67,18 +67,18 @@ Globally, the following points should be noted:
 Depending on its filename length, a given file may have one or two `$FILENAME`
 attributes:
 
-  - file with short name will have a single `$FILENAME` attribute.
+  - files with short names will have a single `$FILENAME` attribute.
 
-  - file with long name will be associated to two `$FILENAME` attributes,
+  - files with long names will be associated with two `$FILENAME` attributes,
     one for the long file name and a second for the MS-DOS-compatible short
     file name (`FILENA~1.TXT` for example).
 
 Additionally, another `$FILENAME` attribute can be found for each file in the
-directory index of their directory of residency. Indeed directory are stored
+directory index of their directory of residency. Indeed, directories are stored
 on `NTFS` partitions as `B+ tree data structure` with the keys, representing
 files and subdirectories, stored as `$FILENAME` attributes. `MACB` timestamps
 for each file and subdirectory of a given directory can thus be found in the
-directory index. The directory index are stored in `NTFS Index Attribute`
+directory index. The directory indexes are stored in `NTFS Index Attribute`
 files, also known as `INDX` files and named `$I30` on disk.
 
 A given file may thus be associated with either:
@@ -93,7 +93,7 @@ A given file may thus be associated with either:
 ### Timestomping detection
 
 Timestomping is the action of modifying the timestamps of a file (on Windows
-systems, on a `NTFS` partition). It can notably be used to evade digital
+systems, on an `NTFS` partition). It can notably be used to evade digital
 forensic investigation by making malicious files look legitimate or being out
 of the presupposed attack timeframe.
 
@@ -123,14 +123,14 @@ from `$STANDARD_INFORMATION` (easily modifiable) are older than the `$FILENAME`
 timestamps (not (easily) modifiable), the file timestamps may have been
 timestomped.
 
-****However, as the `$FILENAME` `MAB` timestamps are updated/copied from the
+**However, as the `$FILENAME` `MAB` timestamps are updated/copied from the
 `$STANDARD_INFORMATION` `MAB` timestamps on file rename or volume-local file
-move, `$FILENAME` timestamps can also be (undirectly) tampered.**
+move, `$FILENAME` timestamps can also be (indirectly) tampered with.**
 
-Additionally, This detection method is however prone to false-positives as some
+Additionally, this detection method is prone to false-positives as some
 applications or installers may modify the `$STANDARD_INFORMATION` timestamps.
 
-`MFTECmd` can be used to parse the `MFT` of a `NTFS` volume and automatically
+`MFTECmd` can be used to parse the `MFT` of an `NTFS` volume and automatically
 highlight the files having `$STANDARD_INFORMATION` timestamps older than their
 `$FILENAME` timestamps.
 
@@ -140,10 +140,10 @@ Data from the `UsnJrnl` artefact may reveal recent operations on timestomped
 files. For instance, a `USN_REASON_FILE_CREATE` record logged in the `UsnJrnl`
 for a seemingly older file could be an indicator of timestomping.
 
-Additionally, an `USN_REASON_BASIC_INFO_CHANGE` (+ `USN_REASON_CLOSE`) record
+Additionally, a `USN_REASON_BASIC_INFO_CHANGE` (+ `USN_REASON_CLOSE`) record
 would be logged in the `UsnJrnl` following the timestomping of a file. The
 presence of such indicator is however not necessarily a strong indicator of
-timestomping as many other attributes change would also trigger a similar
+timestomping as many other attribute changes would also trigger a similar
 record to be logged in the `UsnJrnl`.
 
 This detection method is however prone to false-negatives as the `UsnJrnl` has
@@ -154,15 +154,15 @@ to parse the `UsnJrnl` artefact.
 
 #### Non nano-second precise $STANDARD_INFORMATION timestamps
 
-The timestomping tool used may have limitation on the time precision they
-it for timestomped timestamps. For example, the tool may only allow precision
+The timestomping tool used may have limitations on the time precision it
+uses for timestomped timestamps. For example, the tool may only allow precision
 down to the second level, while the `$STANDARD_INFORMATION` timestamps are
 precise down to the ten millionths of a second. In such case, the timestomped
 timestamps will be padded with zeros in place of the actual milliseconds:
 `YYYY-MM-DD hh:mm:ss.0000000`.
 
 This detection method is however prone to false-positives as some utilities or
-file formats, such as file-archives, may truncate timestamps down the second
+file formats, such as file-archives, may truncate timestamps down to the second
 level.
 
 #### MFT entry numbers

@@ -29,11 +29,11 @@ timestamp of insertion in the `SRUM` database. As entries are only written to
 the `SRUM` database every hour, timestamps are thus precise to the hour (with
 multiple entries usually sharing the same insertion timestamp).
 
-Among the various information stored, the following two tables hold the most
+Among the various information stored, the following tables hold the most
 commonly valuable data for forensics investigations:
 
   - `Application Resource Usage` table (GUID
-    `{D10CA2FE-6FCF-4F6D-848E-B2E99266FA89}`), that tracks programs
+    `{D10CA2FE-6FCF-4F6D-848E-B2E99266FA89}`), that tracks program
     execution.
     For each entry in the `Application Resource Usage` table (`SrumECmd`'s
     `AppResourceUseInfo` output), the following information may be recorded:
@@ -69,7 +69,7 @@ commonly valuable data for forensics investigations:
     - Total duration of execution (in milliseconds).
 
   - `Network Data Usage` table (GUID `{973F5D5C-1D90-4944-BE8E-24B94231A174}`),
-    that tracks programs execution and network usage of the executed
+    that tracks program execution and network usage of the executed
     programs.
     For each entry in the `Network Data Usage` table (`SrumECmd`'s
     `NetworkUsages` output), the following information may be
@@ -80,10 +80,10 @@ commonly valuable data for forensics investigations:
     - Full path of the executable or application information/description for
       built-in components.
 
-    - Metrics on network data usage (bytes sent and receive on a given network
+    - Metrics on network data usage (bytes sent and received on a given network
       interface).
 
-Some of the information recorded in the `SRUM` database be viewed using the
+Some of the information recorded in the `SRUM` database can be viewed using the
 Windows `Task Manager` ("App history" tab).
 
 ### Tool(s)
@@ -113,7 +113,7 @@ database, and correlates information from the `SOFTWARE` registry hive.
 # Parses the specified SRUM database, using the optionally provided SOFTWARE registry hive.
 SrumECmd.exe -f <SRUDB.dat | SRUM_DB_FILE> [-r <SOFTWARE>] --csv <OUTPUT_DIRECTORY>
 
-# Recursively look for SRUDB.dat and SOFTWARE files in the specified directory.
+# Recursively looks for SRUDB.dat and SOFTWARE files in the specified directory.
 SrumECmd.exe -d <DIRECTORY> --csv <OUTPUT_DIRECTORY>
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: Registry - FeatureUsage
-summary: 'Introduced in Windows 10 version 1903, the FeatureUsage registry key is linked to the Windows Task, storing a number of metrics related to the Task bar usage.\n\nInformation of interest: program full path and run counter of the associated taskbar operation (brought to focus, right-clicked, icon updated, etc.).\n\nNo timestamp of execution/occurrence is available.'
+summary: 'Introduced in Windows 10 version 1903, the FeatureUsage registry key is linked to the Windows taskbar, storing a number of metrics related to the taskbar usage.\n\nInformation of interest: program full path and run counter of the associated taskbar operation (brought to focus, right-clicked, icon updated, etc.).\n\nNo timestamp of execution/occurrence is available.'
 keywords: 'FeatureUsage, AppSwitched, ShowJumpView, AppBadgeUpdated, AppLaunch, TrayButtonClicked'
 tags:
   - windows_registry
@@ -15,7 +15,7 @@ folder: windows
 ### Overview
 
 Introduced in `Windows 10`'s version 1903, the `FeatureUsage` registry key is
-linked to the Windows Task, storing a number of metrics related to the Task bar
+linked to the Windows taskbar, storing a number of metrics related to the taskbar
 usage.
 
 ### Information of interest
@@ -38,7 +38,7 @@ The following operation subkeys are populated:
   - `ShowJumpView`: applications whose jump menu was opened (application
     right-clicked on the taskbar).
 
-  - `AppBadgeUpdated`: applications that had their task bar icon updated
+  - `AppBadgeUpdated`: applications that had their taskbar icon updated
     (for example for notifications).
 
   - `AppLaunch`: applications pinned on the taskbar that have been executed.

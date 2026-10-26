@@ -1,6 +1,6 @@
 ---
 title: ETW - Active Directory Domain Services (Domain Controllers) RBCD detections
-summary: 'The resource-based constrained delegation, introduced in Windows Server 2012, deports the trust in Kerberos delegations to the final resources. Instead of trusting a service account to impersonate other users to destination services, service accounts can specifically authorize other services to authenticate using delegated service tickets. The authorized services are identified, by their SPN, in the msDS-AllowedToActOnBehalfOfOtherIdentity attribute of the final services.\n\n The first step of the RBCD attack is usually the modification of an objects "msDS-AllowedToActOnBehalfOfOtherIdentity" attribute, which generates an associated 5136 event.\n\n The exploitation of the configured delegation relies on a first S4U2Self request and a subsequent S4U2Proxy request, each request generating a specific 4769 event.'
+summary: 'The resource-based constrained delegation, introduced in Windows Server 2012, shifts the trust in Kerberos delegations to the final resources. Instead of trusting a service account to impersonate other users to destination services, service accounts can specifically authorize other services to authenticate using delegated service tickets. The authorized services are identified, by their SPN, in the msDS-AllowedToActOnBehalfOfOtherIdentity attribute of the final services.\n\n The first step of the RBCD attack is usually the modification of an object''s "msDS-AllowedToActOnBehalfOfOtherIdentity" attribute, which generates an associated 5136 event.\n\n The exploitation of the configured delegation relies on a first S4U2Self request and a subsequent S4U2Proxy request, each request generating a specific 4769 event.'
 keywords: Active Directory, Domain Controllers, Kerberos, RBCD, Delegations, Resource-Based Constrained Delegations, msDS-AllowedToActOnBehalfOfOtherIdentity, Service-for-User-to-Self, S4U2self, 5136, 4769, 0x40800018, Service for User to Proxy, S4U2Proxy, 0x40820010, service ticket, Transited Services
 tags:
   - windows_etw
@@ -45,18 +45,18 @@ authentication, and further used to authenticate to any domain resources.
 
 Service accounts that are trusted for `constrained delegation`, i.e service
 accounts with a non-empty `msDS-AllowedToDelegateTo` attribute, can impersonate
-other domain users to configured services (in the service account 's
+other domain users to configured services (in the service account's
 `msDS-AllowedToDelegateTo` attribute). `Constrained delegations` are
 implemented in the `Kerberos` protocol by Microsoft through the
 `Service-for-User-to-Proxy (S4U2proxy)` extension. `S4U2proxy` allows service
 accounts to request `service tickets` to the `KDC` (`TGS-REQ`) on behalf of
 other users by arbitrarily specifying the name of the user the `service ticket`
-should be emitted to. In order to do so, the service account must join, in the
+should be issued for. In order to do so, the service account must include, in the
 `req-body.additional-tickets` field of the `TGS-REQ` request, a
 `service ticket` marked as `forwardable` from the specified user. Such
 `service ticket` may be received from a delegable user as part of the
 `Kerberos` authentication process to the "proxifying" service or directly
-requested by the "proxifying" service through a `S4U2self` request (if the
+requested by the "proxifying" service through an `S4U2self` request (if the
 service is allowed to do so). More details on the `Kerberos` `S4U2self`
 extension are provided below.
 
@@ -91,7 +91,7 @@ authentication protocols, such as the `NT Lan Manager (NTLM)` protocol. As a
 `service ticket` is required for `Kerberos` `constrained` and `resource-based
 constrained delegation` (both leveraging the `Kerberos` `S4U2proxy` extension),
 the `S4U2self` allows a service account to obtain a `service ticket` for itself
-on behalf of an arbitrarily specified user. The user is specified in the of the
+on behalf of an arbitrarily specified user. The user is specified in the
 `PA-FOR-USER` field in the `preauthentication data` of the `KRB_TGS_REQ`
 request to the `KDC`.
 
@@ -103,7 +103,7 @@ to `"use any authentication protocol"`, which corresponds to the
 `User-Account-Control` attribute, will receive `service tickets` marked as
 `forwardable`.
 
-The `S4U2self` `service tickets` contain, in its
+The `S4U2self` `service tickets` contain, in their
 `Privilege Attribute Certificate (PAC)`, the `authorization data` of the
 requested user and can be used:
 
@@ -126,14 +126,14 @@ requested user and can be used:
     provided to the `KDC` is non-`forwardable`. The `S4U2self` `service ticket`
     can only be used to make `S4U2proxy` requests for the services that define
     in their `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute the service
-    emitting the `S4U2self` `service ticket`.
+    requesting the `S4U2self` `service ticket`.
 
 #### Accounts that cannot be delegated
 
 Domain users can be protected from `Kerberos` delegation by either being:
   - configured as non-delegable (`"Account is sensitive and cannot be
     delegated"`), which corresponds to the `ADS_UF_NOT_DELEGATED` flag being
-    positioned in a user' `User-Account-Control` attribute.
+    set in a user's `User-Account-Control` attribute.
   - members of the `Protected Users` domain group.
 
 ### RBCD attack Windows events

@@ -1,6 +1,6 @@
 ---
 title: Registry - Background Activity Moderator (BAM) and Desktop Activity Moderator (DAM)
-summary: 'Introduced in Windows 10 Fall Creators update - version 1709, the Background Activity Moderator (BAM) is a mostly undocumented feature that controls the programs executed in the background.The Desktop Activity Moderator (DAM) is a feature for mobile devices, that support the "Connected Standby" mode (and thus hold no data on Windows desktop or server).\n\nIf a file is deleted, the eventual associated entry in the BAM is deleted as well after the system reboot. Additionally, BAM entries older than 7 days are deleted upon system boot.\n\nInformation of interest: program full path, timestamp of execution, and executing user (as the values are grouped by user SID).'
+summary: 'Introduced in Windows 10 Fall Creators update - version 1709, the Background Activity Moderator (BAM) is a mostly undocumented feature that controls the programs executed in the background. The Desktop Activity Moderator (DAM) is a feature for mobile devices that support the "Connected Standby" mode (and thus hold no data on Windows desktop or server).\n\nIf a file is deleted, the eventual associated entry in the BAM is deleted as well after the system reboot. Additionally, BAM entries older than 7 days are deleted upon system boot.\n\nInformation of interest: program full path, timestamp of execution, and executing user (as the values are grouped by user SID).'
 keywords: 'Background Activity Moderator, BAM, Desktop Activity Moderator, DAM'
 tags:
   - windows_registry
@@ -20,7 +20,7 @@ controls the programs executed in the background. The
 `Desktop Activity Moderator (DAM)` is a feature for devices supporting the
 "Connected Standby" mode (i.e. when a device is turned on, but its display will
 be turned off). As a result, the `BAM` registry keys will contain data on any
-devices, while `DAM` registry keys will only contain data on mobile devices.
+device, while `DAM` registry keys will only contain data on mobile devices.
 
 ### Information of interest
 

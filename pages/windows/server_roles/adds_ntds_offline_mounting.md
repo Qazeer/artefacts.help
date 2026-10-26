@@ -1,6 +1,6 @@
 ---
 title: Procedure - Active Directory Domain Services NTDS offline mounting
-summary: 'An exported NTDS database file can be mounted using dsamain, to then be queried in LDAP or with PowerShell cmdlets through the "AD Web Services".\n\n '
+summary: 'An exported NTDS database file can be mounted using dsamain, to then be queried in LDAP or with PowerShell cmdlets through the "AD Web Services".'
 keywords: Active Directory, Active Directory Domain Services, Domain Controllers, DC, replication metadata, msDS-ReplAttributeMetaData, msDS-ReplValueMetaData, Get-ADReplicationAttributeMetadata, ADTimeline, FarsightAD, esentutl, dsamain.exe
 tags:
   - windows_active_directory
@@ -23,9 +23,9 @@ For instance, the `Get-ADReplicationAttributeMetadata` cmdlet or `ADTimeline`
 can be used on a "mounted" NTDS database to retrieve historical
 [AD replication metadata](./adds_replication_metadata.md) from backup images.
 
-The following pre-requisites are required to mount a NTDS database:
+The following pre-requisites are required to mount an NTDS database:
 
-  1. The Windows Server major version used must be superior or equal to the
+  1. The Windows Server major version used must be greater than or equal to the
      Windows Server version of the Domain Controller the NTDS is coming
      from.
 
@@ -86,7 +86,7 @@ Get-AD*
 #### Human-readable ACL using Get-ACL
 
 While RSAT cmdlets or GUI tools can be used to retrieve ACL in a `SDDL`
-notation, the `Get-Acl` cmdlet can be used to query and retrieve ACL in an
+notation, the `Get-Acl` cmdlet can be used to query and retrieve ACL in a
 human-readable format:
 
 ```bash
@@ -103,14 +103,14 @@ The `Get-ADReplicationAttributeMetadata` PowerShell cmdlet and
 [AD replication metadata](./adds_replication_metadata.md):
 
 ```bash
-Get-ADReplicationAttributeMetadata -Server "127.0.0.1:3266" -IncludeDeletedObjects –ShowAllLinkedValues "<DISTINGUISHED_NAME>"
+Get-ADReplicationAttributeMetadata -Server "127.0.0.1:3266" -IncludeDeletedObjects -ShowAllLinkedValues "<DISTINGUISHED_NAME>"
 
 .\AD-timeline.ps1 -server "127.0.0.1:3266"
 ```
 
 #### Hunting with BloodHound
 
-While `SharpHound` can not be directly used on a mounted NTDS database, a
+While `SharpHound` cannot be directly used on a mounted NTDS database, a
 snapshot taken with
 [`ADExplorer`](https://learn.microsoft.com/en-us/sysinternals/downloads/adexplorer)
 can be converted to JSON files compatible with `BloodHound` using

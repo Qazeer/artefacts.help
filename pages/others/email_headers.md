@@ -5,7 +5,7 @@ keywords: SMTP, mail, email, envelope, content, headers, Message Transfer Agent,
 tags:
   - network
   - mailservers
-location: 'Email sender: Return-Path, From, and Reply-To headers. The Return-Path header can be protected against spoofing with SPF. The From header can be protected using DMARC (with SPF and/or DKIM).\n\n Originating server and MTA: Received header(s).\n\n Email legitimacy and anti-spoofing mechanisms, with associated headers:\n\n SPF: validate that the originating server is authorized to send emails for the sender domain.\n\n DKIM header: digitally sign (part of) the email using a public key associated with the sender domain.\n\n DMARC: extends SPF and DKIM by indicating to the receiver the actions to follow (block the email and notify an alerting address for example) if receiving an email with no or a failed SPK/DKIM authentication. Additionally, DMARC check the consistency of the domains from the "From" header, the DKIM signature, and the SMTP "MAIL FROM" command.'
+location: 'Email sender: Return-Path, From, and Reply-To headers. The Return-Path header can be protected against spoofing with SPF. The From header can be protected using DMARC (with SPF and/or DKIM).\n\n Originating server and MTA: Received header(s).\n\n Email legitimacy and anti-spoofing mechanisms, with associated headers:\n\n SPF: validate that the originating server is authorized to send emails for the sender domain.\n\n DKIM header: digitally sign (part of) the email using a public key associated with the sender domain.\n\n DMARC: extends SPF and DKIM by indicating to the receiver the actions to follow (block the email and notify an alerting address for example) if receiving an email with no or a failed SPF/DKIM authentication. Additionally, DMARC checks the consistency of the domains from the "From" header, the DKIM signature, and the SMTP "MAIL FROM" command.'
 last_updated: 2024-08-09
 sidebar: sidebar
 permalink: email_headers.html
@@ -17,7 +17,7 @@ folder: others
 An email object contains an envelope and a content.
 
 The envelope is the information that the email client and server use to
-send the email to the correct recipient(s). It notably include the sender email
+send the email to the correct recipient(s). It notably includes the sender email
 and the recipient email(s) specified with the `MAIL FROM` and `RCPT TO` `SMTP`
 commands respectively. The envelope also includes the `Received` headers added
 by the `Message Transfer Agent (MTA)` that relayed the email. The envelope
@@ -50,13 +50,13 @@ The email address of the sender is positioned in three headers:
     of the email. The `From` header is not verified by the `SPF` mechanism and
     can thus be spoofed.
 
-  - The `Reply-To` header, which simply specify the email to which human
-    replies should be sent to (as the recipient of the new email). An
+  - The `Reply-To` header, which simply specifies the email to which human
+    replies should be sent (as the recipient of the new email). An
     arbitrary email can be specified with no incidence on email security
     mechanisms.
 
 If the `From` and `Return-Path` headers differ, the `From` header may have been
-spoofed for social engineering purpose. If `SPF` verification (detailed below)
+spoofed for social engineering purposes. If `SPF` verification (detailed below)
 fails, the `Return-Path` header may have been spoofed as well.
 
 Note that the
@@ -70,7 +70,7 @@ A `Received` header is added to the email envelope headers by every
 ordered in reverse chronological order, with the last `Received` header
 corresponding to the one added first by the `MTA` closer to the email sender
 (and the first appearing `Received` header corresponding to the `MTA` closer to
-destination). The last `Received` header (placed the closest from the
+destination). The last `Received` header (placed the closest to the
 `From`/`To` headers and the message body) can thus be used to identify the
 `MTA` from which the email originated. The reputation and legitimacy of the
 sender `MTA`, in the email context, can be analysed to determine the legitimacy
@@ -98,10 +98,10 @@ can send emails for (through the `MAIL FROM` envelope header of an email).
 
 `SPF` can be used by organizations to define servers authorized to send emails
 for their domain names. `SPF` relies on specific `DNS` `TXT` records, that
-identify authorized servers and the comportment the receiver should follow in
-case of an email reception from a non authorized server.
+identify authorized servers and the behavior the receiver should follow in
+case of an email reception from a unauthorized server.
 
-`SPK` `DNS` records follow the format below, with mechanisms/rules evaluated
+`SPF` `DNS` records follow the format below, with mechanisms/rules evaluated
 from left-to-right and stopping on the first match (except for the `INCLUDE`
 mechanism).
 
@@ -122,19 +122,19 @@ The following `mechanisms` are supported:
 | `ip4:<IPV4 | IPV4_CIDR>` | Check if the sender email server `IP` address is the specified IPv4 address or in the specified IPv4 address range. |
 | `ip6:<IPV6 | IPV6_CIDR>` | Check if the sender email server `IP` address is the specified IPv6 address or in the specified IPv6 address range. |
 
-The `qualifiers` determine the comportment the receiving email server should
-follow if the `mechanism` match. The following `qualifiers` are supported:
+The `qualifiers` determine the behavior the receiving email server should
+follow if the `mechanism` matches. The following `qualifiers` are supported:
 
 | Qualifier keyword | Qualifier description | Description |
 |-------------------|-----------------------|-------------|
-| `+` | `PASS` | Allow the message. <br><br> I.e if the associated `mechanism` match, the message should be accepted by the receiving email server. <br><br> Default if the `qualifier` is not specified. |
-| `-` | `FAIL` | Reject the message. <br><br> I.e if the associated `mechanism` match, the message should be rejected by the receiving email server. |
-| `?` | `NEUTRAL` | The authoritative domain explicitly state that it is not asserting whether the sender email server `IP` address is authorized. <br><br> Can be processed as if the `SPF` record did not exist. I.e if the associated `mechanism` match, the message could be process as if no `SPF` record was configured by the receiving email server. |
-| `~` | `SOFTFAIL` | The authoritative domain explicitly state that it is not asserting whether the sender email server `IP` address is authorized. <br><br> Same comportment as `NEUTRAL`, with difference in processing left to the receiving email server. |
+| `+` | `PASS` | Allow the message. <br><br> I.e if the associated `mechanism` matches, the message should be accepted by the receiving email server. <br><br> Default if the `qualifier` is not specified. |
+| `-` | `FAIL` | Reject the message. <br><br> I.e if the associated `mechanism` matches, the message should be rejected by the receiving email server. |
+| `?` | `NEUTRAL` | The authoritative domain explicitly states that it is not asserting whether the sender email server `IP` address is authorized. <br><br> Can be processed as if the `SPF` record did not exist. I.e if the associated `mechanism` matches, the message could be processed as if no `SPF` record was configured by the receiving email server. |
+| `~` | `SOFTFAIL` | The authoritative domain explicitly states that it is not asserting whether the sender email server `IP` address is authorized. <br><br> Same behavior as `NEUTRAL`, with difference in processing left to the receiving email server. |
 
 #### Spoofed email SPF headers example
 
-The following email headers correspond to a spoofed email headers (assuming
+The following email headers correspond to the headers of a spoofed email (assuming
 that `SPF` records are correctly configured):
 
 ```

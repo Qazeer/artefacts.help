@@ -33,7 +33,7 @@ The **device installation entries** (generated when the device is plugged-in)
   - `Device id` (vendor and product names) or `vendor ID (VID)` +
     `product ID (PID)`.
 
-Example of an entry for the first time an USB device was plugged-in:
+Example of an entry for the first time a USB device was plugged-in:
 
 ```
 >>>  [Device Install (Hardware initiated) - SWD\WPDBUSENUM\_??_USBSTOR#Disk&Ven_USB&Prod_Flash_Disk&Rev_1100#7&d2713f&0#{53f56307-b6bf-11d0-94f2-00a0c91efb8b}]

@@ -32,7 +32,7 @@ The quarantined files are stored under:
 The `RC4` key used to encrypt the file is hardcoded (in the `mpengine.dll`
 `DLL`).
 
-The metadata of every detections are stored under:
+The metadata of every detection is stored under:
 `%SystemDrive%\ProgramData\Microsoft\Windows Defender\Quarantine\Entries`.
 
 For each quarantined file, its associated metadata notably includes:
@@ -65,7 +65,7 @@ quarantined files.
 python3 defender-dump.py <SYSTEM_ROOT_DIR>
 target-query <TARGET> -v -f defender.quarantine
 
-# Extracts and decrypt the quarantined files from the "Quarantine\ResourceData" folder.
+# Extracts and decrypts the quarantined files from the "Quarantine\ResourceData" folder.
 python3 defender-dump.py --dump <SYSTEM_ROOT_DIR>
 target-query <TARGET> -v -f defender.recover -o <OUTPUT_FOLDER>
 ```

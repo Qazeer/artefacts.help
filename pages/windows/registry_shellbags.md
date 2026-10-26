@@ -1,6 +1,6 @@
 ---
 title: Registry - Shellbags
-summary: 'The Shellbags are Windows Registry keys designed as a user experience enhancing feature to keep track of Windows explorer graphical display settings on a folder-by-folder basis.\n\nShellbags contain folders and network shares to which a given user has navigated (using the Windows Explorer), but not the content of a directory. Files will thus not be referenced and subdirectories will only be referenced if they were navigated into.\n\nShellbag entries are stored in registry as a tree-like hierarchical data structure, allowing to reconstitute the browsed directories arborescence.\n\nInformation of interest, for each Shellbags entry on a given target/directory:\n\n- Target name and absolute path.\n\n- Target Modified, Access, and Created (MAC) timestamps (in UTC) retrieved from the $MFT at the Shellbag entry creation (and not further updated).\n\n- The order in which the sub-targets of a target were accessed (maintained in a MRUList list).\n\nAdditionally, the first and last interacted timestamps can be indirectly deducted for some targets.'
+summary: 'The Shellbags are Windows Registry keys designed as a user experience enhancing feature to keep track of Windows explorer graphical display settings on a folder-by-folder basis.\n\nShellbags contain folders and network shares to which a given user has navigated (using the Windows Explorer), but not the content of a directory. Files will thus not be referenced and subdirectories will only be referenced if they were navigated into.\n\nShellbag entries are stored in registry as a tree-like hierarchical data structure, allowing the reconstitution of the browsed directory tree.\n\nInformation of interest, for each Shellbags entry on a given target/directory:\n\n- Target name and absolute path.\n\n- Target Modified, Access, and Created (MAC) timestamps (in UTC) retrieved from the $MFT at the Shellbag entry creation (and not further updated).\n\n- The order in which the sub-targets of a target were accessed (maintained in an MRUListEx list).\n\nAdditionally, the first and last interacted timestamps can be indirectly deduced for some targets.'
 keywords: Shellbags, BagMRU, ShellBagsExplorer, SBECmd, MRUListEx
 tags:
   - windows_registry
@@ -18,7 +18,7 @@ The `Shellbags` are `Windows Registry keys` designed as a user experience
 enhancing feature to keep track of Windows explorer graphical display settings
 on a folder-by-folder basis. For instance, a `Shellbag` entry is used to store
 the `View` mode of a folder (details, list, small/medium/large icons) as
-well as the column displayed (entry names, dates, sizes, etc.) and their order.
+well as the columns displayed (entry names, dates, sizes, etc.) and their order.
 
 `Shellbags` contain folders and network shares to which a given user has
 navigated (using the `Windows Explorer`), but not the content of a directory.
@@ -36,10 +36,10 @@ or `Credential Manager` (`Control Panel\User Accounts\Credential Manager`)
 operations.
 
 Various kinds of user activity may generate or update `Shellbag` entries (with
-different level of data depending on the activity):
+different levels of data depending on the activity):
 
   - **First access** or renaming of folders, removable devices, or network
-    shares through the `Windows Explorer` **systematically generate a
+    shares through the `Windows Explorer` **systematically generates a
     `Shellbag` entry**.
 
   - Graphical opening of compressed archives or `ISOs`.
@@ -54,7 +54,7 @@ different level of data depending on the activity):
 
 `Shellbag` entries are stored in registry as a tree-like data structure, with
 the root target having the topmost `BagMRU` key. This allows the reconstitution
-of the browsed directories arborescence. **Each sub-target** (subdirectory for
+of the browsed directory tree. **Each sub-target** (subdirectory for
 example) of the parent target **is then represented with both**:
 
   - **A registry sub-key**, named with a numerical value (starting from `0`).
@@ -65,7 +65,7 @@ example) of the parent target **is then represented with both**:
 
 Each `Shellbag` `BagMRU` registry key also contains:
 
-  - A `MRUListEx` value, that maintains the entries visited order, i.e. the
+  - An `MRUListEx` value, that maintains the entries visited order, i.e. the
     order in which the sub-targets of a target were accessed (the last
     sub-target accessed having a `MRU position` of 0).
 
@@ -79,13 +79,13 @@ Each `Shellbag` `BagMRU` registry key also contains:
   - A `NodeSlot` value, containing a numerical value that references the item
     `Bags` sub-key. Each target is indeed associated with a sub-key under the
     `HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags`
-    key. This sub-key, named with a numerical value value corresponding to the
+    key. This sub-key, named with a numerical value corresponding to the
     `NodeSlot` of its associated target, contains the `Explorer` view settings
     for the target.
 
 As the `Shellbags` entries are stored in user's specific registry hives,
 **targets** (folders, `Control Panel` interfaces, etc.) **access can be tied
-to a given user** through its `Shellbags`. `Shellbags` entries are populated
+to a given user** through their `Shellbags`. `Shellbags` entries are populated
 only upon interaction (i.e. are not pre-populated), the mere presence of a
 `Shellbag` entry for a target is thus evidence that the user interacted with
 the given target. `Shellbags` entries are not automatically deleted upon
@@ -101,35 +101,35 @@ forensic interest:
     retrieved from the `$MFT` at the `Shellbag` entry creation (and not further
     updated).
 
-  - Each entry in `ShellBags` `BagMRU` maintain a `MRUListEx` list, which
+  - Each entry in `ShellBags` `BagMRU` maintains an `MRUListEx` list, which
     records **the order in which the sub-targets of a target were accessed**
     (the last sub-target accessed having a `MRU position` of 0).
 
-The **first and last interacted timestamps** can be **indirectly deducted
+The **first and last interacted timestamps** can be **indirectly deduced
 for some targets**:
 
   - The `First Interacted` timestamp can be deduced for some targets thanks to
-    the tree like data structure of `ShellBags` entry. Indeed, for entries that
-    do not have sub-keys (i.e. directory for which no subdirectory were
+    the tree-like data structure of `ShellBags` entry. Indeed, for entries that
+    do not have sub-keys (i.e. directories for which no subdirectory was
     accessed) the `First Interacted` timestamp is equal to the key's
     `LastWriteTime` timestamp. This is due to the fact that the key is created
     when a target is first accessed, and further activity for that target will
     not update the target `BagMRU` key's values or its sub-keys. Indeed
     activities, such as `Explorer` display settings modifications, will update
     the target `Bags` key only (and not its `BagMRU` key directly). In such
-    circumstances, the `LastWriteTime` timestamp reflect the timestamp of the
+    circumstances, the `LastWriteTime` timestamp reflects the timestamp of the
     key initial creation.
 
     When a sub-key is created for the target (i.e. when a subdirectory is
     accessed for that particular directory), the timestamp becomes unreliable
-    as it reflect the creation of the sub-key.
+    as it reflects the creation of the sub-key.
 
-  - The `Last Interacted` timestamp can be deducted for the sub-target that was
+  - The `Last Interacted` timestamp can be deduced for the sub-target that was
     last interacted with. Indeed, as each `Shellbag` entry corresponds to
     a registry key, the key's `LastWriteTime` timestamp indicates when the
     `Shellbag` entry was last updated. As the key is only updated when (a newly
     interacted with) sub-target is added (both as a sub-key and a numerical
-    value), the `LastWriteTime` timestamp of a key (with sub-keys) correspond
+    value), the `LastWriteTime` timestamp of a key (with sub-keys) corresponds
     to the timestamp of creation of the last added sub-key. This last added
     sub-key being known, by its `MRU position` of 0, the interaction timestamp
     of the last interacted with child-bag/sub-target can thus be deduced (the
@@ -146,7 +146,7 @@ and [`SBECmd`](https://www.sans.org/tools/sbecmd/) tools (`KAPE` associated
 module `SBECmd`) can be used to parse `ShellBags` entries.
 
 `ShellBagsExplorer` displays the `ShellBags` entries in a graphical user
-interface that allow browsing of the referenced targets, in a similar manner to
+interface that allows browsing of the referenced targets, in a similar manner to
 `Windows Explorer`.
 
 ```bash

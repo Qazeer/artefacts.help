@@ -2,6 +2,7 @@
 title: Procedure - Required privileges
 summary: 'AWS CLI access requires credentials to be locally configured. While various authentication methods are supported, some tools may only support IAM user long-term credentials.\n\nThe ReadOnlyAccess and SecurityAudit managed policies can be attached to the principal used to conduct the investigations in order to grant the required permissions.'
 keywords: Access key ID, Secret access key, aws configure, ReadOnlyAccess, SecurityAudit
+tags:
   - aws
   - procedures
 last_updated: 2024-01-27
@@ -13,12 +14,12 @@ folder: aws
 ### AWS CLI access
 
 The `AWS Command Line Interface (AWS CLI)` can be used to access AWS resources
-through a command line utility. To setup the `AWS CLI` environment, notably the
+through a command line utility. To set up the `AWS CLI` environment, notably the
 configuration of credentials, the `aws configure` command may be used.
 
-The `aws configure` will ask for the following information, that will be stored
+The `aws configure` command will ask for the following information, that will be stored
 (in clear-text) in the `config` and `credentials` files (by default in a `.aws`
-folder in the current's user home directory):
+folder in the current user's home directory):
 
   - `Access key ID`.
 
@@ -28,10 +29,10 @@ folder in the current's user home directory):
 
   - Output format.
 
-To create a `Access key ID` and `secret access key`, refer to the
+To create an `Access key ID` and `secret access key`, refer to the
 [AWS official documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-user.html).
 
-### ReadOnlyAccess and SecurityAudit managed policy
+### ReadOnlyAccess and SecurityAudit managed policies
 
 The [`ReadOnlyAccess managed policy`](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html)
 and [`SecurityAudit managed policy`](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/SecurityAudit.html)

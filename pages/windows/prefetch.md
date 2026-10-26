@@ -1,6 +1,6 @@
 ---
 title: Prefetch
-summary: 'Windows Prefetch is a performance enhancement feature that enables prefetching of applications to make system boots or applications startups faster. Prefetch is by default disabled on Windows Server operating systems and is limited to 128 entries on Windows XP to Windows 7 and 1024 entries starting from Windows 8.\n\nPrefetch files are created whenever a program is executed from a specific path.\n\nInformation of interest: file name and size, first and, starting from Windows 8, last eight executions timestamps, run count, and list of files and directories accessed during the first ten seconds of execution (often including the full path of the executed file itself).'
+summary: 'Windows Prefetch is a performance enhancement feature that enables prefetching of applications to make system boots or application startups faster. Prefetch is by default disabled on Windows Server operating systems and is limited to 128 entries on Windows XP to Windows 7 and 1024 entries starting from Windows 8.\n\nPrefetch files are created whenever a program is executed from a specific path.\n\nInformation of interest: file name and size, first and, starting from Windows 8, last eight executions timestamps, run count, and list of files and directories accessed during the first ten seconds of execution (often including the full path of the executed file itself).'
 keywords: Prefetch
 tags:
   - windows_program_execution
@@ -14,14 +14,14 @@ folder: windows
 ### Overview
 
 `Windows Prefetch` is a performance enhancement feature that enables
-prefetching of applications to make system boots or applications startups
+prefetching of applications to make system boots or application startups
 faster. `Prefetch` files are created whenever a program is executed from a
 specific path. If the same binary is executed from different locations,
 separate `Prefetch` files will be created for each different location.
 A `Prefetch` file can be created even if the executable did not successfully
 run.
 
-Whether the `Prefect` feature is enabled is configured by the
+Whether the `Prefetch` feature is enabled is configured by the
 `EnablePrefetcher` registry key:
   - `0`/undefined: disabled (default on Windows Server operating systems).
     **`Prefetch` is thus disabled by default on Windows Server operating
@@ -38,38 +38,38 @@ and information lost.
 
 ### Information of interest
 
-The `Prefecth` filenames are based on the executed program name and a hash,
+The `Prefetch` filenames are based on the executed program name and a hash,
 computed using a proprietary algorithm and based on the full path (and
 for some binaries, such as `dllhost.exe` or `svchost.exe`, command line
 parameters) of the executed program.
 
-The `Prefecth` files can yield the following information of forensic interest:
+The `Prefetch` files can yield the following information of forensic interest:
 
   - The file name and size of the binary executed.
 
   - The first and, starting from Windows 8, last eight executions timestamps.
 
-  - The `Prefecth` file `NTFS` created and last modified timestamps also
+  - The `Prefetch` file `NTFS` created and last modified timestamps also
     indicate the first and last time the program was executed.
 
-  - Run count (number of time the binary was executed).
+  - Run count (number of times the binary was executed).
 
   - List of files and directories accessed during the first ten seconds of
     execution (including the eventual `DLL` loaded).
     The full path to executable file can often be determined from the list of
-    files accessed (duplicate possible if a given binary access another binary
+    files accessed (duplicate possible if a given binary accesses another binary
     with the same name).
 
-Note that the `Prefecth` files can be easily deleted, potentially invalidating
+Note that the `Prefetch` files can be easily deleted, potentially invalidating
 the trace of execution and timestamps (notably of first execution).
 
-#### Prefecth files indirect information
+#### Prefetch files indirect information
 
-The creation or modification of `Prefecth` files observed in others artefacts
-(`$MFT`, `UsnJrnl`, etc.) reflect an execution of the binary linked to the
-`Prefecth` file (and whose name can be deducted from the `Prefecth` filename).
+The creation or modification of `Prefetch` files observed in other artefacts
+(`$MFT`, `UsnJrnl`, etc.) reflects an execution of the binary linked to the
+`Prefetch` file (and whose name can be deduced from the `Prefetch` filename).
 
-#### Prefecth information related to PowerShell execution
+#### Prefetch information related to PowerShell execution
 
 The `POWERSHELL.EXE-[...].pf` Prefetch file may contain references to
 recently executed PowerShell scripts. For an entry to be created in the
@@ -83,13 +83,13 @@ subsequent runs.
 ### Tool(s)
 
 [`PECmd`](https://github.com/EricZimmerman/PECmd) (`KAPE` associated
-`PECmd` module) can be used to parse `Prefecth` file(s).
+`PECmd` module) can be used to parse `Prefetch` file(s).
 
 ```bash
-# Parses the specified Prefecth file.
+# Parses the specified Prefetch file.
 PECmd.exe [-q --csv <CSV_DIRECTORY_OUTPUT>] -f <PF_FILE>
 
-# Recursively retrieves and parses the Prefecth files in the specified directory.
+# Recursively retrieves and parses the Prefetch files in the specified directory.
 PECmd.exe [-q --csv <CSV_DIRECTORY_OUTPUT>] -d <C:\Windows\Prefetch | C:\ | DIRECTORY>
 ```
 

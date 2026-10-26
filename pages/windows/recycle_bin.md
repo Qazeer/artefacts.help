@@ -1,6 +1,6 @@
 ---
 title: Recycle Bin
-summary: 'Deleted files and folders (if deleted through a recycle bin aware application), associated with a given user (by their SID).\n\nTwo kind of files:\n $I, which contain the path and timestamp of deletion of the original file.\n$R, which contain the original file content.'
+summary: 'Deleted files and folders (if deleted through a recycle bin aware application), associated with a given user (by their SID).\n\nTwo kinds of files:\n $I, which contains the path and timestamp of deletion of the original file.\n$R, which contains the original file content.'
 keywords: Recycle Bin, $Recycle.Bin, $I, $R
 tags:
   - windows_file_knowledge
@@ -21,12 +21,12 @@ the deletion. Deleted files can thus be associated with a given user.
 
 ### Information of interest
 
-Two kind of files are present in the `Recycle Bin`:
+Two kinds of files are present in the `Recycle Bin`:
 
   - `$I` (for "Information") files, which contain the path and timestamp of
     deletion of the original file.
 
- - `$R` (for "Resource") files, which contain the original file content.
+  - `$R` (for "Resource") files, which contain the original file content.
 
 ### Tool(s)
 

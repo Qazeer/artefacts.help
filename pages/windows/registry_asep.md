@@ -1,7 +1,6 @@
 ---
 title: Registry - Auto-Start Extensibility Points
-summary: 'A number of registry keys, known as Auto-Start Extensibility Points (ASEP) registry keys, are run whenever the system is booted or a specific user logs in.\n\nThe ASEP keys under HKLM are run every time the system is started, while the ASEP keys under HKCU are only executed when the user associated with the keys logs onto the system.\n\nWhile a subset of ASEP registry keys are
-leveraged by threat actors, hundreds of keys may be used to execute a program at boot or following a user logging.'
+summary: 'A number of registry keys, known as Auto-Start Extensibility Points (ASEP) registry keys, are run whenever the system is booted or a specific user logs in.\n\nThe ASEP keys under HKLM are run every time the system is started, while the ASEP keys under HKCU are only executed when the user associated with the keys logs onto the system.\n\nWhile a subset of ASEP registry keys is leveraged by threat actors, hundreds of keys may be used to execute a program at boot or following a user logon.'
 keywords: ASEP, Auto-Start Extensibility Points, Run, RunOnce, Winlogon, Startup, Appinit_Dlls, Userinit, Autoruns, AutorunsC, RECmd, RegistryASEPs, T1547.001
 tags:
   - windows_registry
@@ -26,10 +25,10 @@ only executed when the user associated with the keys logs onto the system. The
 programs started through an `ASEP` key in a user's `HKCU` will execute under
 the context and privileges of the user.
 
-While a subset of common and well-known `ASEP` registry keys are
+While a subset of common and well-known `ASEP` registry keys is
 [leveraged by threat actors](https://attack.mitre.org/techniques/T1547/001/),
 hundreds of keys may be used to execute a program at boot or following a user
-logging.
+logon.
 
 ### Common ASEPs
 
@@ -86,7 +85,7 @@ The [`RECmd`](https://github.com/EricZimmerman/RECmd) utility can also be used
 to parse the registry and extract a predefined list of `ASEP` registry keys
 using the
 [`RegistryASEPs.reb`](https://github.com/EricZimmerman/RECmd/blob/master/BatchExamples/RegistryASEPs.reb)
-plugin. A list of nearly 500 `ASEPs` registry keys and 400 values are
+plugin. A list of nearly 500 `ASEP` registry keys and 400 values are
 referenced by the plugin.
 
 ```bash

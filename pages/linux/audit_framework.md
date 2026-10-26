@@ -1,6 +1,6 @@
 ---
 title: Linux Audit framework (audit logs)
-summary: 'The Linux Audit system is an non-default auditing and logging framework that can be configured to log multiple type of operations, such as authentication successes or failures, process executions, file accesses, user commands executed in a TTY, etc.\n\nThe Linux Audit framework implements kernel-mode hooks to monitor user-mode processes and generate audit telemetry. The auditd daemon is the main user-mode component of the Linux Audit framework, that receives audit messages sent by the kernel and other components (such as pam).\n\nThe Linux Audit system operates on rules, that define what records will be captured in the audit logs. If no rules are defined, which is the case by default, only distribution specific records and telemetry from other components may be logged to audit log file by the auditd daemon.\n\nDepending on the rule configured, multiple events can be generated for the same operation. An event can be split in multiple records, with each record of the same event sharing the same timestamp and same unique identifier.\n\nEach record is associated with a given type: USER_AUTH, USER_LOGIN, EXECVE, SYSCALL, OPENAT, PROCTITLE, USER_CMD, TTY, SOCKADDR, etc.'
+summary: 'The Linux Audit system is a non-default auditing and logging framework that can be configured to log multiple types of operations, such as authentication successes or failures, process executions, file accesses, user commands executed in a TTY, etc.\n\nThe Linux Audit framework implements kernel-mode hooks to monitor user-mode processes and generate audit telemetry. The auditd daemon is the main user-mode component of the Linux Audit framework, that receives audit messages sent by the kernel and other components (such as pam).\n\nThe Linux Audit system operates on rules, that define what records will be captured in the audit logs. If no rules are defined, which is the case by default, only distribution specific records and telemetry from other components may be logged to audit log file by the auditd daemon.\n\nDepending on the rule configured, multiple events can be generated for the same operation. An event can be split in multiple records, with each record of the same event sharing the same timestamp and same unique identifier.\n\nEach record is associated with a given type: USER_AUTH, USER_LOGIN, EXECVE, SYSCALL, OPENAT, PROCTITLE, USER_CMD, TTY, SOCKADDR, etc.'
 keywords: Linux Audit, audit, auditd, audit rules, auditctl, aureport, ausearch, audit.log, auditd.conf, audit.rules, auid, USER_AUTH, USER_LOGIN, EXECVE, SYSCALL, OPENAT, PROCTITLE, USER_CMD, TTY, SOCKADDR, msg, dissect, target-query, sigma, Zircolite, ChopChopGo
 tags:
   - linux_logging_frameworks
@@ -18,8 +18,8 @@ folder: linux
 
 ### Overview
 
-The `Linux Audit` system is an non-default auditing and logging framework that
-can be configured to log multiple type of operations, such as authentication
+The `Linux Audit` system is a non-default auditing and logging framework that
+can be configured to log multiple types of operations, such as authentication
 successes or failures, process executions, file accesses, user commands
 executed in a TTY, etc.
 
@@ -30,7 +30,7 @@ sent by the kernel (via a `netlink socket`) and is responsible for storing the
 messages on the file system. Launched at operating system startup, the `auditd`
 daemon is configured through the configuration file `/etc/audit/auditd.conf`,
 and connects to the socket to receive events from the kernel. The `auditd`
-daemon can also received events from other system components, such as `pam` or
+daemon can also receive events from other system components, such as `pam` or
 `sshd`.
 
 #### Audit rules
@@ -38,7 +38,7 @@ daemon can also received events from other system components, such as `pam` or
 The `Linux Audit` system operates on rules, that define what records will be
 captured in the audit logs. Audit rules are defined in the
 `/etc/audit/audit.rules` file or in the `/etc/audit/rules.d/` directory. One
-rule is defined on a single line, as it was arguments to the `auditctl`
+rule is defined on a single line, as if it were arguments to the `auditctl`
 utility.
 
 As the events generated are dependent on the audit rules configured, it is
@@ -90,7 +90,7 @@ There are three types of audit rules:
 
 The [Neo23x0 auditd rules set](https://github.com/Neo23x0/auditd/tree/master)
 can be used as a baseline, which may require fine tuning depending on the
-environnement and applications running on each system.
+environment and applications running on each system.
 
 ### Information of interest
 
@@ -107,7 +107,7 @@ found in the
 [Linux Audit Documentation](https://github.com/linux-audit/audit-documentation/blob/main/specs/fields/field-dictionary.csv).
 
 Multiple events can be generated for a single operation, with each event
-potentially comporting multiple records. For example, the `cat /etc/passwd`
+potentially comprising multiple records. For example, the `cat /etc/passwd`
 command entered by a user in a `TTY` shell may generate:
 
   - An event for the execution of `cat`.
@@ -151,9 +151,9 @@ More record types are listed in the
 
   - The [user and group identifiers](./user_and_group_identifiers.md)
     (`uid`/`gid`, `euid`/`egid`, `ruid`/`rgid`, `suid`/`sgid`, and
-    `fsuid`/`fsgidof`) of the process.
+    `fsuid`/`fsgid`) of the process.
 
-  - `auid`: `audit identifier` that, if present, identify the initial `uid` of
+  - `auid`: `audit identifier` that, if present, identifies the initial `uid` of
     the user (from the initial process). The `auid` remains the same even if
     the user's identity changes (for instance through `sudo` or `su`, as the
     utilities start a new process with updated `uid`, `euid`, `ruid`, and

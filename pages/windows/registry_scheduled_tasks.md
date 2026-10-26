@@ -1,12 +1,11 @@
 ---
 title: Registry - Scheduled tasks (Taskcache)
-summary: 'Scheduled tasks are used to automatically perform a task on the system whenever the criteria associated to the scheduled task occurs.\n\nA scheduled task can be created through direct manipulation of the registry in order to avoid the generation of task creation ETW events.\n\nInformation of interest, for each task under its associated "Taskcache\Tasks\<TASK_GUID>" and "Taskcache\Tree\<TASK_NAME>" subkeys: task name and file path, lifecycle timestamps (created on, last start, and last
-    stop), and trigger(s) and action(s).\n\nThe lifecycle timestamps, trigger(s), and action(s) are in binary, non human readable format.'
+summary: 'Scheduled tasks are used to automatically perform a task on the system whenever the criteria associated with the scheduled task are met.\n\nA scheduled task can be created through direct manipulation of the registry in order to avoid the generation of task creation ETW events.\n\nInformation of interest, for each task under its associated "Taskcache\Tasks\<TASK_GUID>" and "Taskcache\Tree\<TASK_NAME>" subkeys: task name and file path, lifecycle timestamps (created on, last start, and last stop), and trigger(s) and action(s).\n\nThe lifecycle timestamps, trigger(s), and action(s) are in binary, non-human-readable format.'
 keywords:
 tags:
   - windows_registry
   - windows_local_persistence
-   - windows_local_persistence_user
+  - windows_local_persistence_user
   - windows_lateral_movement
   - windows_lateral_movement_dst
 location: 'File: <SYSTEMROOT>\System32\config\SOFTWARE\n\nRegistry keys:\nHKLM\Software\Microsoft\Windows NT\CurrentVersion\Schedule\Taskcache\Tasks\<TASK_GUID>\nHKLM\Software\Microsoft\Windows NT\CurrentVersion\Schedule\Taskcache\Tree\<TASK_NAME>'
@@ -19,7 +18,7 @@ folder: windows
 ### Overview
 
 Scheduled tasks are used to automatically perform a task on the system whenever
-the criteria associated to the scheduled task occurs. The scheduled tasks can
+the criteria associated with the scheduled task are met. The scheduled tasks can
 either be run at a defined time, on repeat at set intervals, or when a specific
 event occurs, such as the system boot.
 
@@ -33,10 +32,10 @@ registry only, as implemented in
 [GhostTask](https://github.com/netero1010/GhostTask) for instance. [Creating a
 scheduled task this way will not generate task creation ETW events](https://labs.withsecure.com/publications/scheduled-task-tampering).
 However, the task will not be functional until the `Schedule` service is
-restarted or task configuration modified, to a reload by the `Schedule`
+restarted or the task configuration modified, to trigger a reload by the `Schedule`
 service. Modifying the task would generate associated ETW events (channel
-`Microsoft-Windows-TaskScheduler/Operational`, event 140 or `Security`, non
-default event 4702).
+`Microsoft-Windows-TaskScheduler/Operational`, event 140 or `Security`, non-default
+event 4702).
 
 Additionally, a scheduled task can continue to run even if its associated
 elements in the registry and/or on disk (`XML` files) are deleted. The
@@ -51,7 +50,7 @@ Each scheduled task configuration is defined in a dedicated subkey under
 `Schedule\Taskcache\Tasks`, identified by the task GUID (i.e.
 `Schedule\Taskcache\Tasks\<TASK_GUID>`).
 
-For each tasks, the following notable information is available under the task
+For each task, the following notable information is available under the task
 GUID root key `Schedule\Taskcache\Tasks\<TASK_GUID>`:
 
   - The task path.
@@ -60,7 +59,7 @@ GUID root key `Schedule\Taskcache\Tasks\<TASK_GUID>`:
     stop in the `DynamicInfo` value (in binary format).
 
   - The task trigger(s) (`Triggers` value) and action(s) (`Actions` value) in
-    binary, non human readable format. A single scheduled task can be
+    binary, non-human-readable format. A single scheduled task can be
     associated with one or multiple trigger(s) and one or multiple action(s).
     A single task can thus execute multiple distinct executables.
 
@@ -73,11 +72,11 @@ as a subkey of the `Schedule\Taskcache\Tree` key (i.e.
 `Schedule\Taskcache\Tree\<TASK_NAME>`), with the GUID of the task
 stored in the `Id` value.
 
-Additionally, the `Schedule\Taskcache\Tree\<TASK_NAME>` hold the
+Additionally, the `Schedule\Taskcache\Tree\<TASK_NAME>` holds the
 `Security Descriptor` of the scheduled task (in the `SD` value). Removing this
 value will hide the scheduled task, from utilities such as `schtasks` or the
 `Task Scheduler`, while leaving it functional. This was implemented in the
-[Tarrask malware, as discovered by Micosoft](https://www.microsoft.com/en-us/security/blog/2022/04/12/tarrask-malware-uses-scheduled-tasks-for-defense-evasion/).
+[Tarrask malware, as discovered by Microsoft](https://www.microsoft.com/en-us/security/blog/2022/04/12/tarrask-malware-uses-scheduled-tasks-for-defense-evasion/).
 
 ### References
 

@@ -1,6 +1,6 @@
 ---
 title: WebCacheV01
-summary: 'The WebCacheV01.dat database is used by the Microsoft Internet Explorer and Microsoft Edge (legacy) web browsers to store browsing history, downloads, cache, and cookies.\n\nHowever, access to local files, not necessarily through a web browser, are also tracked in the WebCacheV01.dat database. Access to local files can be identified by the file URI scheme (such as "file:///<DRIVE_LETTER>:/folder/file").\n\nInformation of interest: full path to the file or URL, timestamp of access, and visit count.'
+summary: 'The WebCacheV01.dat database is used by the Microsoft Internet Explorer and Microsoft Edge (legacy) web browsers to store browsing history, downloads, cache, and cookies.\n\nHowever, access to local files, not necessarily through a web browser, is also tracked in the WebCacheV01.dat database. Access to local files can be identified by the file URI scheme (such as "file:///<DRIVE_LETTER>:/folder/file").\n\nInformation of interest: full path to the file or URL, timestamp of access, and visit count.'
 keywords: 'WebCacheV01, WebCacheV01.dat, ESE, file://'
 tags:
   - windows_files_and_folders_access
@@ -20,7 +20,7 @@ cache, and cookies. The database is in the `Extensible Storage Engine (ESE)`
 database file format.
 
 In addition to browsing history, **access to local files, not necessarily
-through a web browser, are also tracked in the `WebCacheV01.dat` database**.
+through a web browser, is also tracked in the `WebCacheV01.dat` database**.
 
 ### Information of interest
 

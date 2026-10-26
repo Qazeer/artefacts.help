@@ -17,7 +17,7 @@ The Windows operating system uses a number of `device identification strings`
 to identify devices that are plugged/installed on a computer. Windows notably
 leverages certain identification strings to locate the driver package that best
 matches a device. Additionally, `device instance identification strings` are
-set to uniquely identity each device instance (to distinguish a device from
+set to uniquely identify each device instance (to distinguish a device from
 other devices of the same type/vendor/product).
 
 The following `identification strings` are defined:
@@ -71,5 +71,3 @@ The following `identification strings` are defined:
   - [Microsoft - Device instance ID](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/device-instance-ids)
 
   - [Microsoft - Container ID](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/container-ids)
-
-  - [Microsoft - Compatible ID]()

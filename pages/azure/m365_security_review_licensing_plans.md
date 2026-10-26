@@ -1,6 +1,6 @@
 ---
 title: Security review - Licensing plans
-summary: 'The licensing plans in use will define the level of logs available.\n\nFor instance, MailItemsAccessed mail access events will only be available for users associated to an E5 license.'
+summary: 'The licensing plans in use will define the level of logs available.\n\nFor instance, MailItemsAccessed mail access events will only be available for users associated with an E5 license.'
 keywords: Licenses, Get-MsolAccountSku, Get-MsolUser
 tags:
   - azure_security_review
@@ -12,7 +12,7 @@ folder: azure
 
 The licensing plans in use will define the level of logs available.
 For instance, `MailItemsAccessed` mail access events will only be available
-for users associated to an `Office 365 E5` or `Microsoft 365 E5` license.
+for users associated with an `Office 365 E5` or `Microsoft 365 E5` license.
 
 ```bash
 # List the license plans in the tenant.

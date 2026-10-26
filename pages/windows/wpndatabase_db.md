@@ -43,8 +43,8 @@ table of the `wpndatabase.db` database. There are system-wide notifications and
 per-user notifications, stored in different databases (with one database
 per-user).
 
-Each notably entry contains the arrival and expiry time of the notification, as
-well as a "payload" associated with the notification. For `toast notification`,
+Each entry notably contains the arrival and expiry time of the notification, as
+well as a "payload" associated with the notification. For `toast notifications`,
 the payload contains the content of the notification. In case of
 `toast notifications` from instant messaging applications, or social media /
 instant messaging web application accessed through a web browser, the payload
@@ -53,7 +53,7 @@ may contain the message received.
 The notifications are short-lived and deleted from the database after their
 expiry time or following a user acknowledgement (closing of the pop-up or
 clearing from the Windows Action Center). The `wpndatabase.db` database thus
-provided very limited historical data.
+provides very limited historical data.
 
 More information might be retrievable in the `Write-Ahead Logging (WAL)` file
 `wpndatabase.db-wal` and/or carved from the database (using tools such as

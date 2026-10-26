@@ -1,7 +1,7 @@
 ---
 title: Program Compatibility Assistant (PCA)
-summary: 'Introduced in Windows 11, the Program Compatibility Assistant (PCA) is an application compatibility feature that aim to maintain support of existing desktop applications to new versions of the Windows operating system.\n\nInformation of interest, only for programs executed as GUI: file full path and timestamp of execution. More information available for executions resulting in non 0x0 exit code.'
-keywords: Program Compatibility Assistant, PCA, PcaAppLaunchDic, nPcaGeneralDb0, nPcaGeneralDb1
+summary: 'Introduced in Windows 11, the Program Compatibility Assistant (PCA) is an application compatibility feature that aims to maintain support of existing desktop applications to new versions of the Windows operating system.\n\nInformation of interest, only for programs executed as GUI: file full path and timestamp of execution. More information available for executions resulting in non 0x0 exit code.'
+keywords: Program Compatibility Assistant, PCA, PcaAppLaunchDic, PcaGeneralDb0, PcaGeneralDb1
 tags:
   - windows_program_execution
 location: 'Files under <SYSTEMROOT>\appcompat\pca\:\nPcaAppLaunchDic.txt\nPcaGeneralDb0.txt\nPcaGeneralDb1.txt'
@@ -14,11 +14,11 @@ folder: windows
 ### Overview
 
 Introduced in Windows 11, the `Program Compatibility Assistant (PCA)` is an
-application compatibility feature that aim to maintain support of existing
+application compatibility feature that aims to maintain support of existing
 desktop applications to new versions of the Windows operating system (like the
 `Shimcache` and `Amcache` artefacts). `PCA` is linked to the `pcasvc` service.
 
-`PCA` only hold information about executions of programs with a graphical
+`PCA` only holds information about executions of programs with a graphical
 interface, installed or from a portable executable, or command line programs
 executed as GUI programs (such as by double-clicking on the CLI executable
 from `Windows Explorer`).
@@ -39,7 +39,7 @@ The information stored by the `PCA` is split in 3 text based files:
   - `PcaGeneralDb0.txt` and `PcaGeneralDb1.txt`:
 
     - Fewer entries than in the `PcaAppLaunchDic.txt` file, with most entries
-      seemingly related to non `0x0` execution exit code.
+      seemingly related to non-zero (`0x0`) execution exit code.
 
     - One entry per line, containing the following information in a pipe
       delimited string:

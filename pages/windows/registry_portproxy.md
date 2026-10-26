@@ -1,7 +1,6 @@
 ---
 title: Registry - PortProxy
-summary: 'The PortProxy registry key stores the port forwards configured on the local system using the netsh built-in utility.\n\nInformation of interest: the local and
-remote IP address:port of each port forward.'
+summary: 'The PortProxy registry key stores the port forwards configured on the local system using the netsh built-in utility.\n\nInformation of interest: the local and remote IP address:port of each port forward.'
 keywords: PortProxy, port forward, forwarding, netsh, v4tov4, v4tov6, v6tov4, v6tov6
 tags:
   - windows_registry
@@ -34,7 +33,7 @@ Each port forward configuration is then stored as a value under the second
 level subkey, with the value's name referencing the local endpoint and the
 value's data storing the remote endpoint.
 
-Example for a port forward that redirect connections received on localhost port
+Example for a port forward that redirects connections received on localhost port
 `TCP` `4444` to `10.2.3.4:1234`:
 
 ```

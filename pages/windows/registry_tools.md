@@ -16,7 +16,7 @@ folder: windows
 [`RegistryExplorer`](https://www.sans.org/tools/registry-explorer/) and
 [`RECmd`](https://github.com/EricZimmerman/RECmd) are tools developed by Eric
 Zimmerman to analyze the Windows registry. `RegistryExplorer` is a graphical
-utility to visualize registry hives, while `RECmd` is command-line tool to
+utility to visualize registry hives, while `RECmd` is a command-line tool to
 parse registry hives to CSV or JSON outputs.
 
 `RegistryExplorer` can process registry hive files or directly access the
@@ -26,7 +26,7 @@ registry of the current live system. Additionally, both the `RegistryExplorer`
 
 `RegistryExplorer` implements a number of
 [bookmarks](https://github.com/EricZimmerman/RegistryExplorerBookmarks) of
-well-known key to facilitate analysis.
+well-known keys to facilitate analysis.
 
 `RECmd` can search for strings or regex in key and values names, value
 data, and value slack space, in the specified registry hives directory
@@ -35,7 +35,7 @@ data, and value slack space, in the specified registry hives directory
 `RegistryExplorer` and `RECmd` can use
 [EricZimmerman's RegistryPlugins](https://github.com/EricZimmerman/RegistryPlugins)
 to access and parse specific keys. For instance, the `UserAssist` plugin
-automatically decode the program names from their `ROT13` encoded format.
+automatically decodes the program names from their `ROT13` encoded format.
 
 ```bash
 # Uses the given plugin to parse the specified hive or the hives in the specified directory.
@@ -44,8 +44,8 @@ automatically decode the program names from their `ROT13` encoded format.
 RECmd.exe [-f <HIVE_FILE> | -d <NTFS_VOLUME | FOLDER_CONTAINING_REGISTRY_HIVES>] --bn <REGISTRY_PLUGIN> --csv <OUTPUT_FOLDER>
 ```
 
-A number of `KAPE` module can execute `RECmd` with various plugins. The
-`RECmd_AllBatchFiles` compound module execute all available `RECmd` modules.
+A number of `KAPE` modules can execute `RECmd` with various plugins. The
+`RECmd_AllBatchFiles` compound module executes all available `RECmd` modules.
 
 ### RegRipper
 

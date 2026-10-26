@@ -26,18 +26,18 @@ folder: windows
 | `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `22: Remote Desktop Services: Shell start notification received`. <br><br> Information of interest: user logging in, source network address, and RDP session ID. |
 | `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `23: Remote Desktop Services: Session logoff succeeded`. <br><br> Information of interest: user logging in and RDP session ID. |
 | `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `24: Remote Desktop Services: Session has been disconnected`. <br><br> If no `event 23` (`session logoff succeeded`) is associated with this event, the session was simply "disconnected". In case of a session disconnect (triggered by closing the RDP client window or using the "Disconnect" sign-out option), running processes and opened windows are preserved. <br><br> Information of interest: user logging in, source network address, and RDP session ID. |
-| `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `25: Remote Desktop Services: Session reconnection succeeded`. <br><br> Logged upon reconnection of a disconnected session. Could indicate that a malicious actor got access to running processes / programs state started legitimately by a user. <br><br> Information of interest: user logging in, source network address, and RDP session ID. <br><br> Events with a source network address set to `LOCAL` can sometimes be generated for console, non `Remote Desktop` logins. |
+| `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `25: Remote Desktop Services: Session reconnection succeeded`. <br><br> Logged upon reconnection of a disconnected session. Could indicate that a malicious actor got access to running processes / programs state started legitimately by a user. <br><br> Information of interest: user logging in, source network address, and RDP session ID. <br><br> Events with a source network address set to `LOCAL` can sometimes be generated for console, non-`Remote Desktop` logins. |
 | `Microsoft-Windows-RemoteDesktopServices-RdpCoreTS/Operational` | Introduced in `Windows Server 2012`. <br><br> Default configuration. | Event `131: The server accepted a new TCP connection from client <IP>`. <br><br> Only indicates a network access to the `Remote Desktop` service. <br><br> Information of interest: source network address. |
 | `Microsoft-Windows-TerminalServices-RemoteConnectionManager/Admin` | Default configuration. | Event `1158: Remote Desktop Services accepted a connection from IP address <IP>`. <br><br> Only indicates a network access to the Remote Desktop service. <br><br> Information of interest: source network address. |
 
 #### ngrok tunnel - 16777216
 
 A `Source Network Address` of `::%16777216` in the `Microsoft-Windows-TerminalServices-LocalSessionManager` and `Microsoft-Windows-TerminalServices-RemoteConnectionManager` events could
-indicate that a `ngrok` tunnel was used to make `Remote Desktop` access.
+indicate that an `ngrok` tunnel was used for `Remote Desktop` access.
 
 ### Tool(s)
 
-The [`LogParser`'s KAPE module `LogParser_RDPUsageEvents`](./windows_etw_tools#cli-logparser)
+The [`LogParser`'s KAPE module `LogParser_RDPUsageEvents`](./etw_tools.md#cli-logparser)
 can be used to parse EVTX files and extract the aforementioned `Remote Desktop`
 events into a CSV timeline.
 

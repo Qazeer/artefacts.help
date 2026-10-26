@@ -1,6 +1,6 @@
 ---
 title: Registry - Terminal Server Client\Servers
-summary: 'The Terminal Server Client\Servers registry key tracks the remote hosts the associated user connected to using the built-in mstsc.exe Remote Desktop client.\n\nInformation of interest: IP address of the remote host and eventual saved username associated with the remote host.\n\nThe the last write timestamp may be an indicator of the first access to the remote host.'
+summary: 'The Terminal Server Client\Servers registry key tracks the remote hosts the associated user connected to using the built-in mstsc.exe Remote Desktop client.\n\nInformation of interest: IP address of the remote host and eventual saved username associated with the remote host.\n\nThe last write timestamp may be an indicator of the first access to the remote host.'
 keywords: 'Terminal Server Client\Servers'
 tags:
   - windows_registry
@@ -20,7 +20,7 @@ folder: windows
 The `Terminal Server Client\Servers` registry key tracks the remote hosts the
 associated user connected to (from the local system) using the built-in
 `mstsc.exe` `Remote Desktop` client. Remote hosts are only added if the remote
-host screen was reached, i.e. `Network Level Authentication` succeed (if the
+host screen was reached, i.e. `Network Level Authentication` succeeded (if the
 remote host requires `NLA`) and the certificate warning has been accepted (if a
 warning was displayed).
 
@@ -36,7 +36,7 @@ For each host, its dedicated subkey references the eventual saved username for
 the connection in the `UsernameHint` value.
 
 Additionally, the last write timestamp may be an indicator of the first access
-to the remote host (but may have also be updated for various other reasons).
+to the remote host (but may also have been updated for various other reasons).
 
 ### References
 

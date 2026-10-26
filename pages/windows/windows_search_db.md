@@ -39,7 +39,7 @@ By default, only items from the following sources are scanned and indexed:
     (which include startup `LNK` files).
 
     > Data available: file name, path, size, attributes, `MAC` timestamps.
-      For small file, part of the content of the file may be indexed as well.
+      For small files, part of the content of the file may be indexed as well.
 
   - Outlook mail data (with timestamp of reception, possible mail content).
 
@@ -54,13 +54,13 @@ utility (`SIDRWindowsIndexSearchParser` KAPE module) can be used to parse the
 `Windows Search` database (in both `ESE` and `SQLite` formats).
 
 ```bash
-# Recursively scan the <INPUT_DIRECTORY> for Windows.edb and Windows.db files.
+# Recursively scans the <INPUT_DIRECTORY> for Windows.edb and Windows.db files.
 
 sidr.exe -f <json | csv> <INPUT_DIRECTORY> -o <DESTINATION_DIRECTORY>
 ```
 
 Alternatively, the [WinSearchDBAnalyzer](https://github.com/moaistory/WinSearchDBAnalyzer)
-graphical utility can be used to parse and explore the `Windows Search`, in
+graphical utility can be used to parse and explore the `Windows Search` database, in
 `ESE` database format only.
 
 ### References

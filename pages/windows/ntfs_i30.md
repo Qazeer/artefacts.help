@@ -25,10 +25,10 @@ stored as `index records` structures, with one dedicated record for every
 entry. The `index record` structure contains a `$FILE_NAME` (`0x30`) attribute,
 in which are stored the information about the file or folder.
 
-There is two types of `index attributes`:
+There are two types of `index attributes`:
 
   - `$INDEX_ROOT`: for directories with a small number of entries. The
-    `$INDEX_ROOT` attribute is always resident to the `MFT` and contains a
+    `$INDEX_ROOT` attribute is always resident in the `MFT` and contains a
     small list of `index records`. A directory has at most one `$INDEX_ROOT`
     attribute.
 
@@ -39,10 +39,10 @@ There is two types of `index attributes`:
     `$INDEX_ALLOCATION` attribute should not exist without an associated
     `$INDEX_ROOT` attribute.
 
-The `$Bitmap` attribute keep track of the index allocations.
+The `$Bitmap` attribute keeps track of the index allocations.
 
 The `$INDEX_ROOT`, `$INDEX_ALLOCATION`, and `$Bitmap` attributes are
-collectively reffered to as `$I30`.
+collectively referred to as `$I30`.
 
 ### Information of interest
 
@@ -55,10 +55,10 @@ Each `index record` contains information on the file it references in a
 
  - A set of `MACB` timestamps.
 
-The `$FILE_NAME` attribute of a `index record` in a directory
+The `$FILE_NAME` attribute of an `index record` in a directory
 `index attribute` should be kept in sync with the `MFT` file record's
 `$STANDARD_INFORMATION` attribute of the corresponding entry. However,
-disparities may sometime occur, with the `index record` referencing older
+disparities may sometimes occur, with the `index record` referencing older
 information.
 
 Due to their B-Tree data structure format and their frequent rebalancing,

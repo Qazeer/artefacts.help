@@ -1,6 +1,6 @@
 ---
 title: Registry - Map Network Drive MRU
-summary: 'The Map Network Drive MRU registry key references the recently used network shares.\n\nInformation of interest: UNC path of the network shares (such as "<IP | HOSTNAME>\<SHARE_NAME>").\n\nValues are ordered in a most recently used list. The timestamp of access of the most recently access share can thus be deduced from the last write timestamp of the registry key.'
+summary: 'The Map Network Drive MRU registry key references the recently used network shares.\n\nInformation of interest: UNC path of the network shares (such as "<IP | HOSTNAME>\<SHARE_NAME>").\n\nValues are ordered in a most recently used list. The timestamp of access of the most recently accessed share can thus be deduced from the last write timestamp of the registry key.'
 keywords: 'Map Network Drive MRU, Network share, MRUList'
 tags:
   - windows_registry
@@ -17,7 +17,7 @@ folder: windows
 ### Overview
 
 The `Map Network Drive MRU` registry key references the network shares recently
-used by the associated user. The network share do not have to be persistently
+used by the associated user. The network share does not have to be persistently
 mapped to be referenced by the `Map Network Drive MRU` key.
 
 ### Information of interest
@@ -27,7 +27,7 @@ Each network share is stored in a dedicated value under the
 network share (such as `<IP | HOSTNAME>\<SHARE_NAME>`).
 
 The values are ordered in a `Most recently used (MRU)` list, specified in the
-`MRUList` value. Example: `MRUList` equals to `ba` means that the entry tagged
+`MRUList` value. Example: `MRUList` equal to `ba` means that the entry tagged
 as `b` was accessed last / the most recently, preceded by the entry tagged as
 `a`.
 

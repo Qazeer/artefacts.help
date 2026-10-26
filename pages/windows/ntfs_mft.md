@@ -1,11 +1,11 @@
 ---
-title: NTFS - $MFT, $MFTMir, and $Bitmap
-summary: 'The Master File Table (MFT) is the main element of any NTFS partition and contain a file record for all existing (and very recently deleted) files written on the partition.\n\nThe $MFTMirr file is the first entry in the MFT and contains the first 4 entries of the MFT as a recovery mechanism.\n\nThe $Bitmap file tracks the allocation status (allocated or unused) of the clusters of the volume.'
-keywords: Filesystem, MFT, MFTMir, LogFile, Bitmap, $MFT, $MFTMir, $Bitmap
+title: NTFS - $MFT, $MFTMirr, and $Bitmap
+summary: 'The Master File Table (MFT) is the main element of any NTFS partition and contains a file record for all existing (and very recently deleted) files written on the partition.\n\nThe $MFTMirr file is the first entry in the MFT and contains the first 4 entries of the MFT as a recovery mechanism.\n\nThe $Bitmap file tracks the allocation status (allocated or unused) of the clusters of the volume.'
+keywords: Filesystem, MFT, MFTMirr, LogFile, Bitmap, $MFT, $MFTMirr, $Bitmap
 tags:
   - windows_ntfs_filesystem
   - windows_file_knowledge
-location: '<ROOT>:\$MFT\n\n<ROOT>:\$MFTMir\n\n<ROOT>:\$Bitmap'
+location: '<ROOT>:\$MFT\n\n<ROOT>:\$MFTMirr\n\n<ROOT>:\$Bitmap'
 last_updated: 2023-12-30
 sidebar: sidebar
 permalink: windows_mft.html
@@ -19,19 +19,19 @@ The `Master File Table (MFT)`, filename `$MFT`, is the main element of any
 
 The `MFT` contains an entry for all existing files written on the partition.
 Deleted files that were once written on the partition may also still
-(temporally) have a record in the `MFT`.
+(temporarily) have a record in the `MFT`.
 
 The `Partition Boot Sector` `$Boot` metadata file, which starts at sector 0 and
 can be up to 16 sectors long, describes the basic `NTFS` volume information and
 indicates the location of the `$MFT`.
 
 The `$MFTMirr` file is statically-located as the first entry in the `MFT` and
-contains the first 4 entries of the `MFT` (`MFT`, `$MFTMir`, `$LogFile`, and
+contains the first 4 entries of the `MFT` (`MFT`, `$MFTMirr`, `$LogFile`, and
 `$Volume`) as a recovery mechanism.
 
 The `$Bitmap` file tracks the allocation status (allocated or unused) of the
 clusters of the volume. Each cluster is associated with a bit, set to `0x1` if
-the cluster is in use. Upon deletion of a `non resident file`, the `$Bitmap`
+the cluster is in use. Upon deletion of a `non-resident file`, the `$Bitmap`
 file is updated to tag the cluster(s) associated with the file as free. The
 clusters are not overwritten during the deletion process, and the file data can
 thus be carved as long as the cluster(s) are not re-used.
@@ -47,7 +47,7 @@ Each file on an `NTFS` volume is represented in the `MFT` in a file record.
 Small files and directories (typically 512 bytes or smaller), can be entirely
 contained within their associated `MFT` file record. These files are called
 `resident files`. Files larger than that threshold are written on allocated
-clusters, and are called `non resident files`.
+clusters, and are called `non-resident files`.
 
 Directory records are stored within the master file table just like file
 records. Instead of data, directories contain index information.
@@ -66,7 +66,7 @@ A file record (`FILE0` data structure) notably includes:
   - The file unique (under the `NTFS` volume) `Security ID` in the
     `$STANDARD_INFORMATION` attribute.
 
-  - Two or three set of timestamps:
+  - Two or three sets of timestamps:
     - The file creation, last modified, last accessed, last changed `SI`
       timestamps (`MACB`) in the `$STANDARD_INFORMATION` attribute.
     - The file creation, last modified, last accessed, last changed `FN`
@@ -76,7 +76,7 @@ A file record (`FILE0` data structure) notably includes:
 
  - File access permissions.
 
- - One or multiple `DATA` attribute, that either contain the file data for
+ - One or multiple `DATA` attributes, that either contain the file data for
    `resident file` or reference the clusters of disk space where the file is
    stored for `nonresident file`.
 
@@ -110,7 +110,7 @@ Associated `KAPE` compound module: `MFTECmd` (includes `MFTECmd_$Boot`,
 
 ```bash
 # A $MFT file on a mounted partition should be specified.
-# For instance, to extract $MFT data from a forensics image, the image should first be mounted and the $MFT specified as <DRIVER_LETTER:\$MFT to MFTECmd.exe.
+# For instance, to extract $MFT data from a forensics image, the image should first be mounted and the $MFT specified as <DRIVE_LETTER>:\$MFT to MFTECmd.exe.
 
 MFTECmd.exe -f '<$MFT_FILE>' --csv <OUTPUTDIR_PATH>
 ```

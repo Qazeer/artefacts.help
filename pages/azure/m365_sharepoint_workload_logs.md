@@ -1,6 +1,6 @@
 ---
 title: Microsoft 365 - SharePoint/OneDrive workload
-summary: 'The SharePoint/OneDrive workload regroup events from the SharePoint and OneDrive activity.\n\nThe audit logs include events on file access, download, creation, and modification activity, such as FileAccessed, FileDownloaded, FileUploaded, and FileModified as well as execution of search query (SearchQueryPerformed).'
+summary: 'The SharePoint/OneDrive workload groups events related to SharePoint and OneDrive activity.\n\nThe audit logs include events on file access, download, creation, and modification activity, such as FileAccessed, FileDownloaded, FileUploaded, and FileModified as well as execution of search queries (SearchQueryPerformed).'
 keywords: SharePoint, Drive, OneDrive, Unified Audit Logs, UAL, SearchQueryPerformed, FilePreviewed, FileAccessed, FileAccessedExtended, FileDownloaded, FileUploaded, FileModified, FileModifiedExtended, FileMoved, FileRenamed, FileDeleted, FileMalwareDetected
 tags:
   - azure_logs
@@ -17,7 +17,7 @@ The following operations are notable and common to the `SharePoint` and
 |-----------|-------------|
 | `SearchQueryPerformed` | The user performed a search query. |
 | `FilePreviewed` | The user previewed a file. |
-| `FileAccessed` | The user accessed/downloaded a file. While the Microsoft documentation states that the `FileAccessed` event is generated on file accesses, the full file content may be transmitted to the user's client, allowing saving an offline copy of the file. |
+| `FileAccessed` | The user accessed/downloaded a file. While the Microsoft documentation states that the `FileAccessed` event is generated on file accesses, the full file content may be transmitted to the user's client, allowing the user to save an offline copy of the file. |
 | `FileAccessedExtended` | This activity is related to the `FileAccessed` event. A `FileAccessedExtended` event is logged when the same user continually accesses a file for an extended period (up to three hours), in order to reduce the number of events that are logged. |
 | `FileDownloaded` | The user downloaded a file. |
 | `FileUploaded` | The user uploaded a file. |

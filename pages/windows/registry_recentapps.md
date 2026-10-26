@@ -22,14 +22,14 @@ programs**.
 
 ### Information of interest
 
-Each subkey, identified with a GUID, under the `RecentApps` key correspond to
+Each subkey, identified with a GUID, under the `RecentApps` key corresponds to
 an executed program. In **these application GUID subkeys, the filename, last
 access timestamp, and run count of the application** are stored as values.
 
 Additionally, **each application GUID subkey can have up to 10 subkeys**, also
 identified with a GUID, that correspond to **files accessed using the
 application**. In these file GUID subkeys, **the file name, file full path, and
-(on some OS version) a non-updated timestamp of last access** are stored as
+(on some OS versions) a non-updated timestamp of last access** are stored as
 values. The cycling order of the file subkeys [appears to be based on the
 alphabetical order of the GUID and not on a first-in-first-out basis](https://df-stream.com/2017/10/recentapps/).
 If a new file is accessed while 10 files are already referenced, the subkeys
@@ -38,7 +38,7 @@ entry. Thus the current files referenced are not necessarily the last 10 files
 accessed.
 
 The **last write timestamp of an application subkey can indicate when the
-program was last executed**. While the **last write timestamp of a file subkey
+program was last executed**, while the **last write timestamp of a file subkey
 can indicate when the file was accessed** (by the associated program).
 
 ### References

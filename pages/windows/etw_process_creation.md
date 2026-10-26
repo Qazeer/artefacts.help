@@ -26,8 +26,8 @@ folder: windows
 The `NewProcessName` field stores the full path of the process's executable and
 the `ProcessId` field the `Process ID (PID)` of the process. The
 `ParentProcessName` field logs the parent process's executable full path and
-can be used to identity suspicious processes activity, such as `outlook.exe` or
-`iexplorer.exe` starting `cmd.exe` or `powershell.exe` processes.
+can be used to identify suspicious process activity, such as `outlook.exe` or
+`iexplore.exe` starting `cmd.exe` or `powershell.exe` processes.
 
 #### Associated user and logon session
 
@@ -38,14 +38,14 @@ the logon session ([event ID `4624`](./etw_authentication_dst_host.md)).
 
 #### TokenElevationType
 
-The `TokenElevationType` field represent the privileges of the process and can
+The `TokenElevationType` field represents the privileges of the process and can
 take the following values:
 
 | Flag | Correspondence | Description |
 |------|----------------|-------------|
 | `%%1936` | `TokenElevationTypeDefault` | The process is started with a full token with no privileges removed or groups disabled. A full token is only used if `User Account Control (UAC)` is disabled or if the user starting the process is the built-in `Administrator` (`RID: 500`), `NT AUTHORITY\SYSTEM` or service account. |
-| `%%1937` | `TokenElevationTypeFull` | The process is started with an elevated token with no privileges removed or groups disabled. An elevated token is used when `User Account Control (UAC)` is enabled and the user chooses to start the program in a elevated security context (`Run as administrator` for example). |
-| `%%1938` | `TokenElevationTypeLimited` | The process is started with limited privileges, and privileged tokens such as `SeImpersonatePrivilege`, `SeDebugPrivilege`, etc. are removed from the process security context. |
+| `%%1937` | `TokenElevationTypeFull` | The process is started with an elevated token with no privileges removed or groups disabled. An elevated token is used when `User Account Control (UAC)` is enabled and the user chooses to start the program in an elevated security context (`Run as administrator` for example). |
+| `%%1938` | `TokenElevationTypeLimited` | The process is started with limited privileges, and privileges such as `SeImpersonatePrivilege`, `SeDebugPrivilege`, etc. are removed from the process security context. |
 
 #### ProcessCommandLine
 

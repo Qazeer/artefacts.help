@@ -1,6 +1,6 @@
 ---
 title: Security review - Mailbox delegations
-summary: 'The following level/scope of mailbox delegations can be configured:\n\n - Mailbox permissions: to allow items viewing at the mails box level (but not the right to send emails).\n\n - Recipient SendAs permissions: to delegate the right to send emails from the mailbox (that transparently appear to come from the specified mailbox to the recipients).\n\n - Recipient SendOnBehalf permissions: to delegate the right to send emails on behalf of the mailbox (and will appear as such to the receiving recipients).\n\n - Folder-level permissions: to delegate the rights to interact with items at the mailboxes folder level.'
+summary: 'The following level/scope of mailbox delegations can be configured:\n\n - Mailbox permissions: to allow viewing items at the mailbox level (but not the right to send emails).\n\n - Recipient SendAs permissions: to delegate the right to send emails from the mailbox (that transparently appear to come from the specified mailbox to the recipients).\n\n - Recipient SendOnBehalf permissions: to delegate the right to send emails on behalf of the mailbox (and will appear as such to the receiving recipients).\n\n - Folder-level permissions: to delegate the rights to interact with items at the mailboxs folder level.'
 keywords: Mailbox permissions, Recipient permissions, SendAs, SendOnBehalf, Folder-level permissions, ChangeOwner, ChangePermission, DeleteItem, ExternalAccount, FullAccess, ReadPermission
 tags:
   - azure_security_review
@@ -14,8 +14,8 @@ folder: azure
 
 The following level/scope of mailbox delegations can be configured:
 
-  - Mailbox permissions: to allow items viewing at the mails
-    box level (but not the right to send emails).
+  - Mailbox permissions: to allow viewing items at the
+    mailbox level (but not the right to send emails).
 
   - Recipient `SendAs` permissions: to delegate the right to send emails from
     the mailbox (that transparently appear to come from the specified mailbox
@@ -47,7 +47,7 @@ The available access rights are:
 
   - `ReadPermission`: read the permissions on the mailbox.
 
-The permissions defined on that level allow for emails viewing at the mailbox
+The permissions defined on that level allow viewing emails at the mailbox
 scope but do not allow sending emails (which is defined through the recipient
 `SendAs` and `SendOnBehalf` permissions).
 
@@ -61,9 +61,9 @@ Get-Mailbox -Resultsize Unlimited | Get-MailboxPermission | Where-Object { ($_.A
 
 ### Recipient (or `SendAs`) access right/permission
 
-Recipient, or `SendAs`, permission does not allow for emails viewing but
-allow a user, or group members, to send messages that appear to come from the
-specified mailbox. The email received from the mailbox owner or through a
+Recipient, or `SendAs`, permission does not allow viewing emails but
+allows a user, or group members, to send messages that appear to come from the
+specified mailbox. Emails received from the mailbox owner or through a
 `SendAs` delegation are indistinguishable by the receiving end-user.
 
 Note that the `Get-EXORecipientPermission`/`Get-RecipientPermission` is not
@@ -71,14 +71,14 @@ included by default in the cmdlets allowed for the
 `View-Only Organization Management` role group.
 
 ```bash
-# Lists the mailboxes with the SendAs reciptient permission.
+# Lists the mailboxes with the SendAs recipient permission.
 Get-Mailbox -Resultsize Unlimited | Get-EXORecipientPermission | Where-Object { ($_.Accessrights -like "SendAs") }
 ```
 
 ### Folder-level permissions
 
 Permissions/access rights can also be defined at the folder-level in
-mailboxes, to grant delegate the rights to interact with items at the
+mailboxes, to delegate the rights to interact with items at the
 mailbox's folder level.
 
 The [following individual permissions are available](https://learn.microsoft.com/en-us/powershell/module/exchange/add-mailboxfolderpermission):
@@ -161,7 +161,7 @@ ForEach ($MailBox in $MailBoxes) {
 
 ### Automated collection
 
-[`Microsoft-Extractor-Suite`](./logs_collection_tools.md#azure-ad-microsoft365--azure-microsoft-extractor-suite)'s
+[`Microsoft-Extractor-Suite`](./logs_collection_tools.md#azure-ad-microsoft-365--azure-microsoft-extractor-suite)'s
 [`Get-MailboxPermissions`](https://microsoft-365-extractor-suite.readthedocs.io/en/latest/functionality/M365/MailboxDelegatedPermissions.html)
 PowerShell cmdlet can be used to enumerate the Mailbox and Recipient (or
 `SendAs`) access rights / permissions:

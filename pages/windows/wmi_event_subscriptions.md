@@ -15,12 +15,12 @@ folder: windows
 ### Overview
 
 `Windows Management Instrumentation (WMI)` allows, through
-`Event Subscription`, to maintain persistence on a Windows system. Permanent
+`Event Subscription`, maintaining persistence on a Windows system. Permanent
 `WMI` event subscriptions can be configured to persist across system reboots.
 
 Permanent event subscriptions are composed of:
 
-  - An `event filter` (`__EventFilter `), which is the event of interest that
+  - An `event filter` (`__EventFilter`), which is the event of interest that
     will trigger the consumer. Such event can be, for example, a logon success
     or system startup.
 
@@ -29,19 +29,19 @@ Permanent event subscriptions are composed of:
 
     Five Consumer classes are available:
 
-      - The `ActiveScriptEventConsumer` class that run arbitrary `VBScript`
+      - The `ActiveScriptEventConsumer` class that runs arbitrary `VBScript`
         or `JScript` code.
 
-      - The `CommandLineEventConsumer` class that run an arbitrary system
+      - The `CommandLineEventConsumer` class that runs an arbitrary system
         command.
 
-      - The `LogFileEventConsumer` class that write an arbitrary string to a
+      - The `LogFileEventConsumer` class that writes an arbitrary string to a
         text-based log file.
 
-      - The `NtEventLogEventConsumer` class that write an arbitrary Windows `ETW`
+      - The `NtEventLogEventConsumer` class that writes an arbitrary Windows `ETW`
         event.
 
-      - The `SMTPEventConsumer` class that send an email.
+      - The `SMTPEventConsumer` class that sends an email.
 
   - A `filter to consumer binding` (`FilterToConsumerBinding`) which is the
     registration mechanism binding an event filter to an event consumer.
@@ -56,7 +56,7 @@ Permanent event subscriptions are composed of:
 
 ### WMI repository files
 
-The persistent `WMI Event Subscription` are written to disk in the
+The persistent `WMI Event Subscriptions` are written to disk in the
 (undocumented) `WMI` repository files under
 `%SystemRoot%\System32\wbem\Repository\` or
 `%SystemRoot%\System32\wbem\Repository\FS\`:
@@ -97,13 +97,13 @@ ForEach ($NameSpace in "root\subscription","root\default") { Get-WMIObject -Name
 
 `WMI Event Subscription` data can be extracted from `OBJECTS.DATA` files using
 the [`PyWMIPersistenceFinder`](https://github.com/davidpany/WMI_Forensics)
-Python script (that rely on regexes to extract the data):
+Python script (that relies on regexes to extract the data):
 
 ```bash
 PyWMIPersistenceFinder.py "<OBJECTS.DATA_FILE>"
 ```
 
-If a deeper analysis is required, for example if a consumer reference other
+If a deeper analysis is required, for example if a consumer references other
 `WMI` objects, [`python-cim`](https://github.com/mandiant/flare-wmi) can be
 leveraged to extract data from the `WMI` repository:
 

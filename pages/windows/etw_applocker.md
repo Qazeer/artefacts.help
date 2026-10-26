@@ -15,14 +15,14 @@ folder: windows
 
 ### Overview
 
-AppLocker is a native Windows feature introduced in Windows 7 Enterprise, 
+AppLocker is a native Windows feature introduced in Windows 7 Enterprise,
 designed to replace `Software Restriction Policies (SRP)`. AppLocker enables
 the restriction and control of executable files that users can run.
 
 AppLocker can control the process creation for the following file types,
 controlled through 5 sets of rules:
 
-  - `Executables Rules` for executables (`.exe` and `.dom` files).
+  - `Executables Rules` for executables (`.exe` and `.com` files).
 
   - `Scripts Rules` for scripts (`.ps1`, `.bat`, `.cmd`, `.vbs` and `.js`
     files).
@@ -43,14 +43,14 @@ specific types) or configured in audit mode (only generating ETW events).
 A computer can implement one or more AppLocker rules that are defined
 locally (in `Local Security Policy`) or centrally via one or more `Group Policy
 Object (GPO)`. The effective rules that are actually implemented on the
-computer is the sum of all rules defined in Local and Group policies.
+computer are the sum of all rules defined in Local and Group policies.
 
 Note: for AppLocker to be activated, the `AppIDSvc` service must be enabled and
 running.
 
 #### Default AppLocker rules
 
-AppLocker provides different default rules for each files type category:
+AppLocker provides different default rules for each file type category:
 
   - **Executables**
   
@@ -93,9 +93,9 @@ AppLocker provides different default rules for each files type category:
 The effectively applied AppLocker rules can be retrieved using the
 `Get-AppLockerPolicy` PowerShell cmdlet.
 
-An AppLocker rule is defined for an user or group, identified by the
-`UserOrGroupSid` attribute, and one or more conditions, which can be a
-filesystem paths, publishers for digitally signed files, or `Authenticode`
+An AppLocker rule is defined for a user or group, identified by the
+`UserOrGroupSid` attribute, and one or more conditions, which can be
+file system paths, publishers for digitally signed files, or `Authenticode`
 hashes.
 
 ```bash
@@ -132,17 +132,17 @@ The events in the AppLocker channels share a common set of logged properties:
 
 | Channel | Conditions | Events |
 |---------|------------|--------|
-| Channel: <br> `Microsoft-Windows-AppLocker/EXE and DLL` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4EXE and DLL.evtx` | Requires a matching AppLocker rule (from `Executables Rules` or `DLL Rules`) that allowed the execution. | Event `8002: <PE_FILE> was allowed to run`. <br><br> If the [default AppLocker rules](#default-applocker-rules) are enabled, this event is logged for every executions by members of the local administrators group and for executions from the `%PROGRAMFILES%` and `%WINDIR%` folders for every other users. Other execution attempts would raise events `8004` (if AppLocker `Executables Rules` are enforced) or `8003`. |
+| Channel: <br> `Microsoft-Windows-AppLocker/EXE and DLL` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4EXE and DLL.evtx` | Requires a matching AppLocker rule (from `Executables Rules` or `DLL Rules`) that allowed the execution. | Event `8002: <PE_FILE> was allowed to run`. <br><br> If the [default AppLocker rules](#default-applocker-rules) are enabled, this event is logged for every execution by members of the local administrators group and for executions from the `%PROGRAMFILES%` and `%WINDIR%` folders for every other user. Other execution attempts would raise events `8004` (if AppLocker `Executables Rules` are enforced) or `8003`. |
 | Channel: <br> `Microsoft-Windows-AppLocker/EXE and DLL` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4EXE and DLL.evtx` | Requires a matching AppLocker rule (from `Executables Rules` or `DLL Rules`) that would have blocked the execution if the rule set was in `enforce` mode. | Event `8003: <PE_FILE> was allowed to run but would have been prevented from running if the AppLocker policy were enforced`. <br><br> Logged when an executable or `DLL` file matching a rule was allowed to execute but would have been blocked by an AppLocker rule if the rule was enforced. |
 | Channel: <br> `Microsoft-Windows-AppLocker/EXE and DLL` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4EXE and DLL.evtx` | Requires a matching AppLocker rule (from `Executables Rules` or `DLL Rules`) that blocked the execution. | Event `8004: <PE_FILE> was prevented from running`. <br><br> Logged when an executable or `DLL` was prevented from executing by a matching enforced AppLocker rule. |
-| Channel: <br> `Microsoft-Windows-AppLocker/MSI and Script` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4MSI and Script.evtx` | Requires a matching AppLocker rule (from `Scripts Rules` or `Windows Installer Rules`) that allowed the execution. | Event `8006: <SCRIPT_FILE | MSI FILE> was allowed to run`. <br><br> Similarly to `EXE and DLL` events, logged for every scripts / MSI executions by members of the local administrators group and for scripts / MSI executions from the `%PROGRAMFILES%` and `%WINDIR%` folders for every other users. Other execution attempts would raise events `8007` (if AppLocker `Scripts Rules` or `Windows Installer Rules` rules are enforced) or `8006`. |
+| Channel: <br> `Microsoft-Windows-AppLocker/MSI and Script` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4MSI and Script.evtx` | Requires a matching AppLocker rule (from `Scripts Rules` or `Windows Installer Rules`) that allowed the execution. | Event `8006: <SCRIPT_FILE | MSI FILE> was allowed to run`. <br><br> Similarly to `EXE and DLL` events, logged for every script / MSI execution by members of the local administrators group and for scripts / MSI executions from the `%PROGRAMFILES%` and `%WINDIR%` folders for every other user. Other execution attempts would raise events `8007` (if AppLocker `Scripts Rules` or `Windows Installer Rules` rules are enforced) or `8006`. |
 | Channel: <br> `Microsoft-Windows-AppLocker/MSI and Script` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4MSI and Script.evtx` | Requires a matching AppLocker rule (from `Scripts Rules` or `Windows Installer Rules`) that would have blocked the execution if the rule set was in `enforce` mode. | Event `8007: <SCRIPT_FILE | MSI FILE> was allowed to run but would have been prevented from running if the AppLocker policy were enforced`. |
 | Channel: <br> `Microsoft-Windows-AppLocker/MSI and Script` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4MSI and Script.evtx` | Requires a matching AppLocker rule (from `Scripts Rules` or `Windows Installer Rules`) that blocked the execution. | Event `8008: <SCRIPT_FILE | MSI FILE> was prevented from running`. |
 | Channel: <br> `Microsoft-Windows-AppLocker/Packaged app-Execution` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4Packaged app-Execution.evtx` | Introduced in `Windows Server 2012` and `Windows 8`. <br><br> Requires a matching AppLocker rule (from `Packaged app Rules`) that allowed the app execution. | Event `8020: <PACKAGED_APP> was allowed to run`. |
 | Channel: <br> `Microsoft-Windows-AppLocker/Packaged app-Execution` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4Packaged app-Execution.evtx` | Introduced in `Windows Server 2012` and `Windows 8`. <br><br> Requires a matching AppLocker rule (from `Packaged app Rules`) that would have blocked the app execution if the rule set was in `enforce` mode. | Event `8021: <PACKAGED_APP> was allowed to run but would have been prevented from running if the AppLocker policy were enforced`. |
 | Channel: <br> `Microsoft-Windows-AppLocker/Packaged app-Execution` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4Packaged app-Execution.evtx` | Introduced in `Windows Server 2012` and `Windows 8`. <br><br> Requires a matching AppLocker rule (from `Packaged app Rules`) that blocked the app execution. | Event `8022: <PACKAGED_APP> was prevented from running`. |
 | Channel: <br> `Microsoft-Windows-AppLocker/Packaged app-Deployment` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4Packaged app-Deployment.evtx` | Introduced in `Windows Server 2012` and `Windows 8`. <br><br> Requires a matching AppLocker rule (from `Packaged app Rules`) that allowed the app installation. | Event `8023: <PACKAGED_APP> was allowed to be installed`. |
-| Channel: <br> `Microsoft-Windows-AppLocker/Packaged app-Deployment` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%Packaged app-Deployment.evtx` | Introduced in `Windows Server 2012` and `Windows 8`. <br><br> Requires a matching AppLocker rule (from `Packaged app Rules`) that that would have blocked the app installation if the rule set was in `enforce` mode. | Event `8024: <PACKAGED_APP> was allowed to run but would have been prevented from running if the AppLocker policy were enforced`. |
+| Channel: <br> `Microsoft-Windows-AppLocker/Packaged app-Deployment` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4Packaged app-Deployment.evtx` | Introduced in `Windows Server 2012` and `Windows 8`. <br><br> Requires a matching AppLocker rule (from `Packaged app Rules`) that would have blocked the app installation if the rule set was in `enforce` mode. | Event `8024: <PACKAGED_APP> was allowed to run but would have been prevented from running if the AppLocker policy were enforced`. |
 | Channel: <br> `Microsoft-Windows-AppLocker/Packaged app-Deployment` <br><br> EVTX file: <br> `Microsoft-Windows-AppLocker%4Packaged app-Deployment.evtx` | Introduced in `Windows Server 2012` and `Windows 8`. <br><br> Requires a matching AppLocker rule (from `Packaged app Rules`) that blocked the app installation. | Event `8025: <PACKAGED_APP> was prevented from running`. |
 
 

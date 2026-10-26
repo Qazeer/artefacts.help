@@ -1,11 +1,11 @@
 ---
 title: Microsoft SQL Server
-summary: 'Microsoft SQL Server is a relational database engine. Each installed instance maintains its own set of databases, log files, and optional auditing outputs under the instance data directory. \n\n The following SQL Server–specific sources are of forensics interest: \n\n - Database files (master, msdb, model, and user databases): principals, roles/permission definitions, linked servers, and job configured.\n\n - Transaction logs: for data changes since last database checkpoint.\n\n - SQL Server error logs (ERRORLOG): engine lifecycle events, enabling or disabling of features (such as sp_configure), and login failures. \n\n - SQL Trace (.trc files) and SQL Server Profiler: event tracing framework, that provide granular control over events/fields collection and event filtering events. Intented to for operationnal monitoring/troubleshooting and replaced by Extended Events. A "default trace" is enabled by default on every instance and captures a small amount of built-in history about significant instance activity.\n\n - Extended Events/XEvents sessions (.xel files): event tracing framework that replaces SQL Trace. Extended events provide similar granular control over the events and event fields that will be logged. Not enabled by default.\n\n - SQL Server Audit (.sqlaudit files and/or EVTX events 33205 / 33206): security logging framework, built on top of Extended Events. Not enabled by default.\n\n - SQL Server Agent log files and the msdb database, for scheduled job execution and backup metadataz'
+summary: 'Microsoft SQL Server is a relational database engine. Each installed instance maintains its own set of databases, log files, and optional auditing outputs under the instance data directory. \n\n The following SQL Server–specific sources are of forensics interest: \n\n - Database files (master, msdb, model, and user databases): principals, roles/permission definitions, linked servers, and jobs configured.\n\n - Transaction logs: for data changes since last database checkpoint.\n\n - SQL Server error logs (ERRORLOG): engine lifecycle events, enabling or disabling of features (such as sp_configure), and login failures. \n\n - SQL Trace (.trc files) and SQL Server Profiler: event tracing framework, that provides granular control over events/fields collection and event filtering. Intended for operational monitoring/troubleshooting and replaced by Extended Events. A "default trace" is enabled by default on every instance and captures a small amount of built-in history about significant instance activity.\n\n - Extended Events/XEvents sessions (.xel files): event tracing framework that replaces SQL Trace. Extended events provide similar granular control over the events and event fields that will be logged. Not enabled by default.\n\n - SQL Server Audit (.sqlaudit files and/or EVTX events 33205 / 33206): security logging framework, built on top of Extended Events. Not enabled by default.\n\n - SQL Server Agent log files and the msdb database, for scheduled job execution and backup metadata'
 keywords: Microsoft SQL Server, MSSQL, SQL Server, ERRORLOG, xp_readerrorlog, SQL Server Audit, sqlaudit, .sqlaudit, Extended Events, xel, .xel, ldf, .ldf, trc, .trc, default trace, SQLAGENT, msdb, sysjobhistory, backupset, 18456, 18454, 33205, 33206, 15457, xp_cmdshell, OLE automation, sp_configure, OLEDB, linked server, MSSQLSERVER, SQLSERVERAGENT, system_health, Always On, Database Mail, PolyBase, fn_get_audit_file, fn_xe_file_target_read_file
 tags:
   - databases
   - windows_server_roles
-location: 'Default instance location:\n %ProgramFiles%\Microsoft SQL Server\<MAJOR_VERSION>\<INSTANCE_NAME>\MSSQL\.\n System and user database files: <INSTANCE_FOLDER>\MSSQL\DATA\.\n Log files: <INSTANCE_FOLDER>\MSSQL\Log\.\n\n System databases: master.mdf, msdb.mdf, and model.mdf.\n\n Transaction log: .ldf files.\n\n Error log: ERRORLOG, ERRORLOG.1, ...\n\n Windows event log:\n Channel: Application. Events: 18456, 15457, 18454, etc. (sources MSSQLSERVER/MSSQL$<INSTANCE>/SQLSERVERAGENT).\n\n SQL Trace (target dependant): .trc files.\n Default trace: log_<N>.trc.\n\n Extended Events (target dependant): binary .xel files.\n\n SQL Server Audit (target dependant): binary .sqlaudit files and/or Windows event Application / Security 33205/33206.\n\n SQL Server Agent log: SQLAGENT.OUT (and numbered archives).'
+location: 'Default instance location:\n %ProgramFiles%\Microsoft SQL Server\<MAJOR_VERSION>\<INSTANCE_NAME>\MSSQL\.\n System and user database files: <INSTANCE_FOLDER>\MSSQL\DATA\.\n Log files: <INSTANCE_FOLDER>\MSSQL\Log\.\n\n System databases: master.mdf, msdb.mdf, and model.mdf.\n\n Transaction log: .ldf files.\n\n Error log: ERRORLOG, ERRORLOG.1, ...\n\n Windows event log:\n Channel: Application. Events: 18456, 15457, 18454, etc. (sources MSSQLSERVER/MSSQL$<INSTANCE>/SQLSERVERAGENT).\n\n SQL Trace (target dependent): .trc files.\n Default trace: log_<N>.trc.\n\n Extended Events (target dependent): binary .xel files.\n\n SQL Server Audit (target dependent): binary .sqlaudit files and/or Windows event Application / Security 33205/33206.\n\n SQL Server Agent log: SQLAGENT.OUT (and numbered archives).'
 last_updated: 2026-10-19
 sidebar: sidebar
 permalink: microsoft_sqlserver.html
@@ -24,7 +24,7 @@ privilege escalation through database features, data access or exfiltration,
 persistence through jobs or logins, etc.):
 
   - Database files (`master`, `msdb`, `model`, and user databases): principals,
-    roles/permission definitions, linked servers, and job configured.
+    roles/permission definitions, linked servers, and jobs configured.
   
   - Transaction logs: for data changes since last database checkpoint.
 
@@ -33,8 +33,8 @@ persistence through jobs or logins, etc.):
     failures.
 
   - `SQL Trace` (`.trc` files) and `SQL Server Profiler`: event tracing
-    framework, that provide granular control over events/fields collection and
-    event filtering events. Intented to for operationnal
+    framework, that provides granular control over events/fields collection and
+    event filtering. Intended for operational
     monitoring/troubleshooting and replaced by `Extended Events`.
     
     The `SQL Server Profiler` is an interface to create and manage traces, and
@@ -68,7 +68,7 @@ for a default instance on `SQL Server 2022`.
 | Component | Typical path |
 |-----------|--------------|
 | System and user database data files. | `<INSTANCE_FOLDER>\MSSQL\DATA\` |
-| Logs files. | `<INSTANCE_FOLDER>\MSSQL\Log\` |
+| Log files. | `<INSTANCE_FOLDER>\MSSQL\Log\` |
 | Setup / upgrade bootstrap (install-time) logs. | `%ProgramFiles%\Microsoft SQL Server\<MAJOR_VERSION>\Setup Bootstrap\LOG\` |
 
 ### Database data files
@@ -77,7 +77,7 @@ At a minimum, every SQL Server database requires at least two files: a data
 file and a transaction log file (`.ldf`). Data files store the database's data
 and objects, including tables, indexes, stored procedures, and views. Data files
 can be organized into a primary file (`.mdf`) and optional secondary files
-(`.ndf`). Secondary files can be across multiple disks by putting each file on
+(`.ndf`). Secondary files can be spread across multiple disks by putting each file on
 a different disk drive.
 
 The following tables/views can be of forensic interest:
@@ -87,14 +87,14 @@ The following tables/views can be of forensic interest:
 | `master` | `sys.server_principals` | SQL Server principals, such as `SQL_LOGIN`, `SERVER_ROLE`, `WINDOWS_USER`, or `WINDOWS_GROUP`. <br> Stores each principal's name, SID, type, create timestamp, and last modified timestamp. <br> `Server roles` have a server-wide scope while `database roles` are database-wide in their permissions scope. There are additionally two types of roles: `fixed roles`, that have a fixed and defined set of permissions, and `user-defined roles`, that can be manually created and assigned permissions. <br> Any login can see their own login name, the system logins, and the fixed server roles. Viewing other logins requires `ALTER ANY LOGIN`, or a permission on the login. Viewing user-defined server roles requires `ALTER ANY SERVER ROLE`, or membership in the role. |
 | `master` | `sys.sql_logins` | SQL Server authentication logins (`SQL_LOGIN`, i.e users). <br> Stores the hash of SQL login password. <br> Any login can see their own login name, and the `sa` login. To see other logins, the principal requires `ALTER ANY LOGIN`, `VIEW SERVER SECURITY DEFINITION`, or a permission on the login. |
 | `master` | `sys.server_role_members` | SQL Server role memberships, linking the `Principal ID` of a role to a `Principal ID` of each member. |
-| `master` | `sys.server_permissions ` | SQL Server permissions, that are the rights to access and modify the service configuration and databases objects, such as `CONNECT SQL`, `IMPERSONATE`, `IMPERSONATE ANY LOGIN`, `ALTER ANY LOGIN`, etc. <br> The permissions is granted, through  `Principal ID`, by `grantor_principal_id` to `princigrantee_principal_id`. <br> The permissions can apply at the server-level (`SERVER`), endpoint (`ENDPOINT`), login (`LOGIN`). |
+| `master` | `sys.server_permissions` | SQL Server permissions, that are the rights to access and modify the service configuration and databases objects, such as `CONNECT SQL`, `IMPERSONATE`, `IMPERSONATE ANY LOGIN`, `ALTER ANY LOGIN`, etc. <br> The permissions are granted, through `Principal ID`, by `grantor_principal_id` to `grantee_principal_id`. <br> The permissions can apply at the server-level (`SERVER`), endpoint (`ENDPOINT`), login (`LOGIN`). |
 | `master` | `sys.configurations` | Effective server-wide configuration values, such as `xp_cmdshell`, `clr enabled`, etc. |
-| `master` | `sys.credentials` and `sys.database_scoped_credentials` | Respectively server-level and database scoped credentials. <br> Access to  `sys.credentials` requires either `VIEW ANY DEFINITION` permission or `ALTER ANY CREDENTIAL` permission. Access to  `sys.database_scoped_credentials` requires `CONTROL` permission on the database. |
+| `master` | `sys.credentials` and `sys.database_scoped_credentials` | Respectively server-level and database-scoped credentials. <br> Access to `sys.credentials` requires either `VIEW ANY DEFINITION` permission or `ALTER ANY CREDENTIAL` permission. Access to `sys.database_scoped_credentials` requires `CONTROL` permission on the database. |
 | `master` | `sys.asymmetric_keys`, `sys.symmetric_keys`, and `sys.certificates` | Cryptographic keys and certificates at the instance level. |
 
 #### Linked servers
 
-The linked server mechanism allows for access to others `Object Linking and
+The linked server mechanism allows for access to other `Object Linking and
 Embedding, Database (OLE DB)` data sources outside of the present SQL Server
 instance. The mechanism can be used at the database level to connect to and
 query a variety of data stores including, but not limited to:
@@ -123,8 +123,8 @@ instance.
 #### SQL Server Agent
 
 The `SQL Server Agent` is a Windows service that executes scheduled
-tasks, denominated `SQL Server Agent jobs`. `SQL Server Agent` is available is
-all versions of `SQL server`, except `SQL Server Express`, **but is disabled by
+tasks, called `SQL Server Agent jobs`. `SQL Server Agent` is available in
+all versions of `SQL Server`, except `SQL Server Express`, **but is disabled by
 default**.
 
 In order to fulfil its function, the `SQL Server Agent` Windows service must be
@@ -149,29 +149,29 @@ to execute operating system commands using the following subsystems:
     as `cmd.exe /c <COMMAND>` for example.
   - `PowerShell`: run a PowerShell script, by specifying either the PowerShell
     code directly or a PowerShell script file.   
-  - `ActiveX`: run an `ActiveX` script. Note that the `ActiveSscripting`
+  - `ActiveX`: run an `ActiveX` script. Note that the `ActiveScripting`
     subsystem is discontinued since `SQL Server 2016` (included).
 
 Note that a `SQL Server Agent job` can run locally on the `SQL Server` they are
-configured as well as on one or multiple remote servers.
+configured on, as well as on one or multiple remote servers.
 
 The permissions to configure, execute, and delete `SQL Server Agent jobs` are
 governed by the following fixed database roles:
 
 | Role | Scope | Notable associated permissions |
 |------|-------|--------------------------------|
-| `sysadmin` | Fixed-server role. | Can administrate and execute any jobs, regardless of the job's owner. <br><br> Is the only role that can define new `proxy accounts`. <br> Additionally, can define and execute jobs that will run as the `SQL Server Agent` Windows service account. <br><br> By default, only the members of the `sysadmin` fixed server role can setup a multi-servers environment. |
+| `sysadmin` | Fixed-server role. | Can administrate and execute any jobs, regardless of the job's owner. <br><br> Is the only role that can define new `proxy accounts`. <br> Additionally, can define and execute jobs that will run as the `SQL Server Agent` Windows service account. <br><br> By default, only the members of the `sysadmin` fixed server role can set up a multiserver environment. |
 | `SQLAgentUserRole` | `msdb` database fixed-database role. | Can create and execute local jobs under their own security context or using the identity of an existing `proxy account`. <br><br> Can enumerate, modify, or delete jobs they own. <br><br> By default, cannot delete the job history of the jobs they own. <br> Cannot enumerate, administrate, or execute jobs they don't own. |
 | `SQLAgentReaderRole` | `msdb` database fixed-database role. | Includes the permissions of the `SQLAgentUserRole` role. <br><br> Can additionally enumerate and view the properties / history of all local or multi-servers jobs. |
 | `SQLAgentOperatorRole` | `msdb` database fixed-database role. | Includes the permissions of the `SQLAgentUserRole` and `SQLAgentReaderRole` roles. <br><br> Can additionally execute, stop, and enable / disable all local jobs and their job history. <br><br> Cannot however modify or delete jobs they don't own (nor make use of multi-servers jobs). |
 
-The following tables store  SQL Server Agent job configuration information and
+The following tables store SQL Server Agent job configuration information and
 past execution details:
 
 | Database | table | Forensics use |
 |----------|-------|---------------|
 | `msdb`   | `dbo.sysjobs` | Scheduled job to be executed by `SQL Server Agent`. <br> Stores each job's unique ID (`job_id`), name, description, whether the job is enabled, first step id (`start_step_id`), and creation and last modification timestamps. |
-| `msdb`   | `dbo.sysjobsteps` | Step(s) for scheduled jobs. <br> Link each job to its step(s), i.e command(s) to be executed in sequential order. A step can either be the final step or define different subsequent step(s), with a separate step defined for success and failure outcomes. <br> Stores each step's associated `job_id`, step ID (`step_id`), name, subsystem, command, eventual additional parameters, on success/fail action and eventual associated next steps step_id, and last run information (outcome, duration, run timestamp, etc.). |
+| `msdb`   | `dbo.sysjobsteps` | Step(s) for scheduled jobs. <br> Links each job to its step(s), i.e command(s) to be executed in sequential order. A step can either be the final step or define different subsequent step(s), with a separate step defined for success and failure outcomes. <br> Stores each step's associated `job_id`, step ID (`step_id`), name, subsystem, command, eventual additional parameters, on success/fail action and eventual associated next steps step_id, and last run information (outcome, duration, run timestamp, etc.). |
 | `msdb`   | `dbo.sysschedules` |  SQL Server Agent job schedules, defining a `schedule_id` and scheduling parameters, i.e when a job will be executed (once, at instance start, daily, weekly, monthly, etc.). |
 | `msdb`   | `dbo.sysjobschedules` | Links SQL Server Agent jobs to schedules, mapping a `job_id` to a `schedule_id` and referencing when the next scheduled execution will occur (`next_run_date` + `next_run_time`). |
 | `msdb`   | `dbo.sysjobhistory` | Historical executions of SQL Server Agent jobs. <br> Stores, for each past execution: the `job_id`, `step_id`, step name, the outcome status (succeeded, failed, canceled, etc.), the run date, time, and duration. |
@@ -195,7 +195,7 @@ increased `LSN`.
 
 #### Transaction log's Log Records
 
-`Log records` have a defined structure with a metadata fields and varying
+`Log records` have a defined structure with metadata fields and varying
 additional fields depending on the log record type/operation.
 
 Each log record contains the following notable fields:
@@ -204,8 +204,8 @@ Each log record contains the following notable fields:
   - The previous log record `LSN`.
 
   - The log record `type`/`operation`. There are between 70 and 100 log record
-    operations recorded in the transaction log, depending on the version of SQL
-    Server version in use. These operations include:
+    operations recorded in the transaction log, depending on the SQL Server
+    version in use. These operations include:
       
       - The start and end of each transaction: `LOP_BEGIN_XACT` and
         `LOP_COMMIT_XACT`/`LOP_ABORT_XACT`. Each transaction starts with a
@@ -223,15 +223,15 @@ Each log record contains the following notable fields:
     and a finish timestamp (`End Time`) for `LOP_COMMIT_XACT` log record.
 
   - The `Transaction ID` the log record is part of. The
-    `LOP_COMMIT_XACT`/`LOP_ABORT_XACT` log records additionnaly reference
+    `LOP_COMMIT_XACT`/`LOP_ABORT_XACT` log records additionally reference
     directly the `LSN` of their associated `LOP_BEGIN_XACT` log record. It is
-    thus possible to bound in time each transaction and every operations they
-    contain.
+    thus possible to bound in time each transaction and every operation it
+    contains.
 
   - For operations that modify data, such as `LOP_INSERT_ROWS` or
     `LOP_MODIFY_ROW`, the `Page ID` and `Slot ID`. These two fields can be used
     to locate the modified data in the database. However, as data can
-    reshuffled and reorganized in a clustered table, the data doesn't
+    be reshuffled and reorganized in a clustered table, the data doesn't
     necessarily always remain in the same `Page ID` and `Slot ID` over time.
 
   - For operations that modify data, the data pre and post transaction
@@ -240,13 +240,13 @@ Each log record contains the following notable fields:
     For `LOP_MODIFY_ROW` operations, `RowLog0` and `RowLog1` contain the old
     and new data respectively.
     The `RowLog` fields contain hex-encoded undocumented binary data that
-    depend of the operation type. It is possible to
+    depend on the operation type. It is possible to
     [reconstruct the data change](https://www.sqlservercentral.com/articles/reading-sql-servers-transaction-log)
     by parsing the `RowLogX` fields.
 
 #### Transaction log truncation
 
-Transaction log truncation is the process of feeing inactive `VLFs` for reuse.
+Transaction log truncation is the process of freeing inactive `VLFs` for reuse.
 This prevents the `transaction log` from growing indefinitely and consuming all
 available disk space.
 
@@ -273,7 +273,7 @@ On a live instance, transaction logs can be retrieved using
 
 The
 [`SQLServerForensics`](https://github.com/aarsakian/SQLServerForensics) utility
-can be leveraged to parse and extraction the transactions from transaction log
+can be leveraged to parse and extract the transactions from transaction log
 files: 
 
 ```bash
@@ -281,7 +281,7 @@ files:
 MSSQLParser.exe -db <DB_MDF> -ldb <TRANSACT_LOG_LDF>.ldf -processtables -showcontent -log -export <OUTPUT_FOLDER> -format csv
 
 # Process the specified table from the database, exporting content and insert timestamp from Transaction logs if available.
-# Exporting resulting is optionnal.
+# Exporting the results is optional.
 MSSQLParser.exe -db <DB_MDF> -ldb <TRANSACT_LOG_LDF>.ldf -processtables -tables <TABLE> -showcontent -log [-export <OUTPUT_FOLDER> -format csv]
 
 # Show transaction log raw data.
@@ -290,7 +290,7 @@ MSSQLParser.exe -db <DB_MDF> -ldb <TRANSACT_LOG_LDF>.ldf -showldf -filterlop <an
 
 ### SQL Server error log
 
-The SQL Server error log are plain-text, sequentially numbered log
+The SQL Server error logs are plain-text, sequentially numbered log
 files (`ERRORLOG`, then `ERRORLOG.1`, `ERRORLOG.2`, …) written by the Database
 Engine. A new file is created when the log is recycled (on Database restart or
 when the current file reaches its size limit).
@@ -368,8 +368,8 @@ providers such as `MSSQLSERVER` (default instance),
 |---------|------------|----------------------------------|
 | Channel: <br> `Application` <br><br> EVTX file: <br> `Application.evtx` | Requires auditing of failed logins to be enabled (default configuration). | Event `18456`: `Login failed for user '<USERNAME>'. Reason: Password did not match that for the login provided. [CLIENT: <REMOTE_IP>]`. <br><br> Also logged in SQL Server error log. <br><br> Information of interest: <br> - username. <br> - Client/remote IP address. <br> - Reason of the login failure (invalid username, invalid password, etc.). |
 | Channel: <br> `Application` <br><br> EVTX file: <br> `Application.evtx` | Requires auditing of successful logins to be enabled (non-default configuration). | Event `18454`: `Login succeeded for user '<USERNAME>'. Connection made using SQL Server authentication. [CLIENT: <REMOTE_IP>]`. <br><br> Also logged in SQL Server error log. <br><br> Information of interest: <br> - username. <br> - User type (SQL server or Windows account). <br> - Client/remote IP address. |
-| Channel: <br> `Application` <br><br> EVTX file: <br> `Application.evtx` | Default configuration. | Event `15457`: `Configuration option '<OPTION_NAME>' changed from <OLD_VALUE> to <NEW_VALUE>. Run the RECONFIGURE statement to install`. <br><br> Also logged in SQL Server error log. <br><br> sp_configure configuration change, such as enabling `xp_cmdshell` or `clr enabled`. <br><br> Information of interest: <br> - Option/setting name. <br> - Old and new values of the configuration setting. <br> - For Windows logins, domain and username of the user that conducted the change. SQL server login do not appear to be logged. |
-| Channel: <br> `Application` / `Security` <br><br> EVTX file: <br> `Application.evtx` / `Security.evtx` | Requires `SQL Server Auditing` to be configured, with the Windows event log as a target. The  events logged will depend on the actions/operations audited (as specified in the `Audit Specification`). | Event `33205`: `Audit event: <AUDIT_DATA>`. <br><br> For more information, refer to the [SQL Server Auditing section below](#sql-server-auditing). |
+| Channel: <br> `Application` <br><br> EVTX file: <br> `Application.evtx` | Default configuration. | Event `15457`: `Configuration option '<OPTION_NAME>' changed from <OLD_VALUE> to <NEW_VALUE>. Run the RECONFIGURE statement to install`. <br><br> Also logged in SQL Server error log. <br><br> sp_configure configuration change, such as enabling `xp_cmdshell` or `clr enabled`. <br><br> Information of interest: <br> - Option/setting name. <br> - Old and new values of the configuration setting. <br> - For Windows logins, domain and username of the user that conducted the change. SQL Server logins do not appear to be logged. |
+| Channel: <br> `Application` / `Security` <br><br> EVTX file: <br> `Application.evtx` / `Security.evtx` | Requires `SQL Server Auditing` to be configured, with the Windows event log as a target. The events logged will depend on the actions/operations audited (as specified in the `Audit Specification`). | Event `33205`: `Audit event: <AUDIT_DATA>`. <br><br> For more information, refer to the [SQL Server Auditing section below](#sql-server-auditing). |
 
 The full list of Windows ETW events emitted by the `Microsoft SQL Server` engine
 can be found in the
@@ -383,7 +383,7 @@ log user authentications, privilege changes, setting changes, and data access
 events. It is built on top of [`Extended Events`](#sql-server-extended-events).
 
 SQL Server Audit is not enabled/configured by default. The actions/operations
-logged are also fully configurable, so the data available will be dependant of
+logged are also fully configurable, so the data available will be dependent on
 the SQL Server Audit settings configured.
 
 #### SQL Server Audit components
@@ -400,7 +400,7 @@ SQL Server Audit is composed of multiple components:
     parameters, including the maximum number of audit files and the maximum
     size permitted for each file.  
 
-  - An `Audit Specifications` that defines the actions logged.
+  - An `Audit Specification` that defines the actions logged.
   
     Audit Specification can be configured at the:
     
@@ -442,11 +442,11 @@ The following notable fields are consistently available in audit records:
 
   - `event_time`: Date and time when the action was performed.
 
-  - `action_id`: four character code that indicate the action/operation type.
+  - `action_id`: four-character code that indicates the action/operation type.
 
     Notable values include:
 
-    | Code | Description | Available in  SQL Server version |
+    | Code | Description | Available in SQL Server version |
     |------|-------------|----------------------------------|
     | `AUTH` | Authenticate. | Starting with SQL Server 2012. |
     | `CO` | Connect.  | Starting with SQL Server 2012. |
@@ -501,7 +501,7 @@ The following notable fields are consistently available in audit records:
   - `succeeded`: Indicates whether the action that triggered the event
     succeeded (`1` => success and `0` => fail).
 
-  - `session_id`: Identified of the session under which the event occurred.
+  - `session_id`: Identifier of the session under which the event occurred.
 
   - `sequence_number`: Tracks the sequence of records within a single audit
     operation that was too large to fit in a single row.
@@ -511,19 +511,19 @@ The following notable fields are consistently available in audit records:
     action is performed in.
 
   - `database_name`: The database context in which the action occurred, or NULL
-    for operations that occured at the server level.
+    for operations that occurred at the server level.
 
   - `database_principal_name`: `login` of the login database context the
-    action is performed in (for operations that occured at the database level).
+    action is performed in (for operations that occurred at the database level).
 
   - `object_name`: The name of the entity on which the audit occurred, NULL if
-    the entity is the SQL server itself or if the operaton isn't performed at
+    the entity is the SQL server itself or if the operation isn't performed at
     an object level.
 
-The following notable additionnal fields can be available depending on the
+The following notable additional fields can be available depending on the
 event type:
 
-  - `statement`: Transact SQL statement if avaible. Returns NULL if not
+  - `statement`: Transact SQL statement if available. Returns NULL if not
     applicable.
 
   - `client_ip`: source IP of the client application.
@@ -537,7 +537,7 @@ The full reference of the SQL Server Auditing event fields can be found in the
 #### SQL Server Audit logs access/parsing
 
 On a live SQL Server instance, audit records within binary `.sqlaudit` audit
-files can be read using the system function `sys.fn_get_audit_file`. Altough
+files can be read using the system function `sys.fn_get_audit_file`. Although
 the function requires a live instance, it can be leveraged to read audit files
 exported from another instance.
 
@@ -742,7 +742,7 @@ ORDER BY event_time;
 Alternatively, the
 [`Convert-SqlAudit.ps1`](https://web.archive.org/web/20260415113628/https://gist.github.com/PatrickKeisler/d34f29f943151d253dc6626a1fd5c08b#file-convert-sqlaudit-ps1)
 PowerShell script, leveraging the `Read-SqlXEvent` cmdlet (from the `SqlServer`
-module) can be used to parse to parse binary `.sqlaudit` audit files to CSV:
+module) can be used to parse binary `.sqlaudit` audit files to CSV:
 
 ```
 .\Convert-SqlAudit.ps1 -FileName "<SQLAUDIT_FILE_PATH>" -OutputPath <OUTPUT_DIR>
@@ -754,7 +754,7 @@ module) can be used to parse to parse binary `.sqlaudit` audit files to CSV:
 `SQL Server Database Engine`. SQL Trace provides mechanisms to define the
 events monitored, configure event filters, and collect associated event fields.
 The events, fields, and filtering criteria can be customized to tailor data
-collection to specific monitoring needs. `SQL Trace` are mostly leveraged to
+collection to specific monitoring needs. `SQL Trace` is mostly leveraged to
 gather performance insights into normal operations and in troubleshooting
 scenarios.
 
@@ -820,7 +820,7 @@ The following fields are commonly collected:
   - `HostName` and `ApplicationName`.
   - `TextData`, containing the SQL statement or other event-specific text.
   - `Duration`, representing the duration of the operation.
-  - CPU Reads and Writes.
+  - CPU reads and writes.
   - `RowCounts`, representing the number of rows affected or returned,
     depending on the event.
   - `Error`, containing an associated error number when applicable.
@@ -923,12 +923,12 @@ or to log authentication events.
 
 The Extended Events engine consists of several components including:
 
-  - `Sessions`, that defines the operations/actions monitored, event fields
+  - `Sessions`, that define the operations/actions monitored, event fields
     recorded, and the `Target(s)` implemented to store the data. A given SQL
     Server instance can have multiple sessions, and each session can be created,
     modified, started, or stopped independently.
 
-  - `Targets`, that defines how and where to store the data. Targets can
+  - `Targets`, that define how and where to store the data. Targets can
     notably be `ring_buffer` for in-memory storage or `event_file` for
     persistent on-disk storage. A session must define at least one target
     and can write to multiple targets.
@@ -948,7 +948,7 @@ field contains the overall data/fields for the event, in XML format.
 
 There is a common set of `Global Fields` that can be recorded/captured for all
 Extended Events types (but are not enabled by default). Each event type also
-has a set of specific fields (with some optionnal that can be individually
+has a set of specific fields (with some optional that can be individually
 toggled).
 
 The following global fields may be of interest, if enabled:
@@ -966,8 +966,8 @@ The following global fields may be of interest, if enabled:
 #### Extended Events access
 
 On a live SQL Server instance, Extended Events `.xel` files can be read using
-the system function `sys.fn_xe_file_target_read_file`. Altough the function
-requires a live instance, it can be leveraged to read audit files exported
+the system function `sys.fn_xe_file_target_read_file`. Although the function
+requires a live instance, it can be leveraged to read XEL files exported
 from another instance.
 
 ```sql
@@ -981,7 +981,7 @@ FROM sys.fn_xe_file_target_read_file('<XEL_FILE>', NULL, NULL, NULL) AS event_da
 ```
 
 Alternatively, the `Read-SqlXEvent` cmdlet (from the `SqlServer` module) can be
-used to parse to parse binary XEvents `XEL` audit files (or directly retrieve
+used to parse binary XEvents `XEL` files (or directly retrieve
 XEvents from a live SQL Server instance):
 
 ```bash
@@ -996,7 +996,7 @@ Read-SQLXEvent -ConnectionString "Server=.;Database=master;Trusted_Connection=Tr
 The `SQL Server Agent` service maintains its own text log: `SQLAGENT.OUT`
 (and rotated `SQLAGENT.1`, …), under the instance `MSSQL\Log` folder.
 
-The Agent logs record agents startup, jobs, operator actions, and errors
+The Agent logs record Agent startup, jobs, operator actions, and errors
 encountered while running scheduled tasks.
 
 ---

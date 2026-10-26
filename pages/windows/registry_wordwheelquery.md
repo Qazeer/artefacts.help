@@ -21,8 +21,8 @@ access.
 
 ### Information of interest
 
-Each term/keywords entered is stored in a dedicated value under the
-`Explorer\WordWheelQuery` key (as a unicode string).
+Each term/keyword entered is stored in a dedicated value under the
+`Explorer\WordWheelQuery` key (as a Unicode string).
 
 The values are ordered in temporal order, in a `Most recently used (MRU)` list,
 with the most recently entered term having the position of `0`.

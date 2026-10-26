@@ -1,6 +1,6 @@
 ---
 title: Registry - Services
-summary: 'The Services registry key hold the configuration information of the installed Windows services.\n\nInformation of interest, for each service: service name and display name, image or DLL path, service type, service start mode, and eventual Windows privileges required.\n\nThe timestamp of a service creation, or last configuration update, can be deduced from the last write timestamp of its registry key.'
+summary: 'The Services registry key holds the configuration information of the installed Windows services.\n\nInformation of interest, for each service: service name and display name, image or DLL path, service type, service start mode, and eventual Windows privileges required.\n\nThe timestamp of a service creation, or last configuration update, can be deduced from the last write timestamp of its registry key.'
 keywords: 'Services, installed services, windows service, svchost'
 tags:
   - windows_registry
@@ -23,7 +23,7 @@ implemented as binaries or `Dynamic Link Libraries (DLL)`. The services
 implemented as `DLL` are loaded and executed by an instance of the
 `Service Host` (`svchost.exe`) process.
 
-The `Services` registry key **hold the configuration information of the
+The `Services` registry key **holds the configuration information of the
 installed Windows services**: name, display name, image path, start mode,
 service type, required privileges if any, etc.
 
@@ -31,7 +31,7 @@ service type, required privileges if any, etc.
 
 **Each service configuration is defined in a dedicated subkey** under
 `Services`, **identified by the service name**. The last write timestamp of the
-service sub key indicates the service creation or last modification timestamp.
+service subkey indicates the service creation or last modification timestamp.
 
 For each service, the following notable information is available (under the
 service name root key):
@@ -52,7 +52,7 @@ service name root key):
     The list of services defined in a `Service Host Group` is set in the
     `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost` registry key.
 
-    Two other argument may be specified to the `Service Host` process:
+    Two other arguments may be specified to the `Service Host` process:
       - `-s <SERVICE_NAME>`: to only load the specified service from the
         given `Service Host Group`.
       - `-p`: [to enforce different policies: `DynamicCodePolicy`,

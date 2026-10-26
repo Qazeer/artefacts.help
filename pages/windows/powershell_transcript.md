@@ -1,6 +1,6 @@
 ---
 title: PowerShell Transcript
-summary: 'PowerShell Transcript is a mechanism to record a PowerShell console session. The full console input and, depending on the transcript configuration, stdout and stderr streams are logged to a text file.\n\n This logging mechanism, disabled by default, is the only Windows built-in feature to gain extended visibility on PowerShell console interactions, and in particular to the results of PowerShell commands entered in a console. Contrary to Script Block Logging however, PowerShell Transcript does not include content of scripts executed and only the commands as they are entered in the PowerShell console.\n\n PowerShell Transcript can be enabled using the Start-Transcript cmdlet, by GPO, or directly in the registry.'
+summary: 'PowerShell Transcript is a mechanism to record a PowerShell console session. The full console input and, depending on the transcript configuration, stdout and stderr streams are logged to a text file.\n\n This logging mechanism, disabled by default, is the only Windows built-in feature to gain extended visibility on PowerShell console interactions, and in particular to the results of PowerShell commands entered in a console. Contrary to Script Block Logging however, PowerShell Transcript does not include the content of scripts executed, but only the commands as they are entered in the PowerShell console.\n\n PowerShell Transcript can be enabled using the Start-Transcript cmdlet, by GPO, or directly in the registry.'
 keywords: PowerShell, Transcripts
 tags:
   - windows_program_execution
@@ -23,7 +23,7 @@ extended visibility on `PowerShell` console interactions, and in particular to
 the results of `PowerShell` commands entered in a console.
 
 Contrary to `Script Block Logging` however, `PowerShell Transcript` does not
-include content of scripts executed and only the commands as they are entered /
+include the content of scripts executed, but only the commands as they are entered /
 typed in the `PowerShell` console (and thus potentially obfuscated).
 
 `PowerShell Transcript` is available from `PowerShell 2.0` and onward, with
@@ -54,15 +54,15 @@ execution.
     execution timestamps. This cmdlet can be added to a user
     `PowerShell profile` to be automatically executed upon new `PowerShell`
     session. The `PowerShell profile` can however be trivially bypassed by
-    launching a session with out loading the profile
+    launching a session without loading the profile
     (`powershell.exe -NoProfile`).
 
-  - Through `Group Policy`: Computer configuration -> Polices -> Administrative
+  - Through `Group Policy`: Computer configuration -> Policies -> Administrative
     Templates -> Windows Components -> Windows PowerShell ->
     "Turn on PowerShell Transcription". As stated in the `GPO` setting, this is
-    equivalent of calling the `Start-Transcript` cmdlet for every `PowerShell`
-    session. The "Include invocation headers" checkbox determine, similarly to
-    the `IncludeInvocationHeader` switch, wether execution timestamps should be
+    equivalent to calling the `Start-Transcript` cmdlet for every `PowerShell`
+    session. The "Include invocation headers" checkbox determines, similarly to
+    the `IncludeInvocationHeader` switch, whether execution timestamps should be
     logged for each command.
 
   - Directly through the registry, by setting the values,
@@ -75,7 +75,7 @@ execution.
 ### Information of interest
 
 Each `PowerShell Transcript` is associated with a `PowerShell` session and
-include:
+includes:
 
   - The user associated with the session.
 
@@ -86,8 +86,8 @@ include:
 
   - The `PowerShell` edition (`desktop`, `core`) and version used.
 
-  - Each commands entered/typed in the session, their working directory (as
-    the `PowerSehll` prompt is logged as well), and their respective `stdout`
+  - Each command entered/typed in the session, their working directory (as
+    the `PowerShell` prompt is logged as well), and their respective `stdout`
     and `stderr` outputs.
 
   - [If enabled](#enabling-powershell-transcript), the timestamp of each

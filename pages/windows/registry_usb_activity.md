@@ -1,6 +1,6 @@
 ---
 title: Registry - Devices and USB activity
-summary: 'The registry hold numerous information on currently and previously plugged devices, such as USB devices. The information is stored across a number of registry keys.\n\nGiven a known variable about a device as input (such as the device serial number for example), other identifiers can be retrieved from the registry: serial number, vendor ID, product ID, device id (vendor and product names), instance ID, device interface class, associated volume friendly name and volume letter, etc.\n\nThe first and last plugged-in timestamps, and last unplugged timestamp (for Windows 7 / 8 and later) of a device are also stored in the registry (Enum\USB and Enum\USBSTOR registry keys).'
+summary: 'The registry holds a lot of information on currently and previously plugged devices, such as USB devices. The information is stored across a number of registry keys.\n\nGiven a known variable about a device as input (such as the device serial number for example), other identifiers can be retrieved from the registry: serial number, vendor ID, product ID, device id (vendor and product names), instance ID, device interface class, associated volume friendly name and volume letter, etc.\n\nThe first and last plugged-in timestamps, and last unplugged timestamp (for Windows 7 / 8 and later) of a device are also stored in the registry (Enum\USB and Enum\USBSTOR registry keys).'
 keywords: 'USB, USBSTOR, WPDBUSENUM, Enum\USB, Enum\USBSTOR, Enum\SWD\WPDBUSENUM, MountedDevices, DeviceClasses, Windows Portable Devices, VolumeInfoCache, EMDMgmt, MountPoints2'
 tags:
   - windows_registry
@@ -15,7 +15,7 @@ folder: windows
 
 ### Overview
 
-The registry hold numerous information on currently and previously plugged
+The registry holds a lot of information on currently and previously plugged
 devices, such as USB devices. The information is stored across a number of
 registry keys.
 
@@ -35,7 +35,7 @@ the [Windows devices terminology page](./devices_terminology.md).
 
 ### Enum\USB
 
-{% include note.html content="`Enum\USB` can be used to: <br><br> - Identity the `vendor ID (VID)` and `product ID (PID)` of an USB device from its `serial number` or location information (and vice versa). <br><br> - Determine when the device was first and last plugged-in and last unplugged for `Windows 7 / 8` and later." %}
+{% include note.html content="`Enum\USB` can be used to: <br><br> - Identify the `vendor ID (VID)` and `product ID (PID)` of a USB device from its `serial number` or location information (and vice versa). <br><br> - Determine when the device was first and last plugged-in and last unplugged for `Windows 7 / 8` and later." %}
 
 | Hive | Location |
 | `HKLM\SYSTEM` | File: `%SystemRoot%\System32\config\SYSTEM`. <br><br> Registry key: <br> `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB\`. |
@@ -47,7 +47,7 @@ Each USB device is associated with a dedicated subkey under the `Enum\USB`
 key. This subkey is named after the device `vendor ID (VID)` and
 `product ID (PID)` of the device. For example: `VID_1B1C&PID_4242`.
 
-FUnderneath the `VID`/`PID` subkey, another subkey is named after the
+Underneath the `VID`/`PID` subkey, another subkey is named after the
 `instance ID` of the device (referencing either the device's `serial number` or
 location information).
 
@@ -73,7 +73,7 @@ values and under the `Properties` and `Device Parameters` subkeys, notably:
 
 ### Enum\USBSTOR
 
-{% include note.html content="`Enum\USBSTOR` can be used to: <br><br> - Identity the `device id` (vendor and product names) of an USB device from its `serial number` or location information (and vice versa). <br><br> - Determine when the device was first and last plugged-in and last unplugged for `Windows 7 / 8` and later. <br><br> - Retrieve a `volume id` for the (or one of the) volume(s) of the device." %}
+{% include note.html content="`Enum\USBSTOR` can be used to: <br><br> - Identify the `device id` (vendor and product names) of a USB device from its `serial number` or location information (and vice versa). <br><br> - Determine when the device was first and last plugged-in and last unplugged for `Windows 7 / 8` and later. <br><br> - Retrieve a `volume id` for the (or one of the) volume(s) of the device." %}
 
 | Hive | Location |
 | `HKLM\SYSTEM` | File: `%SystemRoot%\System32\config\SYSTEM`. <br><br> Registry key: <br> `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR\`. |
@@ -94,12 +94,12 @@ This subkey in turn references:
 
   - The same information as the `Enum\USB` key.
 
-  - A `volume id` for one of the device volume in the `DiskId` key value under
+  - A `volume id` for one of the device volumes in the `DiskId` key value under
     the `Device Parameters\Partmgr`.
 
 ### Enum\SWD\WPDBUSENUM
 
-{% include note.html content="`Enum\SWD\WPDBUSENUM` can be used to: <br><br> - Identity the `device id` (vendor and product names) of an USB device from its `serial number` or location information (and vice versa). <br><br> - Determine when the device was first and last plugged-in and last unplugged for `Windows 7 / 8` and later. <br><br> - Retrieve a friendly name of the (or one of the) volume associated with the device." %}
+{% include note.html content="`Enum\SWD\WPDBUSENUM` can be used to: <br><br> - Identify the `device id` (vendor and product names) of a USB device from its `serial number` or location information (and vice versa). <br><br> - Determine when the device was first and last plugged-in and last unplugged for `Windows 7 / 8` and later. <br><br> - Retrieve a friendly name of the (or one of the) volumes associated with the device." %}
 
 | Hive | Location |
 | `HKLM\SYSTEM` | File: `%SystemRoot%\System32\config\SYSTEM`. <br><br> Registry key: <br> `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\SWD\WPDBUSENUM`. |
@@ -122,12 +122,12 @@ This subkey references:
 
   - The same information as the `Enum\USB` key.
 
-  - A "friendly name" or display name of the (or one of the) volume associated
+  - A "friendly name" or display name of the (or one of the) volumes associated
     with the device in the `FriendlyName` key value.
 
 ### MountedDevices
 
-{% include note.html content="`MountedDevices` can be used to identity the `volume GUID` or the drive letter associated with the device from its `serial number` or location information (and vice versa)." %}
+{% include note.html content="`MountedDevices` can be used to identify the `volume GUID` or the drive letter associated with the device from its `serial number` or location information (and vice versa)." %}
 
 | Hive | Location |
 | `HKLM\SYSTEM` | File: `%SystemRoot%\System32\config\SYSTEM`. <br><br> Registry key: <br> `HKEY_LOCAL_MACHINE\SYSTEM\MountedDevices`. |
@@ -141,7 +141,7 @@ Each device is associated with a separate binary value, composed of:
 
   - The device `volume GUID` (as the key's value name).
 
-  - The `device/hardware  ID`, `instance ID`, and `device interface class`
+  - The `device/hardware ID`, `instance ID`, and `device interface class`
     `GUID` in a `#` separated string (as the key's value data).
 
       - The `device ID`/`hardware ID` references the vendor and product
@@ -153,12 +153,12 @@ Each device is associated with a separate binary value, composed of:
       - The `device interface class` represents the type of the device and
         each `class` is associated with a unique `GUID`.
 
-Full example value for an USB key:
+Full example value for a USB key:
 `_??_USBSTOR#Disk&Ven_Kingston&Prod_DataTraveler_3.0&Rev_PMAP#60A44C42568CB041B98902A4&0#{53f56307-b6bf-11d0-94f2-00a0c91efb8b}`
 
 ### DeviceClasses
 
-{% include note.html content="`DeviceClasses` can be used to identity the `device id` (vendor and product names) of an USB device from its `serial number` or location information (and vice versa). <br><br> The last written timestamp of a device subkey can be an indicator of when the device was last plugged on the system or the first time the device was plugged following a reboot. However, the subkey does not appear to be reliably written to on recent versions of the Windows operating system and thus the timestamp should not be considered by itself as a reliable indicator of the device's last activity." %}
+{% include note.html content="`DeviceClasses` can be used to identify the `device id` (vendor and product names) of a USB device from its `serial number` or location information (and vice versa). <br><br> The last write timestamp of a device subkey can be an indicator of when the device was last plugged on the system or the first time the device was plugged following a reboot. However, the subkey does not appear to be reliably written to on recent versions of the Windows operating system and thus the timestamp should not be considered by itself as a reliable indicator of the device's last activity." %}
 
 | Hive | Location |
 | `HKLM\SYSTEM` | File: `%SystemRoot%\System32\config\SYSTEM`. <br><br> Registry key: <br> `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceClasses`. |
@@ -172,7 +172,7 @@ Each `device class` (physical disk, volume, USB device, Bluetooth device,
 etc.) is referenced by its own subkey. The subkeys are named after the
 [`device classes` `GUID`](https://learn.microsoft.com/en-us/previous-versions//ff553412(v=vs.85)).
 
-For examples:
+For example:
   - The external physical storages of the device would be referenced under the
     `{53f56307-b6bf-11d0-94f2-00a0c91efb8b}` `GUID` subkey.
 
@@ -193,7 +193,7 @@ Example of a `{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}` subkey (logical volume): <
 
 ### Windows Portable Devices
 
-{% include note.html content="`Windows Portable Devices` can be used to identity a volume friendly name from (a) a device `serial number`/location information or (b) a `volume id` (and vice versa)." %}
+{% include note.html content="`Windows Portable Devices` can be used to identify a volume friendly name from (a) a device `serial number`/location information or (b) a `volume id` (and vice versa)." %}
 
 | Hive | Location |
 | `HKLM\SOFTWARE` | File: `%SystemRoot%\System32\config\SOFTWARE`. <br><br> Registry key: `HKLM\SOFTWARE\Microsoft\Windows NT\Windows Portable Devices`. |
@@ -217,7 +217,7 @@ This key is named with a string containing either:
     Example: `SWD#WPDBUSENUM#{44B06C95-F0BA-11ED-9802-6C9466A63B90}#000000000C900000`.
 
 This device subkey references in turn, in the `FriendlyName` value, the
-"friendly name" or display name of the (or one of the) volume associated with
+"friendly name" or display name of the (or one of the) volumes associated with
 the device.
 
 ### VolumeInfoCache
@@ -243,12 +243,12 @@ corresponding drive letter:
     in the `DriveType` value. Both hard disks/SSDs and storage devices (such
     as USB keys) appear to be associated with the value `3` (on Windows 10).
 
-The last written timestamp of the key is an indicator of when a volume was last
+The last write timestamp of the key is an indicator of when a volume was last
 associated with a given drive letter.
 
 ### EMDMgmt
 
-{% include note.html content="`EMDMgmt` can be used to identity the device `serial number`, associated volume `serial number`, and possibly the volume friendly name of an USB device from its `device ID` or `hardware ID` (and vice versa)." %}
+{% include note.html content="`EMDMgmt` can be used to identify the device `serial number`, associated volume `serial number`, and possibly the volume friendly name of a USB device from its `device ID` or `hardware ID` (and vice versa)." %}
 
 | Hive | Location |
 | `HKLM\SOFTWARE` | File: `%SystemRoot%\System32\config\SOFTWARE`. <br><br> Registry key: `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt`. |

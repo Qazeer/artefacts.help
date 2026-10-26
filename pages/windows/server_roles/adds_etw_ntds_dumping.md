@@ -1,12 +1,12 @@
 ---
 title: ETW - Active Directory Domain Services (Domain Controllers) ntds.dit dumping
-summary: 'Secrets stored in the Active Directory database (ntds.dit) can be retrieved a number of ways:\n\n- By leveraging the DRSUAPI replication functions, normally used by Domain Controllers to replicate objects (replicated) properties. This attack can be conducted over the network (with out executing code on a Domain Controller) and is known as "DCSync".\n\n - By executing code/commands on a Domain Controller and exfiltrating the ntds.dit database directly. While the ntds.dit database can be accessed and copied using various tools and techniques, the "ntdsutil" built-in administration utility is often leverage by threat actors to do so.'
-keywords: Active Directory, Domain Controllers, NTDS, ntds.dit, DRSUAPI, DCSync, 4662, 1131f6aa-9c07-11d1-f79f-00c04fc2dcd, 1131f6ad-9c07-11d1-f79f-00c04fc2dcd2, ntdsutil, ESENT, 325, 326, 327, 206
+summary: 'Secrets stored in the Active Directory database (ntds.dit) can be retrieved a number of ways:\n\n- By leveraging the DRSUAPI replication functions, normally used by Domain Controllers to replicate objects (replicated) properties. This attack can be conducted over the network (without executing code on a Domain Controller) and is known as "DCSync".\n\n - By executing code/commands on a Domain Controller and exfiltrating the ntds.dit database directly. While the ntds.dit database can be accessed and copied using various tools and techniques, the "ntdsutil" built-in administration utility is often leveraged by threat actors to do so.'
+keywords: Active Directory, Domain Controllers, NTDS, ntds.dit, DRSUAPI, DCSync, 4662, 1131f6aa-9c07-11d1-f79f-00c04fc2dcd2, 1131f6ad-9c07-11d1-f79f-00c04fc2dcd2, ntdsutil, ESENT, 325, 326, 327, 206
 tags:
   - windows_etw
   - windows_active_directory
   - windows_server_roles
-location: 'DCSync (DRSUAPI):\nChannel: Security.\nEvent: 4662 (Property "1131f6aa-9c07-11d1-f79f-00c04fc2dcd" or "1131f6ad-9c07-11d1-f79f-00c04fc2dcd2").\n\n NTDS export using ntdsutil:\nChannel: ESENT (Application.evtx).\nEvents: 206, 325, 326, 327'
+location: 'DCSync (DRSUAPI):\nChannel: Security.\nEvent: 4662 (Property "1131f6aa-9c07-11d1-f79f-00c04fc2dcd2" or "1131f6ad-9c07-11d1-f79f-00c04fc2dcd2").\n\n NTDS export using ntdsutil:\nChannel: ESENT (Application.evtx).\nEvents: 206, 325, 326, 327'
 last_updated: 2024-07-09
 sidebar: sidebar
 permalink: adds_etw_ntds_dumping.html
@@ -20,20 +20,20 @@ number of ways:
 
   - By leveraging the `DRSUAPI` replication functions, normally used by
     `Domain Controllers` to replicate objects (replicated) properties. This
-    attack can be conducted over the network (with out executing code on a
+    attack can be conducted over the network (without executing code on a
     `Domain Controller`) and is known as `DCSync`.
 
   - By executing code/commands on a `Domain Controller` and exfiltrating
     the `ntds.dit` database directly. While the `ntds.dit` database can be
     accessed and copied using various tools and techniques, the `ntdsutil`
-    built-in administration utility is often leverage by threat actors to
+    built-in administration utility is often leveraged by threat actors to
     do so.
 
 ### DCSync (DRSUAPI)
 
-The `DCSync` attack consists in leveraging the Active Directory `DRSUAPI`
+The `DCSync` attack consists of leveraging the Active Directory `DRSUAPI`
 replication functions (part of the `Directory Replication Service (DRS)`
-protocol) to remotely retrieve the specified Active Directory objects' sensible
+protocol) to remotely retrieve the specified Active Directory objects' sensitive
 information. The `DRSUAPI` functions are normally used by the
 `Domain Controllers` to replicate the modifications made to AD objects and keep
 the AD objects consistent across all the `Domain Controllers` of the forest.
@@ -43,7 +43,7 @@ Controller`. Thus, contrary to the others methods explicated so far, no local
 code execution on a `Domain Controller` is required to retrieve information
 from the `ntds.dit` database.
 
-While multiples `DRSUAPI` intermediate functions are used in the replication
+While multiple `DRSUAPI` intermediate functions are used in the replication
 process, the `DSGetNCChanges` function implements the replication request.
 
 The following privileges on the `domain root object` are necessary to make
@@ -63,7 +63,7 @@ the `Domain Controllers`, `ENTERPRISE DOMAIN CONTROLLERS`, `Domain Admins`,
 
 ### ntdsutil usage
 
-If code execution is achieved on a `Domain Controller`, multiples Windows
+If code execution is achieved on a `Domain Controller`, multiple Windows
 utilities can be used to export the `ntds.dit` database, file:
 `%SystemDrive%\Windows\NTDS\ntds.dit` (given sufficient privileges).
 
@@ -80,11 +80,11 @@ controls.
 As the `ntds.dit` file is being continuously accessed, the file cannot be
 directly copied ("The action can't be completed because the file is open in
 another program"). The copy must be done through the Windows `shadow copy`
-mechanism, which leverage a temporary freezing of the I/O requests on the
+mechanism, which leverages a temporary freezing of the I/O requests on the
 file. The freezing is requested by the `Volume Shadow Copy Service (VSS)`
-Windows built-in service, which orchestrate the creation of the `shadow copy`.
+Windows built-in service, which orchestrates the creation of the `shadow copy`.
 
-The sensitive information in the `ntds.dit` file are encrypted using the system
+The sensitive information in the `ntds.dit` file is encrypted using the system
 `Boot Key` (also known as the `System Key`, or `SysKey`). This key is located
 in the `HKEY_LOCAL_MACHINE\SYSTEM` registry hive
 (`%SystemDrive%\Windows\system32\config\SYSTEM` file) and is unique to each
@@ -92,7 +92,7 @@ in the `HKEY_LOCAL_MACHINE\SYSTEM` registry hive
 must thus be exported from the `Domain Controller` the `ntds.dit` was copied
 from.
 
-the `ntdsutil` built-in administration utility is often leverage by threat
+The `ntdsutil` built-in administration utility is often leveraged by threat
 actors to export the `ntds.dit` database and the `SECURITY` and `SYSTEM`
 registry hives.
 

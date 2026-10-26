@@ -1,6 +1,6 @@
 ---
 title: Hiberfil.sys
-summary: 'The hiberfil.sys file is linked to the hibernation, hybrid sleep, and Fast Boot (Windows 8) / Fast Startup (Windows 10) features. Those features are mostly in use on Windows laptops/desktops and are generally not available by default on Windows virtual machines.\n\nAs the hiberfil.sys file is shared by three features, the file can be in various states with its content being either a partial or a full memory snapshot. The partial memory snapshot, linked to the Fast Boot / Fast Startup feature, contains the Windows kernel and session 0 processes memory, notably including the MFT and registry hives.\n\nThe hiberfil.sys file is zeroed out after a system boot starting from Windows 8 / 8.1 and must thus be retrieved from a powered off system.\n\nThe structure of the hiberfil.sys file has evolved starting with Windows 8. Both the old and new formats can be analyzed using volatility, by first converting the hibernation file to a raw file using volatilty3 windows.hibernation.Dump plugin.'
+summary: 'The hiberfil.sys file is linked to the hibernation, hybrid sleep, and Fast Boot (Windows 8) / Fast Startup (Windows 10) features. Those features are mostly in use on Windows laptops/desktops and are generally not available by default on Windows virtual machines.\n\nAs the hiberfil.sys file is shared by three features, the file can be in various states with its content being either a partial or a full memory snapshot. The partial memory snapshot, linked to the Fast Boot / Fast Startup feature, contains the Windows kernel and session 0 processes memory, notably including the MFT and registry hives.\n\nThe hiberfil.sys file is zeroed out after a system boot starting from Windows 8 / 8.1 and must thus be retrieved from a powered off system.\n\nThe structure of the hiberfil.sys file has evolved starting with Windows 8. Both the old and new formats can be analyzed using volatility, by first converting the hibernation file to a raw file using volatility3 windows.hibernation.Dump plugin.'
 keywords: hibernation, hiberfil.sys, memory, sleep, fast boot, fast startup, ClearPageFileAtShutdown, volatility, hibernation recon, hibernation.Dump
 tags:
   - windows_misc
@@ -22,7 +22,7 @@ feature to be implemented at the hypervisor level).
 As the `hiberfil.sys` file is shared by three different (but similar) features,
 the file can be in different states:
 
-  - `Hybernation`: full main memory snapshot, created following a user
+  - `Hibernation`: full main memory snapshot, created following a user
     triggered hibernation.
 
   - `Hybrid sleep`: full main memory snapshot, combination of the sleep and
@@ -37,7 +37,7 @@ the file can be in different states:
 
   - `Fast Boot` / `Fast Startup`: partial memory snapshot, that contains the
     memory of the Windows kernel and of the `session 0` processes (background
-    system services notably). `Fast startup` is a type of shutdown that uses an
+    system services notably). `Fast startup` is a type of shutdown that uses a
     hibernation file to speed up the subsequent boot, with user(s) being logged
     off before the hibernation file is created. In this state, the
     `hiberfil.sys` file will notably contain `MFT` file and `INDX` records, and
@@ -52,8 +52,8 @@ The `hiberfil.sys` file is zeroed out after a system boot starting from
 `ClearPageFileAtShutdown` registry setting is enabled (set to `0x1`). As such,
 the `hiberfil.sys` file must be retrieved from a powered off system.
 
-The structure of the `hiberfil.sys` file have evolved starting with
-`Windows 8`, with notable changes in the compression methods used. There is
+The structure of the `hiberfil.sys` file has evolved starting with
+`Windows 8`, with notable changes in the compression methods used. There are
 thus currently two possible formats:
 
   - The "old" format, starting from `Windows XP` to `Windows 7`.
@@ -75,10 +75,10 @@ image (with potentially less information however) using tools such as
 # volatility2 for hibernation files in the old format.
 
 # Prints basic information about the hibernation file.
-volatility -f <HIBERNATION_FILE> --profile=<PROFIL> hibinfo
+volatility -f <HIBERNATION_FILE> --profile=<PROFILE> hibinfo
 
 # Converts the hibernation file to a raw file.
-volatility -f <HIBERNATION_FILE> --profile=<PROFIL> imagecopy -O <OUTPUT>
+volatility -f <HIBERNATION_FILE> --profile=<PROFILE> imagecopy -O <OUTPUT>
 
 # volatility3 for hibernation files in the new format.
 

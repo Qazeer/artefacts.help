@@ -1,10 +1,10 @@
 ---
 title: Web browsers
-summary: 'The web browsers related artefacts can be split in the following categories:\n\n- User profile: web browsers, such as Chronium-based browsers (Chrome, Edge) and Firefox, implement a profile feature to store users settings, history, favorites, etc. The databases and files that store these information is usually stored under a user specific profile folder.\n\n- History: web browsing history and download history.\n\n- Cookies: web browsing cookies (session tokens).\n\n- Cache: cache of resources downloaded from accessed websites.\n\n- Sessions: tabs and windows from a browsing session.\n\n- Settings: configuration settings.'
+summary: 'The web browsers related artefacts can be split in the following categories:\n\n- User profile: web browsers, such as Chromium-based browsers (Chrome, Edge) and Firefox, implement a profile feature to store users settings, history, favorites, etc. The databases and files that store this information are usually stored under a user specific profile folder.\n\n- History: web browsing history and download history.\n\n- Cookies: web browsing cookies (session tokens).\n\n- Cache: cache of resources downloaded from accessed websites.\n\n- Sessions: tabs and windows from a browsing session.\n\n- Settings: configuration settings.'
 keywords:
 tags:
   - windows_browsing_history
-location: 'Web browsers artefacts are often located under:\n - %LocalAppData%: <SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Local.\n - %AppData%: <SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Roaming.\n\n Internet Explorer\n----------------------\nBrowsing history, downloads, cache, cookies metadata: %LocalAppData%\Microsoft\Windows\WebCache\WebCacheV01.dat.\nCookies: %AppData%\Microsoft\Windows\Cookies.\nSessions: %LocalAppData%\Microsoft\Internet Explorer\Recovery\*.dat.\n\n Edge (Legacy)\n-------------------\nBrowsing history, downloads, cache, cookies metadata: %LocalAppData%\Microsoft\Windows\WebCache\WebCacheV01.dat;\nUser profiles: %LocalAppData%\Packages\Microsoft.MicrosoftEdge_XXX\AC.\nCache: <USER_PROFILE>\MicrosoftEdge\Cache.\nSessions: <USER_PROFILE>\MicrosoftEdge\User\Default\Recovery\Active.\nSettings: <USER_PROFILE>\User\Default\DataStore\Data\nouser1\XXX\DBStore\spartan.edb.\n\nEdge (Chronium-based)\n--------------------------------\nUser profiles: %LocalAppData%\Microsoft\Edge\User Data\<Default | Profile X>.\nBrowsing history: <USER_PROFILE>\History.\nCookies: <USER_PROFILE>\Cookies.\nCache: <USER_PROFILE>\Cache.\nSessions: <USER_PROFILE>\Sessions.\nSettings: <USER_PROFILE>\Preferences.\n\nGoogle Chrome\n----------------------\nUser profiles: %LocalAppData%\Google\Chrome\User Data\<Default | Profile X>.\nBrowsing history: <USER_PROFILE>\History.\nCookies: <USER_PROFILE>\Cookies.\nCache: <USER_PROFILE>\Cache.\nSessions: <USER_PROFILE>\Sessions.\nSettings: <USER_PROFILE>\Preferences.\n\nMozilla Firefox\n--------------------\nUser profiles: %AppData%\Mozilla\Firefox\Profiles\<ID>.default-release.\nBrowsing history, downloads, bookmarks: <USER_PROFILE>\places.sqlite.\nCookies: <USER_PROFILE>\cookies.sqlite.\nCache: <USER_PROFILE>\cache2\*.\nSessions: <USER_PROFILE>\sessionstorebackups\*.\nSettings: <USER_PROFILE>\prefs.js.'
+location: 'Web browsers artefacts are often located under:\n - %LocalAppData%: <SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Local.\n - %AppData%: <SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Roaming.\n\n Internet Explorer\n----------------------\nBrowsing history, downloads, cache, cookies metadata: %LocalAppData%\Microsoft\Windows\WebCache\WebCacheV01.dat.\nCookies: %AppData%\Microsoft\Windows\Cookies.\nSessions: %LocalAppData%\Microsoft\Internet Explorer\Recovery\*.dat.\n\n Edge (Legacy)\n-------------------\nBrowsing history, downloads, cache, cookies metadata: %LocalAppData%\Microsoft\Windows\WebCache\WebCacheV01.dat;\nUser profiles: %LocalAppData%\Packages\Microsoft.MicrosoftEdge_XXX\AC.\nCache: <USER_PROFILE>\MicrosoftEdge\Cache.\nSessions: <USER_PROFILE>\MicrosoftEdge\User\Default\Recovery\Active.\nSettings: <USER_PROFILE>\User\Default\DataStore\Data\nouser1\XXX\DBStore\spartan.edb.\n\nEdge (Chromium-based)\n--------------------------------\nUser profiles: %LocalAppData%\Microsoft\Edge\User Data\<Default | Profile X>.\nBrowsing history: <USER_PROFILE>\History.\nCookies: <USER_PROFILE>\Cookies.\nCache: <USER_PROFILE>\Cache.\nSessions: <USER_PROFILE>\Sessions.\nSettings: <USER_PROFILE>\Preferences.\n\nGoogle Chrome\n----------------------\nUser profiles: %LocalAppData%\Google\Chrome\User Data\<Default | Profile X>.\nBrowsing history: <USER_PROFILE>\History.\nCookies: <USER_PROFILE>\Cookies.\nCache: <USER_PROFILE>\Cache.\nSessions: <USER_PROFILE>\Sessions.\nSettings: <USER_PROFILE>\Preferences.\n\nMozilla Firefox\n--------------------\nUser profiles: %AppData%\Mozilla\Firefox\Profiles\<ID>.default-release.\nBrowsing history, downloads, bookmarks: <USER_PROFILE>\places.sqlite.\nCookies: <USER_PROFILE>\cookies.sqlite.\nCache: <USER_PROFILE>\cache2\*.\nSessions: <USER_PROFILE>\sessionstorebackups\*.\nSettings: <USER_PROFILE>\prefs.js.'
 last_updated: 2024-01-17
 sidebar: sidebar
 permalink: windows_web_browsers.html
@@ -15,9 +15,9 @@ folder: windows
 
 The web browsers related artefacts can be split in the following categories:
 
-  - User profile: web browsers, such as `Chronium`-based browsers and
+  - User profile: web browsers, such as `Chromium`-based browsers and
     `Firefox`, implement a profile feature to store user's settings, history,
-    favorites, etc. The databases and files that store these information is
+    favorites, etc. The databases and files that store this information are
     usually stored under a user specific profile folder.
 
   - History: web browsing history and download history.
@@ -55,9 +55,9 @@ These files are often located under `%LocalAppData%`
 | Sessions | - | `%LocalAppData%\Packages\Microsoft.MicrosoftEdge_XXX\AC\MicrosoftEdge\User\Default\Recovery\Active`
 | Settings | - | `%LocalAppData%\Packages\Microsoft.MicrosoftEdge_XXX\AC\MicrosoftEdge\User\Default\DataStore\Data\nouser1\XXX\DBStore\spartan.edb` |
 
-#### Edge (Chronium-based)
+#### Edge (Chromium-based)
 
-Since Edge version `v79` (January 2020), `Microsoft Edge` uses a `Chronium`
+Since Edge version `v79` (January 2020), `Microsoft Edge` uses a `Chromium`
 backend and shares similar artefacts to `Google Chrome`.
 
 | Type | Description | Location |

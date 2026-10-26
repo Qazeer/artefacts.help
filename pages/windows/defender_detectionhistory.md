@@ -1,6 +1,6 @@
 ---
 title: Windows Defender - Detection History files
-summary: 'Windows Defender stores information on past detections, from its real-time and cloud-delivered protection components, in DetectionHistory file(s).\n\nInformation of interest, per detection:\n - file path, size, md5, sha1, and sha256 hashes of the file that triggered the detection.\n - The threat name.\n - The process and domain and username of the user associated with the detection.\n - For Potentially Unwanted Applications (PUA) detections, the associated Uninstall registry key.'
+summary: 'Windows Defender stores information on past detections, from its real-time and cloud-delivered protection components, in DetectionHistory file(s).\n\nInformation of interest, per detection:\n - file path, size, md5, sha1, and sha256 hashes of the file that triggered the detection.\n - The threat name.\n - The process, and the domain and username of the user associated with the detection.\n - For Potentially Unwanted Applications (PUA) detections, the associated Uninstall registry key.'
 keywords:
 tags:
   - windows_file_knowledge
@@ -35,13 +35,13 @@ For each threat detected, the following notable information is available:
   - The threat name (such as `Backdoor:JS/Chopper.VH!MSR` or
     `Trojan:PowerShell/ReverseShell.SA`).
 
-  - The process and domain and username of the user associated with
+  - The process, and the domain and username of the user associated with
     the detection.
 
   - The size, `md5`, `sha1`, and `sha256` hashes of the file that triggered the
     detection.
 
-  - For `Potentially Unwanted Applications (PUA)` detections, the associated
+  - For `Potentially Unwanted Applications (PUA)` detections, the
     [`Uninstall registry key`](./registry_systeminfo.md#installed-applications-uninstall)
     associated with the application.
 
@@ -65,7 +65,7 @@ file(s) into JSON.
 # Parses the specified file (and outputs the JSON result in the output directory).
 dhparser.exe -f <DH_FILE> -o <OUTPUT_FOLDER>
 
-# Recursively process the specified folder and parses the DH file(s) found.
+# Recursively processes the specified folder and parses the DH file(s) found.
 dhparser.exe -rgf <DH_FOLDER> -o <OUTPUT_FOLDER>
 ```
 

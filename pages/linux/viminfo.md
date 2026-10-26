@@ -16,7 +16,7 @@ folder: linux
 
 The `vim(1)` text editor logs a number of operations, including file access, in
 the text-based `.viminfo` log file. As the `.viminfo` file resides under a user
-home folder, the operations logged in the file can be linked to a specific user
+home folder, the operations logged in the file can be linked to a specific user's
 usage of `vim`.
 
 The operations of a given `vim` "session" are written upon exit of the editor.
@@ -69,7 +69,7 @@ The `.viminfo` log file notably includes:
     and a timestamp (of when the given file was closed).
 
     While multiple "File marks" entries are logged upon multiple accesses to
-    the same file, the "# History of marks within files" section only keep a
+    the same file, the "# History of marks within files" section only keeps a
     single entry for a given file, which references the last closing of the
     file.
 
@@ -96,5 +96,5 @@ The `.viminfo` log file notably includes:
     and expressions entered in `vim`, in three distinct sections.
 
     Each entry in these histories is associated with an `epoch` timestamp
-    of occurrence. Only the last occurrence of a given command/search /
+    of occurrence. Only the last occurrence of a given command/search/
     expression is kept.

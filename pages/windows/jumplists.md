@@ -1,6 +1,6 @@
 ---
 title: Jumplists
-summary: 'Introduced in Windows 7, Jumplists are linked to a taskbar user experience-enhancing feature that allows users to "jump" to files, folders or others elements by right-clicking on open applications in the Windows taskbar.\n\nInformation of interest: target file absolute path, size, attributes, and Modified, Access, and Birth timestamps (updated whenever the file is "jumped" to).\n\nRemote desktop connections made using the Windows built-in mstsc.exe client will generate an entry
+summary: 'Introduced in Windows 7, Jumplists are linked to a taskbar user experience-enhancing feature that allows users to "jump" to files, folders or other elements by right-clicking on open applications in the Windows taskbar.\n\nInformation of interest: target file absolute path, size, attributes, and Modified, Access, and Birth timestamps (updated whenever the file is "jumped" to).\n\nRemote desktop connections made using the Windows built-in mstsc.exe client will generate an entry
 in the AutomaticDestinations JumpList that may reference the remote host.'
 keywords: Jumplists
 tags:
@@ -21,7 +21,7 @@ folder: windows
 
 Introduced in `Windows 7`, `Jumplists` are linked to a taskbar user
 experience-enhancing feature that allows users to "jump" to files, folders
-or others elements by right-clicking on open applications in the `Windows
+or other elements by right-clicking on open applications in the `Windows
 taskbar`. The `Windows Explorer`'s `Quick Access` feature also stores entries
 in `Jumplists`.
 
@@ -36,17 +36,17 @@ Two forms of `Jumplists` are created:
 
 Each application `AutomaticDestinations` and `CustomDestinations` `JumpLists`
 information is thus stored in two unique and separated files, of different
-format:
+formats:
 
   - `AutomaticDestinations` `JumpLists` files are stored as
     `AUTOMATICDESTINATIONS-MS` file, in the `MS OLE Structured Storage` format.
     This file format notably contains a `DestList` stream that acts as a
-    `Most Recent Used (MRU)` list of `shortcut files (.LNK)`. Each entry in an
+    `Most Recently Used (MRU)` list of `shortcut files (.LNK)`. Each entry in an
     application `AutomaticDestinations` `JumpList` is stored as an entry in the
     `DestList` stream, composed of metadata and a `LNK`-like structure.
 
   - `CustomDestinations` `JumpLists` are stored as `CUSTOMDESTINATIONS-MS`
-    file, also assimilable to a series of `shortcut files`.
+    file, also comparable to a series of `shortcut files`.
 
 Applications may handle `Jumplists` differently, with different entries being
 created/updated on different actions by specific applications.
@@ -54,10 +54,10 @@ created/updated on different actions by specific applications.
 ### Information of interest
 
 As `JumpLists` are linked to an application, through an `AppId`, knowledge of
-the application that was used to open the files can be deducted if the
-application associated to the `AppId` is known. A number of `AppId` are
+the application that was used to open the files can be deduced if the
+application associated with the `AppId` is known. A number of `AppIds` are
 documented in
-[`EricZimmerman` 's `JumpList` GitHub repository](https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Resources/AppIDs.txt).
+[`EricZimmerman`'s `JumpList` GitHub repository](https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Resources/AppIDs.txt).
 
 `JumpLists` hold information similar in nature to `shortcut files` for each
 file referenced in an application's `AutomaticDestinations` /
@@ -121,7 +121,7 @@ entries will be associated with the application identifier `1bc392b8e104a00e`.
 The `DestList` last modified timestamp indicates the last time the connection
 with the remote host was successfully established.
 
-The arguments in the entry for a given connections will reference the remote
+The arguments in the entry for a given connection will reference the remote
 host by hostname or IP address (`/v:"<HOSTNAME | IP>"`) or the `RDP File` used
 for the connection (`"<PATH>\<FILE>.rdp"`).
 

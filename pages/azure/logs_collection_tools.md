@@ -1,6 +1,6 @@
 ---
 title: Procedure - Logs search and collection tools
-summary: 'The Azure logs (Azure AD sign-ins and audit logs, Office 365 Unified and Mailbox Audit Audit Logs, Azure Activity logs, etc.) can be collected using Microsoft PowerShell modules and third-party tools, such as DFIR-O365RC or Microsoft-Extractor-Suite.'
+summary: 'The Azure logs (Azure AD sign-ins and audit logs, Office 365 Unified and Mailbox Audit Logs, Azure Activity logs, etc.) can be collected using Microsoft PowerShell modules and third-party tools, such as DFIR-O365RC or Microsoft-Extractor-Suite.'
 keywords: Search-UnifiedAuditLog, DFIR-O365RC, Microsoft-Extractor-Suite, Log Analytics workspace, Diagnostic settings
 tags:
   - azure_logs
@@ -25,7 +25,7 @@ The `Search-UnifiedAuditLog` cmdlet of the `ExchangeOnlineManagement` module
 can be used to search and export the Microsoft 365 `Unified Audit Logs`. The cmdlet
 returns a maximum of 5000 results for direct queries, 50 000 (unsorted) results
 for paged queries. Requests that would return a large number of events should
-thus automated (for instance with `DFIR-O365RC` or `Microsoft-Extractor-Suite`).
+thus be automated (for instance with `DFIR-O365RC` or `Microsoft-Extractor-Suite`).
 
 ```bash
 # If necessary, install and/or import the ExchangeOnlineManagement module.
@@ -40,7 +40,7 @@ Search-UnifiedAuditLog -ResultSize 5000 -StartDate <YYYY-MM-DDT00:00:00Z> -EndDa
 
 # Retrieves events for the specified record type.
 # Record types: https://learn.microsoft.com/en-us/office/office-365-management-api/office-365-management-activity-api-schema#auditlogrecordtype
-# Record type examples for the the Exchange workload: "ExchangeItem","ExchangeAdmin","ExchangeItemGroup","ExchangeSearch","ExchangeAggregatedOperation","ExchangeItemAggregated","ComplianceDLPExchange","ComplianceSupervisionExchange","MipAutoLabelExchangeItem"
+# Record type examples for the Exchange workload: "ExchangeItem","ExchangeAdmin","ExchangeItemGroup","ExchangeSearch","ExchangeAggregatedOperation","ExchangeItemAggregated","ComplianceDLPExchange","ComplianceSupervisionExchange","MipAutoLabelExchangeItem"
 # Record type examples for Azure AD: "AzureActiveDirectory","AzureActiveDirectoryAccountLogon","AzureActiveDirectoryStsLogon"
 Search-UnifiedAuditLog -ResultSize 5000 -RecordType <RECORD_TYPES>
 
@@ -59,10 +59,10 @@ PowerShell module can be used to extract logs from Azure AD and Microsoft 365.
 Install-Module -Name ExchangeOnlineManagement
 Install-Module -Name AzureADPreview
 
-# Only required for cmdlets using the GraphAPI, such as Get-EntraSignInLogsGraph or Get-EntraAuditLogsGraph
+# Only required for cmdlets using the Graph API, such as Get-EntraSignInLogsGraph or Get-EntraAuditLogsGraph
 Install-Module Microsoft.Graph.Beta
 
-# The AzureADPreview module MUST be imported (in place of the AzureAD module), as Get-AzureADAuditSignInLogs is updated to allow the retrieval of all events (instead of 1.000 entries with the AzureAD version).
+# The AzureADPreview module MUST be imported (in place of the AzureAD module), as Get-AzureADAuditSignInLogs is updated to allow the retrieval of all events (instead of 1,000 entries with the AzureAD version).
 Remove-Module -Name 'AzureAD' -Force
 Import-Module -Name 'AzureADPreview' -Force
 
@@ -85,23 +85,23 @@ Get-EntraAuditLogs
 Get-EntraAuditLogs -StartDate <YYYY-MM-DD> -EndDate <YYYY-MM-DD>
 
 # Retrieves the total number of records in the UAL per Record Type.
-# By default retrieve data for the last 90 days for all users.
+# By default, retrieves data for the last 90 days for all users.
 Get-UALStatistics
 # For the specified user(s) and/or in the given timeframe.
 Get-UALStatistics -UserIds "<EMAIL>" -StartDate <YYYY-MM-DDT00:00:00Z> -EndDate <YYYY-MM-DDT00:00:00Z>
 
 # Retrieves all UAL data.
-# By default retrieve data for the last 90 days for all users.
+# By default, retrieves data for the last 90 days for all users.
 Get-UAL [-Output JSON]
-# For the specified user(s) andor in the given timeframe.
+# For the specified user(s) and/or in the given timeframe.
 Get-UAL [-Output JSON] -UserIds "<EMAIL | EMAILS_LIST>" -StartDate <YYYY-MM-DDT00:00:00Z> -EndDate <YYYY-MM-DDT00:00:00Z>
 
-# Retrieves MailBox audit logs for the specified or all mailboxes.
+# Retrieves Mailbox audit logs for the specified or all mailboxes.
 Get-MailboxAuditLog [-StartDate <YYYY-MM-DDT00:00:00Z>] [-EndDate <YYYY-MM-DDT00:00:00Z>]
 Get-MailboxAuditLog -UserIds "<EMAIL | EMAILS_LIST>"
 
 # Retrieves Message Trace logs for the specified or all mailboxes.
-# Uses Get-MessageTraceV2 to retrieve by default 90 days of message trace data, with  pagination (5000 records per page) and the 10-day query window allowed by the cmdlet.
+# Uses Get-MessageTraceV2 to retrieve by default 90 days of message trace data, with pagination (5000 records per page) and the 10-day query window allowed by the cmdlet.
 Get-MessageTraceLog [-StartDate <YYYY-MM-DDT00:00:00Z>] [-EndDate <YYYY-MM-DDT00:00:00Z>]
 Get-MessageTraceLog -UserIds "<EMAIL | EMAILS_LIST>"
 ```
@@ -109,8 +109,8 @@ Get-MessageTraceLog -UserIds "<EMAIL | EMAILS_LIST>"
 ### [Azure AD, Microsoft 365, & Azure] DFIR-O365RC collector
 
 [`DFIR-O365RC`](https://github.com/ANSSI-FR/DFIR-O365RC) is a PowerShell module
-that implement a number of cmdlets to retrieve Office 365Azure logs. As
-`DFIR-O365RC` supports PowerShell Core, it can be used on both Windows or Linux
+that implements a number of cmdlets to retrieve Office 365 and Azure logs. As
+`DFIR-O365RC` supports PowerShell Core, it can be used on both Windows and Linux
 endpoints.
 
 The logs are retrieved in `JSON` from the following sources of information:
@@ -119,7 +119,7 @@ The logs are retrieved in `JSON` from the following sources of information:
 
   - `Mailbox Audit Log`
 
-  - `Azure AD sign-ins logs`
+  - `Azure AD sign-in logs`
 
   - `Azure AD audit logs`
 
@@ -150,7 +150,7 @@ Install-WSMan
 ```
 
 The `DFIR-O365RC` directory of the `DFIR-O365RC` project can then be placed in
-in one of the system modules path (retrievable using `$env:PSModulePath`) and
+one of the system module paths (retrievable using `$env:PSModulePath`) and
 imported with `Import-Module DFIR-O365RC`.
 
 #### DFIR-O365RC cmdlets
@@ -158,7 +158,7 @@ imported with `Import-Module DFIR-O365RC`.
 Note that whenever using PowerShell Core, the `-DeviceCode:$true` parameter
 must be specified for all `DFIR-O365RC` cmdlets in order to authenticate to the
 Azure AD tenant. The authentication should be done using a web browser at the
-`https://microsoft.com/devicelogin` URL and the device code obtained passed
+`https://microsoft.com/devicelogin` URL and the obtained device code passed
 to the executed `DFIR-O365RC` cmdlet.
 
 ```bash
@@ -166,19 +166,19 @@ $EndDate = (Get-Date).ToUniversalTime()
 $StartDate30 = $EndDate.adddays(-31)
 $StartDate90 = $EndDate.adddays(-91)
 
-# Get a subset of Office 365 Unified audit logs (selection of operations of judged of interest).
+# Get a subset of Office 365 Unified audit logs (selection of operations deemed of interest).
 # Files produced:
 # - Get-O365Light.log
 # - O365_unified_audit_logs\YYYY-MM-DD\UnifiedAuditLog_<FQDN>_<YYYY-MM-DD>.json
 Get-O365Light -StartDate $StartDate90 -Enddate $EndDate [-Operationsset "AllbutAzureAD"]
 
 # Get all Office 365 Unified audit logs.
-# As performance are poor, usage should be limited on a small time period or on small tenant.
+# As performance is poor, usage should be limited to a small time period or to small tenants.
 $StartDateLimited = $EndDate.adddays(-<DAYS>)
 Get-O365Full -StartDate [$StartDate90 | $StartDateLimited] -Enddate $EndDate
 
 # Get Defender for Office 365 logs, from Office 365 Unified audit logs.
-# Defender logs require an E5 license or a license plan with Microsoft Defender for Office 365cloud app security.
+# Defender logs require an E5 license or a license plan with Microsoft Defender for Office 365 or Microsoft Defender for Cloud Apps.
 Get-DefenderforO365 -StartDate $StartDate90 -Enddate $EndDate
 
 # Search for activity related to a particular user, IP address or freetext query in the Office 365 Unified audit logs.
@@ -215,17 +215,17 @@ Get-AzDevOpsActivityLogs -StartDate $StartDate90 -Enddate $EndDate [-SelectOrg:$
 Through the `Diagnostic settings`, Azure logs at tenant, subscription(s), or
 resource(s) level can be either:
 
-  - Exported to json formatted files in a `storage account blob`. Logs exported
+  - Exported to JSON formatted files in a `storage account blob`. Logs exported
     to a blob will be in `PT1H.json` files, and can be downloaded using the
     `Azure Storage Explorer` utility (among others).
 
-  - Send to a `Log Analytics workspace` to be processed directly in the Cloud
+  - Sent to a `Log Analytics workspace` to be processed directly in the Cloud
     with `KQL` queries.
 
 Once a `storage account` or `Log Analytics workspace` has been created, the
-procedure to export logs from different sources is as follow:
+procedure to export logs from different sources is as follows:
 
-  - `AzureAD` tenant logs (sign-ins and audit logs) - P1P2 license required:
+  - `AzureAD` tenant logs (sign-ins and audit logs) - P1/P2 license required:
 
     ```
     Azure Active Directory portal
@@ -246,7 +246,7 @@ procedure to export logs from different sources is as follow:
                 => Archive to a storage account / Send to Log Analytics workspace
     ```
 
-  - Resources logs:
+  - Resource logs:
 
     ```
     The given resource portal
@@ -261,7 +261,7 @@ following folders:
 
   - Azure AD audit logs: `insights-logs-auditlogs`
 
-  - Azure AD sign-ins logs:
+  - Azure AD sign-in logs:
 
     - `insights-logs-signinlogs`
 

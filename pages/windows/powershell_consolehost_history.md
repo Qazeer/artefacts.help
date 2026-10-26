@@ -25,7 +25,7 @@ file.
 By default, the `ConsoleHost_history.txt` file will be located under
 `$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt`.
 
-Bypassing `PSReadline` logging is however easy, as it simply requires to unload
+Bypassing `PSReadline` logging is however easy, as it simply requires unloading
 the `PSReadline` module (for instance with the `Remove-Module PSReadline` in an
 existing PowerShell session).
 

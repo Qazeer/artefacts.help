@@ -1,6 +1,6 @@
 ---
 title: NTFS - UsnJrnl
-summary: 'The USN Journal is a feature of NTFS, activated by default on Vista and later, which maintains a record of changes made to the NTFS volume.\n\n The $J stream stores the actual change log records, with usually historical data of the last few days.\n\n Each change log record is notably composed of: the timestamp, filename, and reason/operation of the change.\n\n Additionally, each change log record contains the MFT "entry" and "sequence" numbers and the direct parent "entry" and "sequence" numbers of the file concerned by the change, making it is possible to retrieve the location of the file using the MFT. The UsnJrnl can be "rewinded" to exhaustively and accurately rebuild the location of every files in the journal.'
+summary: 'The USN Journal is a feature of NTFS, activated by default on Vista and later, which maintains a record of changes made to the NTFS volume.\n\n The $J stream stores the actual change log records, with usually historical data of the last few days.\n\n Each change log record is notably composed of: the timestamp, filename, and reason/operation of the change.\n\n Additionally, each change log record contains the MFT "entry" and "sequence" numbers and the direct parent "entry" and "sequence" numbers of the file concerned by the change, making it possible to retrieve the location of the file using the MFT. The UsnJrnl can be "rewind" to exhaustively and accurately rebuild the location of every file in the journal.'
 keywords: Filesystem, NTFS, UsnJrnl, USN, Journal
 tags:
   - windows_ntfs_filesystem
@@ -14,10 +14,10 @@ folder: windows
 
 ### Overview
 
-The `Update Sequence Number Journal (USN) Journal` is a feature of NTFS,
+The `Update Sequence Number (USN) Journal` is a feature of NTFS,
 activated by default on Vista and later, which maintains a record of changes
 made to the NTFS volume. The creation, deletion or modification of files or
-directories are for instance journalized.
+directories are for instance journaled.
 
 The records in the `UsnJrnl` are progressively overwritten once the max size of
 the journal has been reached. The `UsnJrnl` usually contains historical data on
@@ -30,7 +30,7 @@ The `UsnJrnl` is composed of two named data streams:
 
   - The `$Max` stream stores the metadata of the change.
 
-  - The `$J`  stream stores the actual change log records.
+  - The `$J` stream stores the actual change log records.
 
 Each change log record is notably composed of:
 
@@ -68,7 +68,7 @@ entry (when the `file record` gets re-used). The `MFT` `file record` `entry`
 number remains unchanged with only the `file record` `sequence` number being
 increased by one.
 
-Thus, matching the `UsnJrnl` to the current state of the `MFT` will result:
+Thus, matching the `UsnJrnl` to the current state of the `MFT` will result in:
 
   - In some invalid paths if only the `file record`'s `entry` numbers are used
     to find the files location. For example, if the `file record` of the folder
@@ -79,12 +79,12 @@ Thus, matching the `UsnJrnl` to the current state of the `MFT` will result:
 
   - In some unknown paths if both the `file record`'s `entry` and `sequence`
     numbers are used, as deleted entries referenced in the `UsnJrnl` have an
-    `entry` and `sequence` numbers combination that no longer exist in the
+    `entry` and `sequence` numbers combination that no longer exists in the
     `MFT`.
 
 Additionally, renaming or moving files or folders does not change the `MFT`
 `file record` `entry` or `sequence` numbers, potentially leading to invalid
-paths if only the `MFT` is used to the location of files referenced in the
+paths if only the `MFT` is used to determine the location of files referenced in the
 `UsnJrnl`.
 
 A technique to exhaustively and accurately rebuild the location of files found
@@ -95,7 +95,7 @@ the last, most recent change to the first, oldest change) and keeping stateful
 information (in a local `SQL` database) about every entry's `entry` and
 `sequence` numbers and parent's `entry` and `sequence` numbers. Using this
 technique it is thus possible to rebuild a file location as it was when the
-change operation ocurred. Indeed every entry's `entry` and `sequence` numbers
+change operation occurred. Indeed every entry's `entry` and `sequence` numbers
 in the file's path are either in the `MFT` (if unchanged since the operation)
 or referenced by an operation in the `UsnJrnl` (as changes impacting the file
 location would have occurred after the file change operation).

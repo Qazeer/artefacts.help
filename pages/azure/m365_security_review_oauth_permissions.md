@@ -1,7 +1,7 @@
 ---
 title: Security review - OAuth permissions
-summary: 'OAuth is a protocol to delegate access and grant third party websites or applications access to users data and perform operations on their behalf.\n\nOAuth applications can be leveraged by threat actors: in illicit consent grant phishing attacks, to maintain persistence, or to automate operations (such as virtual machines creation for cryptomining activity).'
-keywords: OAuth, permissions, OAuth2PermissionGrants, consent grant, phishing, 
+summary: 'OAuth is a protocol to delegate access and grant third-party websites or applications access to users'' data and perform operations on their behalf.\n\nOAuth applications can be leveraged by threat actors: in illicit consent grant phishing attacks, to maintain persistence, or to automate operations (such as virtual machines creation for cryptomining activity).'
+keywords: OAuth, permissions, OAuth2PermissionGrants, consent grant, phishing
 tags:
   - azure_security_review
 last_updated: 2024-01-28
@@ -10,19 +10,19 @@ permalink: azure_m365_security_review_oauth_permissions.html
 folder: azure
 ---
 
-`OAuth` is a protocol to delegate access and grant third party websites or
-applications access to users data and perform operations on their behalf. With
-`OAuth`, users don't have to reveal their credentials to the third party
+`OAuth` is a protocol to delegate access and grant third-party websites or
+applications access to users' data and perform operations on their behalf. With
+`OAuth`, users don't have to reveal their credentials to the third-party
 service, as access is granted through the `Identity Provider (IdP)`
-(`Azure AD` in `Azure` case).
+(`Azure AD` in the case of `Azure`).
 
 `OAuth` applications can be leveraged by threat actors:
 
   - In illicit consent grant phishing attacks. A victim authorizes a malicious
-    third-party `OAuth ` application to access their account data. However
+    third-party `OAuth` application to access their account data. However,
     Microsoft implemented security measures in November 2020 to limit this kind
     of attack. An administrator's approval is now required for sensitive
-    permission requests made by unverified application created outside the
+    permission requests made by unverified applications created outside the
     tenant.
 
   - To maintain persistence in the tenant.
@@ -33,8 +33,8 @@ service, as access is granted through the `Identity Provider (IdP)`
 Microsoft Graph supports two access types, delegated permissions and
 application permissions. With delegated permissions, the application calls
 Microsoft Graph on behalf of a signed-in user. With application permissions,
-the application calls Microsoft Graph with its own identity, without a signed
-in user.
+the application calls Microsoft Graph with its own identity, without a signed-in
+user.
 
 The delegated and application permissions available are referenced in the
 [Microsoft documentation](https://learn.microsoft.com/en-us/graph/permissions-reference).

@@ -29,10 +29,10 @@ Each drive is represented by a subkey, which is named as either the
 
 For devices, the `volume GUID` can be used to retrieve more information on the
 device from the `HKLM\SYSTEM\MountedDevices` registry key, including the
-`device/hardware  ID` (vendor and product name) and `instance ID` (with the
+`device/hardware ID` (vendor and product name) and `instance ID` (with the
 `serial number` if existing).
 
 **This key can be used to determine which user interacted with a given USB
-device**. However entries are not reliably created, so **the absence of an
+device**. However, entries are not reliably created, so **the absence of an
 entry is not an indicator that the given user didn't interact with the
 device**.

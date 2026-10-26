@@ -16,7 +16,7 @@ folder: others
 ### Physical devices
 
 For physical drives, the drive to be imaged should be extracted from the system
-and plugged on an acquisition station through a (ideally) hardware write
+and plugged into an acquisition station through an (ideally hardware) write
 blocker. Dedicated hardware, such as the `TX1 Tableau Forensic Imager`, can
 also be used to directly make a drive to drive or drive to file (such as a
 `raw` file) copy.
@@ -31,8 +31,8 @@ acquisition.
 
 #### Using a Windows OS
 
-Windows should only be used as a acquisition platform if the drive to image can
-be connected through an hardware write-blocker, as Windows will automatically
+Windows should only be used as an acquisition platform if the drive to image can
+be connected through a hardware write-blocker, as Windows will automatically
 attempt to mount any recognized partitions, potentially altering the data.
 
 The `FTK Imager` utility can be used to create a forensic image of a physical
@@ -62,8 +62,8 @@ disk.
 | Type | block device | Eventual partition(s) |
 |------|--------------|-----------------------|
 | SATA drives | Each drive is represented as `/dev/sdx`. <br><br> Example of two drives: <br> `/dev/sda` <br> `/dev/sdc` | Each partition is represented as `/dev/sdxN`. <br><br> Example of two partitions on the same drive: <br> `/dev/sda1` <br> `/dev/sda2` |
-| NVMe drives | Each drive is represented as `/dev/nvmeXn1`. <br><br> Examples: <br> `/dev/nvme0n1` <br> `/dev/nvme1n1` | Each drive is partition as `/dev/nvmeXpX`. <br><br> Examples: <br> `/dev/nvme0n1p1` <br> `/dev/nvme0n1p2` |
-| Optical medias (CD or DVD drives) | `/dev/srx` <br><br> Example of two CD / DVD drives: <br> `/dev/sr0` <br> `/dev/sr1` | NA |
+| NVMe drives | Each drive is represented as `/dev/nvmeXn1`. <br><br> Examples: <br> `/dev/nvme0n1` <br> `/dev/nvme1n1` | Each partition is represented as `/dev/nvmeXnYpZ`. <br><br> Examples: <br> `/dev/nvme0n1p1` <br> `/dev/nvme0n1p2` |
+| Optical media (CD or DVD drives) | `/dev/srx` <br><br> Example of two CD / DVD drives: <br> `/dev/sr0` <br> `/dev/sr1` | NA |
 
 The `lsblk` utility can be used to list the block devices present on a system
 and the `fdisk` or `gdisk` (for handling of `GPT`) utilities to retrieve more
@@ -82,8 +82,8 @@ gdisk -l <DEVICE>
 *Imaging using dd*
 
 `dd` is the standard copy utility that, while not forensic oriented, can be
-used to create image of a device / partition. `dd` presents the advantage of
-being available in most Linux distributions. A more forensics sound utility,
+used to create an image of a device / partition. `dd` presents the advantage of
+being available in most Linux distributions. A more forensically sound utility,
 such as `dc3dd` (presented below), should generally be used if possible.
 
 ```bash
@@ -102,13 +102,13 @@ sha256sum /dest_media/image.raw  > /dest_media/SHA256_image
 *Imaging using dc3dd*
 
 `dc3dd` is a more forensic oriented utility, based on `dd`, to make disk or
-partition image. `dc3dd` automatically detects bad sectors, natively integrates
+partition images. `dc3dd` automatically detects bad sectors, natively integrates
 hashing of the input and output bytes, and integrates logging functionalities,
 making it more suitable for forensic imaging.
 
 ```bash
 # log option: output log files.
-# hlog option: output file that will contains the image hash(es).
+# hlog option: output file that will contain the image hash(es).
 
 dc3dd if=<DEVICE | PARTITION> hof=/dest_media/image.raw log=<LOG_FILE> hash=sha256 hlog=<HASH_FILE>
 ```
@@ -137,7 +137,7 @@ Right click device -> Acquire image
      corresponding option must be enabled when taking the snapshot). This can
      be done through the `ESXi Host client` or in `SSH`.
 
-  2. Shutdown the virtual machine and copy all the files in the VM folder from
+  2. Shut down the virtual machine and copy all the files in the VM folder from
      the datastore. Depending on the number of past snapshot(s) taken, relevant
      data may be present in different virtual drives. Additionally, metadata
      files (`vmsm` for virtual memory or disk descriptor files) can be 
@@ -149,14 +149,14 @@ For a thick provisioned virtual disk, the specified space is reserved directly
 upon the creation of the disk. Whereas, for a thin provisioned virtual disk,
 the allocated space will only grow over time as large as required for the data
 used by the virtual machine. However, as thin provisioning is a function of
-the `VMFS` filesystem, downloading a thin provisioned virtual disk (to a
-`ntfs`, `ext3/4`, etc.) will result in the full sized file. 
+the `VMFS` filesystem, downloading a thin provisioned virtual disk (to an
+`NTFS`, `ext3/4`, etc.) will result in the full sized file. 
 
 Thick provisioned drives can be either "lazily" or "eagerly" zeroed. While in
-both configuration the desired size for this virtual disk is reserved directly
+both configurations the desired size for this virtual disk is reserved directly
 upon creation, the way empty disk space is processed is different. In "eagerly"
 zeroed virtual disk, the unused space is zeroed directly at the time of
-creation, whereas for "lazily" zeroed virtual disk unallocated space remain
+creation, whereas for "lazily" zeroed virtual disk unallocated space remains
 untouched on the datastore until an I/O operation occurs for the virtual
 machine.
 
@@ -164,9 +164,9 @@ machine.
 
 When taking a snapshot of a virtual machine, a new virtual drive will be
 created. Modifications to the filesystem of the virtual machine after that
-snapshot standpoint will be applied to this newly created virtual drive. The
+snapshot will be applied to this newly created virtual drive. The
 drive is associated with its own disk descriptor file, that references the
-parent virtual disk (including in an human readable format in the
+parent virtual disk (including in a human readable format in the
 `parentFileNameHint` field).
 
 The following files are thus created after a snapshot is taken:
@@ -179,11 +179,11 @@ The following files are thus created after a snapshot is taken:
 
 The virtual machine logs, `vmware.log` and `vmware-XX.log` files, in the virtual
 machine folder in the datastore, can be used to determine which snapshot /
-virtual disk was used at a given time. The `scsi0:0.filename` log entry specify
+virtual disk was used at a given time. The `scsi0:0.filename` log entry specifies
 the virtual disk associated with the virtual machine at a boot event.
 Example: `2025-09-11T21:51:47.571Z In(05) vmx - DICT          scsi0:0.filename = "disk-000003.vmdk"`.
 
-The virtual disk of snapshots can be reassembled / reconsolidated using
+The virtual disks of snapshots can be reassembled / reconsolidated using
 the 3rd-party open source script
 [`vmdksync`](https://github.com/mpalmer/vmdksync/blob/master/vmdksync)
 or the VMware `vmware-vdiskmanager.exe` utility. Some forensics tools, such as
@@ -279,12 +279,12 @@ sudo sshfs [-odebug,sshfs_debug,loglevel=debug] -o reconnect [-o IdentityFile=<K
 Following the imaging of a system disk, the image taken must be mounted as a
 partition for analysis. Numerous tools can be used, from either the Windows or
 Linux operating systems, to do so. An important aspect of image mounting is the
-preservation of the artefacts integrity. The image should be mounted in
+preservation of the artefacts' integrity. The image should be mounted
 read-only (or temporary write), with a few specificities to preserve timestamps
 and data integrity.
 
 Some utilities, such as `Autoruns`, require writable partitions. To use such
-utilities, the image should be mounted using an utility supporting temporary
+utilities, the image should be mounted using a utility supporting temporary
 writes.
 
 ### On Windows OS
@@ -293,16 +293,16 @@ The [`Arsenal Image Mounter`](https://arsenalrecon.com/downloads/) is a
 powerful graphical utility that can be used to mount multiple image types. It
 supports temporary write using a diff file that will store the modifications.
 `Arsenal Image Mounter` will automatically mount the different partitions of
-a given image and implements decryption of `BitLocker` protected partition.
+a given image and implements decryption of `BitLocker` protected partitions.
 
-`Arsenal Image Mounter` supports the following disk image format:
+`Arsenal Image Mounter` supports the following disk image formats:
   - `raw` / `DD`
   - Multi-parts `raw`
   - `EnCase Evidence File (E01)`
   - `Advanced Forensics Format (AFF)`
   - `VDI` / `VMDK` / `VHD`
 
-Other utilities such as `FTK Imager` or `OSF Mount` may be used as well.
+Other utilities such as `FTK Imager` or `OSFMount` may be used as well.
 
 ### On Linux OS
 
@@ -331,7 +331,7 @@ qemu-img convert -O raw <VM_DISK_FILE> <OUTPUT_IMAGE>
 
 #### Expert Witness/EnCase (EWF) image
 
-The following procedure can be following to mount disk images in the
+The following procedure can be followed to mount disk images in the
 `Expert Witness/EnCase (EWF)` format:
 
 ```bash
@@ -341,9 +341,9 @@ mkdir <RAW_EWF_DIR>
 ewfmount <EWF_FILE_PATH> <RAW_EWF_DIR_PATH>
 
 # Mount the image as a loop device.
-# show_sys_files and streams_interace=windows are options for Windows NTFS partitions.
+# show_sys_files and streams_interface=windows are options for Windows NTFS partitions.
 mkdir <MOUNTPOINT>
-mount <RAW_EWF_DIR_PATH>/ewf1 <MOUNTPOINT_PATH> -o ro,loop,noatime,noexec,noload,norecovery[,show_sys_files,streams_interace=windows]
+mount <RAW_EWF_DIR_PATH>/ewf1 <MOUNTPOINT_PATH> -o ro,loop,noatime,noexec,noload,norecovery[,show_sys_files,streams_interface=windows]
 ```
 
 #### Logical Volume Manager image
@@ -361,7 +361,7 @@ The `LVM` feature is composed of the following building blocks:
     container for `logical volume(s)`.
 
   - `Logical volume (LV)`: virtual/logical partition that resides in a
-    `volume group` and is composed of `physical extents`. `LV` can be directly
+    `volume group` and is composed of `physical extents`. `LVs` can be directly
     formatted with a file system.
 
   - `Physical extent (PE)`: smallest contiguous extent in a `physical volume`
@@ -376,7 +376,7 @@ Examples:
   - Logical volumes: `/dev/MyVolGroup/rootvol`, `/dev/MyVolGroup/homevol`,
     `/dev/MyVolGroup/mediavol `
 
-The following commands can be used to mount a `LVM` disk image:
+The following commands can be used to mount an `LVM` disk image:
 
 ```bash
 # Mappings for the LVM's volumes.
@@ -418,12 +418,12 @@ fdisk -l <IMAGE_FILE>
 # noatime : preserve the atime (last access time) timestamps.
 # noexec : files from the mounted partition cannot be executed.
 # norecovery/noload : prevent replaying of the partition journal to preserve integrity.
-# loop : explicitly tells mount to use a loop device (optional on newer version of mount).
-# show_sys_files and streams_interace=windows are options for Windows NTFS partitions.
+# loop : explicitly tells mount to use a loop device (optional on newer versions of mount).
+# show_sys_files and streams_interface=windows are options for Windows NTFS partitions.
 
 # OFFSET = SECTOR_SIZE * PARTITION_START.
 
-sudo mount -o ro,loop,noload,noatime,noexec,[show_sys_files,streams_interace=windows,]offset=<OFFSET | $((<SECTOR_SIZE> * <PARTITION_START>))> <IMAGE_FILE> </mnt/ | MOUNT_POINT>
+sudo mount -o ro,loop,noload,noatime,noexec,[show_sys_files,streams_interface=windows,]offset=<OFFSET | $((<SECTOR_SIZE> * <PARTITION_START>))> <IMAGE_FILE> </mnt/ | MOUNT_POINT>
 ```
 
 ### Automated script
