@@ -1,6 +1,6 @@
 ---
 title: Security review - Mailbox auditing configuration
-summary: 'Mailbox auditing is on by default for the entire Office 365 tenant, but can be turned off.\n\nWhile mailbox auditing cannot be disabled for a specific mailbox if mailbox auditing is enabled tenant-wide, mailbox audit logging can still be bypassed by defined users. In such circumstances, mailbox access and actions, to any mailbox, made by the bypassing account are not logged.'
+summary: 'Mailbox auditing is on by default for the entire Office 365 tenant, but can be turned off.\n\nWhile mailbox auditing cannot be disabled for a specific mailbox if mailbox auditing is enabled tenant-wide, mailbox audit logging can still be bypassed for specific users. In such circumstances, mailbox access and actions, to any mailbox, made by the bypassing account are not logged.'
 keywords: Owner, Delegate, Admin, Get-OrganizationConfig, Get-MailboxAuditBypassAssociation
 tags:
   - azure_security_review
@@ -13,8 +13,8 @@ folder: azure
 Mailbox auditing is on by default for the entire `Office 365` tenant, but can
 be turned off. Turning off mailbox auditing will result in mailbox actions no
 longer being audited (even if auditing is enabled at a mailbox level).
-Existing mailbox audit records will however be retained until the audit log age
-limit for the record expires.
+Existing mailbox audit records will, however, be retained until the audit log
+age limit for the record expires.
 
 The following logon types are used to classify the audited actions on a
 mailbox:
@@ -28,8 +28,8 @@ mailbox:
     is accessed with the `Microsoft Exchange Server MAPI Editor`.
 
 While mailbox auditing cannot be disabled for a specific mailbox if mailbox
-auditing is enabled tenant-wide, mailbox audit logging can still be bypassed by
-defined users.
+auditing is enabled tenant-wide, mailbox audit logging can still be bypassed
+for specific users.
 
 In such circumstances, mailbox `Owner`, `Delegate`, or `Admin`
 access and actions, to any mailbox, made by the bypassing user or computer

@@ -1,6 +1,6 @@
 ---
 title: Windows Defender - Detection History files
-summary: 'Windows Defender stores information on past detections, from its real-time and cloud-delivered protection components, in DetectionHistory file(s).\n\nInformation of interest, per detection:\n - file path, size, md5, sha1, and sha256 hashes of the file that triggered the detection.\n - The threat name.\n - The process, and the domain and username of the user associated with the detection.\n - For Potentially Unwanted Applications (PUA) detections, the associated Uninstall registry key.'
+summary: 'Windows Defender stores information on past detections, from its real-time and cloud-delivered protection components, in DetectionHistory file(s).\n\nInformation of interest, per detection:\n - The file path, size, and hashes (md5, sha1, and sha256) of the file that triggered the detection.\n - The threat name.\n - The process, and the domain and username of the user associated with the detection.\n - For Potentially Unwanted Applications (PUA) detections, the associated Uninstall registry key.'
 keywords:
 tags:
   - windows_file_knowledge
@@ -16,7 +16,7 @@ folder: windows
 `Windows Defender` stores information on past detections, from its real-time
 and cloud-delivered protection components, in `DetectionHistory` file(s). Part
 of the information contained in the `DetectionHistory` files is displayed to
-end-users in the `Windows Defender` "Current threats" and "Protection history"
+end users in the `Windows Defender` "Current threats" and "Protection history"
 interfaces (Windows Security -> Virus & threat protection ->
 Current threats -> Protection history).
 
@@ -24,8 +24,8 @@ Current threats -> Protection history).
 
 The `DetectionHistory` file(s) are located in subdirectories under
 `<SYSTEMDRIVE>:\ProgramData\Microsoft\Windows Defender\Scans\History\Service\DetectionHistory\`,
-with a `GUID` filename. The files follow a specific, partially non-human
-readable format, detailed in the
+with a `GUID` filename. The files follow a specific, partially
+non-human readable format, detailed in the
 [DetectionHistory Parser README](https://github.com/jklepsercyber/defender-detectionhistory-parser).
 
 For each threat detected, the following notable information is available:
@@ -38,8 +38,8 @@ For each threat detected, the following notable information is available:
   - The process, and the domain and username of the user associated with
     the detection.
 
-  - The size, `md5`, `sha1`, and `sha256` hashes of the file that triggered the
-    detection.
+  - The size and the `md5`, `sha1`, and `sha256` hashes of the file that
+    triggered the detection.
 
   - For `Potentially Unwanted Applications (PUA)` detections, the
     [`Uninstall registry key`](./registry_systeminfo.md#installed-applications-uninstall)
@@ -47,7 +47,7 @@ For each threat detected, the following notable information is available:
 
   - Various metadata on the detection:
 
-    - The detection `ThreatID`, that can be used to correlate the
+    - The detection `ThreatID`, which can be used to correlate the
       `DetectionHistory` entry with `Windows Defender`
       [ETW events](./etw_windows_defender.md) and
       [Support log files](./defender_support_logs.md).

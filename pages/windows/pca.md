@@ -1,6 +1,6 @@
 ---
 title: Program Compatibility Assistant (PCA)
-summary: 'Introduced in Windows 11, the Program Compatibility Assistant (PCA) is an application compatibility feature that aims to maintain support of existing desktop applications to new versions of the Windows operating system.\n\nInformation of interest, only for programs executed as GUI: file full path and timestamp of execution. More information available for executions resulting in non 0x0 exit code.'
+summary: 'Introduced in Windows 11, the Program Compatibility Assistant (PCA) is an application compatibility feature that aims to maintain support of existing desktop applications on new versions of the Windows operating system.\n\nInformation of interest, only for programs executed as GUI programs: file full path and timestamp of execution. More information is available for executions resulting in a non-0x0 exit code.'
 keywords: Program Compatibility Assistant, PCA, PcaAppLaunchDic, PcaGeneralDb0, PcaGeneralDb1
 tags:
   - windows_program_execution
@@ -15,7 +15,7 @@ folder: windows
 
 Introduced in Windows 11, the `Program Compatibility Assistant (PCA)` is an
 application compatibility feature that aims to maintain support of existing
-desktop applications to new versions of the Windows operating system (like the
+desktop applications on new versions of the Windows operating system (like the
 `Shimcache` and `Amcache` artefacts). `PCA` is linked to the `pcasvc` service.
 
 `PCA` only holds information about executions of programs with a graphical
@@ -25,24 +25,24 @@ from `Windows Explorer`).
 
 ### Information of interest
 
-The information stored by the `PCA` is split in 3 text based files:
+The information stored by the `PCA` is split into 3 text-based files:
   - `PcaAppLaunchDic.txt`:
 
-    - Most valuable file from a forensic standpoint and reliable source of
+    - Most valuable file from a forensic standpoint and a reliable source of
       program execution.
 
     - One entry per line, containing the full path of the executable and the
-      timestamp of execution in `UTC` (in a pipe separated string).
+      timestamp of execution in `UTC` (in a pipe-separated string).
 
     - Example: `%SystemRoot%\FOLDER\executable.exe\|2023-05-25 01:20:30.123`.
 
   - `PcaGeneralDb0.txt` and `PcaGeneralDb1.txt`:
 
     - Fewer entries than in the `PcaAppLaunchDic.txt` file, with most entries
-      seemingly related to non-zero (`0x0`) execution exit code.
+      seemingly related to non-zero (non-`0x0`) execution exit codes.
 
-    - One entry per line, containing the following information in a pipe
-      delimited string:
+    - One entry per line, containing the following information in a
+      pipe-delimited string:
       - Execution timestamp.
       - Execution status.
       - Full path of the executable.

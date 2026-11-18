@@ -1,14 +1,14 @@
 ---
 title: ETW - PowerShell activity
-summary: 'For local PowerShell activity.\n\nWindows PowerShell version 2.0, and prior versions, provide few useful audit settings, thereby limiting the availability of evidence (such as a command history).\n\nStarting with PowerShell v5, PowerShell logging was enhanced, with the notable addition of Script Block Logging, which records the full contents of PowerShell code executed (both original and deobfuscated code). While Script Block Logging is not fully enabled by default, it will record events for code containing suspicious keywords (from a Microsoft pre-defined list).'
-keywords: 'PowerShell, Script Block Logging, Windows PowerShell.evtx, Microsoft-Windows-PowerShell\Operational.evtx, Microsoft-Windows-PowerShell\Analytic.etl, Microsoft-Windows-WinRM\Operational.evtx, Microsoft-Windows-WinRM\Analytic.etl, AppLocker, PSDecode, 400, 403, 500, 501, 600, 800, 4100, 4103, 4104, SuspiciousContentChecker'
+summary: 'For local PowerShell activity.\n\nWindows PowerShell version 2.0, and prior versions, provide few useful audit settings, thereby limiting the availability of evidence (such as a command history).\n\nStarting with PowerShell v5, PowerShell logging was enhanced, with the notable addition of Script Block Logging, which records the full contents of PowerShell code executed (both original and deobfuscated code). While Script Block Logging is not fully enabled by default, it will record events for code containing suspicious keywords (from a Microsoft predefined list).'
+keywords: 'PowerShell, Script Block Logging, Windows PowerShell.evtx, Microsoft-Windows-PowerShell%4Operational.evtx, Microsoft-Windows-PowerShell%4Analytic.etl, Microsoft-Windows-WinRM%4Operational.evtx, Microsoft-Windows-WinRM%4Analytic.etl, AppLocker, PSDecode, 400, 403, 500, 501, 600, 800, 4100, 4103, 4104, SuspiciousContentChecker'
 tags:
   - windows_etw
   - windows_program_execution
   - windows_powershell_activity
   - windows_powershell_remoting
   - windows_powershell_remoting_dst
-location: 'Channels:\n\nWindows PowerShell.\n Events: 400, 403, 500, 501, 600, 800.\n\nMicrosoft-Windows-PowerShell\Operational.\nEvents: 4100, 4103, 4104, 40961, 40962, 53504.\n\nMicrosoft-Windows-AppLocker\MSI and Script.\nEvents: 8005, 8006.'
+location: 'Channels:\n\nWindows PowerShell.\n Events: 400, 403, 500, 501, 600, 800.\n\nMicrosoft-Windows-PowerShell/Operational.\nEvents: 4100, 4103, 4104, 40961, 40962, 53504.\n\nMicrosoft-Windows-AppLocker/MSI and Script.\nEvents: 8005, 8006.'
 last_updated: 2024-01-06
 sidebar: sidebar
 permalink: windows_etw_powershell.html
@@ -20,31 +20,31 @@ folder: windows
 Windows PowerShell version 2.0, and prior versions, provide few useful audit
 settings, thereby limiting the availability of evidence (such as a command
 history). Starting with `PowerShell v5`, [PowerShell logging was
-enhanced](https://devblogs.microsoft.com/powershell/powershell-the-blue-team/)
+enhanced](https://devblogs.microsoft.com/powershell/powershell-the-blue-team/),
 with the notable addition of `Script Block Logging`, which records the full contents
 of PowerShell code executed. While `Script Block Logging` is not fully enabled
 by default, it will record events for code containing suspicious keywords (from
-a Microsoft pre-defined list).
+a Microsoft predefined list).
 
 Upon executing any PowerShell command or script, either locally or using PS
 remoting, Windows may write events to the following files:
 
   - `Windows PowerShell.evtx`.
 
-  - `Microsoft-Windows-PowerShell\Operational.evtx`.
+  - `Microsoft-Windows-PowerShell%4Operational.evtx`.
 
-  - `Microsoft-Windows-PowerShell\Analytic.etl` (non default).
+  - `Microsoft-Windows-PowerShell%4Analytic.etl` (non-default).
 
 As PowerShell implements its remoting functionality through the `Windows Remote
-Management (WinRM)` service, remote PowerShell activity may induce events in
+Management (WinRM)` service, remote PowerShell activity may generate events in
 the following files:
 
-  - `Microsoft-Windows-WinRM\Operational.evtx`.
+  - `Microsoft-Windows-WinRM%4Operational.evtx`.
 
-  - `Microsoft-Windows-WinRM\Analytic.etl` (non default).
+  - `Microsoft-Windows-WinRM%4Analytic.etl` (non-default).
 
 If enabled, `AppLocker` will record PowerShell activity in the
-`Microsoft-Windows-AppLocker\MSI and Script` channel.
+`Microsoft-Windows-AppLocker/MSI and Script` channel.
 
 Additionally, starting with `PowerShell v5` on `Windows 10`, the commands
 entered in a PowerShell console will be logged by the `PSReadline` module to a
@@ -65,12 +65,12 @@ The following keywords can be a sign of suspicious activity:
     / `GNIRTS` / `marshal` / `convert` / `env` / `{` / `}` (obfuscation
     detection)
 
-While the occurrence of these keywords may entail malicious activities, their
-absence is not a formal proof of lack of malicious PowerShell activity as
+While the occurrence of these keywords may indicate malicious activity, their
+absence is not formal proof of a lack of malicious PowerShell activity, as
 PowerShell code can be deeply obfuscated.
 
 The `PSDecode` PowerShell script can be used to deobfuscate malicious
-PowerShell scripts that have several layers of encodings.
+PowerShell scripts that have several layers of encoding.
 
 ```bash
 # Source: https://github.com/R3MRUM/PSDecode.
@@ -84,22 +84,22 @@ PSDecode <ENCODED_POWERSHELL_FILE>
 
 | Channel  | Event ID | Conditions | Description |
 |----------|----------|------------|-------------|
-| `Windows PowerShell` | 400 | PowerShell 2.0. | `Engine state is changed from None to Available`. <br><br> Logged at the start of any local or remote PowerShell activity (execution of powershell.exe). <br><br> The `HostApplication` field records the binary path at the origin of the powershell activity and contains the commandline arguments provided to powershell.exe. <br> If the `HostName` field is equal to: <br> - `ConsoleHost`, the event concerns a local activity <br> - `ServerRemoteHost`, the event occurred due to PowerShell remoting activity. <br> The `RunspaceId` identifies the PowerShell activity and can be linked to the session termination (`EID 403`). Note, however, that this event cannot be strictly correlated to a logon session. |
+| `Windows PowerShell` | 400 | PowerShell 2.0. | `Engine state is changed from None to Available`. <br><br> Logged at the start of any local or remote PowerShell activity (execution of powershell.exe). <br><br> The `HostApplication` field records the binary path at the origin of the PowerShell activity and contains the command-line arguments provided to powershell.exe. <br> If the `HostName` field is equal to: <br> - `ConsoleHost`, the event concerns local activity <br> - `ServerRemoteHost`, the event occurred due to PowerShell remoting activity. <br> The `RunspaceId` identifies the PowerShell activity and can be linked to the session termination (`EID 403`). Note, however, that this event cannot be strictly correlated to a logon session. |
 | `Windows PowerShell` | 403 | PowerShell 2.0. | `Engine state is changed from Available to Stopped`. <br><br> Logged at the end of any local or remote PowerShell activity (execution of powershell.exe) and contains the same level of information as the `EID 400` events. <br><br> The `RunspaceId` identifies the PowerShell activity and can be linked to the session start (`EID 400`). Note, however, that this event cannot be strictly correlated to a logon session. |
-| `Windows PowerShell` | 500 | PowerShell 2.0. <br><br> Requires `$LogCommandLifeCycleEvent` to be set to true (non default). | `Command "<COMMAND>" is Started`. <br><br> Logged whenever a PowerShell command is executed, but can be bypassed by starting PowerShell using the `-NoProfile` / `-nop` flag. |
-| `Windows PowerShell` | 501 | PowerShell 2.0. <br><br> Requires `$LogCommandLifeCycleEvent` to be set to true (non default). | `Command "<COMMAND>" is Stopped`. <br><br> Logged whenever a PowerShell command finishes its execution, but can be bypassed by starting PowerShell using the `-NoProfile` / `-nop` flag. |
-| `Windows PowerShell` | 600 | PowerShell 2.0. | `Provider "<PROVIDER_NAME>" is Started`. <br><br> Logs the start and stop of PowerShell providers, with one provider per event (and usually multiple subsequent events). <br><br> Similarly to the events `EID 400` and `EID 403`, this event includes the `HostApplication` field. <br><br> The provider `WSMan` ("Provider WSMan Is Started") is loaded in case of a `WinRM` session (on the remote host). <br><br> If the PowerShell activity relies on built-in alias, such as `IEX`, an event will be generated for the `Alias` provider. |
-| `Windows PowerShell` | 800 | PowerShell 3.0. | `Pipeline execution details for command line`. <br><br> Inconsistently logged. <br><br> Similarly to the events EID 400 and EID 403, this event includes the `HostApplication` field and presents the advantage of logging, in the `UserId` field, the user account executing PowerShell.  |
-| `Microsoft-Windows-PowerShell\Operational` | 4100 | PowerShell 5.0. | `Error message [...]`. <br><br> Logged whenever an error occurs in a PowerShell activity. <br><br> Includes a `HostApplication` field, the `<DOMAIN>\<USER>` executing PowerShell in the `User` field, and may include the script path of the executed script in the `ScriptName` field. |
-| `Microsoft-Windows-PowerShell\Operational` | 4103 | PowerShell 3.0. <br><br> Requires PowerShell `Module Logging` to be enabled (`EnableModuleLogging` registry key set to 1). | `Module Logging`. <br><br> Logged upon the execution of functions in the module(s) set to be logged. <br><br> If the module names, configured in the `Software\Policies\Microsoft\Windows\PowerShell\ModuleLogging\ModuleNames` registry key, are set to `*`, the activity of the members of all modules is logged. <br> Provides verbose information on the PowerShell activity and, in addition to user information, events may yield the parameters and output of the executed PowerShell cmdlets. |
-| `Microsoft-Windows-PowerShell\Operational` | 4104 | PowerShell 5.0. <br><br> Requires PowerShell `Script Block Logging` to be enabled to generate all events. <br><br> By default (without a specific policy), events will however be logged for potentially-malicious commands execution. The [following resource](https://gist.github.com/nasbench/50cd0b64bedacabccecc9149c15228da) lists the suspicious strings used by PowerShell `SuspiciousContentChecker` function to trigger an event creation. | `Script block logging`: `Creating Scriptblock text [...]`. <br><br> Logged upon the execution of PowerShell scripts and cmdlets. <br><br> If the `Path` field is empty, the command was executed interactively through the PowerShell console. <br> Includes, in the `ScriptBlockText` field, the script block (content of the PowerShell script or cmdlet and the commandline) being executed. The original code will be logged as well as deobfuscated code (such as the encoded or encrypted code, decoded / decrypted at runtime). <br><br> If the script block code exceeds the maximum length, the code will be fragmented into multiple events. <br><br> This event provides valuable information but may be bypassed by malicious actors by starting PowerShell 2.0 (`powershell.exe -version 2.0`). |
-| `Microsoft-Windows-PowerShell\Operational` | 40961 <br> 40962 | PowerShell 3.0. | `PowerShell console is starting up` (`EID 40961`) followed by `PowerShell console is ready for user input` (`EID 40962`). <br><br> Logged upon the start of a PowerShell activity (execution of powershell.exe). <br> Includes the `<DOMAIN>\<USER>` executing PowerShell in the `User` field. |
-| `Microsoft-Windows-PowerShell\Operational` | 53504 | PowerShell 3.0. | `Windows PowerShell has started an IPC listening thread on process: <PID> in `AppDomain`: <DOMAIN>`. <br><br> Indicates that a PowerShell `AppDomain` was started. <br><br> Usually logged upon the start of the PowerShell console, in between events `EID: 40961` and `EID: 40962`. |
-| `Microsoft-Windows-AppLocker\MSI and Script` | 8005 | Requires `AppLocker` to be enabled and running in `Audit only` mode. | `<SCRIPT_PATH> was allowed to run`. <br><br> Logged upon the execution of a local PowerShell script. |
-| `Microsoft-Windows-AppLocker\MSI and Script` | 8006 | Requires `AppLocker` to be enabled and running in `Audit only` mode. | `<SCRIPT_PATH> was allowed to run but would have been prevented from running if the AppLocker policy were enforced`. <br><br> Logged upon the execution of a local PowerShell script. |
+| `Windows PowerShell` | 500 | PowerShell 2.0. <br><br> Requires `$LogCommandLifeCycleEvent` to be set to true (non-default). | `Command "<COMMAND>" is Started`. <br><br> Logged whenever a PowerShell command is executed, but can be bypassed by starting PowerShell using the `-NoProfile` / `-nop` flag. |
+| `Windows PowerShell` | 501 | PowerShell 2.0. <br><br> Requires `$LogCommandLifeCycleEvent` to be set to true (non-default). | `Command "<COMMAND>" is Stopped`. <br><br> Logged whenever a PowerShell command finishes its execution, but can be bypassed by starting PowerShell using the `-NoProfile` / `-nop` flag. |
+| `Windows PowerShell` | 600 | PowerShell 2.0. | `Provider "<PROVIDER_NAME>" is Started`. <br><br> Logs the start and stop of PowerShell providers, with one provider per event (and usually multiple subsequent events). <br><br> As with events `EID 400` and `EID 403`, this event includes the `HostApplication` field. <br><br> The provider `WSMan` ("Provider WSMan Is Started") is loaded in case of a `WinRM` session (on the remote host). <br><br> If the PowerShell activity relies on a built-in alias, such as `IEX`, an event will be generated for the `Alias` provider. |
+| `Windows PowerShell` | 800 | PowerShell 3.0. | `Pipeline execution details for command line`. <br><br> Inconsistently logged. <br><br> As with events `EID 400` and `EID 403`, this event includes the `HostApplication` field and has the advantage of logging, in the `UserId` field, the user account executing PowerShell.  |
+| `Microsoft-Windows-PowerShell/Operational` | 4100 | PowerShell 5.0. | `Error message [...]`. <br><br> Logged whenever an error occurs in a PowerShell activity. <br><br> Includes a `HostApplication` field, the `<DOMAIN>\<USER>` executing PowerShell in the `User` field, and may include the script path of the executed script in the `ScriptName` field. |
+| `Microsoft-Windows-PowerShell/Operational` | 4103 | PowerShell 3.0. <br><br> Requires PowerShell `Module Logging` to be enabled (`EnableModuleLogging` registry key set to 1). | `Module Logging`. <br><br> Logged upon the execution of functions in the module(s) set to be logged. <br><br> If the module names, configured in the `Software\Policies\Microsoft\Windows\PowerShell\ModuleLogging\ModuleNames` registry key, are set to `*`, the activity of the members of all modules is logged. <br> Provides verbose information on the PowerShell activity: in addition to user information, events may yield the parameters and output of the executed PowerShell cmdlets. |
+| `Microsoft-Windows-PowerShell/Operational` | 4104 | PowerShell 5.0. <br><br> Requires PowerShell `Script Block Logging` to be enabled to generate all events. <br><br> However, by default (without a specific policy), events will be logged for the execution of potentially malicious commands. The [following resource](https://gist.github.com/nasbench/50cd0b64bedacabccecc9149c15228da) lists the suspicious strings used by the PowerShell `SuspiciousContentChecker` function to trigger event creation. | `Script block logging`: `Creating Scriptblock text [...]`. <br><br> Logged upon the execution of PowerShell scripts and cmdlets. <br><br> If the `Path` field is empty, the command was executed interactively through the PowerShell console. <br> Includes, in the `ScriptBlockText` field, the script block (content of the PowerShell script or cmdlet and the command line) being executed. The original code will be logged as well as deobfuscated code (such as the encoded or encrypted code, decoded / decrypted at runtime). <br><br> If the script block code exceeds the maximum length, the code will be fragmented into multiple events. <br><br> This event provides valuable information but may be bypassed by malicious actors by starting PowerShell 2.0 (`powershell.exe -version 2.0`). |
+| `Microsoft-Windows-PowerShell/Operational` | 40961 <br> 40962 | PowerShell 3.0. | `PowerShell console is starting up` (`EID 40961`) followed by `PowerShell console is ready for user input` (`EID 40962`). <br><br> Logged upon the start of a PowerShell activity (execution of powershell.exe). <br> Includes the `<DOMAIN>\<USER>` executing PowerShell in the `User` field. |
+| `Microsoft-Windows-PowerShell/Operational` | 53504 | PowerShell 3.0. | `Windows PowerShell has started an IPC listening thread on process: <PID> in `AppDomain`: <DOMAIN>`. <br><br> Indicates that a PowerShell `AppDomain` was started. <br><br> Usually logged upon the start of the PowerShell console, in between events `EID: 40961` and `EID: 40962`. |
+| `Microsoft-Windows-AppLocker/MSI and Script` | 8005 | Requires `AppLocker` to be enabled and running in `Audit only` mode. | `<SCRIPT_PATH> was allowed to run`. <br><br> Logged upon the execution of a local PowerShell script. |
+| `Microsoft-Windows-AppLocker/MSI and Script` | 8006 | Requires `AppLocker` to be enabled and running in `Audit only` mode. | `<SCRIPT_PATH> was allowed to run but would have been prevented from running if the AppLocker policy were enforced`. <br><br> Logged upon the execution of a local PowerShell script. |
 
 Additionally, `Security` event ID
-[`4688: A new process has been created`](./etw_process_creation.md), that
+[`4688: A new process has been created`](./etw_process_creation.md), which
 requires `Audit Process Creation` to be enabled, can track `powershell.exe` execution.
 
 ### References

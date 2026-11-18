@@ -1,12 +1,11 @@
 ---
 title: PowerShell Transcript
-summary: 'PowerShell Transcript is a mechanism to record a PowerShell console session. The full console input and, depending on the transcript configuration, stdout and stderr streams are logged to a text file.\n\n This logging mechanism, disabled by default, is the only Windows built-in feature to gain extended visibility on PowerShell console interactions, and in particular to the results of PowerShell commands entered in a console. Contrary to Script Block Logging however, PowerShell Transcript does not include the content of scripts executed, but only the commands as they are entered in the PowerShell console.\n\n PowerShell Transcript can be enabled using the Start-Transcript cmdlet, by GPO, or directly in the registry.'
+summary: 'PowerShell Transcript is a mechanism to record a PowerShell console session. The full console input and, depending on the transcript configuration, stdout and stderr streams are logged to a text file.\n\n This logging mechanism, disabled by default, is the only Windows built-in feature to gain extended visibility into PowerShell console interactions, and in particular into the results of PowerShell commands entered in a console. However, unlike Script Block Logging, PowerShell Transcript does not include the content of scripts executed, but only the commands as they are entered in the PowerShell console.\n\n PowerShell Transcript can be enabled using the Start-Transcript cmdlet, by GPO, or directly in the registry.'
 keywords: PowerShell, Transcripts
 tags:
   - windows_program_execution
   - windows_powershell_activity
-default_location: 'By default:\n\n<USERPROFILE>\Documents\PowerShell_transcript.*.txt\n\nHowever, alternative path, on the local filesystem or
-on a remote server, can be specified.'
+default_location: 'By default:\n\n<USERPROFILE>\Documents\PowerShell_transcript.*.txt\n\nHowever, an alternative path, on the local filesystem or on a remote server, can be specified.'
 last_updated: 2024-06-14
 sidebar: sidebar
 permalink: windows_powershell_transcript.html
@@ -19,14 +18,14 @@ folder: windows
 session. The full console input and, depending on the transcript configuration,
 `stdout` and `stderr` streams are logged to a text file. This logging
 mechanism, disabled by default, is the only Windows built-in feature to gain
-extended visibility on `PowerShell` console interactions, and in particular to
-the results of `PowerShell` commands entered in a console.
+extended visibility into `PowerShell` console interactions, and in particular
+into the results of `PowerShell` commands entered in a console.
 
-Contrary to `Script Block Logging` however, `PowerShell Transcript` does not
-include the content of scripts executed, but only the commands as they are entered /
-typed in the `PowerShell` console (and thus potentially obfuscated).
+However, unlike `Script Block Logging`, `PowerShell Transcript` does not
+include the content of scripts executed, but only the commands as they are
+entered / typed in the `PowerShell` console (and thus potentially obfuscated).
 
-`PowerShell Transcript` is available from `PowerShell 2.0` and onward, with
+`PowerShell Transcript` is available from `PowerShell 2.0` onward, with
 a different default file naming convention starting with `PowerShell 5.0`:
 
   - Before `PowerShell 5.0`: `PowerShell_transcript.YYYYMMDDHHmmss.txt`, with
@@ -45,7 +44,7 @@ the [`KAPE` target `PowerShellTranscripts`](https://github.com/EricZimmerman/Kap
 #### Enabling PowerShell Transcript
 
 `PowerShell Transcript` can be enabled in a number of ways. By default, only
-the timestamps of the `PowerShell` session start and end are logged and an
+the timestamps of the `PowerShell` session start and end are logged, and
 additional configuration is required to log the timestamp of each command
 execution.
 
@@ -61,16 +60,16 @@ execution.
     Templates -> Windows Components -> Windows PowerShell ->
     "Turn on PowerShell Transcription". As stated in the `GPO` setting, this is
     equivalent to calling the `Start-Transcript` cmdlet for every `PowerShell`
-    session. The "Include invocation headers" checkbox determines, similarly to
+    session. The "Include invocation headers" checkbox determines, as does
     the `IncludeInvocationHeader` switch, whether execution timestamps should be
     logged for each command.
 
   - Directly through the registry, by setting the values,
     under `HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription`,
     `EnableTranscripting` to `0x1` and `EnableInvocationHeader` to `0x1` (to
-    enable commands timestamps). While supporting the `Start-Transcript`
-    cmdlet, `PowerShell core` does not however appear to take into account
-    these values.
+    enable command timestamps). However, while supporting the
+    `Start-Transcript` cmdlet, `PowerShell Core` does not appear to take these
+    values into account.
 
 ### Information of interest
 

@@ -1,6 +1,6 @@
 ---
 title: Prefetch
-summary: 'Windows Prefetch is a performance enhancement feature that enables prefetching of applications to make system boots or application startups faster. Prefetch is by default disabled on Windows Server operating systems and is limited to 128 entries on Windows XP to Windows 7 and 1024 entries starting from Windows 8.\n\nPrefetch files are created whenever a program is executed from a specific path.\n\nInformation of interest: file name and size, first and, starting from Windows 8, last eight executions timestamps, run count, and list of files and directories accessed during the first ten seconds of execution (often including the full path of the executed file itself).'
+summary: 'Windows Prefetch is a performance enhancement feature that enables prefetching of applications to make system boots or application startups faster. Prefetch is disabled by default on Windows Server operating systems and is limited to 128 entries on Windows XP to Windows 7, and 1024 entries starting from Windows 8.\n\nPrefetch files are created whenever a program is executed from a specific path.\n\nInformation of interest: file name and size, first and, starting from Windows 8, last eight execution timestamps, run count, and list of files and directories accessed during the first ten seconds of execution (often including the full path of the executed file itself).'
 keywords: Prefetch
 tags:
   - windows_program_execution
@@ -31,7 +31,7 @@ Whether the `Prefetch` feature is enabled is configured by the
   - `0x3`: Enabled (application and boot prefetching).
 
 `Prefetch` files are not automatically deleted if the related executable is
-deleted and can thus be a source of historical information. However, as the
+deleted, and can thus be a source of historical information. However, as the
 `Prefetch` directory is limited to 128 entries on `Windows XP` to `Windows 7`
 and 1024 entries starting from `Windows 8`, Prefetch files may be overwritten
 and information lost.
@@ -47,7 +47,7 @@ The `Prefetch` files can yield the following information of forensic interest:
 
   - The file name and size of the binary executed.
 
-  - The first and, starting from Windows 8, last eight executions timestamps.
+  - The first and, starting from Windows 8, last eight execution timestamps.
 
   - The `Prefetch` file `NTFS` created and last modified timestamps also
     indicate the first and last time the program was executed.
@@ -55,10 +55,10 @@ The `Prefetch` files can yield the following information of forensic interest:
   - Run count (number of times the binary was executed).
 
   - List of files and directories accessed during the first ten seconds of
-    execution (including the eventual `DLL` loaded).
-    The full path to executable file can often be determined from the list of
-    files accessed (duplicate possible if a given binary accesses another binary
-    with the same name).
+    execution (including any `DLLs` loaded).
+    The full path to the executable file can often be determined from the list
+    of files accessed (duplicates are possible if a given binary accesses
+    another binary with the same name).
 
 Note that the `Prefetch` files can be easily deleted, potentially invalidating
 the trace of execution and timestamps (notably of first execution).
@@ -77,12 +77,12 @@ Prefetch file, the given script must be executed within the first ten seconds
 of the `powershell.exe` execution.
 
 The accessed file list does retain entries from previous instances of a program
-execution. Accessed files information may thus persist through `powershell.exe`
-subsequent runs.
+execution. Accessed file information may thus persist through subsequent
+`powershell.exe` runs.
 
 ### Tool(s)
 
-[`PECmd`](https://github.com/EricZimmerman/PECmd) (`KAPE` associated
+[`PECmd`](https://github.com/EricZimmerman/PECmd) (associated `KAPE`
 `PECmd` module) can be used to parse `Prefetch` file(s).
 
 ```bash

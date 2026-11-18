@@ -26,17 +26,17 @@ through a web browser, is also tracked in the `WebCacheV01.dat` database**.
 
 **Access to local files can be identified by the `file` `URI` scheme** (such
 as `file:///<DRIVE_LETTER>:/folder/file`). Note that files accessed on remote
-webservers may also be using the `file` `URI` scheme (usually only as
-`file://` however).
+web servers may also use the `file` `URI` scheme (however, usually only as
+`file://`).
 
 For each entry, **the full path to the file or the URL, the timestamp of
 access, and the visit count** will be referenced.
 
 ### Tool(s)
 
-The [`NirSoft's BrowsingHistoryView`](https://www.nirsoft.net/utils/browsing_history_view.html)
-(`KAPE` associated module `Nirsoft_BrowsingHistoryView`) can be used to parse,
-among other web browsers artefacts, the `WebCacheV01.dat` database.
+[`NirSoft's BrowsingHistoryView`](https://www.nirsoft.net/utils/browsing_history_view.html)
+utility (associated `KAPE` module `Nirsoft_BrowsingHistoryView`) can be used to
+parse, among other web browser artefacts, the `WebCacheV01.dat` database.
 
 ### References
 

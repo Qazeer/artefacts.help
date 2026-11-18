@@ -1,6 +1,6 @@
 ---
 title: Registry - Auto-Start Extensibility Points
-summary: 'A number of registry keys, known as Auto-Start Extensibility Points (ASEP) registry keys, are run whenever the system is booted or a specific user logs in.\n\nThe ASEP keys under HKLM are run every time the system is started, while the ASEP keys under HKCU are only executed when the user associated with the keys logs onto the system.\n\nWhile a subset of ASEP registry keys is leveraged by threat actors, hundreds of keys may be used to execute a program at boot or following a user logon.'
+summary: 'A number of registry keys, known as Auto-Start Extensibility Points (ASEP) registry keys, reference programs that are run whenever the system is booted or a specific user logs in.\n\nThe ASEP keys under HKLM are run every time the system is started, while the ASEP keys under HKCU are only executed when the user associated with the keys logs onto the system.\n\nWhile a subset of ASEP registry keys is leveraged by threat actors, hundreds of keys may be used to execute a program at boot or following a user logon.'
 keywords: ASEP, Auto-Start Extensibility Points, Run, RunOnce, Winlogon, Startup, Appinit_Dlls, Userinit, Autoruns, AutorunsC, RECmd, RegistryASEPs, T1547.001
 tags:
   - windows_registry
@@ -16,8 +16,8 @@ folder: windows
 ### Overview
 
 A number of registry keys, known as `Auto-Start Extensibility Points (ASEP)`
-registry keys, are run whenever the system is booted or a specific user logs
-in.
+registry keys, reference programs that are run whenever the system is booted or
+a specific user logs in.
 
 The `ASEP` keys under `HKEY_LOCAL_MACHINE (HKLM)` are run every time the system
 is started, while the `ASEP` keys under `HKEY_CURRENT_USER (HKCU)` are
@@ -78,15 +78,15 @@ HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run
 ### Tool(s)
 
 The most common `ASEP` keys can be automatically checked using the
-[`SysInternals` `Autoruns`](https://learn.microsoft.com/fr-fr/sysinternals/)
+[`Sysinternals` `Autoruns`](https://learn.microsoft.com/fr-fr/sysinternals/)
 (GUI) and `AutorunsC` (CLI) utilities.
 
 The [`RECmd`](https://github.com/EricZimmerman/RECmd) utility can also be used
 to parse the registry and extract a predefined list of `ASEP` registry keys
 using the
 [`RegistryASEPs.reb`](https://github.com/EricZimmerman/RECmd/blob/master/BatchExamples/RegistryASEPs.reb)
-plugin. A list of nearly 500 `ASEP` registry keys and 400 values are
-referenced by the plugin.
+plugin. Nearly 500 `ASEP` registry keys and 400 values are referenced by the
+plugin.
 
 ```bash
 RECmd.exe -d "<NTFS_VOLUME | FOLDER_CONTAINING_REGISTRY_HIVES>" --bn ".\BatchExamples\RegistryASEPs.reb" --csv "<OUTPUT_FOLDER>"
@@ -94,6 +94,6 @@ RECmd.exe -d "<NTFS_VOLUME | FOLDER_CONTAINING_REGISTRY_HIVES>" --bn ".\BatchExa
 
 ### References
 
-  - [MITRE ATT&CK - T1547.001- Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder](https://attack.mitre.org/techniques/T1547/001/)
+  - [MITRE ATT&CK - T1547.001 - Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder](https://attack.mitre.org/techniques/T1547/001/)
 
   - [RegistryASEPs.reb](https://github.com/EricZimmerman/RECmd/blob/master/BatchExamples/RegistryASEPs.reb)

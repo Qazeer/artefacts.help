@@ -1,7 +1,6 @@
 ---
 title: ETW - Remote Desktop - Destination host
-summary: 'Destination host of a Remote Desktop access.\n\nMain events:\n\nChannel: Security.\nEvent ID 4624: "An account was successfully logged on", with LogonType 10.
-\n\nChannel:\nMicrosoft-Windows-TerminalServices-RemoteConnectionManager/Operational.\nEvent ID 1149: "Remote Desktop Services: User authentication succeeded".\n\nChannel:\nMicrosoft-Windows-TerminalServices-LocalSessionManager/Operational.\nEvent ID 21: "Remote Desktop Services: Session logon succeeded".\nEvent ID 23: "Remote Desktop Services: Session logoff succeeded".\nEvent ID 24: "Remote Desktop Services: Session has been disconnected".\nEvent ID 25: "Remote Desktop Services: Session reconnection succeeded".'
+summary: 'Destination host of Remote Desktop access.\n\nMain events:\n\nChannel: Security.\nEvent ID 4624: "An account was successfully logged on", with LogonType 10.\n\nChannel:\nMicrosoft-Windows-TerminalServices-RemoteConnectionManager/Operational.\nEvent ID 1149: "Remote Desktop Services: User authentication succeeded".\n\nChannel:\nMicrosoft-Windows-TerminalServices-LocalSessionManager/Operational.\nEvent ID 21: "Remote Desktop Services: Session logon succeeded".\nEvent ID 23: "Remote Desktop Services: Session logoff succeeded".\nEvent ID 24: "Remote Desktop Services: Session has been disconnected".\nEvent ID 25: "Remote Desktop Services: Session reconnection succeeded".'
 keywords: 'RDP, Remote Desktop, Terminal Services, RemoteConnectionManager, LocalSessionManager, RdpCoreTS, LogonType 10, 1149, 21, 22, 23, 24, 25, 131, 1158, ::%16777216, %16777216, 16777216'
 tags:
   - windows_etw
@@ -25,10 +24,10 @@ folder: windows
 | `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `21: Remote Desktop Services: Session logon succeeded`. <br><br> Information of interest: user logging in, source network address, and RDP session ID. |
 | `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `22: Remote Desktop Services: Shell start notification received`. <br><br> Information of interest: user logging in, source network address, and RDP session ID. |
 | `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `23: Remote Desktop Services: Session logoff succeeded`. <br><br> Information of interest: user logging in and RDP session ID. |
-| `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `24: Remote Desktop Services: Session has been disconnected`. <br><br> If no `event 23` (`session logoff succeeded`) is associated with this event, the session was simply "disconnected". In case of a session disconnect (triggered by closing the RDP client window or using the "Disconnect" sign-out option), running processes and opened windows are preserved. <br><br> Information of interest: user logging in, source network address, and RDP session ID. |
-| `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `25: Remote Desktop Services: Session reconnection succeeded`. <br><br> Logged upon reconnection of a disconnected session. Could indicate that a malicious actor got access to running processes / programs state started legitimately by a user. <br><br> Information of interest: user logging in, source network address, and RDP session ID. <br><br> Events with a source network address set to `LOCAL` can sometimes be generated for console, non-`Remote Desktop` logins. |
-| `Microsoft-Windows-RemoteDesktopServices-RdpCoreTS/Operational` | Introduced in `Windows Server 2012`. <br><br> Default configuration. | Event `131: The server accepted a new TCP connection from client <IP>`. <br><br> Only indicates a network access to the `Remote Desktop` service. <br><br> Information of interest: source network address. |
-| `Microsoft-Windows-TerminalServices-RemoteConnectionManager/Admin` | Default configuration. | Event `1158: Remote Desktop Services accepted a connection from IP address <IP>`. <br><br> Only indicates a network access to the Remote Desktop service. <br><br> Information of interest: source network address. |
+| `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `24: Remote Desktop Services: Session has been disconnected`. <br><br> If no `event 23` (`session logoff succeeded`) is associated with this event, the session was simply "disconnected". In case of a session disconnect (triggered by closing the RDP client window or using the "Disconnect" sign-out option), running processes and open windows are preserved. <br><br> Information of interest: user logging in, source network address, and RDP session ID. |
+| `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` | Default configuration. | Event `25: Remote Desktop Services: Session reconnection succeeded`. <br><br> Logged upon reconnection of a disconnected session. Could indicate that a malicious actor gained access to running processes / program state started legitimately by a user. <br><br> Information of interest: user logging in, source network address, and RDP session ID. <br><br> Events with a source network address set to `LOCAL` can sometimes be generated for console, non-`Remote Desktop` logins. |
+| `Microsoft-Windows-RemoteDesktopServices-RdpCoreTS/Operational` | Introduced in `Windows Server 2012`. <br><br> Default configuration. | Event `131: The server accepted a new TCP connection from client <IP>`. <br><br> Only indicates network access to the `Remote Desktop` service. <br><br> Information of interest: source network address. |
+| `Microsoft-Windows-TerminalServices-RemoteConnectionManager/Admin` | Default configuration. | Event `1158: Remote Desktop Services accepted a connection from IP address <IP>`. <br><br> Only indicates network access to the Remote Desktop service. <br><br> Information of interest: source network address. |
 
 #### ngrok tunnel - 16777216
 
@@ -43,7 +42,7 @@ events into a CSV timeline.
 
 ### References
 
-  - [13Cubed -  RDP Event Log Forensics](https://www.youtube.com/watch?v=OlENso8_u7s)
+  - [13Cubed - RDP Event Log Forensics](https://www.youtube.com/watch?v=OlENso8_u7s)
 
   - [13Cubed - RDP Authentication vs. Authorization](https://www.youtube.com/watch?v=OlENso8_u7s)
 

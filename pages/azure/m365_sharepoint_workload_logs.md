@@ -1,6 +1,6 @@
 ---
 title: Microsoft 365 - SharePoint/OneDrive workload
-summary: 'The SharePoint/OneDrive workload groups events related to SharePoint and OneDrive activity.\n\nThe audit logs include events on file access, download, creation, and modification activity, such as FileAccessed, FileDownloaded, FileUploaded, and FileModified as well as execution of search queries (SearchQueryPerformed).'
+summary: 'The SharePoint/OneDrive workload groups events related to SharePoint and OneDrive activity.\n\nThe audit logs include events on file access, download, creation, and modification activity, such as FileAccessed, FileDownloaded, FileUploaded, and FileModified, as well as the execution of search queries (SearchQueryPerformed).'
 keywords: SharePoint, Drive, OneDrive, Unified Audit Logs, UAL, SearchQueryPerformed, FilePreviewed, FileAccessed, FileAccessedExtended, FileDownloaded, FileUploaded, FileModified, FileModifiedExtended, FileMoved, FileRenamed, FileDeleted, FileMalwareDetected
 tags:
   - azure_logs
@@ -26,7 +26,7 @@ The following operations are notable and common to the `SharePoint` and
 | `FileMoved` | The user moved a file. |
 | `FileRenamed` | The user renamed a file. |
 | `FileDeleted` | The user deleted a file. |
-| `FileMalwareDetected` | SharePoint anti-virus engine detected malware in a file. |
+| `FileMalwareDetected` | The SharePoint anti-virus engine detected malware in a file. |
 
 The full list of actions logged for the `SharePoint` and `OneDrive` workloads
 can be found in the

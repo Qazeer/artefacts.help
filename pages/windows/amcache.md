@@ -1,6 +1,6 @@
 ---
 title: Amcache / RecentFileCache
-summary: 'Very complex artefact, linked to an application compatibility feature.\n\nTracks program execution (or simply file presence for recent versions), installed drivers, and shortcuts from a subset of folders.\n\nProgram execution / binary presence information of interest: executable full path, program size, SHA1 (of the first 30MB of the executable).'
+summary: 'Very complex artefact, linked to an application compatibility feature.\n\nTracks program execution (or simply file presence for recent versions), installed drivers, and shortcuts in a subset of folders.\n\nProgram execution / binary presence information of interest: executable full path, program size, SHA1 (of the first 30MB of the executable).'
 keywords: Amcache, RecentFileCache
 tags:
   - windows_program_execution
@@ -14,11 +14,11 @@ folder: windows
 
 ### Overview
 
-*`Amcache` is a replacement of the `RecentFileCache` (that was linked to DLL
+*`Amcache` is a replacement for the `RecentFileCache` (which was linked to DLL
 version `6.1.7600`).*
 
 Very complex artefact, linked to an application compatibility feature that aims
-to maintain support of existing software to new versions of the Windows
+to maintain support for existing software on new versions of the Windows
 operating system (like the `Shimcache` artefact). `ProgramDataUpdater` (a task
 associated with the Application Experience Service) uses the registry file
 `Amcache.hve` to store data during process creation. The `Amcache` is a
@@ -26,8 +26,8 @@ standalone registry hive, with multiple root keys that contain various types of
 data.
 
 The `Amcache` behavior depends on the version of the associated libraries, and
-not the version of the operating system. The `Amcache` on an up-to-date
-`Windows 7` and `Windows 10` will thus behave the same way.
+not on the version of the operating system. The `Amcache` on up-to-date
+`Windows 7` and `Windows 10` systems will thus behave the same way.
 
 For a very comprehensive analysis of the `Amcache` artefact, and its evolution
 across different releases of the underlying `DLL`, refer to the
@@ -35,33 +35,33 @@ across different releases of the underlying `DLL`, refer to the
 
 ### Information of interest
 
-The `Amcache.hve` registry hive is split in a number of root keys, with keys
-being added, changed, or removed depending on the `Amcache` `DLLs` versions.
+The `Amcache.hve` registry hive is split into a number of root keys, with keys
+being added, changed, or removed depending on the `Amcache` `DLL` version.
 
 *An `Amcache` entry is created whenever a program is executed from a specific
 path. However, entries may also be created for files in "scanned" directories.*
 
 The following notable root keys can be of forensic interest:
 
-  - `File` then `InventoryApplicationFile` starting from the version
+  - `File` then `InventoryApplicationFile` starting from version
     `10.0.14913.1002` of the `Amcache` libraries (`AmcacheParser` outputs
     `AssociatedFileEntries` and `UnassociatedFileEntries`):
 
-    - Data about program executions if they are shimmed, programs part of an
-      installed application, or programs part of scanned directories (without
+    - Data about program executions if they are shimmed, programs that are part
+      of an installed application, or programs in scanned directories (without
       requiring execution of the associated programs).
 
     - Data available (depending on the `Amcache` libraries version): executable
       full path, program size, **`SHA1` of the first 30MB of the executable**
-      in the `FileId` value, binary type (x86 versus x64), the compilation date
-      of the program in the `LinkDate` value.
+      in the `FileId` value, binary type (x86 versus x64), and the compilation
+      date of the program in the `LinkDate` value.
 
     - Additional data for entries associated with an installed application is
       available in the `InventoryApplication` key. The `ProgramId` value
       from the `InventoryApplicationFile` subkey of a given program matches the
       subkey's name under the `InventoryApplication` key of the associated
-      application. The `InventoryApplication` key provides metadata information
-      about the application: name, publisher, install date, etc.
+      application. The `InventoryApplication` key provides metadata about the
+      application: name, publisher, install date, etc.
 
     - For non-up-to-date systems still using a `File` key, the last write time
       of an entry key under the `File` key coincides with the execution time of
@@ -71,21 +71,21 @@ The following notable root keys can be of forensic interest:
       executable needed shimming. For entries under the
       newer `InventoryApplicationFile` key, the last write time of the keys
       always coincides with an execution of
-      `Microsoft Compatibility Appraiser` and is thus no longer a timestamp of
-      execution time.
+      `Microsoft Compatibility Appraiser` and is thus no longer an execution
+      timestamp.
 
     - `AmcacheParser`'s `AssociatedFileEntries` output references programs
-      associated with an application and `UnassociatedFileEntries` output
+      associated with an application, and the `UnassociatedFileEntries` output
       references "loose" programs (that are not associated with an installed
       application).
 
   - `InventoryDeviceContainer` and `InventoryDevicePnp` (`AmcacheParser`
     outputs `DeviceContainers` and `DevicePnp`):
 
-    - Data about devices plugged in on the system.
+    - Data about devices plugged into the system.
 
     - Data available: device type (USB, Bluetooth, media, etc.), device
-      friendly name, self reported description, manufacturer, associated
+      friendly name, self-reported description, manufacturer, associated
       driver, etc.
 
   - `InventoryDriverBinary` (`AmcacheParser` output `DriverBinaries`):
@@ -98,8 +98,8 @@ The following notable root keys can be of forensic interest:
 
   - `InventoryDriverPackage` (`AmcacheParser` output `DriverPackages`):
 
-    - Data about driver package files (INF files) that contains information
-      about the driver.
+    - Data about driver package files (INF files), which contain information
+      about the drivers.
 
     - Data available: driver package file name, path, last write timestamp, etc.
 
@@ -115,13 +115,13 @@ The following notable root keys can be of forensic interest:
   - `InventoryApplicationShortcut` (`AmcacheParser` output `ShortCuts`):
 
     - Data about the shortcuts (`LNK` files) that were present at one time (and
-      that may still be present or may have been removed) from a subset of
-      scanned folders (Start Menu and / or Desktop folders).
+      that may still be present or may have been removed) in a subset of
+      scanned folders (Start Menu and/or Desktop folders).
 
     - Data available: full path of the shortcut. The last write timestamp of
       the associated subkey can also be a general indicator of when the
-      activity occurred but does not seem to match any `MACB` timestamps of the
-      shortcut file.
+      activity occurred, but does not seem to match any of the `MACB`
+      timestamps of the shortcut file.
 
 ### Tool(s)
 

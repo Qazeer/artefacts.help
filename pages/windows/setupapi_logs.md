@@ -1,6 +1,6 @@
 ---
 title: Setupapi logs
-summary: 'The setupapi logs are plaintext log files that track installation of devices and drivers on the system.\n\nThe logs are rotated and preserved, so historical data dating back to the system install is usually available.\n\nInformation of interest: device serial number, device id (vendor and product names) or vendor ID (VID) + product ID (PID), and when a device was first plugged (in the local timezone of the system).'
+summary: 'The setupapi logs are plaintext log files that track the installation of devices and drivers on the system.\n\nThe logs are rotated and preserved, so historical data dating back to the system installation is usually available.\n\nInformation of interest: device serial number, device ID (vendor and product names) or vendor ID (VID) + product ID (PID), and when a device was first plugged in (timestamp in the local timezone of the system).'
 keywords: USB, device, setupapi, serial number
 tags:
   - windows_usb_activity
@@ -13,27 +13,27 @@ folder: windows
 
 ### Overview
 
-The `setupapi` logs are plaintext log files that track installation of devices
-and drivers on the system. The logs are rotated and preserved, so historical
-data dating back to the system install is usually available (if the logs were
-not deleted/tampered with).
+The `setupapi` logs are plaintext log files that track the installation of
+devices and drivers on the system. The logs are rotated and preserved, so
+historical data dating back to the system installation is usually available
+(if the logs were not deleted/tampered with).
 
 The terminology and more details on the various identifiers are available in
 the [Windows devices terminology page](./devices_terminology.md).
 
 ### Information of interest
 
-{% include note.html content="The `setupapi` logs can be used to determine when a device was first plugged (in the local timezone of the system)." %}
+{% include note.html content="The `setupapi` logs can be used to determine when a device was first plugged in (timestamp in the local timezone of the system)." %}
 
-The **device installation entries** (generated when the device is plugged-in)
-**contain various information**, including the device:
+The **device installation entries** (generated when the device is plugged in)
+**contain a variety of information**, including the device's:
 
   - `serial number`.
 
-  - `Device id` (vendor and product names) or `vendor ID (VID)` +
+  - `device ID` (vendor and product names) or `vendor ID (VID)` +
     `product ID (PID)`.
 
-Example of an entry for the first time a USB device was plugged-in:
+Example of an entry for the first time a USB device was plugged in:
 
 ```
 >>>  [Device Install (Hardware initiated) - SWD\WPDBUSENUM\_??_USBSTOR#Disk&Ven_USB&Prod_Flash_Disk&Rev_1100#7&d2713f&0#{53f56307-b6bf-11d0-94f2-00a0c91efb8b}]

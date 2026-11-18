@@ -1,7 +1,6 @@
 ---
 title: NTFS - $LogFile
-summary: 'The $LogFile is part of a journaling feature of NTFS, activated by default, which maintains a low-level record of changes made to the NTFS volume with very limited
-historical data (usually only of the last few hours).'
+summary: 'The $LogFile is part of a journaling feature of NTFS, activated by default, which maintains a low-level record of changes made to the NTFS volume with very limited historical data (usually only covering the last few hours).'
 keywords:
 tags:
   - windows_ntfs_filesystem
@@ -25,7 +24,7 @@ revert disk operations.
 ### Information of interest
 
 As low-level operations are journaled, the `$LogFile` contains very limited
-historical data, usually only of the last few hours at most.
+historical data, usually covering only the last few hours at most.
 
 ### References
 

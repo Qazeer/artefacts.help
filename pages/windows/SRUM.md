@@ -26,14 +26,14 @@ historical data for the last 30 to 60 days only.
 
 Entries are not associated with their timestamp of occurrence but with the
 timestamp of insertion in the `SRUM` database. As entries are only written to
-the `SRUM` database every hour, timestamps are thus precise to the hour (with
+the `SRUM` database every hour, timestamps are only precise to the hour (with
 multiple entries usually sharing the same insertion timestamp).
 
-Among the various information stored, the following tables hold the most
-commonly valuable data for forensics investigations:
+Of all the information stored, the following tables hold the most commonly
+valuable data for forensic investigations:
 
   - `Application Resource Usage` table (GUID
-    `{D10CA2FE-6FCF-4F6D-848E-B2E99266FA89}`), that tracks program
+    `{D10CA2FE-6FCF-4F6D-848E-B2E99266FA89}`), which tracks program
     execution.
     For each entry in the `Application Resource Usage` table (`SrumECmd`'s
     `AppResourceUseInfo` output), the following information may be recorded:
@@ -51,9 +51,9 @@ commonly valuable data for forensics investigations:
       operations and bytes read/written).
 
   - `App Timeline Provider` table (GUID
-    `{5C8CF1C7-7257-4F13-B223-970EF5939312}`), that also tracks programs
+    `{5C8CF1C7-7257-4F13-B223-970EF5939312}`), which also tracks program
     execution.
-    For each entry in the `Application Resource Usage` table (`SrumECmd`'s
+    For each entry in the `App Timeline Provider` table (`SrumECmd`'s
     `AppTimelineProvider` output), the following information may be recorded:
 
     - Timestamp of the `SRUM` entry creation.
@@ -64,12 +64,12 @@ commonly valuable data for forensics investigations:
 
     - User `SID` of the user executing the process.
 
-    - Timestamp of seemingly approximate end of execution.
+    - Timestamp of what seems to be the approximate end of execution.
 
     - Total duration of execution (in milliseconds).
 
   - `Network Data Usage` table (GUID `{973F5D5C-1D90-4944-BE8E-24B94231A174}`),
-    that tracks program execution and network usage of the executed
+    which tracks program execution and network usage of the executed
     programs.
     For each entry in the `Network Data Usage` table (`SrumECmd`'s
     `NetworkUsages` output), the following information may be
@@ -96,7 +96,7 @@ database will have to be repaired. This can be accomplished using the
 before repairing the database.
 
 ```bash
-# The following commands should be executed in the directory containing the UAL database files.
+# The following commands should be executed in the directory containing the SRUM database files.
 
 esentutl.exe /r sru /i
 
@@ -107,7 +107,7 @@ esentutl.exe /p SRUDB.dat
 
 The [`SrumECmd`](https://github.com/EricZimmerman/Srum) utility (`KAPE`
 `SrumECmd` module) can parse and extract information from the `SRUDB.dat`
-database, and correlates information from the `SOFTWARE` registry hive.
+database and correlate it with information from the `SOFTWARE` registry hive.
 
 ```bash
 # Parses the specified SRUM database, using the optionally provided SOFTWARE registry hive.
@@ -119,8 +119,8 @@ SrumECmd.exe -d <DIRECTORY> --csv <OUTPUT_DIRECTORY>
 
 The `PowerShell_SrumECmd_SRUM-RepairAndParse` `KAPE` module, leveraging the
 PowerShell script
-[`SRUM-Repair.ps1`](https://github.com/AndrewRathbun/DFIRPowerShellScripts/blob/main/SRUM-Repair.ps1)
-can be used to automate the repairing and parsing process (with `SrumECmd`).
+[`SRUM-Repair.ps1`](https://github.com/AndrewRathbun/DFIRPowerShellScripts/blob/main/SRUM-Repair.ps1),
+can be used to automate the repair and parsing process (with `SrumECmd`).
 
 ### References
 

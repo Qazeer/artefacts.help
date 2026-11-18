@@ -12,4 +12,4 @@ folder: azure
 
 | Operation | Description |
 |-----------|-------------|
-| `CreateFlow` | Creation of a new flow. Flows can be used to forward emails, automatically copy or download files, etc. <br><br> Emails forwarded through `Microsoft Flow` can be identified in the "Send" operations of the `UAL` "Exchange" workload, as the user agent associated with the event will be "Microsoft Power Automate" (and the client IP will be an IP belonging to Microsoft). |
+| `CreateFlow` | Creation of a new flow. Flows can be used to forward emails, automatically copy or download files, etc. <br><br> Emails forwarded through `Microsoft Flow` can be identified in the "Send" operations of the `UAL` "Exchange" workload, as the user agent associated with the event will be "Microsoft Power Automate" (and the client IP will be an IP address belonging to Microsoft). |

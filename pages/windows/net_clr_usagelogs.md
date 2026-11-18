@@ -1,6 +1,6 @@
 ---
 title: .NET CLR UsageLogs
-summary: 'Following the execution (or in-memory injection) of a .NET assembly, the Common Language Runtime (CLR) creates a Usage Log file whose name is based on the name of the executed assembly.\n\nInformation of interest: the filename of the log file matches the name of the assembly/binary executed.\nThe file creation timestamp corresponds to the first time the associated assembly was executed and the file last modification timestamp corresponds to the last execution time of the assembly.'
+summary: 'Following the execution (or in-memory injection) of a .NET assembly, the Common Language Runtime (CLR) creates a Usage Log file whose name is based on the name of the executed assembly.\n\nInformation of interest: the filename of the log file matches the name of the assembly/binary executed.\nThe file creation timestamp corresponds to the first time the associated assembly was executed, and the file last modification timestamp corresponds to the last execution time of the assembly.'
 keywords:
 tags:
   - windows_program_execution
@@ -18,7 +18,7 @@ folder: windows
 based on the name of the executed assembly**.
 
 The file is written just before the assembly's process terminates, and will thus
-not be written if the process does not gracefully exit.
+not be written if the process does not exit gracefully.
 
 ### Information of interest
 
@@ -29,15 +29,15 @@ The **file creation timestamp corresponds to the first time the associated
 assembly was executed** and the **file last modification timestamp corresponds
 to the last execution time** of the assembly.
 
-The content of the file itself does not appear to hold forensics value.
+The content of the file itself does not appear to hold forensic value.
 
 ### Tool(s)
 
 The [`ConvertUsageLogsTo-CSV.ps1`](https://gist.github.com/Qazeer/6c655627962f034aa2b6e92594770ee2)
-PowerShell script (`KAPE` associated module
+PowerShell script (associated `KAPE` module
 `PowerShell_ConvertUsageLogsTo-CSV`) can be used to recursively process the
 specified directory to aggregate the `Usage Log` file names in a single CSV
-output (grouping filename by user).
+output (grouping filenames by user).
 
 ### References
 

@@ -1,6 +1,6 @@
 ---
 title: Registry - TypedURLs
-summary: 'The TypedURLs registry key tracks URLs entered (typed, pasted, or auto-completed) in the Internet Explorer (IE) web browser search/address bar. Web searches are not stored, only the URLs entered are tracked.\n\nInformation of interest: URL entered in the IE search bar.\n\nValues are stored in inverse chronological order. The timestamp of last visit of the most recently visited URL can thus be deduced from the last write timestamp of the registry key.'
+summary: 'The TypedURLs registry key tracks URLs entered (typed, pasted, or auto-completed) in the Internet Explorer (IE) web browser search/address bar. Web searches are not stored; only the URLs entered are tracked.\n\nInformation of interest: URLs entered in the IE search bar.\n\nValues are stored in reverse chronological order. The visit timestamp of the most recently visited URL can thus be deduced from the last write timestamp of the registry key.'
 keywords: 'TypedURLs, URL, Internet Explorer, IE, MRUList'
 tags:
   - windows_registry
@@ -16,16 +16,16 @@ folder: windows
 
 The `TypedURLs` registry key tracks URLs entered (typed, pasted, or
 auto-completed) in the `Internet Explorer (IE)` web browser search/address bar. 
-Web searches are not stored, only the URLs entered are tracked.
+Web searches are not stored as only the URLs entered are tracked.
 
-Starting with `IE8`, entries are added/updated in near real-time.
+Starting with `IE8`, entries are added/updated in near real time.
 
 ### Information of interest
 
 Each URL is stored in a dedicated value under the `Explorer\TypedURLs` key, as
-`url1` to `url[N]`. The values are stored in inverse chronological order.
+`url1` to `url[N]`. The values are stored in reverse chronological order.
 
-The last write timestamp of the key is thus the timestamp of visit of the most
+The last write timestamp of the key is thus the visit timestamp of the most
 recently visited `URL`.
 
 ### References

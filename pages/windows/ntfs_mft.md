@@ -25,7 +25,7 @@ The `Partition Boot Sector` `$Boot` metadata file, which starts at sector 0 and
 can be up to 16 sectors long, describes the basic `NTFS` volume information and
 indicates the location of the `$MFT`.
 
-The `$MFTMirr` file is statically-located as the first entry in the `MFT` and
+The `$MFTMirr` file is statically located as the first entry in the `MFT` and
 contains the first 4 entries of the `MFT` (`MFT`, `$MFTMirr`, `$LogFile`, and
 `$Volume`) as a recovery mechanism.
 
@@ -34,7 +34,7 @@ clusters of the volume. Each cluster is associated with a bit, set to `0x1` if
 the cluster is in use. Upon deletion of a `non-resident file`, the `$Bitmap`
 file is updated to tag the cluster(s) associated with the file as free. The
 clusters are not overwritten during the deletion process, and the file data can
-thus be carved as long as the cluster(s) are not re-used.
+thus be carved as long as the cluster(s) are not reused.
 
 The `$MFT`, `$MFTMirr`, and `$Bitmap` files have both the `Hidden (H)` and
 `System (S)` attributes and will thus not be shown by the Windows Explorer
@@ -44,12 +44,12 @@ application or the `dir` utility by default.
 
 Each file on an `NTFS` volume is represented in the `MFT` in a file record.
 
-Small files and directories (typically 512 bytes or smaller), can be entirely
+Small files and directories (typically 512 bytes or smaller) can be entirely
 contained within their associated `MFT` file record. These files are called
-`resident files`. Files larger than that threshold are written on allocated
+`resident files`. Files larger than that threshold are written to allocated
 clusters, and are called `non-resident files`.
 
-Directory records are stored within the master file table just like file
+Directory records are stored within the Master File Table just like file
 records. Instead of data, directories contain index information.
 
 A file record (`FILE0` data structure) notably includes:
@@ -58,42 +58,42 @@ A file record (`FILE0` data structure) notably includes:
 
   - The file size.
 
-  - The `entry` and `sequence` number of the record.
+  - The `entry` and `sequence` numbers of the record.
 
-  - The `entry` and `sequence` number of the parent record, allowing the
+  - The `entry` and `sequence` numbers of the parent record, allowing the
     reconstruction of the file location.
 
-  - The file unique (under the `NTFS` volume) `Security ID` in the
+  - The file's unique (within the `NTFS` volume) `Security ID` in the
     `$STANDARD_INFORMATION` attribute.
 
   - Two or three sets of timestamps:
-    - The file creation, last modified, last accessed, last changed `SI`
+    - The file creation, last modified, last accessed, and last changed `SI`
       timestamps (`MACB`) in the `$STANDARD_INFORMATION` attribute.
-    - The file creation, last modified, last accessed, last changed `FN`
+    - The file creation, last modified, last accessed, and last changed `FN`
       timestamps (`MACB`) in the `$FILE_NAME` attribute. Two sets of
-      `$FILE_NAME` timestamps will be available for files with a short
-      (`DOS`) and long filenames.
+      `$FILE_NAME` timestamps will be available for files with both a short
+      (`DOS`) and a long filename.
 
  - File access permissions.
 
- - One or multiple `DATA` attributes, that either contain the file data for
-   `resident file` or reference the clusters of disk space where the file is
-   stored for `nonresident file`.
+ - One or multiple `DATA` attributes, which either contain the file data for
+   `resident files` or reference the clusters of disk space where the file is
+   stored for `non-resident files`.
 
  - Whether the `file record` is in use. When a file is deleted from the volume,
    its associated `MFT` `file record` is set as no longer in use, but is not
    directly deleted during the file deletion process. Metadata information, and
-   content for `MFT` resident files, can thus be retrieved for recently deleted
+   content for `MFT`-resident files, can thus be retrieved for recently deleted
    files (as long as the `file record` is not overwritten by a new entry).
 
-   Additionally, the `entry` number of the record remains unchanged, the
+   Additionally, the `entry` number of the record remains unchanged, while the
    `sequence` number is simply incremented by one upon the file deletion.
 
 #### $STANDARD_INFORMATION vs $FILE_NAME
 
 The `$STANDARD_INFORMATION` and `$FILE_NAME` attributes are updated
 differently for the same file action. The changes produced on the attributes
-for a file creation, access, modification, renaming, etc. can be found on the
+for a file creation, access, modification, renaming, etc. can be found in the
 [SANS `Windows Forensic Analysis` poster](https://www.sans.org/security-resources/posters/windows-forensic-analysis/170/download).
 
 ### Tool(s)
@@ -101,16 +101,16 @@ for a file creation, access, modification, renaming, etc. can be found on the
 #### MFTECmd
 
 The [`MFTECmd`](https://github.com/EricZimmerman/MFTECmd) utility can parse and
-extract information from the `$MFT` (as well as other NTFS filesystem artefacts
+extract information from the `$MFT` (as well as other NTFS filesystem artefacts,
 such as the `UsnJrnl`'s `$J` stream, the file ownership `$Secure:$SDS` data
-stream, and the transaction log file `$Logfile`).
+stream, and the transaction log file `$LogFile`).
 
 Associated `KAPE` compound module: `MFTECmd` (includes `MFTECmd_$Boot`,
 `MFTECmd_$MFT`, `MFTECmd_$J`, and `MFTECmd_$SDS`).
 
 ```bash
 # A $MFT file on a mounted partition should be specified.
-# For instance, to extract $MFT data from a forensics image, the image should first be mounted and the $MFT specified as <DRIVE_LETTER>:\$MFT to MFTECmd.exe.
+# For instance, to extract $MFT data from a forensic image, the image should first be mounted and the $MFT specified as <DRIVE_LETTER>:\$MFT to MFTECmd.exe.
 
 MFTECmd.exe -f '<$MFT_FILE>' --csv <OUTPUTDIR_PATH>
 ```
@@ -118,9 +118,9 @@ MFTECmd.exe -f '<$MFT_FILE>' --csv <OUTPUTDIR_PATH>
 #### Mft2Csv
 
 The [`Mft2Csv`](https://github.com/jschicht/Mft2Csv) utility can parse, decode,
-and log information from the MFT to a CSV. It supports getting the `$MFT` from
-a variety of sources and notably:
-  - a raw/dd image of disk or partition.
+and log information from the MFT to a CSV file. It supports getting the `$MFT`
+from a variety of sources, notably:
+  - a raw/dd image of a disk or partition.
   - an extracted `$MFT` file.
   - a live host.
 

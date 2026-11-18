@@ -1,6 +1,6 @@
 ---
 title: Registry - MountPoints2
-summary: 'The MountPoints2 registry key references the currently or previously mapped drives (such as the system drive, USB devices, or network shares) mounted by the associated user.\n\nInformation of interest: each drive is represented by a subkey, which is named as either the volume GUID, a letter, or, for network shares "##<IP | HOSTNAME>#<SHARE_NAME>".'
+summary: 'The MountPoints2 registry key references the currently or previously mapped drives (such as the system drive, USB devices, or network shares) mounted by the associated user.\n\nInformation of interest: each drive is represented by a subkey, which is named as either the volume GUID, a letter, or, for network shares, "##<IP | HOSTNAME>#<SHARE_NAME>".'
 keywords: 'MountPoints2'
 tags:
   - windows_registry
@@ -29,8 +29,8 @@ Each drive is represented by a subkey, which is named as either the
 
 For devices, the `volume GUID` can be used to retrieve more information on the
 device from the `HKLM\SYSTEM\MountedDevices` registry key, including the
-`device/hardware ID` (vendor and product name) and `instance ID` (with the
-`serial number` if existing).
+`device/hardware ID` (vendor and product names) and `instance ID` (with the
+`serial number`, if any).
 
 **This key can be used to determine which user interacted with a given USB
 device**. However, entries are not reliably created, so **the absence of an

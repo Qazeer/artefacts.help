@@ -1,6 +1,6 @@
 ---
 title: Security review - Mailbox delegations
-summary: 'The following level/scope of mailbox delegations can be configured:\n\n - Mailbox permissions: to allow viewing items at the mailbox level (but not the right to send emails).\n\n - Recipient SendAs permissions: to delegate the right to send emails from the mailbox (that transparently appear to come from the specified mailbox to the recipients).\n\n - Recipient SendOnBehalf permissions: to delegate the right to send emails on behalf of the mailbox (and will appear as such to the receiving recipients).\n\n - Folder-level permissions: to delegate the rights to interact with items at the mailboxs folder level.'
+summary: 'The following levels/scopes of mailbox delegation can be configured:\n\n - Mailbox permissions: to allow viewing items at the mailbox level (but not the right to send emails).\n\n - Recipient SendAs permissions: to delegate the right to send emails from the mailbox (which transparently appear to the recipients to come from the specified mailbox).\n\n - Recipient SendOnBehalf permissions: to delegate the right to send emails on behalf of the mailbox (which will appear as such to the recipients).\n\n - Folder-level permissions: to delegate the rights to interact with items at the mailbox''s folder level.'
 keywords: Mailbox permissions, Recipient permissions, SendAs, SendOnBehalf, Folder-level permissions, ChangeOwner, ChangePermission, DeleteItem, ExternalAccount, FullAccess, ReadPermission
 tags:
   - azure_security_review
@@ -12,18 +12,17 @@ folder: azure
 
 ### Overview
 
-The following level/scope of mailbox delegations can be configured:
+The following levels/scopes of mailbox delegation can be configured:
 
   - Mailbox permissions: to allow viewing items at the
     mailbox level (but not the right to send emails).
 
   - Recipient `SendAs` permissions: to delegate the right to send emails from
-    the mailbox (that transparently appear to come from the specified mailbox
-    to the recipients).
+    the mailbox (which transparently appear to the recipients to come from the
+    specified mailbox).
 
   - Recipient `SendOnBehalf` permissions: to delegate the right to send emails
-    on behalf of the mailbox (and will appear as such to the receiving
-    recipients).
+    on behalf of the mailbox (which will appear as such to the recipients).
 
   - Folder-level permissions: to delegate the rights to interact with items at
     the mailbox's folder level.
@@ -47,7 +46,7 @@ The available access rights are:
 
   - `ReadPermission`: read the permissions on the mailbox.
 
-The permissions defined on that level allow viewing emails at the mailbox
+The permissions defined at that level allow viewing emails at the mailbox
 scope but do not allow sending emails (which is defined through the recipient
 `SendAs` and `SendOnBehalf` permissions).
 
@@ -55,19 +54,19 @@ scope but do not allow sending emails (which is defined through the recipient
 # Retrieves the access rights defined on the given mailbox.
 Get-MailboxPermission -Identity <EMAIL>
 
-# Lists the mailbox permissions with Full Access, ChangeOwner, ChangePermission, or ExternalAccount access rights.
+# Lists the mailbox permissions with FullAccess, ChangeOwner, ChangePermission, or ExternalAccount access rights.
 Get-Mailbox -Resultsize Unlimited | Get-MailboxPermission | Where-Object { ($_.Accessrights -like "FullAccess" -or $_.Accessrights -like "ChangeOwner" -or $_.Accessrights -like "ChangePermission" -or $_.Accessrights -like "ExternalAccount") } | Format-List
 ```
 
 ### Recipient (or `SendAs`) access right/permission
 
-Recipient, or `SendAs`, permission does not allow viewing emails but
-allows a user, or group members, to send messages that appear to come from the
-specified mailbox. Emails received from the mailbox owner or through a
-`SendAs` delegation are indistinguishable by the receiving end-user.
+The Recipient, or `SendAs`, permission does not allow viewing emails, but
+allows a user, or the members of a group, to send messages that appear to come
+from the specified mailbox. Emails received from the mailbox owner or through a
+`SendAs` delegation are indistinguishable to the receiving end user.
 
-Note that the `Get-EXORecipientPermission`/`Get-RecipientPermission` is not
-included by default in the cmdlets allowed for the
+Note that the `Get-EXORecipientPermission`/`Get-RecipientPermission` cmdlets
+are not included by default in the cmdlets allowed for the
 `View-Only Organization Management` role group.
 
 ```bash
@@ -77,7 +76,7 @@ Get-Mailbox -Resultsize Unlimited | Get-EXORecipientPermission | Where-Object { 
 
 ### Folder-level permissions
 
-Permissions/access rights can also be defined at the folder-level in
+Permissions/access rights can also be defined at the folder level in
 mailboxes, to delegate the rights to interact with items at the
 mailbox's folder level.
 
@@ -111,7 +110,7 @@ The [following individual permissions are available](https://learn.microsoft.com
 
   - `ReadItems`: The user can read items within the specified folder.
 
-The following roles, that group individual permissions, are available:
+The following roles, which group individual permissions, are available:
 
   - `Author`: CreateItems, DeleteOwnedItems, EditOwnedItems, FolderVisible,
     ReadItems.
@@ -137,10 +136,10 @@ The following roles, that group individual permissions, are available:
   - `Reviewer`: FolderVisible, ReadItems.
 
 ```bash
-# Retrieves the folder-level permission for the specified mailbox.
+# Retrieves the folder-level permissions for the specified mailbox.
 Get-Mailbox -Identity <EMAIL> | Get-MailboxFolderPermission | Select-Object *
 
-# Enumerates, for all the mailboxes, the folder-level permission allowing access to Anonymous or Default.
+# Enumerates, for all the mailboxes, the folder-level permissions allowing access to Anonymous or Default.
 $MailBoxes = Get-Mailbox -Resultsize Unlimited
 ForEach ($MailBox in $MailBoxes) {
   $Permissions = Get-MailboxFolderPermission $MailBox |

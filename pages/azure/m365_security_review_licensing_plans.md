@@ -15,7 +15,7 @@ For instance, `MailItemsAccessed` mail access events will only be available
 for users associated with an `Office 365 E5` or `Microsoft 365 E5` license.
 
 ```bash
-# List the license plans in the tenant.
+# Lists the license plans in the tenant.
 Get-MsolAccountSku
 
 # Retrieves the license plans associated with the specified user.

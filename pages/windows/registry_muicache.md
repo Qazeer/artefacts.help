@@ -1,6 +1,6 @@
 ---
 title: Registry - MUICache
-summary: 'The Multilanguage User Interface (MUI) is a feature to allow applications to have a single executable for multiple languages.\n\nThe MUICache registry key references GUI program executions only.\n\nInformation of interest: executable full path, executable PE FileDescription attribute (that references the original filename, allowing the identification of renamed files), the executable PE CompanyName attribute.\n\nThe MUICache does not provide a timestamp of execution.'
+summary: 'The Multilanguage User Interface (MUI) is a feature that allows applications to have a single executable for multiple languages.\n\nThe MUICache registry key references GUI program executions only.\n\nInformation of interest: executable full path, executable PE FileDescription attribute (which references the original filename, allowing the identification of renamed files), and the executable PE CompanyName attribute.\n\nThe MUICache does not provide a timestamp of execution.'
 keywords: 'Multilanguage User Interface, MUI, MUICache, FriendlyAppName, FileDescription, ApplicationCompany, CompanyName'
 tags:
   - windows_registry
@@ -14,11 +14,11 @@ folder: windows
 
 ### Overview
 
-The `Multilanguage User Interface (MUI)` is a feature to allow applications to
-have a single executable for multiple languages. `MUI` files can be created,
+The `Multilanguage User Interface (MUI)` is a feature that allows applications
+to have a single executable for multiple languages. `MUI` files can be created,
 one per supported language, to switch the application display language.
 
-The registry key references execution of **programs with a graphical
+The registry key references the execution of **programs with a graphical
 interface**, installed or from a portable executable.
 
 ### Information of interest
@@ -26,8 +26,8 @@ interface**, installed or from a portable executable.
 Each execution is associated with two values under the `MUICache` registry key,
 both starting with the executable full path.
 
-The values data reference information retrieved from the executable's
-`Version` information from its resources section (`.rsrc`):
+The value data references information retrieved from the executable's
+`Version` information in its resources section (`.rsrc`):
 
   - `<PE_FULL_PATH>.FriendlyAppName`: references the executable
     `FileDescription`.

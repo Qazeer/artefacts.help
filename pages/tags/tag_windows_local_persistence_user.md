@@ -1,5 +1,5 @@
 ---
-title: "Windows - Local persistence user-scoped (without requiring admin privileges)"
+title: "Windows - User-scoped local persistence (without requiring admin privileges)"
 tagName: windows_local_persistence_user
 search: exclude
 permalink: tag_windows_local_persistence_user.html

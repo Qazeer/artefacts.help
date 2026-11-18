@@ -1,6 +1,6 @@
 ---
 title: Windows Search database
-summary: 'The Windows Search database provides an index to the Windows Search feature to improve search speed by indexing content from a subset of folders and files.\n\nInformation of interest: files and folders from the Users folders (file name, path, size, attributes, MAC timestamps, and sometimes part of the content of smaller files), Outlook mail data (timestamp of reception and possible mail content), OneNote notes title, and Internet Explorer history.'
+summary: 'The Windows Search database provides an index to the Windows Search feature to improve search speed by indexing content from a subset of folders and files.\n\nInformation of interest: files and folders from the Users folders (file name, path, size, attributes, MAC timestamps, and sometimes part of the content of smaller files), Outlook mail data (timestamp of reception and possible mail content), OneNote note titles, and Internet Explorer history.'
 keywords: Search database, Windows.edb, Windows.db, Windows-gather.db
 tags:
   - windows_file_knowledge
@@ -16,13 +16,13 @@ folder: windows
 
 The `Windows Search` database provides an index to the Windows Search feature
 to improve search speed by indexing content. The Windows Search index is used
-for searches made through Windows taskbar, the Windows Explorer, and some
+for searches made through the Windows taskbar, the Windows Explorer, and some
 `Universal Windows Platform (UWP)` applications (such as Outlook, OneDrive,
 etc.).
 
-By default, only a subset of folders and files are indexed (to reduce the
-Windows Search database size and CPU usage). The folders scanned and number of
-items indexed can be consulted in the "Windows search settings" menu.
+By default, only a subset of folders and files is indexed (to reduce the
+Windows Search database size and CPU usage). The folders scanned and the number
+of items indexed can be consulted in the "Windows search settings" menu.
 
 From `Windows Vista` / `Windows Server 2008` to `Windows 10` /
 `Windows Server 2019`, the `Windows Search` used an
@@ -36,14 +36,14 @@ By default, only items from the following sources are scanned and indexed:
 
   - Files and folders from the folders `C:\Users\*` (excluding `AppData`
     directories) and `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\*`
-    (which include startup `LNK` files).
+    (which includes startup `LNK` files).
 
-    > Data available: file name, path, size, attributes, `MAC` timestamps.
+    > Data available: file name, path, size, attributes, and `MAC` timestamps.
       For small files, part of the content of the file may be indexed as well.
 
-  - Outlook mail data (with timestamp of reception, possible mail content).
+  - Outlook mail data (with timestamp of reception and possible mail content).
 
-  - OneNote notes title.
+  - OneNote note titles.
 
   - Internet Explorer history (URLs, timestamp of last visit).
 

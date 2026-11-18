@@ -1,6 +1,6 @@
 ---
 title: Registry - UserAssist
-summary: 'The UserAssist registry key references GUI program executions, and, starting from Windows 7, shortcut executions.\n\nInformation of interest: full path of the executed program / shortcut (encoded in ROT13), sometimes the timestamp of the last execution, an unreliable run counter and focus count and time.'
+summary: 'The UserAssist registry key references GUI program executions, and, starting from Windows 7, shortcut executions.\n\nInformation of interest: full path of the executed program / shortcut (encoded in ROT13), sometimes the timestamp of the last execution, an unreliable run counter, focus count, and focus time.'
 keywords:
 tags:
   - windows_registry
@@ -16,7 +16,7 @@ folder: windows
 
 The purpose of the `UserAssist` registry key is not officially documented.
 
-The registry key references **execution of programs with a graphical
+The registry key references the **execution of programs with a graphical
 interface**, installed or from a portable executable, and, starting from
 `Windows 7`, shortcut execution.
 
@@ -43,8 +43,8 @@ information:
 
   - Sometimes, the timestamp of the last execution (in the binary value data).
 
-  - An unreliable run counter and focus count and time (in the binary value
-    data).
+  - An unreliable run counter, focus count, and focus time (in the binary
+    value data).
 
 ### References
 

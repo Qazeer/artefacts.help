@@ -1,13 +1,13 @@
 ---
 title: Windows Defender - Support logs
-summary: 'Windows Defender stores on disk a number of plain-text log files.\n\nAmong these log files, the Microsoft Protection Log (MPLog) log includes a number of event types related to past Windows Defender scanning activity and detections.\n\nThe MPLog can notably be a source of historical information on:\n - Program and suspicious command line executions.\n - Files existence and access.\n - Windows Defender configuration state, detections, and other telemetry.'
+summary: 'Windows Defender stores on disk a number of plain-text log files.\n\nAmong these log files, the Microsoft Protection Log (MPLog) includes a number of event types related to past Windows Defender scanning activity and detections.\n\nThe MPLog can notably be a source of historical information on:\n - Program and suspicious command line executions.\n - File existence and access.\n - Windows Defender configuration state, detections, and other telemetry.'
 keywords:
 tags:
   - windows_program_execution
   - windows_file_knowledge
   - windows_files_and_folders_access
   - windows_defense_evasion
-location: 'Log files, and notably "MPLog-YYMMDD-hhmmss.log", under:\n\n<SYSTEMDRIVE>\ProgramData\Microsoft\Windows Defender\Support'
+location: 'Log files, and notably "MPLog-YYMMDD-hhmmss.log", under:\n\n<SYSTEMDRIVE>:\ProgramData\Microsoft\Windows Defender\Support'
 last_updated: 2024-01-31
 sidebar: sidebar
 permalink: windows_defender_support_logs.html
@@ -21,12 +21,12 @@ folder: windows
 
 | File | Description |
 |------|-------------|
-| `MPLog-YYMMDD-hhmmss.log` | The `Microsoft Protection Log` (`MPLog`) log includes a number of event types related to past `Windows Defender` scanning activity and detections, notably to permit the troubleshooting of performance issues related to real-time protection. <br><br> The `MPLog` can be a source of historical information on: <br> - Program and suspicious command line executions. <br> - Files existence and access. <br> - `Windows Defender` configuration state and detections. |
-| `MPScanSkip-YYMMDD-hhmmss.log` | The `Microsoft Scan Skip` (`MPScanSkip`) log stores information on `Windows Defender` scans that were skipped or aborted. A scan can be aborted for a number of reasons, including reaching the timeout limit. <br><br> The `MPScanSkip` log can be a source of historical information on files that were not, or partially, scanned by `Windows Defender`. |
+| `MPLog-YYMMDD-hhmmss.log` | The `Microsoft Protection Log` (`MPLog`) log includes a number of event types related to past `Windows Defender` scanning activity and detections, notably to help troubleshoot performance issues related to real-time protection. <br><br> The `MPLog` can be a source of historical information on: <br> - Program and suspicious command line executions. <br> - File existence and access. <br> - `Windows Defender` configuration state and detections. |
+| `MPScanSkip-YYMMDD-hhmmss.log` | The `Microsoft Scan Skip` (`MPScanSkip`) log stores information on `Windows Defender` scans that were skipped or aborted. A scan can be aborted for a number of reasons, including reaching the timeout limit. <br><br> The `MPScanSkip` log can be a source of historical information on files that were not scanned, or only partially scanned, by `Windows Defender`. |
 
 ### Microsoft Protection Log (MPLog)
 
-The `MPLog` log includes a number of different event types, that can be of
+The `MPLog` includes a number of different event types, which can be of
 interest for incident response investigations.
 
 #### Estimated performance impact events
@@ -64,7 +64,7 @@ Information of interest available, as stated in the
 
 #### Real-time detection events
 
-{% include note.html content="Detection-related events can be used to retrieve information on malware detections by `Windows Defender` (in complement to [`Microsoft-Windows-Windows Defender/Operational` ETW events](./etw_windows_defender.md#windows-defender-malware-detection-events)). The information available notably includes the filepath of the file that raised the detection, and the threat type and name of the detection." %}
+{% include note.html content="Detection-related events can be used to retrieve information on malware detections by `Windows Defender` (in addition to [`Microsoft-Windows-Windows Defender/Operational` ETW events](./etw_windows_defender.md#windows-defender-malware-detection-events)). The information available notably includes the path of the file that raised the detection, and the threat type and name of the detection." %}
 
 Various events are emitted by `Windows Defender` following a detection. These
 events can be used to retrieve information on the detection, such as the
@@ -162,7 +162,7 @@ Information of interest available:
 | ProcessID | The process's `Process ID (PID)`. |
 | ProcessCreationTime | The creation time of the process, in `Windows NT Time` format. |
 | Modules | Sometimes, the `Dynamic Link Libraries (DLL)` loaded by the process. |
-| Parents | The parent process's image path of the process. Additional image paths may sometimes be referenced, without a clear link between the processes. For example: `Parents: C:\Program Files (x86)\XXX\userland-binary.exe:3052:2,Registry:104:2,C:\Windows\System32\lsass.exe:700:2` |
+| Parents | The image path of the parent process. Additional image paths may sometimes be referenced, without a clear link between the processes. For example: `Parents: C:\Program Files (x86)\XXX\userland-binary.exe:3052:2,Registry:104:2,C:\Windows\System32\lsass.exe:700:2` |
 
 Examples:
 
@@ -204,9 +204,9 @@ END BM telemetry
 suspicious files, generating an associated "Filter caching disabled" event.
 This event can be used to track (some) files that `Windows Defender` identified
 as suspicious (without necessarily raising a detection alert). For instance,
-"Filter caching disabled" events are raised on `PsExec` binary, some port
+"Filter caching disabled" events are raised on the `PsExec` binary, some port
 scanning utilities (such as `netscan`), or some remote monitoring and
-management products. The feature, and associated event type, are not
+management products. The feature and the associated event type are not
 documented.
 
 Format:
@@ -224,7 +224,7 @@ Examples:
 
 #### EMS Detection events
 
-{% include note.html content="'Filter caching disabled' events can be used to track detection of malicious content in memory." %}
+{% include note.html content="'EMS detection' events can be used to track the detection of malicious content in memory." %}
 
 `Windows Defender` seems to periodically scan the memory of processes,
 generating `Engine:EMS scan for process` events. If malicious content is
@@ -247,11 +247,11 @@ Example:
 {% include note.html content="'Issuing SDN query' events can be used as evidence of file existence, along with the file's `SHA1` and `SHA256` hashes." %}
 
 `Windows Defender` seems to make "Cloud" queries on suspicious files, generating
-"Issuing SDN query" events. Other events may however be generated instead (as
-shown below) depending on the `Windows Defender` version. This event is likely
-to be dependent on the activation of "Cloud-delivered protection"
-(`SubmitSamplesConsent` set to `0x1`). The feature, and associated event type,
-are not documented.
+"Issuing SDN query" events. However, other events may be generated instead (as
+shown below), depending on the `Windows Defender` version. This event likely
+depends on the activation of "Cloud-delivered protection"
+(`SubmitSamplesConsent` set to `0x1`). The feature and the associated event
+type are not documented.
 
 Format:
 
@@ -361,7 +361,7 @@ type parsed).
 
   - ["Setting original file name" events](#setting-original-file-name-events).
 
-  - ["RTP Perf Log" events](#rtp-perf-log), that reference the configured scan
+  - ["RTP Perf Log" events](#rtp-perf-log), which reference the configured scan
     exclusion(s).
 
 ```bash
@@ -370,7 +370,7 @@ mplog_parser -d "<INPUT_FOLDER>" -o "<OUTPUT_FOLDER>"
 
 ### References
 
-  - [Crowdstrike - James Lovato - Mind the MPLog: Leveraging Microsoft Protection Logging for Forensic Investigations](https://crowdstrike.com/blog/how-to-use-microsoft-protection-logging-for-forensic-investigations/)
+  - [CrowdStrike - James Lovato - Mind the MPLog: Leveraging Microsoft Protection Logging for Forensic Investigations](https://crowdstrike.com/blog/how-to-use-microsoft-protection-logging-for-forensic-investigations/)
 
   - [Microsoft - Troubleshoot performance issues related to real-time protection](https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/troubleshoot-performance-issues?view=o365-worldwide)
 

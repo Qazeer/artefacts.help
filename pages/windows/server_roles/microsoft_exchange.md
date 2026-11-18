@@ -1,11 +1,11 @@
 ---
 title: Microsoft Exchange
-summary: 'Microsoft Exchange is a complex mail server ecosystem, running exclusively on the Windows operating system. Microsoft Exchange logs telemetry and events in various text-based log files (100+) and EVTX event logs (40+).\n\nThe following sources of logs can be of forensics interest to investigate the compromise of a Microsoft Exchange server or account:\n - Exchange IIS logs, that contain information on the HTTP requests made to the various Exchange HTTP web services.\n - EVTX event logs, of Exchange ETW channels (such as the "MSExchange Management" channel), and of other providers depending on the Exchange server Windows logging configuration.\n - 20+ text-based log files, each associated with a given Exchange service.'
+summary: 'Microsoft Exchange is a complex mail server ecosystem, running exclusively on the Windows operating system. Microsoft Exchange logs telemetry and events in various text-based log files (100+) and EVTX event logs (40+).\n\nThe following sources of logs can be of forensic interest to investigate the compromise of a Microsoft Exchange server or account:\n - Exchange IIS logs, which contain information on the HTTP requests made to the various Exchange HTTP web services.\n - EVTX event logs, of Exchange ETW channels (such as the "MSExchange Management" channel), and of other providers, depending on the Exchange server''s Windows logging configuration.\n - 20+ text-based log files, each associated with a given Exchange service.'
 keywords: Mail, email, mailserver, Microsoft Exchange, Exchange, IIS, Outlook, EWS, ECP, OWA, ActiveSync, MAPI, Message Tracking, Autodiscover, OAB, RpcHttp, SMTP, MSExchange Management, MSExchange CmdletLogs, ExchangePowerShell, webshell, W3SVC1, W3SVC2, u_exYYmmdd, c-ip, CVE-2021-26855, 26858, 27065, 26857, ProxyLogon, Get-ExchangeServer, Get-Mailbox, Get-Recipient, Get-MailboxPermission, Get-MailboxRegionalConfiguration, Get-InboxRule, Search-Mailbox, New-MailboxSearch, New-MailboxExportRequest, Remove-MailboxExportRequest, Set-Mailbox, Set-InboxRule, New-InboxRule, Enable-InboxRule, New-TransportRule, Add-MailboxPermission, Add-MailboxFolderPermission, Add-RecipientPermission, Set-TransportRule, New-ManagementRoleAssignment, New-ExchangeCertificate
 tags:
   - mailservers
   - windows_server_roles
-location: 'Exchange IIS logs:\n %SystemDrive%\inetpub\logs\LogFiles\W3SVC1 and W3SVC2 folders.\n\n ETW channels:\n MSExchange Management, for usage of cmdlets from the ExchangePowerShell module (that interact with the Exchange Web Services API).\n Microsoft-Windows-Windows Defender/Operational, events 1006 / 1116 and 1007 / 1117, for detections of suspicious behavior related to Exchange.\n Security event 4688, if "Audit Process Creation" is enabled, to identify suspicious processes spawned by the Exchange IIS process.\n\nExchange components (EWS, ECP, OWA, ExchangePowerShell, ActiveSync, MAPI, etc.) text-based logs:\n %SystemDrive%\Program Files\Microsoft\Exchange Server\V15\Logging and TransportRoles folders.'
+location: 'Exchange IIS logs:\n %SystemDrive%\inetpub\logs\LogFiles\W3SVC1 and W3SVC2 folders.\n\n ETW channels:\n MSExchange Management, for usage of cmdlets from the ExchangePowerShell module (which interact with the Exchange Web Services API).\n Microsoft-Windows-Windows Defender/Operational, events 1006 / 1116 and 1007 / 1117, for detections of suspicious behavior related to Exchange.\n Security event 4688, if "Audit Process Creation" is enabled, to identify suspicious processes spawned by the Exchange IIS process.\n\nExchange components (EWS, ECP, OWA, ExchangePowerShell, ActiveSync, MAPI, etc.) text-based logs:\n %SystemDrive%\Program Files\Microsoft\Exchange Server\V15\Logging and TransportRoles folders.'
 last_updated: 2024-06-09
 sidebar: sidebar
 permalink: microsoft_exchange.html
@@ -18,35 +18,35 @@ folder: windows
 the `Windows` operating system. `Microsoft Exchange` logs telemetry and
 events in various text-based log files (100+) and `EVTX` event logs (40+).
 
-The following sources of logs can be of forensics interest to investigate the
+The following sources of logs can be of forensic interest to investigate the
 compromise of a `Microsoft Exchange` server or account:
 
-  - `Exchange IIS` logs, that contain information on the `HTTP` requests made
+  - `Exchange IIS` logs, which contain information on the `HTTP` requests made
     to the various `Exchange HTTP` web services.
 
   - `EVTX` event logs, of `Exchange` `ETW` channels (such as the
-    `MSExchange Management` channel), and of other providers depending on the
-    `Exchange` server `Windows` logging configuration (process creation events,
-    `Windows Defender` detections, ...).
+    `MSExchange Management` channel), and of other providers, depending on the
+    `Exchange` server's `Windows` logging configuration (process creation
+    events, `Windows Defender` detections, ...).
 
   - 20+ text-based log files, each associated with a given `Exchange` service.
 
 Additionally, the `Exchange` web folders should be:
 
-  - Reviewed for files created or modified during the attack time-frame (using
+  - Reviewed for files created or modified during the attack timeframe (using
     artefacts such as the [`MFT`](../ntfs_mft.md) or
-    [`UsnJrnl`](../ntfs_usnjrnl.md))
+    [`UsnJrnl`](../ntfs_usnjrnl.md)).
 
-  - Scanned for webshells presence (using `yara` and rules from
-    [`yara-forge`](https://yarahq.github.io/) for instance).
+  - Scanned for the presence of webshells (using `yara` and rules from
+    [`yara-forge`](https://yarahq.github.io/), for instance).
 
 ### Exchange IIS logs
 
 The `Exchange IIS` logs contain information on the `HTTP` requests made to the
 various `Exchange HTTP` web services (`owa`, `ecp`, `EWS`, `Autodiscover`,
 `ActiveSync`, etc.). The `IIS` logs can contain indicators of vulnerability
-exploitation (such as `ProxyLogon`), webshells access, as well as evidence of
-data exfiltration (through threat actor created files, such as compressed
+exploitation (such as `ProxyLogon`), webshell access, as well as evidence of
+data exfiltration (through threat actor-created files, such as compressed
 archives, exposed by the `Exchange IIS` web server).
 
 The `Exchange IIS` log files are stored under the
@@ -74,11 +74,11 @@ configuration and log `HTTP` requests to text-based log files `u_exYYmmdd`, in
 | `cs(User-Agent)` | The client `HTTP` `User-Agent` header. | Mozilla/5.0+Mozilla/5.0 (Windows NT 10.0; Win64; x64)[...] |
 | `cs(Referer)` | The client `HTTP` `Referer` header, containing the address from which the resource has been requested (last visited page). | - |
 | `sc-status` | The response `HTTP` status code. | 200 |
-| `sc-substatus` | The response [`HTTP` sub status code](https://learn.microsoft.com/en-us/troubleshoot/developer/webapps/iis/www-administration-management/http-status-code). | 0 |
-| `sc-win32-status` | The Windows status code, `0` for success and non `0` if an error occurred. The error message associated with an error code can be retrieved using `certutil.exe -error <ERROR_CODE>`. | 0 |
+| `sc-substatus` | The response [`HTTP` substatus code](https://learn.microsoft.com/en-us/troubleshoot/developer/webapps/iis/www-administration-management/http-status-code). | 0 |
+| `sc-win32-status` | The Windows status code, `0` for success and non-`0` if an error occurred. The error message associated with an error code can be retrieved using `certutil.exe -error <ERROR_CODE>`. | 0 |
 | `time-taken` | The time taken by the request, in milliseconds. | 142 |
 
-Example of an `HTTP` `GET` request made to a threat actor uploaded webshell:
+Example of an `HTTP` `GET` request made to a threat actor-uploaded webshell:
 
 ```
 # Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
@@ -86,37 +86,37 @@ Example of an `HTTP` `GET` request made to a threat actor uploaded webshell:
 2023-12-25 11:54:21 10.10.130.5 GET /owa/auth/aKdMadOeT.aspx cmd=whoami 443 - 1.2.3.4 Mozilla/5.0+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/522.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/512.34 - 200 0 0 142
 ```
 
-### EVTX based events
+### EVTX-based events
 
 | Channel | Conditions | Events |
 |---------|------------|--------|
-| `MSExchange Management` | Default configuration. | The `MSExchange CmdletLogs` provider logs, to the `MSExchange Management` channel, usage of cmdlets from the `ExchangePowerShell` module. The cmdlets of the `ExchangePowerShell` module can be used to perform a number of actions through the `Exchange Web Services (EWS)` API, such as managing the Exchange server and its mailboxes, searching and exporting mailboxes content, setting email forward rules, etc. <br><br> Event `1: Cmdlet succeeded. Cmdlet <CMDLET>, parameters <COMMAND_LINE_PARAMETERS>`. <br><br> Event `6: Cmdlet failed. Cmdlet <CMDLET>, parameters <COMMAND_LINE_PARAMETERS>`, with the error details in the raw event data. <br><br> Information of interest: <br> - The PowerShell `cmdlet` used, with the associated parameters. <br><br> Among others, the executions of the following `ExchangePowerShell` cmdlets should be reviewed: <br><br> *Reconnaissance* <br> - [`Get-ExchangeServer`](https://learn.microsoft.com/en-us/powershell/module/exchange/get-exchangeserver) <br> - [`Get-Mailbox`](https://learn.microsoft.com/en-us/powershell/module/exchange/get-mailbox) <br> - [`Get-Recipient`](https://learn.microsoft.com/en-us/powershell/module/exchange/get-recipient) <br> - [`Get-MailboxPermission`](https://learn.microsoft.com/en-us/powershell/module/exchange/get-mailboxpermission) <br> - [`Get-MailboxRegionalConfiguration`](https://learn.microsoft.com/en-us/powershell/module/exchange/get-mailboxregionalconfiguration) <br> - [`Get-InboxRule`](https://learn.microsoft.com/en-us/powershell/module/exchange/get-inboxrule) <br><br> *Mailbox search for data access* <br> - [`Search-Mailbox`](https://learn.microsoft.com/en-us/powershell/module/exchange/search-mailbox) <br> - [`New-MailboxSearch`](https://learn.microsoft.com/en-us/powershell/module/exchange/new-mailboxsearch) <br> - [`New-MailboxExportRequest`](https://learn.microsoft.com/en-us/powershell/module/exchange/new-mailboxexportrequest) <br> - [`Remove-MailboxExportRequest`](https://learn.microsoft.com/en-us/powershell/module/exchange/remove-mailboxexportrequest) <br><br> *Configuration of email forwarding for persistent data exfiltration (through direct email forwarding, inbox rules, or transport rules)* <br> - [`Set-Mailbox`](https://learn.microsoft.com/en-us/powershell/module/exchange/set-mailbox), with `ForwardingSmtpAddress` to forward emails or `HiddenFromAddressListsEnabled` to hide the mailbox from the `Global Address List` <br> - [`Set-InboxRule`](https://learn.microsoft.com/en-us/powershell/module/exchange/set-inboxrule) <br> - [`New-InboxRule`](https://learn.microsoft.com/en-us/powershell/module/exchange/new-inboxrule) <br> - [`Enable-InboxRule`](https://learn.microsoft.com/en-us/powershell/module/exchange/enable-inboxrule) <br> - [`New-TransportRule`](https://learn.microsoft.com/en-us/powershell/module/exchange/new-transportrule) <br><br> *Configuration of mailbox delegations for persistent access (to access a mailbox / mailbox's folder or to send emails from the mailbox)* <br> - [`Add-MailboxPermission`](https://learn.microsoft.com/en-us/powershell/module/exchange/add-mailboxpermission) <br> - [`Add-MailboxFolderPermission`](https://learn.microsoft.com/en-us/powershell/module/exchange/add-mailboxfolderpermission) <br> - [`Add-RecipientPermission`](https://learn.microsoft.com/en-us/powershell/module/exchange/add-recipientpermission) <br> - [`Set-TransportRule`](https://learn.microsoft.com/en-us/powershell/module/exchange/set-transportrule) <br><br> *Administration of the Exchange server* <br> - [`Set-RoleGroup`](https://learn.microsoft.com/fr-fr/powershell/module/exchange/set-rolegroup) <br> - [`New-ManagementRoleAssignment`](https://learn.microsoft.com/en-us/powershell/module/exchange/new-managementroleassignment), including the `Mailbox Import Export` role to export mailbox content <br> - [`New-ExchangeCertificate`](https://learn.microsoft.com/en-us/powershell/module/exchange/new-exchangecertificate) |
+| `MSExchange Management` | Default configuration. | The `MSExchange CmdletLogs` provider logs, to the `MSExchange Management` channel, the usage of cmdlets from the `ExchangePowerShell` module. The cmdlets of the `ExchangePowerShell` module can be used to perform a number of actions through the `Exchange Web Services (EWS)` API, such as managing the Exchange server and its mailboxes, searching and exporting mailbox content, setting email forwarding rules, etc. <br><br> Event `1: Cmdlet succeeded. Cmdlet <CMDLET>, parameters <COMMAND_LINE_PARAMETERS>`. <br><br> Event `6: Cmdlet failed. Cmdlet <CMDLET>, parameters <COMMAND_LINE_PARAMETERS>`, with the error details in the raw event data. <br><br> Information of interest: <br> - The PowerShell `cmdlet` used, with the associated parameters. <br><br> Among others, the executions of the following `ExchangePowerShell` cmdlets should be reviewed: <br><br> *Reconnaissance* <br> - [`Get-ExchangeServer`](https://learn.microsoft.com/en-us/powershell/module/exchange/get-exchangeserver) <br> - [`Get-Mailbox`](https://learn.microsoft.com/en-us/powershell/module/exchange/get-mailbox) <br> - [`Get-Recipient`](https://learn.microsoft.com/en-us/powershell/module/exchange/get-recipient) <br> - [`Get-MailboxPermission`](https://learn.microsoft.com/en-us/powershell/module/exchange/get-mailboxpermission) <br> - [`Get-MailboxRegionalConfiguration`](https://learn.microsoft.com/en-us/powershell/module/exchange/get-mailboxregionalconfiguration) <br> - [`Get-InboxRule`](https://learn.microsoft.com/en-us/powershell/module/exchange/get-inboxrule) <br><br> *Mailbox search for data access* <br> - [`Search-Mailbox`](https://learn.microsoft.com/en-us/powershell/module/exchange/search-mailbox) <br> - [`New-MailboxSearch`](https://learn.microsoft.com/en-us/powershell/module/exchange/new-mailboxsearch) <br> - [`New-MailboxExportRequest`](https://learn.microsoft.com/en-us/powershell/module/exchange/new-mailboxexportrequest) <br> - [`Remove-MailboxExportRequest`](https://learn.microsoft.com/en-us/powershell/module/exchange/remove-mailboxexportrequest) <br><br> *Configuration of email forwarding for persistent data exfiltration (through direct email forwarding, inbox rules, or transport rules)* <br> - [`Set-Mailbox`](https://learn.microsoft.com/en-us/powershell/module/exchange/set-mailbox), with `ForwardingSmtpAddress` to forward emails or `HiddenFromAddressListsEnabled` to hide the mailbox from the `Global Address List` <br> - [`Set-InboxRule`](https://learn.microsoft.com/en-us/powershell/module/exchange/set-inboxrule) <br> - [`New-InboxRule`](https://learn.microsoft.com/en-us/powershell/module/exchange/new-inboxrule) <br> - [`Enable-InboxRule`](https://learn.microsoft.com/en-us/powershell/module/exchange/enable-inboxrule) <br> - [`New-TransportRule`](https://learn.microsoft.com/en-us/powershell/module/exchange/new-transportrule) <br><br> *Configuration of mailbox delegations for persistent access (to access a mailbox / mailbox's folder or to send emails from the mailbox)* <br> - [`Add-MailboxPermission`](https://learn.microsoft.com/en-us/powershell/module/exchange/add-mailboxpermission) <br> - [`Add-MailboxFolderPermission`](https://learn.microsoft.com/en-us/powershell/module/exchange/add-mailboxfolderpermission) <br> - [`Add-RecipientPermission`](https://learn.microsoft.com/en-us/powershell/module/exchange/add-recipientpermission) <br> - [`Set-TransportRule`](https://learn.microsoft.com/en-us/powershell/module/exchange/set-transportrule) <br><br> *Administration of the Exchange server* <br> - [`Set-RoleGroup`](https://learn.microsoft.com/fr-fr/powershell/module/exchange/set-rolegroup) <br> - [`New-ManagementRoleAssignment`](https://learn.microsoft.com/en-us/powershell/module/exchange/new-managementroleassignment), including the `Mailbox Import Export` role to export mailbox content <br> - [`New-ExchangeCertificate`](https://learn.microsoft.com/en-us/powershell/module/exchange/new-exchangecertificate) |
 | `Microsoft-Windows-Windows Defender/Operational` | Requires `Windows Defender` to be running. | `Windows Defender` integrates a number of detections for suspicious `Exchange` behavior: `Exchange IIS` process spawning `PowerShell` or `cmd` (`IISExchgSpawnCMD.A`), exploitation of the `ProxyLogon` vulnerability (`Exploit:Win32/CVE-2021-31207.B` / `Behavior:Win32/SuspExchgSession.E`), etc. <br><br> Standard [events `1006` / `1116` and `1007` / `1117`](../etw_windows_defender.md#windows-defender-malware-detection-events) will be logged for detections of suspicious behavior related to `Exchange`. |
 | `Security` | Requires `Audit Process Creation` to be enabled. <br><br> Requires `ProcessCreationIncludeCmdLine_Enabled` to be enabled for the command line to be logged. | [Event `4688: A new process has been created`](../etw_process_creation.md). <br><br> Can be used to identify suspicious processes (`NewProcessName`), such as `powershell.exe` or `cmd.exe`, spawned (`ParentProcessName`) by the `Exchange IIS` process `w3wp.exe`. |
 
-### Exchange components text-based logs
+### Exchange component text-based logs
 
 #### Overview
 
-`Exchange` default install folder: `%SystemDrive%\Program Files\Microsoft\Exchange Server\V15\`.
+`Exchange` default installation folder: `%SystemDrive%\Program Files\Microsoft\Exchange Server\V15\`.
 
 | Component | Path | Description |
 |-----------|------|-------------|
 | `Exchange AgentLog` | \<EXCHANGE_FOLDER\>\TransportRoles\Logs\FrontEnd\AgentLog\AgentLog\*.log | `AgentLog` logs contain the actions performed on a message by specific [`Exchange` anti-spam agents](https://learn.microsoft.com/en-us/exchange/anti-spam-agent-logging-exchange-2013-help). |
-| `Exchange Autodiscover HttpProxy` | \<EXCHANGE_FOLDER\>\Logging\HttpProxy\Autodiscover\HttpProxy_\*.log | `Autodiscover` logs contain client interactions to the [`Autodiscover` service](https://learn.microsoft.com/en-us/exchange/architecture/client-access/autodiscover), which is used by clients to retrieve information on the `Exchange` infrastructure. `Autodiscover` is typically used to find the `EWS` endpoint `URL` for `Exchange Web Services (EWS)` clients. |
+| `Exchange Autodiscover HttpProxy` | \<EXCHANGE_FOLDER\>\Logging\HttpProxy\Autodiscover\HttpProxy_\*.log | `Autodiscover` logs contain client interactions with the [`Autodiscover` service](https://learn.microsoft.com/en-us/exchange/architecture/client-access/autodiscover), which is used by clients to retrieve information on the `Exchange` infrastructure. `Autodiscover` is typically used to find the `EWS` endpoint `URL` for `Exchange Web Services (EWS)` clients. |
 | `Exchange CosmosQueue` | \<EXCHANGE_FOLDER\>\Logging\CosmosQueue\audit\*.LOG | `CosmosQueue` logs contain some administration actions performed, such as `New-Mailbox` or `Set-Mailbox`, with the account that performed the operation. |
 | `Exchange ActiveSync (EAS) HttpProxy` | \<EXCHANGE_FOLDER\>\Logging\HttpProxy\Eas\HttpProxy_\*.log | `Exchange ActiveSync` logs contain client interactions through the [`Exchange ActiveSync`](https://learn.microsoft.com/en-us/exchange/clients/exchange-activesync/exchange-activesync) protocol. `Exchange ActiveSync` is an `Exchange` synchronization protocol designed to let mobile devices access their mailbox items (such as email messages, meetings, and contacts). |
 | `Exchange Control Panel (ECP)` | \<EXCHANGE_FOLDER\>\Logging\ECP\Activity\ECPActivity_\*.LOG <br><br> \<EXCHANGE_FOLDER\>\Logging\ECP\Server\ECPServer\*.LOG <br><br> \<EXCHANGE_FOLDER\>\Logging\HttpProxy\Ecp\HttpProxy_\*.log | `Exchange Control Panel (ECP)` logs contain client interactions with the web-based management console [`Exchange Control Panel (ECP)` interface](https://learn.microsoft.com/en-us/exchange/architecture/client-access/exchange-admin-center?view=exchserver-2019). The `ECP`, accessible at `https://<EXCHANGE_SERVER>/ecp`, can be used to administer `Exchange` components (management of mailboxes, creation of policies to manage mail traffic, etc.). |
 | `Exchange Web Services (EWS)` API | \<EXCHANGE_FOLDER\>\Logging\Ews\Ews_\*.log <br><br> \<EXCHANGE_FOLDER\>\Logging\HttpProxy\Ews\HttpProxy_\*.log | `Exchange Web Services` logs contain client interactions with the [`EWS` API](https://learn.microsoft.com/en-us/exchange/client-developer/exchange-web-services/ews-applications-and-the-exchange-architecture), which provides access to mailbox items (such as email messages, meetings, and contacts). The `EWS` API is notably used by the cmdlets of the `ExchangePowerShell` module. |
 | `Exchange Messaging Application Programming Interface (MAPI)` | \<EXCHANGE_FOLDER\>\Logging\HttpProxy\Mapi\HttpProxy_\*.log | [`Exchange Messaging Application Programming Interface (MAPI)`](https://learn.microsoft.com/en-us/exchange/clients/mapi-over-http/mapi-over-http) over `HTTP` `HttpProxy` logs. The `MAPI` transport protocol is notably used by the `Outlook` client to access and locally synchronize mailbox data. |
-| `Exchange Message Tracking` | \<EXCHANGE_FOLDER\>\TransportRoles\Logs\MessageTracking\MSG\*.LOG | [`Exchange Message Tracking` logs](https://learn.microsoft.com/en-us/Exchange/mail-flow/transport-logs/message-tracking) contain detailed information about the history of each email message as it travels through an `Exchange` server, including the emails sender and recipient addresses and subject. |
-| `Exchange Offline Address Book (OAB)` | \<EXCHANGE_FOLDER\>\Logging\HttpProxy\Oab\HttpProxy_\*.log | `Exchange Offline Address Book (OAB)` logs contain access to the `OAB` feature, which allows `Outlook` users to cache the contents of the `Global Address List (GAL)` (to access it even when no longer connected to an `Exchange` server). |
-| `Exchange Outlook Web Access (OWA)` | \<EXCHANGE_FOLDER\>\Logging\HttpProxy\Owa\HttpProxy_\*.log | `Exchange Outlook Web Access (OWA)` logs contain client interactions with the `Outlook Web Access (OWA)` webmail interface, that can be used by end-users to access and manage their mailbox (reading, sending, and deletion of emails, creation of inbox rules, etc.). |
+| `Exchange Message Tracking` | \<EXCHANGE_FOLDER\>\TransportRoles\Logs\MessageTracking\MSG\*.LOG | [`Exchange Message Tracking` logs](https://learn.microsoft.com/en-us/Exchange/mail-flow/transport-logs/message-tracking) contain detailed information about the history of each email message as it travels through an `Exchange` server, including the sender, the recipient, and the subject of the email. |
+| `Exchange Offline Address Book (OAB)` | \<EXCHANGE_FOLDER\>\Logging\HttpProxy\Oab\HttpProxy_\*.log | `Exchange Offline Address Book (OAB)` logs track access to the `OAB` feature, which allows `Outlook` users to cache the contents of the `Global Address List (GAL)` (to access it even when no longer connected to an `Exchange` server). |
+| `Exchange Outlook Web Access (OWA)` | \<EXCHANGE_FOLDER\>\Logging\HttpProxy\Owa\HttpProxy_\*.log | `Exchange Outlook Web Access (OWA)` logs contain client interactions with the `Outlook Web Access (OWA)` webmail interface, which can be used by end users to access and manage their mailboxes (reading, sending, and deleting emails, creating inbox rules, etc.). |
 | `PowerShell CmdletInfra` and `HttpProxy` | \<EXCHANGE_FOLDER\>\Logging\CmdletInfra\LocalPowerShell\Cmdlet\\* <br><br> \<EXCHANGE_FOLDER\>\Logging\CmdletInfra\Powershell-Proxy\Cmdlet\\* <br><br> \<EXCHANGE_FOLDER\>\Logging\HttpProxy\PowerShell\HttpProxy_\*.log | `PowerShell CmdletInfra` and `HttpProxy` logs contain the `ExchangePowerShell` cmdlets executed, and can be an alternative to the `MSExchange Management.evtx` event logs. <br><br> Information of interest: <br> - The PowerShell `cmdlet` used, with the associated parameters. <br> - The user that executed the cmdlet. |
-| `Exchange RPC over HTTP` | \<EXCHANGE_FOLDER\>\Logging\HttpProxy\RpcHttp\HttpProxy_\*.log | `Exchange RPC over HTTP` log contains requests over the `RpcHttp` transport protocol, which is / was notably used by the `Outlook` client for mailboxes access. The `RpcHttp` transport protocol has been replaced by the `MAPI over HTTP` protocol. |
+| `Exchange RPC over HTTP` | \<EXCHANGE_FOLDER\>\Logging\HttpProxy\RpcHttp\HttpProxy_\*.log | `Exchange RPC over HTTP` logs contain requests over the `RpcHttp` transport protocol, which is / was notably used by the `Outlook` client for mailbox access. The `RpcHttp` transport protocol has been replaced by the `MAPI over HTTP` protocol. |
 | `Exchange SmtpReceive` <br><br> `Exchange SmtpSend` | \<EXCHANGE_FOLDER\>\TransportRoles\Logs\FrontEnd\ProtocolLog\SmtpReceive\RECV\*.LOG <br><br> \<EXCHANGE_FOLDER\>\TransportRoles\Logs\FrontEnd\ProtocolLog\SmtpSend\SEND\*.LOG | `Exchange SMTP Receive` and `Exchange SMTP Send` protocol logs contain, respectively, the inbound and outbound `SMTP` requests. |
 
-#### Examples of (some) Exchange components logs
+#### Examples of (some) Exchange component logs
 
 {% include note.html content="Exchange AgentLog logs" %}
 
@@ -171,7 +171,7 @@ Example log filename: `Eas\HttpProxy_2023011116-1.LOG`.
 2023-01-11T16:06:06.997Z,823d6c00-01f1-4067-9002-18ff1cf2e5d9,15,1,2375,7,,Eas,webmail.domain.com,/Microsoft-Server-ActiveSync/default.eas,,Basic,true,DOMAIN\username,,Sid~S-1-5-21-123456789-9876543211-123456798-4343,Outlook-iOS-Android/1.0,20.10.20.30,SERVER-HOSTNAME,403,403,,OPTIONS,Proxy,SERVER-HOSTNAME.domain.test,15.01.2375.000,IntraForest,WindowsIdentity-NoDatabase,,,,0,5278,,,30,7,,0,2;,2,,0,2,,0,19068,1,,,,19027,0,0,1,0,0,19037,0,19028,10,10,40,19068,,?Cmd=Options&User=domain.test%5Cusername&DeviceId=1234567987987987987987987987987&DeviceType=Outlook,,BeginRequest=2023-01-11T16:05:47.929Z;CorrelationID=<empty>;ProxyState-Run=None;AccountForestGuard_domain.test=1;FEAuth=BEVersion-1942063431;RoutingEntry=DatabaseGuid:fb7adba2-51f4-47e3-b170-fd39f85aaf35%40domain.test%40domain.test Server:SERVER-HOSTNAME.domain.test+1942063431@638070367506148886;NewConnection=fe80::1234:5678:62ef:245e%3&0;BeginGetResponse=2023-01-11T16:05:47.970Z;OnResponseReady=2023-01-11T16:06:06.996Z;EndGetResponse=2023-01-11T16:06:06.996Z;ProxyState-Complete=ProxyResponseData;SharedCacheGuard=0;EndRequest=2023-01-11T16:06:06.997Z;I32:ATE.C[DC-HOSTNAME.domain.test]=2;F:ATE.AL[DC-HOSTNAME.domain.test]=0.5;I32:ADS.C[DC-HOSTNAME]=2;F:ADS.AL[DC-HOSTNAME]=1.700816,WebExceptionStatus=ProtocolError;ResponseStatusCode=403;WebException=System.Net.WebException: Le serveur distant a retourné une erreur : (403) Interdit.    à System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)    à Microsoft.Exchange.HttpProxy.ProxyRequestHandler.<>c__DisplayClass197_0.<OnResponseReady>b__0();,,|RoutingDB:fb7adba2-51f4-47e3-b170-fd39f85aaf35,,,CafeV1
 ```
 
-{% include note.html content="Exchange Control Panel (ECP)` Activity logs" %}
+{% include note.html content="Exchange Control Panel (ECP) Activity logs" %}
 
 Example log filename: `ECPActivity_11500_20230111-1.LOG`.
 
@@ -185,7 +185,7 @@ Example log filename: `ECPActivity_11500_20230111-1.LOG`.
 2023-01-10T00:47:12.020Z,SERVER-HOSTNAME,Request,S:URL=https://localhost:444/ecp/logoff.aspx;S:Bld=15.1.2375.7;S:ActID=555555678-1234-1234-123456789987654;Dbl:WLM.TS=0
 ```
 
-{% include note.html content="Exchange Control Panel (ECP)` Server logs" %}
+{% include note.html content="Exchange Control Panel (ECP) Server logs" %}
 
 Example log filename: `ECPServer20230111-1.LOG`.
 

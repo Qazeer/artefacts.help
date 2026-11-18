@@ -47,7 +47,7 @@ Foreach ($Mailbox in $Mailboxes) {
 
 [`Microsoft-Extractor-Suite`](./logs_collection_tools.md#azure-ad-microsoft-365--azure-microsoft-extractor-suite)'s
 [`Show-MailboxRules`](https://microsoft-365-extractor-suite.readthedocs.io/en/latest/functionality/M365/InboxRules.html)
-PowerShell cmdlet can be used to enumerate Mailbox Inbox rules with:
+PowerShell cmdlet can be used to enumerate the Mailbox Inbox rules:
 
 ```bash
 Show-MailboxRules
@@ -58,16 +58,16 @@ Show-MailboxRules -UserIds "<EMAIL | EMAILS_LIST>"
 ### Mailbox Mail Flow / Transport rules
 
 `Mailbox Mail Flow` / `Transport rules` can only be configured by
-`Exchange Admin` users, and allow actions to be taken on in-transit emails.
+`Exchange Admin` users and allow actions to be taken on in-transit emails.
 
-For instance, a blind copy (i.e without disclosure to the sender or
+For instance, a blind copy (i.e. without disclosure to the sender or
 recipients) can be sent to external or internal email addresses.
 
 ```bash
-# List all Mail Flow / Transport rules.
+# Lists all Mail Flow / Transport rules.
 Get-TransportRule | Select-Object *
 
-# List all Mail Flow / Transport rules that send a copy of received emails.
+# Lists all Mail Flow / Transport rules that send a copy of received emails.
 Get-TransportRule | Where-Object { ($Null -ne $_.BlindCopyTo) } | Select-Object *
 ```
 

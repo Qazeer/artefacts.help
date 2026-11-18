@@ -1,6 +1,6 @@
 ---
 title: Basic security review
-summary: 'The AWS account state and configuration (IAM users, users access keys, IAM roles and policies, compute instances, storage objects, etc.) can be reviewed manually using the AWS CLI utility or in a more automated fashion using third-party tools such as Scout Suite.'
+summary: 'The AWS account state and configuration (IAM users, users'' access keys, IAM roles and policies, compute instances, storage objects, etc.) can be reviewed manually using the AWS CLI utility or in a more automated fashion using third-party tools such as Scout Suite.'
 keywords: AWS CLI, iam, Scout Suite
 tags:
   - aws
@@ -25,7 +25,7 @@ aws iam list-users
 # Lists the users' access keys, with their status and creation date.
 aws iam list-access-keys
 
-# Lists the IAM groups (collection of IAM users that can be associated with specific permissions).
+# Lists the IAM groups (collections of IAM users that can be associated with specific permissions).
 aws iam list-groups
 
 # Retrieves the groups associated with a given user.
@@ -34,10 +34,10 @@ aws iam list-groups-for-user --user-name "<USERNAME>"
 # Lists the IAM roles (an IAM identity that can be associated with specific permissions. An IAM role can be assumed by users allowed to do so).
 aws iam list-roles
 
-# Lists all the IAM policies (an IAM policy grants IAM identities - users, groups, or roles - permissions to resources. Permissions in the policies determine whether an IAM principal (user or role) request is allowed or denied.)
+# Lists all the IAM policies (an IAM policy grants IAM identities - users, groups, or roles - permissions to resources. Permissions in the policies determine whether a request from an IAM principal (user or role) is allowed or denied.)
 aws iam list-policies
 
-# Lists all the IAM policy names and ARN.
+# Lists all the IAM policy names and ARNs.
 aws iam list-policies --query 'Policies[*].[PolicyName, Arn]' --output text
 
 # Lists the metadata of the specified IAM policy.
@@ -66,15 +66,15 @@ aws s3 ls
 # Retrieves more detailed (compared to s3 ls) information on a bucket (and bucket files).
 aws s3api list-objects --bucket <BUCKET_NAME>
 
-# Download/upload files from/to an S3 bucket.
-# Source/destination for s3://<BUCKET> or local path.
+# Downloads/uploads files from/to an S3 bucket.
+# Source/destination: s3://<BUCKET> or local path.
 aws s3 cp [--recursive] <SOURCE> <DEST>
 ```
 
 ### Automated enumeration with ScoutSuite
 
 [`Scout Suite`](https://github.com/nccgroup/ScoutSuite) leverages the API
-provided by AWS (as well as other possible Cloud providers) to automatically
+provided by AWS (as well as those of other cloud providers) to automatically
 enumerate the configuration of the account. It can be used to quickly gather
 information on the attack surface of the AWS account across all regions.
 

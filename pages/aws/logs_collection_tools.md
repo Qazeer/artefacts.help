@@ -29,37 +29,36 @@ configuration) and export logs from a number of sources (`CloudTrail`,
 region bound.
 
 In addition to the
-[`ReadOnlyAccess managed policy`](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html)
+[`ReadOnlyAccess managed policy`](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html),
 `Invictus-AWS` also requires
 [specific permissions, as defined in the provided policy](https://github.com/invictus-ir/Invictus-AWS/blob/main/source/files/policy.json).
 
-As stated in `Invictus-AWS`'s readme, the tool is divided into 4 different
-steps (that can be run independently):
+As stated in `Invictus-AWS`'s README, the tool is divided into 4 different
+steps (which can be run independently):
 
-  - The first step performs enumeration of activated AWS services and their
-    details.
+  - The first step enumerates the activated AWS services and their details.
 
   - The second step retrieves configuration details about the activated
     services.
 
-  - The third step extracts available logs for the activated services.
+  - The third step extracts the available logs for the activated services.
 
   - The fourth and last step analyzes CloudTrail logs, and only CloudTrail logs,
     by running `Athena` queries against them.
 
-By default, steps one to three are executed. The step 4 is optional and
-must be run separately.
+By default, steps 1 to 3 are executed. Step 4 is optional and must be run
+separately.
 
 ```bash
 # Configures the required API access.
 aws configure
 
-# -r <REGION>: defines the specified region (such as "us-east-1") to retrieve the logs from.
+# -r <REGION>: specifies the region (such as "us-east-1") to retrieve the logs from.
 # -A <REGION>: retrieves the logs from all regions, starting with the specified region.
-# -w <local | cloud>: defines if the results should be stored in an S3 bucket only or if the results should also be downloaded to the local storage.
+# -w <local | cloud>: defines whether the results should be stored in an S3 bucket only or if the results should also be downloaded to the local storage.
 python3 main.py [-r <REGION> | -A <REGION>] -w <local | cloud>
 
-# Downloads locally the exported/collected elements from invictus-aws.py.
+# Downloads the exported/collected elements from invictus-aws.py locally.
 aws s3 cp --recursive s3://<INVICTUS_BUCKET> <EXPORT_FOLDER>
 ```
 
@@ -78,7 +77,7 @@ awslogs groups
 # Lists the streams in the specified log group.
 awslogs streams <LOG_GROUP>
 
-# Retrieves the logs in all or the specified log group/stream.
+# Retrieves the logs from all log groups/streams or from the specified log group/stream.
 # The start/end filtering supports multiple filtering options: DD/MM/YYYY HH:mm, <INT><m | h | d | w>.
 awslogs get <ALL | LOG_GROUP> <ALL | LOG_GROUP_STREAM> -s <START> -e <END>
 ```

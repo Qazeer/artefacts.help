@@ -1,6 +1,6 @@
 ---
 title: Security review - OAuth permissions
-summary: 'OAuth is a protocol to delegate access and grant third-party websites or applications access to users'' data and perform operations on their behalf.\n\nOAuth applications can be leveraged by threat actors: in illicit consent grant phishing attacks, to maintain persistence, or to automate operations (such as virtual machines creation for cryptomining activity).'
+summary: 'OAuth is a protocol to delegate access and grant third-party websites or applications access to users'' data and perform operations on their behalf.\n\nOAuth applications can be leveraged by threat actors: in illicit consent grant phishing attacks, to maintain persistence, or to automate operations (such as virtual machine creation for cryptomining activity).'
 keywords: OAuth, permissions, OAuth2PermissionGrants, consent grant, phishing
 tags:
   - azure_security_review
@@ -14,7 +14,7 @@ folder: azure
 applications access to users' data and perform operations on their behalf. With
 `OAuth`, users don't have to reveal their credentials to the third-party
 service, as access is granted through the `Identity Provider (IdP)`
-(`Azure AD` in the case of `Azure`).
+(`Entra ID` in the case of `Azure`).
 
 `OAuth` applications can be leveraged by threat actors:
 
@@ -27,10 +27,10 @@ service, as access is granted through the `Identity Provider (IdP)`
 
   - To maintain persistence in the tenant.
 
-  - As an automation tool, to automate operations such as virtual machines
+  - As an automation tool, to automate operations such as virtual machine
     creation for cryptomining activity.
 
-Microsoft Graph supports two access types, delegated permissions and
+Microsoft Graph supports two access types: delegated permissions and
 application permissions. With delegated permissions, the application calls
 Microsoft Graph on behalf of a signed-in user. With application permissions,
 the application calls Microsoft Graph with its own identity, without a signed-in

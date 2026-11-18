@@ -1,6 +1,6 @@
 ---
 title: Recycle Bin
-summary: 'Deleted files and folders (if deleted through a recycle bin aware application), associated with a given user (by their SID).\n\nTwo kinds of files:\n $I, which contains the path and timestamp of deletion of the original file.\n$R, which contains the original file content.'
+summary: 'Deleted files and folders (if deleted through a Recycle Bin-aware application), associated with a given user (by their SID).\n\nTwo kinds of files:\n $I, which contains the path and timestamp of deletion of the original file.\n$R, which contains the original file content.'
 keywords: Recycle Bin, $Recycle.Bin, $I, $R
 tags:
   - windows_file_knowledge
@@ -13,10 +13,10 @@ folder: windows
 
 ### Overview
 
-Deleted files and folders (if deleted through a recycle bin aware application).
+Deleted files and folders (if deleted through a Recycle Bin-aware application).
 
 The deleted files are placed in a subfolder (under
-`%SystemDrive%:\$Recycle.Bin`) named after the `SID` of the user that performed
+`%SystemDrive%\$Recycle.Bin`) named after the `SID` of the user that performed
 the deletion. Deleted files can thus be associated with a given user.
 
 ### Information of interest

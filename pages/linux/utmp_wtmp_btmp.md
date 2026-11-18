@@ -1,6 +1,6 @@
 ---
 title: utmp, wtmp and btmp
-summary: 'The utmp, wtmp and btmp files track successful and failed logins on the system. They are notably maintained by the login(1), init(1), sshd(8), and some versions of the getty(8) programs.\n\n The utmp entry format is specified in the "utmp.h" header. This format is used by the utmp, wtmp, and btmp logs. The username and the remote host''s hostname or IP address are notably recorded for remote logins.\n\n *tmp login records are not stored in clear-text and must be parsed with adequate utilities, such as utmpdump or Dissect.'
+summary: 'The utmp, wtmp, and btmp files track successful and failed logins on the system. They are notably maintained by the login(1), init(1), sshd(8), and some versions of the getty(8) programs.\n\n The utmp entry format is specified in the "utmp.h" header. This format is used by the utmp, wtmp, and btmp logs. The username and the remote host''s hostname or IP address are notably recorded for remote logins.\n\n *tmp login records are not stored in cleartext and must be parsed with appropriate utilities, such as utmpdump or Dissect.'
 keywords: utmp, wtmp, btmp
 tags:
   - linux_lateral_movement
@@ -14,7 +14,7 @@ folder: linux
 
 ### Overview
 
-The `utmp`, `wtmp` and `btmp` files track successful and failed logins on the
+The `utmp`, `wtmp`, and `btmp` files track successful and failed logins on the
 system. They are notably maintained by the `login(1)`, `init(1)`,
 `sshd(8)`, and some versions of the `getty(8)` programs. However, none of these
 programs creates the `wtmp` and `btmp` files, so if the files are deleted,
@@ -23,16 +23,16 @@ record-keeping is effectively turned off.
 The following `*tmp` login record files are commonly defined on Linux
 distributions:
 
-  - `utmp`/`utmpx` (under `/var/run/`): currently logged users. As
+  - `utmp`/`utmpx` (under `/var/run/`): currently logged-in users. As
     `/var/run/` (often a symlink to `/run/`) is a `tmpfs` filesystem in RAM,
     the `utmp`/`utmpx` files do not persist across system shutdowns.
 
     The `utmpx` and `utmp` files are read by the `who(1)` utility to list the
-    user(s) currently logged-in on the system.
+    user(s) currently logged in to the system.
 
   - `wtmp`/`wtmpx` (under `/var/log/`): all current and past logins, with
-    additional details on system shutdown and reboots, etc. All entries are
-    thus not necessarily related to user authentication.
+    additional details on system shutdowns and reboots, etc. Thus, not all
+    entries are related to user authentication.
 
   - `btmp`/`btmpx` (under `/var/log/`): all bad/failed login attempts.
 
@@ -52,18 +52,18 @@ and may vary between distributions and `utmp.h` versions/implementations.
 
 | Field | Description |
 |-------|-------------|
-| `ut_type` | The type of login associated with the record. <br><br> The following type values are defined: <br>  - `EMPTY` (0): No valid user accounting information. <br> - `RUN_LVL` (1): The system's runlevel. <br> - `BOOT_TIME` (2): Time of system boot. <br> - `NEW_TIME` (3): Time after system clock changed. <br> - `OLD_TIME` (4): Time when system clock changed. <br> - `INIT_PROCESS` (5): Process spawned by the init process. <br> - `LOGIN_PROCESS` (6): Session leader of a logged in user. <br> - `USER_PROCESS` (7): Normal process. <br> - `DEAD_PROCESS` (8): Terminated process. <br><br> The `login(1)` program creates records of `USER_PROCESS` type after a user has successfully authenticated, populating the `ut_host` and `ut_addr` fields. Terminal emulators may also directly create `USER_PROCESS` records. |
+| `ut_type` | The type of login associated with the record. <br><br> The following type values are defined: <br>  - `EMPTY` (0): No valid user accounting information. <br> - `RUN_LVL` (1): The system's runlevel. <br> - `BOOT_TIME` (2): Time of system boot. <br> - `NEW_TIME` (3): Time after system clock changed. <br> - `OLD_TIME` (4): Time when system clock changed. <br> - `INIT_PROCESS` (5): Process spawned by the init process. <br> - `LOGIN_PROCESS` (6): Session leader of a logged-in user. <br> - `USER_PROCESS` (7): Normal process. <br> - `DEAD_PROCESS` (8): Terminated process. <br><br> The `login(1)` program creates records of `USER_PROCESS` type after a user has successfully authenticated, populating the `ut_host` and `ut_addr` fields. Terminal emulators may also directly create `USER_PROCESS` records. |
 | `ut_pid` | The `process ID` of the process associated with the record. |
 | `ut_line` & `ut_id` | The name of the (native `tty` or pseudo `pts`) terminal device associated with the record (such as `tty1` or `pts/3`). <br> `ut_line` is set to `~` and `ut_id` to `~~` for records related to system shutdown or reboot. |
-| `ut_name`/`ut_user` | The username or technical information associated with the record. <br><br> The username is set to: <br> - `shutdown` for system shutdown <br> - `reboot` for system reboot. <br> - `LOGIN` for `LOGIN_PROCESS` records. <br> - `runlevel` for `RUN_LVL` record related to `init(1)`. <br> - The username of the user associated with the login for `USER_PROCESS` records. |
-| `ut_host` | The source host's hostname or IP address set for `USER_PROCESS` records linked to a remote login (set to `:0` for local logins) or the kernel version for `RUN_LVL` records. |
+| `ut_name`/`ut_user` | The username or technical information associated with the record. <br><br> The username is set to: <br> - `shutdown` for system shutdown. <br> - `reboot` for system reboot. <br> - `LOGIN` for `LOGIN_PROCESS` records. <br> - `runlevel` for `RUN_LVL` records related to `init(1)`. <br> - The username of the user associated with the login for `USER_PROCESS` records. |
+| `ut_host` | The source host's hostname or IP address set for `USER_PROCESS` records linked to a remote login (set to `:0` for local logins), or the kernel version for `RUN_LVL` records. |
 | `ut_addr` | The source host's IP address set for `USER_PROCESS` records linked to a remote login (or set to `0.0.0.0` otherwise). |
-| `ut_time`/`ut_tv` | The timestamp of the record, with up to microseconds precision depending on the system architecture (`32-bit` or `64-bit`) and `utmp.h` versions/implementation. |
+| `ut_time`/`ut_tv` | The timestamp of the record, with up to microsecond precision, depending on the system architecture (`32-bit` or `64-bit`) and `utmp.h` versions/implementations. |
 
 ### Tool(s)
 
-`*tmp` login records are not stored in clear-text and must be parsed with
-adequate utilities:
+`*tmp` login records are not stored in cleartext and must be parsed with
+appropriate utilities:
 
   - The built-in `last` (for `wtmp`), `lastb` (for `btmp`), and `w`/`who`
     (for `utmp`) utilities for live systems and exported `*tmp` log files.
@@ -84,7 +84,7 @@ adequate utilities:
     who
     ``` 
 
-  - The `utmpdump` utility can be used to parse `*tmp` logs into an ascii
+  - The `utmpdump` utility can be used to parse `*tmp` logs into an ASCII
     table.
 
     ```bash
@@ -96,10 +96,10 @@ adequate utilities:
 
   - The `target-query` tool, part of the
     [`dissect` Python framework](https://docs.dissect.tools/en/latest/index.html),
-    can be used to parse `wtmp` and `btmp` logs in `CSV` or `JSON` outputs.
+    can be used to parse `wtmp` and `btmp` logs into `CSV` or `JSON` output.
 
     ```bash
-    # To parse a single wtmp or btmp file, the files must be under <TARGET>/var/log/
+    # To parse a single wtmp or btmp file, the file must be placed under <TARGET>/var/log/.
 
     target-query -f <wtmp | btmp> <TARGET> | rdump <--csv | --json | --jsonlines>
     ```

@@ -63,9 +63,9 @@ Get-WinEvent -Computer <HOSTNAME | IP> -Credential <PSCredential> -ListLog <LOGN
 The following commands can be used to filter the event logs.
 
 The `wevtutil` utility supports only `XPath` queries. The
-`Windows Event Viewer` utility can be used to define a filter query through the
-graphical and more user-friendly interface and export the filter into an
-`XPath` format for use with `wevtutil`.
+`Windows Event Viewer` utility can be used to define a filter query through its
+graphical and more user-friendly interface, and export the filter in `XPath`
+format for use with `wevtutil`.
 
 ```bash
 wevtutil qe <LOGNAME> /q:"<XPATH_QUERY>"
@@ -98,7 +98,7 @@ the following attributes:
 Get-WinEvent -FilterHashtable @{Path="<FILE_PATH>"; ID=<EVENT_ID | LIST_EVENT_IDs>} | Fl
 Get-WinEvent -Computer <HOSTNAME | IP> -Credential <PSCredential> -FilterHashtable @{Path="<FILE_PATH>"; ID=<EVENT_ID | LIST_EVENT_IDs>} | Fl
 
-# Searches the specified string in event data.
+# Searches for the specified string in event data.
 Get-WinEvent -FilterHashtable @{Path="<FILE_PATH>"; data="<STRING | LIST_STRINGs>"} | Fl
 Get-WinEvent -Computer <HOSTNAME | IP> -Credential <PSCredential> -FilterHashtable @{Path="<FILE_PATH>"; data="<STRING | LIST_STRINGs>"} | Fl
 ```
@@ -107,9 +107,9 @@ Get-WinEvent -Computer <HOSTNAME | IP> -Credential <PSCredential> -FilterHashtab
 
 #### Graphical applications
 
- - `Event Viewer`: Windows built-in `GUI` events viewer utility.
+ - `Event Viewer`: Windows built-in `GUI` event viewer utility.
 
- - `Event Log Explorer`: Proprietary `GUI` events viewer utility.
+ - `Event Log Explorer`: Proprietary `GUI` event viewer utility.
 
 #### [CLI] LogParser
 
@@ -121,12 +121,12 @@ Notable `KAPE` modules available that leverage `LogParser`:
 
 The following `LogParser.exe` query, as implemented in `KAPE` as the
 `Logon-Logoff-events` module, extracts and parses multiple `Security` events
-related to Windows logon into an output `CSV` file. The following `events ID`
+related to Windows logon into an output `CSV` file. The following `event IDs`
 are processed: 4624, 4625, 4634, 4647, 4648, 4672, 4778, 4779, 4800, 4801,
 4802, and 4803.
 
-This query can prove useful for analysis of events from both Domain Controllers
-and Windows servers or workstations.
+This query can prove useful for the analysis of events from both Domain
+Controllers and Windows servers or workstations.
 
 ```bash
 # Author: Brian Maloney (idea by @0x47617279).
@@ -136,11 +136,12 @@ LogParser.exe -stats:OFF -i:EVT -o CSV "SELECT TO_UTCTIME(TimeGenerated) AS Date
 
 #### [CLI] Winlogbeat
 
-`Winlogbeat` can be used to parse `EVTX` into JSON or to ship them to `ELK`.
+`Winlogbeat` can be used to parse `EVTX` files into JSON or to ship them to
+`ELK`.
 
-The `Winlogbeat_ALL` `KAPE` module can be used to parse every `EVTX`
-recursively found in the specified directory to JSON. As `winlogbeat` is
-executed once per `EVTX` file, the module however suffers from poor
+The `Winlogbeat_ALL` `KAPE` module can be used to parse every `EVTX` file
+recursively found in the specified directory into JSON. However, as
+`winlogbeat` is executed once per `EVTX` file, the module suffers from poor
 performance.
 
 The [`Execute-Winlogbeat.ps1`](https://gist.github.com/Qazeer/4936ec6c9fa511500f9496d0ceacab22)
@@ -151,15 +152,15 @@ improving performance.
 
 #### [CLI] EvtxECmd
 
-`EvtxECmd` can be used to parse `EVTX` into CSV, JSON, or XML outputs. However,
-contrary to `winlogbeat`, `EvtxECmd` does not extract the fields in a one-to-one
-manner, but groups the event payload into a limited number of fields (in order
-to support CSV output).
+`EvtxECmd` can be used to parse `EVTX` files into CSV, JSON, or XML output.
+However, unlike `winlogbeat`, `EvtxECmd` does not extract the fields in a
+one-to-one manner, but groups the event payload into a limited number of fields
+(in order to support CSV output).
 
 Associated `KAPE` modules: `EvtxECmd` and `EvtxECmd_RDP`.
 
 ```bash
-# Processes all events in the specific evtx file or evtx files in the specified directory.
+# Processes all events in the specified EVTX file, or in the EVTX files in the specified directory.
 EvtxECmd.exe [-f '<FILE>' | -d '<DIRECTORY>']  --csv '<OUTPUT_DIRECTORY_CSV>'
 
 # Filters the events to output based on an include list (--inc) or exclude list (--exc).
@@ -189,15 +190,15 @@ represented as two nodes, the host (hostname or IP address) and the account
 name, linked by the event information (`event ID`, number of occurrences,
 etc.).
 
-The following `events ID` are processed: 4624, 4625, 4768, 4769, 4776, and
+The following `event IDs` are processed: 4624, 4625, 4768, 4769, 4776, and
 4672.
 
 Events can be filtered on a number of criteria:
   - The host(s) (hostname or IP) or user(s) concerned by the logon.
-  - If the authentication provider is `NTLM` (AuthName: NTLM).
+  - Whether the authentication provider is `NTLM` (AuthName: NTLM).
   - The logon type: `RDP` (Logon type 10), `Network` (Logon type 3), `Batch`
     (Logon type 4), and `Service` (Logon type 5).
-  - If the logon was associated with special privileges (`event ID` 4672).
+  - Whether the logon was associated with special privileges (`event ID` 4672).
   - etc.
 
 ```bash
@@ -213,7 +214,7 @@ docker run --detach --publish=7474:7474 --publish=7687:7687 --publish=8080:8080 
 # Deletes the example data present by default in the container.
 docker exec <CONTAINER_ID> python /usr/local/src/LogonTracer/logontracer.py --delete -u '<USERNAME>' -p '<PASSWORD>' -s <IP>
 
-# It is advised to add Security.evtx files through the web interface, exposed by default on the TCP port 8080.
+# It is advised to add Security.evtx files through the web interface, exposed by default on TCP port 8080.
 Upload Event Log (bottom left) -> Browse -> One or multiple files can be selected -> Upload
 
 # Alternatively, the Security.evtx files can be uploaded using the logontracer.py Python script.

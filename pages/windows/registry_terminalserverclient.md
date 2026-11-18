@@ -1,6 +1,6 @@
 ---
 title: Registry - Terminal Server Client\Servers
-summary: 'The Terminal Server Client\Servers registry key tracks the remote hosts the associated user connected to using the built-in mstsc.exe Remote Desktop client.\n\nInformation of interest: IP address of the remote host and eventual saved username associated with the remote host.\n\nThe last write timestamp may be an indicator of the first access to the remote host.'
+summary: 'The Terminal Server Client\Servers registry key tracks the remote hosts the associated user connected to using the built-in mstsc.exe Remote Desktop client.\n\nInformation of interest: IP address of the remote host and saved username associated with the remote host (if any).\n\nThe last write timestamp may be an indicator of the first access to the remote host.'
 keywords: 'Terminal Server Client\Servers'
 tags:
   - windows_registry
@@ -21,23 +21,23 @@ The `Terminal Server Client\Servers` registry key tracks the remote hosts the
 associated user connected to (from the local system) using the built-in
 `mstsc.exe` `Remote Desktop` client. Remote hosts are only added if the remote
 host screen was reached, i.e. `Network Level Authentication` succeeded (if the
-remote host requires `NLA`) and the certificate warning has been accepted (if a
+remote host requires `NLA`) and the certificate warning was accepted (if a
 warning was displayed).
 
-Entries are added/updated in near real-time.
+Entries are added/updated in near real time.
 
 ### Information of interest
 
 Each remote host is referenced as a dedicated subkey under the
-`Terminal Server Client\Servers\<IP>` registry key. This subkey is named after
-the IP address of the remote host.
+`Terminal Server Client\Servers` registry key. This subkey is named after the
+IP address of the remote host.
 
-For each host, its dedicated subkey references the eventual saved username for
-the connection in the `UsernameHint` value.
+For each host, its dedicated subkey references the saved username for the
+connection (if any) in the `UsernameHint` value.
 
 Additionally, the last write timestamp may be an indicator of the first access
 to the remote host (but may also have been updated for various other reasons).
 
 ### References
 
-  - [jpcertcc - RDP (Remote Desktop Protocol)](https://jpcertcc.github.io/ToolAnalysisResultSheet/details/mstsc.htm)
+  - [JPCERT - RDP (Remote Desktop Protocol)](https://jpcertcc.github.io/ToolAnalysisResultSheet/details/mstsc.htm)

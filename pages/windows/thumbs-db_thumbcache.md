@@ -1,6 +1,6 @@
 ---
 title: Thumbs.db and Thumbcache
-summary: 'The Thumbs.db and Thumbcache files contain cached thumbnail previews for files (pictures, some document and media file types) in folders that were interactively accessed with the Windows Explorer. Some document types, such as PDF files, will have their first page as their thumbnail preview.\n\nThe cached thumbnail previews persist even after deletion of the associated files.\n\nThe Thumbs.db files are stored in their associated folders, with one individual Thumbs.db file per folder. Since Windows Vista, Thumbs.db files are only generated for access through UNC paths (in the remote/share directory).\n\nStarting with Windows Vista, the Thumbcache files centralize thumbnails in a central location. Each Thumbcache file, labeled "thumbcache_<RESOLUTION>.db", contains thumbnails from all locations. The location of the file linked to a thumbnail is not stored in the Thumbcache file. However, a unique identifier may be used to retrieve the location of the associated file (mostly for non-deleted files).'
+summary: 'The Thumbs.db and Thumbcache files contain cached thumbnail previews for files (pictures, some document and media file types) in folders that were interactively accessed with the Windows Explorer. Some document types, such as PDF files, will have their first page as their thumbnail preview.\n\nThe cached thumbnail previews persist even after deletion of the associated files.\n\nThe Thumbs.db files are stored in their associated folders, with one individual Thumbs.db file per folder. Since Windows Vista, Thumbs.db files are only generated for access through UNC paths (in the remote/share directory).\n\nStarting with Windows Vista, the Thumbcache files store thumbnails in a central location. Each Thumbcache file, labeled "thumbcache_<RESOLUTION>.db", contains thumbnails from all locations. The location of the file linked to a thumbnail is not stored in the Thumbcache file. However, a unique identifier may be used to retrieve the location of the associated file (mostly for non-deleted files).'
 keywords: Thumbs.db, Thumbcache, picture, thumbnail, preview
 tags:
   - windows_files_and_folders_access
@@ -20,13 +20,13 @@ files (pictures, some document and media file types) in folders that were
 interactively accessed with the `Windows Explorer`. Some document types, such
 as `PDF` files, will have their first page as their thumbnail preview.
 
-The thumbnail previews are stored in these databases as it takes less system
-resources (CPU time and memory) to retrieve an already generated thumbnail as
-opposed to generating it every time the directory is accessed.
+The thumbnail previews are stored in these databases as it takes fewer system
+resources (CPU time and memory) to retrieve an already generated thumbnail than
+to generate it every time the directory is accessed.
 
 For a `Thumbs.db` file to be generated in a given folder, or for entries to be
-added to the central `Thumbcache` files, the access must have been done with
-some sort of files' thumbnail/icon preview enabled.
+added to the central `Thumbcache` files, the folder must have been accessed
+with some sort of file thumbnail/icon preview enabled.
 
 The cached thumbnail previews persist even after deletion of the associated
 files.
@@ -37,7 +37,7 @@ files.
 
 The `Thumbs.db` files are stored in their associated folders, with one
 individual `Thumbs.db` file per folder (that was interactively accessed with
-files preview). However, since Windows Vista, `Thumbs.db` files are only
+file previews enabled). However, since Windows Vista, `Thumbs.db` files are only
 generated for access through `UNC` paths (such as
 `\\<HOST>\<SHARE_NAME>\<FOLDER>` or `\\<HOST>\c$\<FOLDER>`) in the remote /
 share directory.
@@ -50,15 +50,15 @@ deduced.
 
 #### Thumbcache
 
-Starting with `Windows Vista`, the `Thumbcache` files centralize thumbnails in
-a central location. Each `Thumbcache` file, labeled
+Starting with `Windows Vista`, the `Thumbcache` files store thumbnails in a
+central location. Each `Thumbcache` file, labeled
 `thumbcache_<RESOLUTION>.db`, contains thumbnails from all locations. The
 `<RESOLUTION>` indicates the resolution of the thumbnail previews, such as the
 `thumbcache_1280.db` file for thumbnails in 1280 x 720 pixels resolution.
 
 The location of the file linked to a thumbnail is not stored in the
 `Thumbcache` file. However, each thumbnail in the `Thumbcache` file is
-associated with a unique identifier `ThumbnailcacheID`. This identifier/hash
+associated with a unique identifier, `ThumbnailcacheID`. This identifier/hash
 can be used to retrieve the location of the associated file, mostly for
 non-deleted files:
 
@@ -66,25 +66,25 @@ non-deleted files:
     This requires the file to still be present on the volume.
 
   - By searching the `Windows Search` database (`Windows.edb`) for the
-    `ThumbnailcacheID`, as a table of this database notably references the file
-    original full path and size. As the `Windows Search` database is updated in
-    near real time and does not store information on deleted files, this also
-    requires the original file to still be present.
+    `ThumbnailcacheID`, as a table of this database notably references the
+    file's original full path and size. As the `Windows Search` database is
+    updated in near real time and does not store information on deleted files,
+    this also requires the original file to still be present.
 
 ### Tool(s)
 
 The [`Thumbs Viewer`](https://thumbsviewer.github.io/) and
-[`Thumbcache Viewer`](https://thumbcacheviewer.github.io/) can be used to,
-respectively, parse `Thumbs.db` and `Thumbcache` files.
+[`Thumbcache Viewer`](https://thumbcacheviewer.github.io/) utilities can be
+used to parse `Thumbs.db` and `Thumbcache` files, respectively.
 
 The command-line version
 [`thumbcache_viewer_cmd`](https://thumbcacheviewer.github.io/#Thumbcache_Viewer_CMD)
 can be used to extract thumbnail images and generate HTML and CSV report(s) on
 the thumbnails extracted. The
 [Execute-ThumbcacheViewer.ps1](https://gist.github.com/Qazeer/cb3a0cf306bc1f75a2d5a8cef5b9ffa9)
-PowerShell script (`KAPE` associated module
+PowerShell script (associated `KAPE` module
 `PowerShell_Execute-ThumbcacheViewer`) can recursively process the specified
-input folder to execute `thumbcache_viewer_cmd.exe` over each thumbcache
+input folder to execute `thumbcache_viewer_cmd.exe` on each thumbcache
 subfolder found. The PowerShell script is basically a wrapper to make
 `thumbcache_viewer_cmd.exe` recursive, as the tool can natively only process a
 thumbcache subfolder directly.

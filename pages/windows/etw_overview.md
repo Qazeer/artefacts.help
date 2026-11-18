@@ -1,6 +1,6 @@
 ---
 title: ETW - Overview
-summary: 'Event Tracing is broken into three distinct components: controllers, providers, and consumers.\n\nControllers start and stop an event tracing session and enable providers.\n\nProviders: provide the events, consumed by Consumers in real time.\n\nProviders can also write events to (new or existing) channels, with each event only being writable to a single channel.'
+summary: 'Event Tracing is broken into three distinct components: controllers, providers, and consumers.\n\nControllers start and stop an event tracing session and enable providers.\n\nProviders provide the events, which are consumed by consumers in real time.\n\nProviders can also write events to (new or existing) channels, with each event only being writable to a single channel.'
 keywords: 'Event Tracing for Windows, ETW, EVTX, controllers, providers, consumers, trace sessions, channel'
 tags:
   - windows_etw
@@ -11,8 +11,8 @@ permalink: windows_etw_overview.html
 folder: windows
 ---
 
-Overall system usage: Accounts authentication successes and failures, local
-accounts and groups management, Windows Services or scheduled tasks operations,
+Overall system usage: account authentication successes and failures, local
+account and group management, Windows service or scheduled task operations,
 PowerShell activity, etc.
 
 `Event Tracing` is broken into three distinct components:

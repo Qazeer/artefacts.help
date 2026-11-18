@@ -14,12 +14,12 @@ folder: aws
 ### AWS CLI access
 
 The `AWS Command Line Interface (AWS CLI)` can be used to access AWS resources
-through a command line utility. To set up the `AWS CLI` environment, notably the
+through a command-line utility. To set up the `AWS CLI` environment, notably the
 configuration of credentials, the `aws configure` command may be used.
 
-The `aws configure` command will ask for the following information, that will be stored
-(in clear-text) in the `config` and `credentials` files (by default in a `.aws`
-folder in the current user's home directory):
+The `aws configure` command will ask for the following information, which will
+be stored (in cleartext) in the `config` and `credentials` files (by default in
+a `.aws` folder in the current user's home directory):
 
   - `Access key ID`.
 
@@ -40,6 +40,6 @@ can be attached to the principal used to retrieve the `CloudTrail` logs and
 perform the security review in order to grant the required and necessary
 permissions.
 
-Additionally, specific tooling may require additional permissions. For example,
+Specific tools may also require additional permissions. For example,
 [`Invictus-AWS`](https://github.com/invictus-ir/Invictus-AWS) notably requires
-the permissions to write exported logs to a specific `S3` bucket.
+the permissions to write the exported logs to a specific `S3` bucket.

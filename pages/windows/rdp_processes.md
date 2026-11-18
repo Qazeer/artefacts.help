@@ -1,6 +1,6 @@
 ---
 title: RDP - Processes
-summary: 'The following processes are related to RDP activity:\n\n- mstsc.exe: Windows built-in RDP client. The remote host may (but not necessarily) be specified using the command-line parameter "/v:".\n\n- rdpclip.exe: RDP Clipboard Monitor, executed on the remote host every time a remote interactive RDP session is successfully established.\n\n- TSTheme.exe: TSTheme Server Module, starting with Windows 7, executed on the remote host every time a remote interactive RDP session is successfully established and upon session closure.'
+summary: 'The following processes are related to RDP activity:\n\n- mstsc.exe: Windows built-in RDP client. The remote host can, but does not have to, be specified using the command-line parameter "/v:".\n\n- rdpclip.exe: RDP Clipboard Monitor, executed on the remote host every time a remote interactive RDP session is successfully established.\n\n- TSTheme.exe: TSTheme Server Module, starting with Windows 7, executed on the remote host every time a remote interactive RDP session is successfully established and upon session closure.'
 keywords: RDP, mstsc.exe, rdpclip.exe, RDP Clipboard Monitor, tstheme.exe, TSTheme Server Module, NLA
 tags:
   - windows_lateral_movement
@@ -23,7 +23,7 @@ The following processes are related to `RDP` activity on the source host:
     client `Microsoft Terminal Server Client`. The client can be launched and
     the remote server then specified through the graphical interface, or the
     remote server can be specified directly using the `/v:` command-line
-    parameter. If the remote server is specified through the command-line,
+    parameter. If the remote server is specified through the command line,
     [ETW process logging](./etw_process_creation.md) or
     [mstsc's `Jumplists`](./jumplists.md#remote-desktop-connection-mstscexe)
     can be leveraged to determine the remote host reached.
@@ -44,6 +44,6 @@ The following processes are related to `RDP` activity on the destination host:
 
   - `TSTheme.exe` (`<WINDIR>\System32\TSTheme.exe`): the
     `TSTheme Server Module`. Starting with `Windows 7`, `TSTheme` is executed,
-    similarly to `rdpclip`, every time an interactive `RDP` session is
+    as is `rdpclip`, every time an interactive `RDP` session is
     successfully established. A new `TSTheme` instance also appears to be
     reliably executed upon the session closure.

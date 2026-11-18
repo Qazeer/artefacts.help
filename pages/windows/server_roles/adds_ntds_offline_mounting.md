@@ -1,6 +1,6 @@
 ---
 title: Procedure - Active Directory Domain Services NTDS offline mounting
-summary: 'An exported NTDS database file can be mounted using dsamain, to then be queried in LDAP or with PowerShell cmdlets through the "AD Web Services".'
+summary: 'An exported NTDS database file can be mounted using dsamain, to then be queried over LDAP or with PowerShell cmdlets through the "AD Web Services".'
 keywords: Active Directory, Active Directory Domain Services, Domain Controllers, DC, replication metadata, msDS-ReplAttributeMetaData, msDS-ReplValueMetaData, Get-ADReplicationAttributeMetadata, ADTimeline, FarsightAD, esentutl, dsamain.exe
 tags:
   - windows_active_directory
@@ -13,17 +13,17 @@ permalink: adds_ntds_offline_mounting.html
 folder: windows
 ---
 
-### Overview and pre-requisites
+### Overview and prerequisites
 
 An exported NTDS database file can be mounted using `dsamain`, to then be
-queried in LDAP or with PowerShell cmdlets through the `AD Web Services`
+queried over LDAP or with PowerShell cmdlets through the `AD Web Services`
 (ADWS).
 
 For instance, the `Get-ADReplicationAttributeMetadata` cmdlet or `ADTimeline`
 can be used on a "mounted" NTDS database to retrieve historical
 [AD replication metadata](./adds_replication_metadata.md) from backup images.
 
-The following pre-requisites are required to mount an NTDS database:
+The following prerequisites must be met to mount an NTDS database:
 
   1. The Windows Server major version used must be greater than or equal to the
      Windows Server version of the Domain Controller the NTDS is coming
@@ -51,7 +51,7 @@ If needed, for instance if the NTDS database was exported while the AD DS
 service was running, the NTDS must be repaired using `esentutl`:
 
 ```bash
-# /r: Replays the last transaction logs (files "edb*.log") from the current folder, if any, to apply the last AD objects changes.
+# /r: Replays the last transaction logs (files "edb*.log") from the current folder, if any, to apply the last AD object changes.
 esentutl /r edb
 
 # /p: Repairs the specified NTDS database.
@@ -61,7 +61,7 @@ esentutl /p <NTDS_DIT_PATH>
 Then the `dsamain` utility can be used to "mount" the NTDS (in a clean state):
 
 ```bash
-# Mount the specified NTDS database, exposing a LDAP service on port 3266 (and allowing access through the ADWS service).
+# Mounts the specified NTDS database, exposing an LDAP service on port 3266 (and allowing access through the ADWS service).
 
 dsamain.exe -dbpath <NTDS_DIT_PATH> -ldapport 3266 -allownonadminaccess
 ```
@@ -85,8 +85,8 @@ Get-AD*
 
 #### Human-readable ACL using Get-ACL
 
-While RSAT cmdlets or GUI tools can be used to retrieve ACL in a `SDDL`
-notation, the `Get-Acl` cmdlet can be used to query and retrieve ACL in a
+While RSAT cmdlets or GUI tools can be used to retrieve ACLs in `SDDL`
+notation, the `Get-Acl` cmdlet can be used to query and retrieve ACLs in a
 human-readable format:
 
 ```bash
@@ -96,7 +96,7 @@ New-PSDrive -Name ADOffline -PSProvider ActiveDirectory -Root "//RootDSE/" -Serv
 Get-Acl "ADOffline://<OBJECT_DN> | Select -ExpandProperty Access
 ```
 
-#### AD Replication metadata
+#### AD replication metadata
 
 The `Get-ADReplicationAttributeMetadata` PowerShell cmdlet and
 [ADTimeline](https://github.com/ANSSI-FR/ADTimeline) can be used to retrieve

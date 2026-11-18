@@ -25,28 +25,27 @@ Both utilities support the same
 ["display filter" engine](https://www.wireshark.org/docs/man-pages/wireshark-filter.html),
 allowing advanced filtering on network protocol fields. Additionally, `tshark`
 supports "read filters" that can be used to perform two-pass analysis. The
-packets are first filtered using the read filter and the results can be
+packets are first filtered using the read filter, and the results can then be
 processed as if working on an intermediate `pcap` export. This can be useful to
-combine `tshark` filters and statistic computation.   
+combine `tshark` filters and statistics computation.   
 
 #### `Wireshark` and `tshark` tips
 
-  - To easily identify a field name (for later filtering for instance), it is
+  - To easily identify a field name (for later filtering, for instance), it is
     possible to select/hover over the field in `Wireshark`, and the field
-    name will be displayed in the
-    [status bar](https://www.wireshark.org/docs/wsug_html_chunked/ChUseStatusbarSection.html)
-    left side.
+    name will be displayed on the left side of the
+    [status bar](https://www.wireshark.org/docs/wsug_html_chunked/ChUseStatusbarSection.html).
 
-  - A field can be added as a column in `Wireshark` by right clicking the field
+  - A field can be added as a column in `Wireshark` by right-clicking the field
     in the packet details panel and selecting "Apply as Column", or by
     selecting the field and using the "Ctrl + Shift + I" shortcut.
 
-  - The "Find Packet" menu ("Ctrl + F" shortcut) can be used to search string /
-    regex in packet (list and content). This feature can be combined with
-    display filters to limit the number of packets searched. A similar search
-    can be conducted with `tshark` using the display filter
-    `'frame contains "<STRING>"'` (for string) or `'frame matches "<REGEX>"'`
-    (for case-insensitive regular expression).
+  - The "Find Packet" menu ("Ctrl + F" shortcut) can be used to search for
+    strings / regexes in packets (list and content). This feature can be
+    combined with display filters to limit the number of packets searched. A
+    similar search can be conducted with `tshark` using the display filter
+    `'frame contains "<STRING>"'` (for strings) or `'frame matches "<REGEX>"'`
+    (for case-insensitive regular expressions).
 
 #### `tshark` basic usage
 
@@ -54,9 +53,9 @@ combine `tshark` filters and statistic computation.
 # -n: Disables all name resolutions, to avoid DNS queries to external resolvers.
 # -t ud: Displays the timestamp associated with the packet in UTC YYYY-MM-DD hh:mm:ss.SSSSSSSSS.
 # -Y <DISPLAY_FILTER>: Filters the displayed results using <DISPLAY_FILTER> ("display filter").
-# -2 -R <READ_FILTER>: Filters the results with <READ_FILTER>, allowing for 2 pass analysis.
+# -2 -R <READ_FILTER>: Filters the results with <READ_FILTER>, allowing for two-pass analysis.
 # -z <STATISTIC_EXPRESSION>: Computes statistics based on the specified expression.
-# -q: Limits stdout output, notably to avoid printing packets metadata for statistics (-z).
+# -q: Limits stdout output, notably to avoid printing packet metadata for statistics (-z).
 # -T <json | PRINT_FORMAT>: Specifies the output print format. Defaults to "text".
 # -T fields -e <FIELD_1> ... -e <FIELD_N>: Extracts the specified fields.
 
@@ -71,7 +70,7 @@ tshark -n [-i <NETWORK_INTERFACE> | -r <INPUT_FILE>] [-2 -R '<READ_FILTER>'] -q 
 
 #### `tshark` command examples
 
-Example of useful `tshark` commands with display/read filters (that may also
+Examples of useful `tshark` commands with display/read filters (which may also
 be used in `Wireshark`) and statistic expressions:
 
 | tshark command | Description |
@@ -82,9 +81,9 @@ be used in `Wireshark`) and statistic expressions:
 | `tshark -nr <INPUT_FILE> -2 -R 'ip.src.addr == <SRC_IP> && ip.dst.addr in {10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16}' -q -z io,phs` <br><br> `tshark -nr <INPUT_FILE> -2 -R 'ip.src.addr == <IP> && ip.dst.addr in {10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16}' -q -z endpoints,ip` | Displays basic metrics (frames and bytes exchanged) per protocol (`io,phs`) or per remote host (`endpoints,ip`) for the given `IP` source `SRC_IP` to all private hosts. |
 | `tshark -nr <INPUT_FILE> --export-objects smb,<OUTPUT_FOLDER>` <br><br> `tshark -nr <INPUT_FILE> --export-objects http,<OUTPUT_FOLDER>` | Extracts the files found in the `SMB` or `HTTP` streams to disk. |
 | `tshark -nr <INPUT_FILE> -Y 'dns || udp.dstport == 53 || tcp.dstport == 53' -T fields -e ip.src -e dns.qry.name | sort -u` | Extracts `DNS` queries made per host. |
-| `tshark -nr <INPUT_FILE> -Y 'tls.handshake.type eq 1'` <br><br> `tshark -nr <INPUT_FILE> -Y 'tls.handshake.type eq 1' -T fields -e ip.src -e tls.handshake.extensions_server_name | sort -u` | Lists/extracts the `TLS` `Client Hello` requests, that may contain [`Server Name Indication` (`SNI`)](https://www.cloudflare.com/learning/ssl/what-is-sni/) referencing the requested domain. <br><br> `Client Hello` requests can be listed or the `SNI` specified extracted per host. |
+| `tshark -nr <INPUT_FILE> -Y 'tls.handshake.type eq 1'` <br><br> `tshark -nr <INPUT_FILE> -Y 'tls.handshake.type eq 1' -T fields -e ip.src -e tls.handshake.extensions_server_name | sort -u` | Lists/extracts the `TLS` `Client Hello` requests, which may contain [`Server Name Indication` (`SNI`)](https://www.cloudflare.com/learning/ssl/what-is-sni/) referencing the requested domain. <br><br> `Client Hello` requests can be listed, or the specified `SNI` extracted per host. |
 | `tshark -nr <INPUT_FILE> -Y 'http && http.request.method in {"GET", "POST"}'` | Extracts `GET` and `POST` `HTTP` requests. |
-| `tshark -nr <INPUT_FILE> -Y 'http' -T fields -e http.host -e http.user_agent | sort -u` | Extracts the `User-Agents` (uniquely) used in `HTTP` requests per host. |
+| `tshark -nr <INPUT_FILE> -Y 'http' -T fields -e http.host -e http.user_agent | sort -u` | Extracts the unique `User-Agents` used in `HTTP` requests per host. |
 
   - Extracts the `HTTP` request or response body content:
 
@@ -111,13 +110,13 @@ can be used to parse `PCAP` files and will produce
 [several `log` files](https://docs.zeek.org/en/current/log-formats.html#working-with-log-files)
 related to the network activity occurring in the `PCAP`.
 
-By default `zeek` will output `TSV` files, but also supports `JSON` outputs.
+By default, `zeek` outputs `TSV` files, but also supports `JSON` output.
 
 ```bash
-# TSV formatted output files.
+# TSV-formatted output files.
 zeek -r <PCAP_FILE>
 
-# JSON formatted output files.
+# JSON-formatted output files.
 zeek -C -r <PCAP_FILE> LogAscii::use_json=T
 ```
 
@@ -132,10 +131,10 @@ against network packets and `PCAP` files.
 analysis with tools supporting deep packet inspection (such as `Wireshark`).
 
 ```bash
-# -W Specifies  an  alternate  manner  for displaying output packets matching the expression.
+# -W: Specifies an alternate manner for displaying output packets matching the expression.
 #    The "byline" mode honors embedded line feeds (useful for observing HTTP transactions, for instance).
-#    The "none" displays the IP and source/destination header on one line, the payload on a second line.
-#    The "single" displays everything (header and payload) on a single line.
+#    The "none" mode displays the IP and source/destination header on one line, the payload on a second line.
+#    The "single" mode displays everything (header and payload) on a single line.
 
 ngrep [-i] [-W <normal | single | byline> | -O <OUTPUT_PCAP_FILE>] -I <INPUT_PCAP_FILE> '<GREP_EXPRESSION>' '<BPF_FILTER>'
 ```

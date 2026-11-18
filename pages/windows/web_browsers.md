@@ -1,10 +1,10 @@
 ---
 title: Web browsers
-summary: 'The web browsers related artefacts can be split in the following categories:\n\n- User profile: web browsers, such as Chromium-based browsers (Chrome, Edge) and Firefox, implement a profile feature to store users settings, history, favorites, etc. The databases and files that store this information are usually stored under a user specific profile folder.\n\n- History: web browsing history and download history.\n\n- Cookies: web browsing cookies (session tokens).\n\n- Cache: cache of resources downloaded from accessed websites.\n\n- Sessions: tabs and windows from a browsing session.\n\n- Settings: configuration settings.'
+summary: 'Web browser-related artefacts can be split into the following categories:\n\n- User profile: web browsers, such as Chromium-based browsers (Chrome, Edge) and Firefox, implement a profile feature to store users'' settings, history, favorites, etc. The databases and files that store this information are usually located under a user-specific profile folder.\n\n- History: web browsing history and download history.\n\n- Cookies: web browsing cookies (session tokens).\n\n- Cache: cache of resources downloaded from accessed websites.\n\n- Sessions: tabs and windows from a browsing session.\n\n- Settings: configuration settings.'
 keywords:
 tags:
   - windows_browsing_history
-location: 'Web browsers artefacts are often located under:\n - %LocalAppData%: <SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Local.\n - %AppData%: <SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Roaming.\n\n Internet Explorer\n----------------------\nBrowsing history, downloads, cache, cookies metadata: %LocalAppData%\Microsoft\Windows\WebCache\WebCacheV01.dat.\nCookies: %AppData%\Microsoft\Windows\Cookies.\nSessions: %LocalAppData%\Microsoft\Internet Explorer\Recovery\*.dat.\n\n Edge (Legacy)\n-------------------\nBrowsing history, downloads, cache, cookies metadata: %LocalAppData%\Microsoft\Windows\WebCache\WebCacheV01.dat;\nUser profiles: %LocalAppData%\Packages\Microsoft.MicrosoftEdge_XXX\AC.\nCache: <USER_PROFILE>\MicrosoftEdge\Cache.\nSessions: <USER_PROFILE>\MicrosoftEdge\User\Default\Recovery\Active.\nSettings: <USER_PROFILE>\User\Default\DataStore\Data\nouser1\XXX\DBStore\spartan.edb.\n\nEdge (Chromium-based)\n--------------------------------\nUser profiles: %LocalAppData%\Microsoft\Edge\User Data\<Default | Profile X>.\nBrowsing history: <USER_PROFILE>\History.\nCookies: <USER_PROFILE>\Cookies.\nCache: <USER_PROFILE>\Cache.\nSessions: <USER_PROFILE>\Sessions.\nSettings: <USER_PROFILE>\Preferences.\n\nGoogle Chrome\n----------------------\nUser profiles: %LocalAppData%\Google\Chrome\User Data\<Default | Profile X>.\nBrowsing history: <USER_PROFILE>\History.\nCookies: <USER_PROFILE>\Cookies.\nCache: <USER_PROFILE>\Cache.\nSessions: <USER_PROFILE>\Sessions.\nSettings: <USER_PROFILE>\Preferences.\n\nMozilla Firefox\n--------------------\nUser profiles: %AppData%\Mozilla\Firefox\Profiles\<ID>.default-release.\nBrowsing history, downloads, bookmarks: <USER_PROFILE>\places.sqlite.\nCookies: <USER_PROFILE>\cookies.sqlite.\nCache: <USER_PROFILE>\cache2\*.\nSessions: <USER_PROFILE>\sessionstorebackups\*.\nSettings: <USER_PROFILE>\prefs.js.'
+location: 'Web browser artefacts are often located under:\n - %LocalAppData%: <SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Local.\n - %AppData%: <SYSTEMDRIVE>:\Users\<USERNAME>\AppData\Roaming.\n\n Internet Explorer\n----------------------\nBrowsing history, downloads, cache, cookies metadata: %LocalAppData%\Microsoft\Windows\WebCache\WebCacheV01.dat.\nCookies: %AppData%\Microsoft\Windows\Cookies.\nSessions: %LocalAppData%\Microsoft\Internet Explorer\Recovery\*.dat.\n\n Edge (Legacy)\n-------------------\nBrowsing history, downloads, cache, cookies metadata: %LocalAppData%\Microsoft\Windows\WebCache\WebCacheV01.dat.\nUser profiles: %LocalAppData%\Packages\Microsoft.MicrosoftEdge_XXX\AC.\nCache: <USER_PROFILE>\MicrosoftEdge\Cache.\nSessions: <USER_PROFILE>\MicrosoftEdge\User\Default\Recovery\Active.\nSettings: <USER_PROFILE>\User\Default\DataStore\Data\nouser1\XXX\DBStore\spartan.edb.\n\nEdge (Chromium-based)\n--------------------------------\nUser profiles: %LocalAppData%\Microsoft\Edge\User Data\<Default | Profile X>.\nBrowsing history: <USER_PROFILE>\History.\nCookies: <USER_PROFILE>\Cookies.\nCache: <USER_PROFILE>\Cache.\nSessions: <USER_PROFILE>\Sessions.\nSettings: <USER_PROFILE>\Preferences.\n\nGoogle Chrome\n----------------------\nUser profiles: %LocalAppData%\Google\Chrome\User Data\<Default | Profile X>.\nBrowsing history: <USER_PROFILE>\History.\nCookies: <USER_PROFILE>\Cookies.\nCache: <USER_PROFILE>\Cache.\nSessions: <USER_PROFILE>\Sessions.\nSettings: <USER_PROFILE>\Preferences.\n\nMozilla Firefox\n--------------------\nUser profiles: %AppData%\Mozilla\Firefox\Profiles\<ID>.default-release.\nBrowsing history, downloads, bookmarks: <USER_PROFILE>\places.sqlite.\nCookies: <USER_PROFILE>\cookies.sqlite.\nCache: <USER_PROFILE>\cache2\*.\nSessions: <USER_PROFILE>\sessionstorebackups\*.\nSettings: <USER_PROFILE>\prefs.js.'
 last_updated: 2024-01-17
 sidebar: sidebar
 permalink: windows_web_browsers.html
@@ -13,27 +13,27 @@ folder: windows
 
 ### Overview
 
-The web browsers related artefacts can be split in the following categories:
+Web browser-related artefacts can be split into the following categories:
 
   - User profile: web browsers, such as `Chromium`-based browsers and
-    `Firefox`, implement a profile feature to store user's settings, history,
+    `Firefox`, implement a profile feature to store users' settings, history,
     favorites, etc. The databases and files that store this information are
-    usually stored under a user specific profile folder.
+    usually located under a user-specific profile folder.
 
   - History: web browsing history and download history.
 
   - Cookies: web browsing cookies (session tokens).
 
   - Cache: cache of resources downloaded from accessed websites (images, text
-    content, `HTML`, `CSS`, `Javascript` files, etc.).
+    content, `HTML`, `CSS`, `JavaScript` files, etc.).
 
   - Sessions: tabs and windows from a browsing session.
 
   - Settings: configuration settings.
 
 These files are often located under `%LocalAppData%`
-(`%SystemDrive%:\Users\<USERNAME>\AppData\Local\`) and
-`%AppData%` (`%SystemDrive%:\Users\<USERNAME>\AppData\Roaming\`).
+(`%SystemDrive%\Users\<USERNAME>\AppData\Local\`) and
+`%AppData%` (`%SystemDrive%\Users\<USERNAME>\AppData\Roaming\`).
 
 ### Artefacts
 
@@ -41,7 +41,7 @@ These files are often located under `%LocalAppData%`
 
 | Type | Description | Location |
 |------|-------------|----------|
-| Browsing history <br><br> Downloads <br><br> Cache <br><br> Cookies metadata | The `WebCacheV01.dat` is an `ESE` database, with information about `Internet Explorer` browsing activity split across multiple tables: <br><br> - Browsing history: `History` table. <br><br> - Downloads: `iedownload` table. <br><br> - Cache: `content` table. <br><br> - Cookies metadata: `Cookies` table. <br><br> [Local files accessed, not necessarily through the web browser, may also appear in the `WebCacheV01.dat` database](./webcachev01.md). | `%LocalAppData%\Microsoft\Windows\WebCache\WebCacheV01.dat` |
+| Browsing history <br><br> Downloads <br><br> Cache <br><br> Cookies metadata | The `WebCacheV01.dat` file is an `ESE` database, with information about `Internet Explorer` browsing activity split across multiple tables: <br><br> - Browsing history: `History` table. <br><br> - Downloads: `iedownload` table. <br><br> - Cache: `content` table. <br><br> - Cookies metadata: `Cookies` table. <br><br> [Local files accessed, not necessarily through the web browser, may also appear in the `WebCacheV01.dat` database](./webcachev01.md). | `%LocalAppData%\Microsoft\Windows\WebCache\WebCacheV01.dat` |
 | Cookies | - | `%AppData%\Microsoft\Windows\Cookies` |
 | Sessions | - | `%LocalAppData%\Microsoft\Internet Explorer\Recovery\*.dat` |
 
@@ -58,7 +58,7 @@ These files are often located under `%LocalAppData%`
 #### Edge (Chromium-based)
 
 Since Edge version `v79` (January 2020), `Microsoft Edge` uses a `Chromium`
-backend and shares similar artefacts to `Google Chrome`.
+backend and shares similar artefacts with `Google Chrome`.
 
 | Type | Description | Location |
 |------|-------------|----------|
@@ -93,19 +93,19 @@ backend and shares similar artefacts to `Google Chrome`.
 
 ### Tool(s)
 
-The [`NirSoft's BrowsingHistoryView`](https://www.nirsoft.net/utils/browsing_history_view.html)
+[`NirSoft's BrowsingHistoryView`](https://www.nirsoft.net/utils/browsing_history_view.html)
 utility (`NirSoft_BrowsingHistoryView` KAPE module) can be used to parse a
-number of browsers artefacts to extract browsing history information.
+number of browser artefacts to extract browsing history information.
 
 `BrowsingHistoryView` can be used either as a graphical application or as a
-command-line utility to export the parsing result (for instance in the CSV
+command-line utility to export the parsing results (for instance, in CSV
 format).
 
 ```bash
-# /HistorySource 3: Load history from the specified profiles folder (specified using /HistorySourceFolder).
+# /HistorySource 3: Loads history from the specified profiles folder (specified using /HistorySourceFolder).
 # /HistorySourceFolder <USER_PROFILES_FOLDER> example: "C:\Users" or "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Users" (for shadow copy).
-# /VisitTimeFilterType 1: Load history dating back to any time.
-# /ShowTimeInGMT 1: Converts timestamps to UTC-0 (default to the local timezone).
+# /VisitTimeFilterType 1: Loads history dating back to any time.
+# /ShowTimeInGMT 1: Converts timestamps to UTC-0 (defaults to the local timezone).
 
 browsinghistoryview.exe /HistorySource 3 /HistorySourceFolder "<USER_PROFILES_FOLDER>" /VisitTimeFilterType 1 /ShowTimeInGMT 1 /scomma <OUTPUT_CSV>
 ```
@@ -116,4 +116,4 @@ browsinghistoryview.exe /HistorySource 3 /HistorySourceFolder "<USER_PROFILES_FO
 
   - [hacktricks - Browser Artifacts](https://book.hacktricks.xyz/forensics/basic-forensic-methodology/specific-software-file-type-tricks/browser-artifacts)
 
-  - [Nirsoft - BrowsingHistoryView](https://www.nirsoft.net/utils/browsing_history_view.html)
+  - [NirSoft - BrowsingHistoryView](https://www.nirsoft.net/utils/browsing_history_view.html)

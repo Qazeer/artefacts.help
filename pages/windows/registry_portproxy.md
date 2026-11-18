@@ -22,19 +22,19 @@ system using the `netsh` built-in utility.
 The port forwards configured are stored in subkeys under `PortProxy` depending
 on their parameters:
 
-  - A first level subkey is based on the IP address source and destination
+  - A first-level subkey is based on the source and destination IP address
     versions (`IPv4` or `IPv6`). The following values are supported by `netsh`:
     `v4tov4`, `v4tov6`, `v6tov4`, and `v6tov6`.
 
-  - A second level subkey is based on the `transport layer` protocol of
-    the port forward. Only `TCP` is currently supported by netsh.
+  - A second-level subkey is based on the `transport layer` protocol of
+    the port forward. Only `TCP` is currently supported by `netsh`.
 
-Each port forward configuration is then stored as a value under the second
-level subkey, with the value's name referencing the local endpoint and the
-value's data storing the remote endpoint.
+Each port forward configuration is then stored as a value under the
+second-level subkey, with the value's name referencing the local endpoint and
+the value's data storing the remote endpoint.
 
-Example for a port forward that redirects connections received on localhost port
-`TCP` `4444` to `10.2.3.4:1234`:
+Example for a port forward that redirects connections received on localhost
+`TCP` port `4444` to `10.2.3.4:1234`:
 
 ```
 PortProxy

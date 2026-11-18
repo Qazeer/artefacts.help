@@ -1,7 +1,6 @@
 ---
 title: Jumplists
-summary: 'Introduced in Windows 7, Jumplists are linked to a taskbar user experience-enhancing feature that allows users to "jump" to files, folders or other elements by right-clicking on open applications in the Windows taskbar.\n\nInformation of interest: target file absolute path, size, attributes, and Modified, Access, and Birth timestamps (updated whenever the file is "jumped" to).\n\nRemote desktop connections made using the Windows built-in mstsc.exe client will generate an entry
-in the AutomaticDestinations JumpList that may reference the remote host.'
+summary: 'Introduced in Windows 7, Jumplists are linked to a taskbar user experience-enhancing feature that allows users to "jump" to files, folders, or other elements by right-clicking on open applications in the Windows taskbar.\n\nInformation of interest: target file absolute path, size, attributes, and Modified, Access, and Birth timestamps (updated whenever the file is "jumped" to).\n\nRemote desktop connections made using the Windows built-in mstsc.exe client will generate an entry in the AutomaticDestinations JumpList that may reference the remote host.'
 keywords: Jumplists
 tags:
   - windows_files_and_folders_access
@@ -20,7 +19,7 @@ folder: windows
 ### Overview
 
 Introduced in `Windows 7`, `Jumplists` are linked to a taskbar user
-experience-enhancing feature that allows users to "jump" to files, folders
+experience-enhancing feature that allows users to "jump" to files, folders,
 or other elements by right-clicking on open applications in the `Windows
 taskbar`. The `Windows Explorer`'s `Quick Access` feature also stores entries
 in `Jumplists`.
@@ -31,30 +30,29 @@ Two forms of `Jumplists` are created:
     `*.automaticDestinations-ms` files.
 
   - custom entries in `*.customDestinations-ms` files for items manually
-    "pinned" elements (by users or the applications themselves) to the
+    "pinned" (by users or the applications themselves) to the
     `Windows taskbar` or an application's `Jumplist`.
 
-Each application `AutomaticDestinations` and `CustomDestinations` `JumpLists`
-information is thus stored in two unique and separated files, of different
-formats:
+The `AutomaticDestinations` and `CustomDestinations` `JumpLists` information of
+each application is thus stored in two separate files of different formats:
 
   - `AutomaticDestinations` `JumpLists` files are stored as
-    `AUTOMATICDESTINATIONS-MS` file, in the `MS OLE Structured Storage` format.
+    `AUTOMATICDESTINATIONS-MS` files, in the `MS OLE Structured Storage` format.
     This file format notably contains a `DestList` stream that acts as a
     `Most Recently Used (MRU)` list of `shortcut files (.LNK)`. Each entry in an
     application `AutomaticDestinations` `JumpList` is stored as an entry in the
     `DestList` stream, composed of metadata and a `LNK`-like structure.
 
   - `CustomDestinations` `JumpLists` are stored as `CUSTOMDESTINATIONS-MS`
-    file, also comparable to a series of `shortcut files`.
+    files, also comparable to a series of `shortcut files`.
 
 Applications may handle `Jumplists` differently, with different entries being
 created/updated on different actions by specific applications.
 
 ### Information of interest
 
-As `JumpLists` are linked to an application, through an `AppId`, knowledge of
-the application that was used to open the files can be deduced if the
+As `JumpLists` are linked to an application through an `AppId`, the
+application that was used to open the files can be deduced if the
 application associated with the `AppId` is known. A number of `AppIds` are
 documented in
 [`EricZimmerman`'s `JumpList` GitHub repository](https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Resources/AppIDs.txt).
@@ -63,10 +61,10 @@ documented in
 file referenced in an application's `AutomaticDestinations` /
 `CustomDestinations` `JumpLists`:
 
-  - the target file's **absolute path, size and attributes** (hidden,
+  - the target file's **absolute path, size, and attributes** (hidden,
     read-only, etc.).
 
-  - the target file **`Modified, Access, and Birth` timestamps**,
+  - the target file's **`Modified, Access, and Birth` timestamps**,
     updated whenever the file is "jumped" to.
 
   - the **number of times the target file was "jumped" to**.
@@ -78,7 +76,7 @@ file referenced in an application's `AutomaticDestinations` /
     associated with two additional timestamps: the created and last modified
     timestamps of the entry in the `DestList` stream. The last modified
     timestamp is updated whenever the entry is interacted with (file opened,
-    `RDP` session established, etc.). The created timestamp does not however
+    `RDP` session established, etc.). However, the created timestamp does not
     appear to be reliable.
 
   - Occasionally **information on the volume that stored the target file**:

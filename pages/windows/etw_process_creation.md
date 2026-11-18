@@ -17,7 +17,7 @@ folder: windows
 | Channel | Conditions | Events |
 |---------|------------|--------|
 | `Security` | Requires `Audit Process Creation` to be enabled. <br><br> Requires `ProcessCreationIncludeCmdLine_Enabled` to be enabled for the command line to be logged. | Event `4688: A new process has been created`. <br><br> Logged upon the creation of every new process on the system. |
-| `Security` | Requires `Audit Process Creation` to be enabled. | Event `4689: Process Termination: Success and Failure` <br><br> Logged upon the termination of the process. |
+| `Security` | Requires `Audit Process Creation` to be enabled. | Event `4689: Process Termination: Success and Failure`. <br><br> Logged upon the termination of a process. |
 
 ### Fields of interest
 
@@ -43,8 +43,8 @@ take the following values:
 
 | Flag | Correspondence | Description |
 |------|----------------|-------------|
-| `%%1936` | `TokenElevationTypeDefault` | The process is started with a full token with no privileges removed or groups disabled. A full token is only used if `User Account Control (UAC)` is disabled or if the user starting the process is the built-in `Administrator` (`RID: 500`), `NT AUTHORITY\SYSTEM` or service account. |
-| `%%1937` | `TokenElevationTypeFull` | The process is started with an elevated token with no privileges removed or groups disabled. An elevated token is used when `User Account Control (UAC)` is enabled and the user chooses to start the program in an elevated security context (`Run as administrator` for example). |
+| `%%1936` | `TokenElevationTypeDefault` | The process is started with a full token with no privileges removed or groups disabled. A full token is only used if `User Account Control (UAC)` is disabled or if the user starting the process is the built-in `Administrator` (`RID: 500`), `NT AUTHORITY\SYSTEM`, or a service account. |
+| `%%1937` | `TokenElevationTypeFull` | The process is started with an elevated token with no privileges removed or groups disabled. An elevated token is used when `User Account Control (UAC)` is enabled and the user chooses to start the program in an elevated security context (for example, `Run as administrator`). |
 | `%%1938` | `TokenElevationTypeLimited` | The process is started with limited privileges, and privileges such as `SeImpersonatePrivilege`, `SeDebugPrivilege`, etc. are removed from the process security context. |
 
 #### ProcessCommandLine

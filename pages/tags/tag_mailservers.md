@@ -1,5 +1,5 @@
 ---
-title: "Mailservers"
+title: "Mail servers"
 tagName: mailservers
 search: exclude
 permalink: tag_mailservers.html

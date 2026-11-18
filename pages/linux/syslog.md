@@ -1,13 +1,13 @@
 ---
 title: Syslog
-summary: 'Syslog, also known as "legacy-syslog" or "BSD-syslog", is a logging framework defined in RFC3164 then RFC5424 (IETF-syslog). syslog-ng and rsyslog extended the initial syslog protocol, and all three versions continue to be developed as separate projects, growing separately and in parallel.\n\nsyslog logs events/messages from various system components, notably on:\n - Successful authentication and failed authentication attempts.\n - sudo usage.\n - Kernel and hardware component activities.\n - cron jobs and mail activity (sendmail).\n - ...\n\nsyslog relies on "Facilities" to classify and separate log messages from their originating subsystem/components (kernel, cron, user, mail, ...). The facilities are associated with actions in syslog configuration files, to log the messages to a file on disk, send them over the network, or display them to end-users.\n\nThe syslog log file locations are fully dependent on the syslog configuration and differ between Linux distribution and syslog implementation.'
+summary: 'Syslog, also known as "legacy-syslog" or "BSD-syslog", is a logging framework defined in RFC3164, then RFC5424 (IETF-syslog). syslog-ng and rsyslog extended the initial syslog protocol, and all three versions continue to be developed as separate projects, growing separately and in parallel.\n\nsyslog logs events/messages from various system components, notably on:\n - Successful authentication and failed authentication attempts.\n - sudo usage.\n - Kernel and hardware component activities.\n - cron jobs and mail activity (sendmail).\n - ...\n\nsyslog relies on "Facilities" to classify and separate log messages by their originating subsystem/component (kernel, cron, user, mail, ...). The facilities are associated with actions in syslog configuration files, to log the messages to a file on disk, send them over the network, or display them to end users.\n\nThe syslog log file locations are fully dependent on the syslog configuration and differ between Linux distributions and syslog implementations.'
 keywords: syslog, RFC3164, RFC5424, syslog-ng, rsyslog, Facility, Severity, Priority, auth, cron, kernel
 tags:
   - linux_logging_frameworks
   - linux_lateral_movement
   - linux_lateral_movement_dst
   - linux_local_persistence
-default_location: 'Configuration files and directories:\n - /etc/syslog.conf\n - /etc/rsyslog.conf\n - /etc/rsyslog.d/*.conf\n - /etc/syslog-ng.conf\n - /etc/syslog-ng/*\n\nMain syslog log files:\n - auth/authpriv: (Debian/Ubuntu) /var/log/auth.log | (RedHat/Centos) /var/log/secure\n - All except auth and authpriv: /var/log/syslog\n - All except auth, authpriv, and mail: (RedHat/Centos) /var/log/messages\n- cron: /var/log/cron.log\n- mail: /var/log/mail.log\n - Linux kernel: /var/log/kern.log\n - User: /var/log/user.log'
+default_location: 'Configuration files and directories:\n - /etc/syslog.conf\n - /etc/rsyslog.conf\n - /etc/rsyslog.d/*.conf\n - /etc/syslog-ng.conf\n - /etc/syslog-ng/*\n\nMain syslog log files:\n - auth/authpriv: (Debian/Ubuntu) /var/log/auth.log | (Red Hat/CentOS) /var/log/secure\n - All except auth and authpriv: /var/log/syslog\n - All except auth, authpriv, and mail: (Red Hat/CentOS) /var/log/messages\n - cron: /var/log/cron.log\n - mail: /var/log/mail.log\n - Linux kernel: /var/log/kern.log\n - User: /var/log/user.log'
 last_updated: 2024-07-24
 sidebar: sidebar
 permalink: linux_syslog.html
@@ -18,12 +18,12 @@ folder: linux
 
 `Syslog`, also known as `legacy-syslog` or `BSD-syslog`, is a logging
 framework started in 1980 and first defined in
-[`RFC3164`](https://datatracker.ietf.org/doc/html/rfc3164). The current and
-up-to-date version of `syslog` is often referred to as `IETF-syslog` and is
+[`RFC3164`](https://datatracker.ietf.org/doc/html/rfc3164). The current
+version of `syslog` is often referred to as `IETF-syslog` and is
 defined in [`RFC5424`](https://tools.ietf.org/html/rfc5424).
 While `journald` (part of `systemd`) is a more modern approach to logging that
-addresses some of `syslog`'s shortcomings, `syslog` (or one of its variation) is
-still in use today on many Linux distributions.
+addresses some of `syslog`'s shortcomings, `syslog` (or one of its variations)
+is still in use today on many Linux distributions.
 
 `syslog` logs events/messages from various system components, notably on:
   - Successful authentication and failed authentication attempts.
@@ -43,7 +43,7 @@ encryption, advanced filtering, etc. `syslog-ng` uses a different configuration
 file format than `syslog`.
 
 `rsyslog`, started in 2004, also extends the initial `syslog` protocol with
-additional features, such as rule based filtering, incoming messages filtering
+additional features, such as rule-based filtering, incoming message filtering
 and restrictions, etc. `rsyslog` uses the same configuration file format as
 `syslog`.
 
@@ -52,9 +52,9 @@ projects, growing separately and in parallel.
 
 #### syslog Facility, Severity, and Priority
 
-`syslog` relies on `Facility` to classify and separate log messages from their
-originating subsystem/components (kernel, cron, user, mail, ...). The
-`Facility` are numbered, from 0 to 23 inclusive, with the levels ranging from
+`syslog` relies on `Facilities` to classify and separate log messages by their
+originating subsystem/component (kernel, cron, user, mail, ...). The
+facilities are numbered from 0 to 23 inclusive, with the levels ranging from
 16 to 22 reserved for locally used facilities.
 
 The facilities are described in
@@ -75,13 +75,13 @@ The facilities are described in
 | 10 | `authpriv` | Security and authorization messages. |
 | 11 | `ftp` | FTP daemon. |
 | 12 | `ntp` | NTP subsystem. |
-| 13 | `security` | log audit. |
-| 14 | `console` | log alert. |
+| 13 | `security` | Log audit. |
+| 14 | `console` | Log alert. |
 | 15 | `solaris-cron` | Clock daemon (2). |
 | 16 to 23 | local use 0 to 7 (`local0` to `local7`). |
 
-Note however that the mapping between a facility code and a keyword is not
-uniform in different Linux distributions or `syslog` implementations.
+Note, however, that the mapping between a facility code and a keyword is not
+uniform across Linux distributions or `syslog` implementations.
 
 The
 [`syslog.h` interface](https://pubs.opengroup.org/onlinepubs/009695399/functions/syslog.html)
@@ -93,20 +93,20 @@ arbitrary messages in a log file normally linked to a specific `Facility`.
 `syslog` messages are associated with a `Severity` level, ranging from 0
 (`emergency`) to 7 (`debug`). Messages can be filtered by their `Severity`
 level, with usually all lower levels kept when filtering for a given level
-(i.e with levels 0, 1, 2, 3, and 4 kept if filtering on level 4 `Warning`).
+(i.e. with levels 0, 1, 2, 3, and 4 kept if filtering on level 4 `Warning`).
 
 `Facility` and `Severity` levels can be mapped to log files in
 [`syslog` configuration files](#configuration-files) to log `syslog` messages
 to disk. A
-[number of mappings are usually configured by default](#default-log-files)
-depending on the Linux distribution. Those default mappings can however change
-depending on the Linux distribution and `syslog` version in use.
+[number of mappings are usually configured by default](#default-log-files).
+Those default mappings can, however, vary depending on the Linux distribution
+and `syslog` version in use.
 
 The `Priority` value of a message is based on the message `Facility` and
 `Severity` level: `Priority = Facility * 8 + Severity`. `Priority` values thus
-range between 0 and 191 included. The `Priority` is included in (`BSD`)
-`syslog`: `<PRI>HEADER MESSAGE`. The `Priority` is however often omitted in the
-messages in log files on disk.
+range from 0 to 191 inclusive. The `Priority` is included in (`BSD`) `syslog`
+messages: `<PRI>HEADER MESSAGE`. The `Priority` is, however, often omitted from
+the messages in log files on disk.
 
 ### Configuration files
 
@@ -128,18 +128,18 @@ by one or more spaces or tabs.
 
 The `selector` field consists of two parts: a `facility` and a `priority`,
 separated by a period ('.'). The `facility` and `priority` can be replaced by
-an asterisk, to match all `facilities` or all `priorities` respectively.
+an asterisk to match all `facilities` or all `priorities`, respectively.
 Multiple `facilities` and `priorities` can be specified in a single
 `selector`, using a comma-separated list (example: `auth,authpriv.*	`). All
 messages of the specified `priority`, and higher, for a given `facility` are
 logged according to the given `action`. The keyword `none` stands for no
-priority of the given `Facility`, i.e to prevent logging of messages associated
-with the `Facility` (example: `*.*;auth,authpriv.none`).
+priority of the given `Facility`, i.e. it prevents the logging of messages
+associated with the `Facility` (example: `*.*;auth,authpriv.none`).
 
 The `action` field of a rule defines how and where the messages matching the
 rule `selector` are logged. The `action` field is usually a file path, but may
 also be a remote host (`@<HOSTNAME>`), a named pipe, a console, or a user /
-users list (to notify users using the `wall` feature). The file path can be
+list of users (to notify users using the `wall` feature). The file path can be
 prefixed with the minus ('-') sign to omit syncing the file after every new
 message, for performance reasons.
 
@@ -158,12 +158,12 @@ mail.*				-/var/log/mail.log
 
 The `syslog` log file locations are fully dependent on the `syslog`
 configuration, and the configuration files should thus first be
-reviewed. Additionally, Linux distribution and `syslog` implementation leverage
+reviewed. Additionally, Linux distributions and `syslog` implementations use
 different default configurations, with different default log file locations.
 
-| Facility | Debian/Ubuntu default | RedHat/CentOs default |
+| Facility | Debian/Ubuntu default | Red Hat/CentOS default |
 |----------|-------------------------|-------------------------|
-| all | `/var/log/syslog` (except auth related messages) | `/var/log/syslog` (except auth related messages) <br> `/var/log/messages` (except auth and mail related messages) |
+| all | `/var/log/syslog` (except auth-related messages) | `/var/log/syslog` (except auth-related messages) <br> `/var/log/messages` (except auth- and mail-related messages) |
 | `auth` | `/var/log/auth.log` | `/var/log/secure` |
 | `authpriv` | `/var/log/auth.log` | `/var/log/secure` |
 | `kern` | `/var/log/kern.log` | `/var/log/kern.log` |
@@ -246,7 +246,7 @@ Aug  4 02:58:05 hostname useradd[2979]: new group: name=new_group, GID=1001
 Aug  4 05:53:11 hostname passwd[2934]: pam_unix(passwd:chauthtok): password changed for user
 ```
 
-{% include note.html content="Password change for user `user`. `syslog` format." %}
+{% include note.html content="Addition of the user `tuser` to the `wheel` group. `syslog` format." %}
 
 ```
 Aug  4 02:59:40 hostname usermod[2999]: add 'tuser' to group 'wheel'
@@ -271,7 +271,7 @@ Aug  4 10:30:01 hostname CROND[25488]: (root) CMD (/root/.script.sh)
 #### kern facility
 
 The `kern` `Facility` is used by the Linux kernel to emit messages. While the
-kernel messages are usually of limited forensics interest (depending on the
+kernel messages are usually of limited forensic interest (depending on the
 investigation type), the following information may be found in `kern` logs:
 
   - Kernel version and command line.
@@ -284,14 +284,14 @@ investigation type), the following information may be found in `kern` logs:
   - Basic information on Ethernet interfaces (notably including name and `MAC`
     address).
 
-  - Details on USB devices plugged (notably including vendor and product
-    identifiers, serial number).
+  - Details on plugged-in USB devices (notably including vendor and product
+    identifiers, and serial number).
 
   - ...
 
-For an easier analysis, it is possible to separate kernel messages generated
+For easier analysis, it is possible to separate kernel messages generated
 during the system boot from the messages generated during system operations
-(that can indicate changes to the initial system configuration).
+(which can indicate changes to the initial system configuration).
 
 ### References
 

@@ -1,6 +1,6 @@
 ---
 title: NTFS - UsnJrnl
-summary: 'The USN Journal is a feature of NTFS, activated by default on Vista and later, which maintains a record of changes made to the NTFS volume.\n\n The $J stream stores the actual change log records, with usually historical data of the last few days.\n\n Each change log record is notably composed of: the timestamp, filename, and reason/operation of the change.\n\n Additionally, each change log record contains the MFT "entry" and "sequence" numbers and the direct parent "entry" and "sequence" numbers of the file concerned by the change, making it possible to retrieve the location of the file using the MFT. The UsnJrnl can be "rewind" to exhaustively and accurately rebuild the location of every file in the journal.'
+summary: 'The USN Journal is a feature of NTFS, activated by default on Vista and later, which maintains a record of changes made to the NTFS volume.\n\n The $J stream stores the actual change log records, usually with historical data covering the last few days.\n\n Each change log record is notably composed of: the timestamp, filename, and reason/operation of the change.\n\n Additionally, each change log record contains the MFT "entry" and "sequence" numbers and the direct parent "entry" and "sequence" numbers of the file concerned by the change, making it possible to retrieve the location of the file using the MFT. The UsnJrnl can be "rewinnd" to exhaustively and accurately rebuild the location of every file in the journal.'
 keywords: Filesystem, NTFS, UsnJrnl, USN, Journal
 tags:
   - windows_ntfs_filesystem
@@ -16,13 +16,13 @@ folder: windows
 
 The `Update Sequence Number (USN) Journal` is a feature of NTFS,
 activated by default on Vista and later, which maintains a record of changes
-made to the NTFS volume. The creation, deletion or modification of files or
-directories are for instance journaled.
+made to the NTFS volume. For instance, the creation, deletion, or modification
+of files or directories is journaled.
 
-The records in the `UsnJrnl` are progressively overwritten once the max size of
-the journal has been reached. The `UsnJrnl` usually contains historical data on
-the last few days (1-3 days for system full time use, < 7 days for regular
-system use).
+The records in the `UsnJrnl` are progressively overwritten once the maximum
+size of the journal has been reached. The `UsnJrnl` usually contains historical
+data covering the last few days (1-3 days for systems in full-time use, < 7 days
+for regular system usage).
 
 ### Information of interest
 
@@ -34,7 +34,7 @@ The `UsnJrnl` is composed of two named data streams:
 
 Each change log record is notably composed of:
 
-  - an `Update Sequence Number (USN)`.
+  - An `Update Sequence Number (USN)`.
 
   - The timestamp of the change.
 
@@ -62,24 +62,24 @@ However, as the files and parent folder(s) of files referenced in the `UsnJrnl`
 may have been deleted and may no longer be present in the `MFT`, simply
 searching for records with matching `entry` and `sequence` numbers in the `MFT`
 can lead to unresolved or inconsistent paths. Indeed, when a file is deleted
-from the volume, its associated `MFT` `file record` is set as no longer in use
-and the metadata of the `file record` are overwritten with that of the new
-entry (when the `file record` gets re-used). The `MFT` `file record` `entry`
-number remains unchanged with only the `file record` `sequence` number being
+from the volume, its associated `MFT` `file record` is set as no longer in use,
+and the metadata of the `file record` is overwritten with that of the new
+entry (when the `file record` gets reused). The `MFT` `file record` `entry`
+number remains unchanged, with only the `file record` `sequence` number being
 increased by one.
 
 Thus, matching the `UsnJrnl` to the current state of the `MFT` will result in:
 
-  - In some invalid paths if only the `file record`'s `entry` numbers are used
-    to find the files location. For example, if the `file record` of the folder
-    "C:\Windows\Temp\TMP" is re-used (after deletion of the "TMP" folder) for
-    the folder "C:\Users\user\Other", only using the `entry` numbers would lead
-    to locating the files from the "TMP" folder to the current "Other" folder
-    instead.
+  - Some invalid paths if only the `file record`'s `entry` numbers are used
+    to find the file locations. For example, if the `file record` of the
+    folder "C:\Windows\Temp\TMP" is reused (after deletion of the "TMP" folder)
+    for the folder "C:\Users\user\Other", only using the `entry` numbers would
+    lead to locating the files from the "TMP" folder in the current "Other"
+    folder instead.
 
-  - In some unknown paths if both the `file record`'s `entry` and `sequence`
+  - Some unknown paths if both the `file record`'s `entry` and `sequence`
     numbers are used, as deleted entries referenced in the `UsnJrnl` have an
-    `entry` and `sequence` numbers combination that no longer exists in the
+    `entry` and `sequence` number combination that no longer exists in the
     `MFT`.
 
 Additionally, renaming or moving files or folders does not change the `MFT`
@@ -94,8 +94,8 @@ in the `UsnJrnl` is implemented by
 the last, most recent change to the first, oldest change) and keeping stateful
 information (in a local `SQL` database) about every entry's `entry` and
 `sequence` numbers and parent's `entry` and `sequence` numbers. Using this
-technique it is thus possible to rebuild a file location as it was when the
-change operation occurred. Indeed every entry's `entry` and `sequence` numbers
+technique, it is thus possible to rebuild a file location as it was when the
+change operation occurred. Indeed, every entry's `entry` and `sequence` numbers
 in the file's path are either in the `MFT` (if unchanged since the operation)
 or referenced by an operation in the `UsnJrnl` (as changes impacting the file
 location would have occurred after the file change operation).
@@ -111,9 +111,10 @@ python usnjrnl_rewind.py -m "<MFT_CSV>" -u "<USNJRNL_CSV>" "<OUTPUT_FOLDER>"
 
 #### UsnJrnl metadata
 
-The Windows `fsutil` and the PowerShell cmdlet `Get-ForensicUsnJrnlInformation`
-of the [`PowerForensics`](https://github.com/Invoke-IR/PowerForensics) suite
-can be used to retrieve metadata about the `UsnJrnl`:
+The Windows `fsutil` utility and the PowerShell cmdlet
+`Get-ForensicUsnJrnlInformation` of the
+[`PowerForensics`](https://github.com/Invoke-IR/PowerForensics) suite can be
+used to retrieve metadata about the `UsnJrnl`:
 
 ```
 # First and current USN, maximum size notably
@@ -128,8 +129,8 @@ Get-ForensicUsnJrnlInformation -Path <USN_JRNL_PATH>
 
 The [`MFTECmd`](https://github.com/EricZimmerman/MFTECmd) utility can parse and
 extract information from the `UsnJrnl` (as well as other NTFS filesystem
-artefacts such as the `MFT`'s `$J` stream, the file ownership `$Secure:$SDS`
-data stream, and the transaction log file `$Logfile`).
+artefacts, such as the `$MFT`, the file ownership `$Secure:$SDS` data stream,
+and the transaction log file `$LogFile`).
 
 Associated `KAPE` compound module: `MFTECmd` (includes `MFTECmd_$Boot`,
 `MFTECmd_$MFT`, `MFTECmd_$J`, and `MFTECmd_$SDS`).

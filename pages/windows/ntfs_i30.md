@@ -1,6 +1,6 @@
 ---
 title: 'NTFS - $I30 ($INDEX_ROOT, $INDEX_ALLOCATION, and $Bitmap)'
-summary: 'The NTFS index attributes $INDEX_ROOT and $INDEX_ALLOCATION are MFT attributes that represent directories and store index records.\n\nEach file in a directory is associated with an index record. The record contains information on the file it references in a $FILE_NAME (0x30) attribute: file name, size, parent directory and a set of MACB timestamps (copied from the MFT file record $STANDARD_INFORMATION of the file).'
+summary: 'The NTFS index attributes $INDEX_ROOT and $INDEX_ALLOCATION are MFT attributes that represent directories and store index records.\n\nEach file in a directory is associated with an index record. The record contains information on the file it references in a $FILE_NAME (0x30) attribute: file name, size, parent directory, and a set of MACB timestamps (copied from the $STANDARD_INFORMATION attribute of the file''s MFT file record).'
 keywords: '$I30, I30, 0x30, index attributes, index record, $INDEX_ROOT, INDEX_ROOT, $INDEX_ALLOCATION, INDEX_ALLOCATION, $FILE_NAME, FILE_NAME, $Bitmap, Bitmap'
 tags:
   - windows_ntfs_filesystem
@@ -17,13 +17,13 @@ folder: windows
 The `NTFS` `index attributes` are `MFT` attributes, of two distinct types,
 that index all the files/directories in a given directory (in a B-Tree data
 structure). Each directory is represented by one or more `index attributes`.
-The files and folders information displayed by the `Windows Explorer` are based
-on the index attribute(s) of the directory being accessed.
+The file and folder information displayed by the `Windows Explorer` is based on
+the index attribute(s) of the directory being accessed.
 
 The entries (files or subdirectories) in a directory's `index attribute(s)` are
-stored as `index records` structures, with one dedicated record for every
+stored as `index record` structures, with one dedicated record for every
 entry. The `index record` structure contains a `$FILE_NAME` (`0x30`) attribute,
-in which are stored the information about the file or folder.
+in which the information about the file or folder is stored.
 
 There are two types of `index attributes`:
 

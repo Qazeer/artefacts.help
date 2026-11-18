@@ -1,6 +1,6 @@
 ---
 title: RDP Bitmap Cache
-summary: 'The RDP Bitmap Cache contains partial image captures, in the bitmap format, of the remote host screen from Remote Desktop sessions. This feature is implemented to reduce the amount of data sent by the server.\n\nInformation of interest: small bitmap images, with a width of 64 pixels and a height of up to 64 pixels, that represent pieces of the content displayed in past Remote Desktop sessions of the user.\n\nThousands of tiles may be available for a given user RDP Bitmap Cache folder.'
+summary: 'The RDP Bitmap Cache contains partial image captures, in the bitmap format, of the remote host screen from Remote Desktop sessions. This feature is implemented to reduce the amount of data sent by the server.\n\nInformation of interest: small bitmap images (with a width of 64 pixels and a height of up to 64 pixels) that represent pieces of the content displayed in past Remote Desktop sessions of the user.\n\nThousands of tiles may be available for a given user''s RDP Bitmap Cache folder.'
 keywords:
 tags:
   - windows_lateral_movement
@@ -19,11 +19,11 @@ folder: windows
 
 The `RDP Bitmap Cache` contains partial image captures, in the bitmap format,
 of the remote host screen from past Remote Desktop sessions. This feature is
-implemented to reduce the amount of data sent by the server to save bandwidth
-usage and improve user experience in case of a slow network connection.
+implemented to reduce the amount of data sent by the server in order to save
+bandwidth and improve the user experience in case of a slow network connection.
 
-Bitmap caching can be deactivated client-side in `mstsc.exe` `Remote Desktop`
-client by deactivating the "Persistent bitmap caching" option.
+Bitmap caching can be deactivated client-side in the `mstsc.exe`
+`Remote Desktop` client by disabling the "Persistent bitmap caching" option.
 
 ### Information of interest
 
@@ -32,7 +32,8 @@ was displayed in past Remote Desktop sessions of the user. The image captures
 are stored as small bitmap images, with a width of 64 pixels and a height of up
 to 64 pixels.
 
-Thousands of tiles may be available for a given user `RDP Bitmap Cache` folder.
+Thousands of tiles may be available for a given user's `RDP Bitmap Cache`
+folder.
 
 ### Tool(s)
 
@@ -51,20 +52,20 @@ bmc-tools.py -s <SOURCE_FOLDER> -d <DESTINATION_FOLDER> -b
 ```
 
 A compiled version of the `bmc-tools` Python script (compiled with
-`PyInstaller`)
-[bmc-tools-compiled](https://github.com/Qazeer/bmc-tools-compiled/) may also be
-used. The
+`PyInstaller`),
+[bmc-tools-compiled](https://github.com/Qazeer/bmc-tools-compiled/), may also
+be used. The
 [`Execute-BmcTools.ps1`](https://gist.github.com/Qazeer/3a6d43a117bbece6d83e7e79687e0870)
 PowerShell script (`KAPE` module `PowerShell_Execute-BmcTools`) leverages the
 compiled version to recursively process the specified input folder to execute
-`bmc-tools.exe` over each `Bitmap Cache` subfolder(s) found.
+`bmc-tools.exe` on each `Bitmap Cache` subfolder found.
 
 #### Screenshots and screen extracts reconstruction
 
 [`RdpCacheStitcher`](https://github.com/BSI-Bund/RdpCacheStitcher) provides a
 graphical interface to more easily assemble or "stitch" together
 `RDP Bitmap Cache` tiles, either manually or through an automatic feature
-(that usually yields mixed results).
+(which usually yields mixed results).
 
 The tiles, as extracted by `bmc-tools` for instance, can be loaded by
 `RdpCacheStitcher` for analysis and to recompose screen extracts from the

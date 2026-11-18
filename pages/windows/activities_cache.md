@@ -1,6 +1,6 @@
 ---
 title: Windows 10 Timeline / ActivitiesCache.db
-summary: 'Introduced in Windows 10 version 1803, the Windows Activity history tracks a number of operations on the system: programs used, local files opened, SharePoint documents consulted, and websites browsed (using Internet Explorer/Microsoft Edge Legacy).\n\nThe ActivitiesCache.db database only stores data for the last 30 days by default.\n\nInformation of interest, that depends on the activity type: start and end times of the activity (in UTC), executable full path for program execution, file name/SharePoint link for files accessed using certain programs, created and last modified timestamp of the associated file, etc.\n\nThe history of the clipboard data may also be stored for a short amount of time (approximately 12 hours) in a non-default configuration.'
+summary: 'Introduced in Windows 10 version 1803, the Windows Activity history tracks a number of operations on the system: programs used, local files opened, SharePoint documents viewed, and websites browsed (using Internet Explorer/Microsoft Edge Legacy).\n\nThe ActivitiesCache.db database only stores data for the last 30 days by default.\n\nInformation of interest, which depends on the activity type: start and end times of the activity (in UTC), executable full path for program execution, file name/SharePoint link for files accessed using certain programs, creation and last modification timestamps of the associated file, etc.\n\nThe history of the clipboard data may also be stored for a short amount of time (approximately 12 hours) in a non-default configuration.'
 keywords: Windows 10 Timeline, ActivitiesCache.db, ActivitiesCache
 tags:
   - windows_program_execution
@@ -19,8 +19,8 @@ folder: windows
 
 **Introduced in `Windows 10` version 1803**, the Windows Activity history
 tracks a number of operations on the system: programs used, local files opened,
-SharePoint documents consulted, and websites browsed (using Internet Explorer /
-Microsoft Edge Legacy). The Activity history can be consulted in the Windows
+SharePoint documents viewed, and websites browsed (using Internet Explorer /
+Microsoft Edge Legacy). The Activity history can be viewed in the Windows
 Timeline (Windows + Tab keys).
 
 The `ActivitiesCache.db` is a `SQLite` database that locally stores the
@@ -48,8 +48,8 @@ tables being of interest:
       - Executable full path for program execution.
       - For certain programs, the accessed file name and path and/or
         associated SharePoint link.
-      - Created and last modified timestamp of the associated file (local or
-        on SharePoint).
+      - Creation and last modification timestamps of the associated file
+        (local or on SharePoint).
       - The user's device timezone.
       - ...
 
@@ -66,7 +66,7 @@ tables being of interest:
     - Data available:
       - The activity ID (GUID).
       - The application name/program filename.
-      - Eventual program full path.
+      - Program full path (if any).
       - Activity expiration timestamp (timestamp of occurrence + 30 days by
         default).
 
@@ -80,11 +80,11 @@ The `Activity`/`ActivityOperation` tables reference clipboard activity
 through two activity types: `10` and `16`. The events will be stored for
 approximately 12 hours after the operation.
 
-The activity type `16` tracks use of the clipboard by an application, and is
-logged by default. The activity type `10` tracks the clipboard content, and is
-only logged if the non-default "Clipboard history" and "Sync across your
+The activity type `16` tracks the use of the clipboard by an application, and
+is logged by default. The activity type `10` tracks the clipboard content, and
+is only logged if the non-default "Clipboard history" and "Sync across your
 devices" clipboard settings are both enabled. The latter setting is only
-available for Microsoft or Azure AD synchronized accounts (and thus not
+available for Microsoft or Entra ID-synchronized accounts (and thus not
 available for local or simple Active Directory domain accounts).
 
 If the prerequisites are met, an activity type `10` should be logged
@@ -108,9 +108,9 @@ events:
 
   - The application from which the data was copied (in the `AppId` column).
 
-  - If the data was copied (`Copy`) or pasted (`Paste`) (in the `Group`
-    column). Only copy operations seem to generate an entry on recent versions
-    of the Windows operating system however.
+  - Whether the data was copied (`Copy`) or pasted (`Paste`) (in the `Group`
+    column). However, only copy operations seem to generate an entry on recent
+    versions of the Windows operating system.
 
 ### Tool(s)
 

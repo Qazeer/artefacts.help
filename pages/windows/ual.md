@@ -1,12 +1,12 @@
 ---
 title: User Access Logging / SUM
-summary: 'Introduced in Windows Server 2012 and enabled by default, User Access Logging (UAL) is a feature that consolidates data on user access to Windows Server roles (such as "Active Directory Domain Services" on Domain Controllers).\n\nUAL stores up to 2 years of data.\n\nInformation of interest:\n- Accessed Windows Server role (such as ADDS, CIFS, ADCS, etc.)\n- The client domain and username.\n- The client IPv4 or IPv6 address.\n- First, last, and daily access timestamps.\n- Total number of accesses.\n\nAs machine accounts of domain-joined systems also authenticate to ADDS, UAL of Domain Controllers can be used to map hostnames with past IP addresses.'
+summary: 'Introduced in Windows Server 2012 and enabled by default, User Access Logging (UAL) is a feature that consolidates data on user access to Windows Server roles (such as "Active Directory Domain Services" on Domain Controllers).\n\nUAL stores up to 2 years of data.\n\nInformation of interest:\n- Accessed Windows Server role (such as ADDS, CIFS, ADCS, etc.).\n- The client domain and username.\n- The client IPv4 or IPv6 address.\n- First, last, and daily access timestamps.\n- Total number of accesses.\n\nAs machine accounts of domain-joined systems also authenticate to ADDS, the UAL of Domain Controllers can be used to map hostnames to past IP addresses.'
 keywords: User Access Logging, SUM, UAL, DNS, Current.mdb
 tags:
   - windows_lateral_movement
   - windows_lateral_movement_dst
   - windows_active_directory
-location: 'Files under <SYSTEMROOT>\System32\Logfiles\SUM\ folder:\n\nCurrent.mdb (data for the last 24-hours).\nUp to three "<GUID>.mdb" files (current year and history up to 2 years).\nSystemidentity.mdb (mapping on roles GUIDs and names).'
+location: 'Files under the <SYSTEMROOT>\System32\Logfiles\SUM\ folder:\n\nCurrent.mdb (data for the last 24 hours).\nUp to three "<GUID>.mdb" files (current year and history up to 2 years).\nSystemidentity.mdb (mapping between role GUIDs and names).'
 last_updated: 2024-01-01
 sidebar: sidebar
 permalink: windows_ual.html
@@ -17,29 +17,29 @@ folder: windows
 
 `User Access Logging (UAL)` is a feature introduced, and enabled by default, in
 `Windows Server 2012` that consolidates data on client activity. Among other
-information, user access on specific Windows Server roles (such as
+information, user access to specific Windows Server roles (such as
 `Active Directory Domain Services` on Domain Controllers) is logged by the
 `UAL`. The specific activity triggering an entry to be logged for a given role
 is not documented.
 
-On Domain Controllers, `UAL` thus yields information on **sessions opening on
+On Domain Controllers, `UAL` thus yields information on **sessions opened on
 domain-joined computers** (if the given DC was reached for authentication or
 `Group Policy` retrieval).
 
 The information is stored locally in up to five (5)
 `Extensible Storage Engine (ESE)` database files (`.mdb`):
 
-  - The `Current.mdb` file which contains data for the last 24 hours.
+  - The `Current.mdb` file, which contains data for the last 24 hours.
 
   - Up to three `<GUID>.mdb` files, which contain data for an entire year
-    (first to last day), going back to 2 years. The data in the `Current.mdb`
+    (first to last day), going back up to 2 years. The data in the `Current.mdb`
     database is copied each day to the corresponding (`<GUID>.mdb`) database
     for the current year.
 
-  - `Systemidentity.mdb` which contains metadata on the local server, including
-    a mapping on roles' GUIDs and names.
+  - `Systemidentity.mdb`, which contains metadata on the local server,
+    including a mapping between role GUIDs and names.
 
-**Historical data going back to 2 years may thus be retrieved in the `UAL`
+**Historical data going back up to 2 years may thus be retrieved from the `UAL`
 database files**.
 
 ### Information of interest
@@ -62,11 +62,11 @@ contains several pieces of information of interest:
   - First, last, and daily access timestamps.
 
   - The client `IPv4` or `IPv6` address. On Domain Controllers, the hostname
-    associated with the `IP` address at that time may be retrievable as machine
-    accounts of domain-joined computers also authenticate on `AD DS`.
+    associated with the `IP` address at that time may be retrievable, as
+    machine accounts of domain-joined computers also authenticate to `AD DS`.
 
-Each entry in the `CLIENTS` table is composed of a unique set of a Windows
-Server role, a client's domain/username, and a source `IP` address.
+Each entry in the `CLIENTS` table corresponds to a unique combination of a
+Windows Server role, a client's domain/username, and a source `IP` address.
 
 The `DNS` table of the aforementioned database files contains information about
 `DNS` resolutions: hostname, associated `IP` address, and timestamp of last
@@ -115,14 +115,14 @@ esentutl.exe /p <Current.mdb | UAL_DB_FILE>
 ```
 
 The Windows operating system used to parse the `SUM` databases must be of the
-same major version, or of a more recent version, than the system from which the
-databases were acquired. For instance, `SUM` databases acquired from a
+same major version as, or of a more recent version than, the system from which
+the databases were acquired. For instance, `SUM` databases acquired from a
 `Windows Server 2022` operating system must be parsed on `Windows 11` or
 `Windows Server 2022`.
 
 ##### SumECmd
 
-The Eric Zimmerman's [`SumECmd`](https://github.com/EricZimmerman/Sum) tool or
+Eric Zimmerman's [`SumECmd`](https://github.com/EricZimmerman/Sum) tool or
 the [`KStrike`](https://github.com/brimorlabs/KStrike) Python script can be
 used to parse repaired `UAL` database files:
 
@@ -137,8 +137,8 @@ SumECmd.exe --csv <CSV_DIRECTORY_OUTPUT> -d <DIRECTORY_WITH_UAL_DB_FILES>
 
 The `PowerShell_SumECmd_SUM-RepairAndParse` `KAPE` module, leveraging the
 PowerShell script
-[`SUM-Repair.ps1`](https://github.com/AndrewRathbun/DFIRPowerShellScripts/blob/main/SUM-Repair.ps1)
-can be used to automate the repairing and parsing process (with `SumECmd`).
+[`SUM-Repair.ps1`](https://github.com/AndrewRathbun/DFIRPowerShellScripts/blob/main/SUM-Repair.ps1),
+can be used to automate the repair and parsing process (with `SumECmd`).
 
 ### References
 

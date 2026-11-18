@@ -18,21 +18,22 @@ folder: others
 For physical drives, the drive to be imaged should be extracted from the system
 and plugged into an acquisition station through an (ideally hardware) write
 blocker. Dedicated hardware, such as the `TX1 Tableau Forensic Imager`, can
-also be used to directly make a drive to drive or drive to file (such as a
+also be used to directly make a drive-to-drive or drive-to-file (such as a
 `raw` file) copy.
 
 If the disk to image cannot be extracted from the system, a bootable USB drive
 can be used to boot into a temporary OS (if the BIOS boot order of the target
 system can be changed). A Linux distribution suitable for forensic imaging
 should be used, such as the [`CAINE`](https://www.caine-live.net/) distribution
-(based on `Ubuntu`) or [`Kali Linux in Forensics Mode`](https://www.kali.org/docs/general-use/kali-linux-forensics-mode/). In such distributions all devices are blocked in read-only and
-auto-mounting is disabled, and a number of forensics tools are installed for
-acquisition.
+(based on `Ubuntu`) or
+[`Kali Linux in Forensics Mode`](https://www.kali.org/docs/general-use/kali-linux-forensics-mode/).
+In such distributions, all devices are set to read-only, auto-mounting is
+disabled, and a number of forensic tools are installed for acquisition.
 
 #### Using a Windows OS
 
 Windows should only be used as an acquisition platform if the drive to image can
-be connected through a hardware write-blocker, as Windows will automatically
+be connected through a hardware write blocker, as Windows will automatically
 attempt to mount any recognized partitions, potentially altering the data.
 
 The `FTK Imager` utility can be used to create a forensic image of a physical
@@ -59,21 +60,21 @@ one or more logical disks called partitions. This partitioning is recorded in
 the partition table, such as `MBR` or `GPT`, usually found in sector 0 of the
 disk.
 
-| Type | block device | Eventual partition(s) |
+| Type | Block device | Partition(s), if any |
 |------|--------------|-----------------------|
 | SATA drives | Each drive is represented as `/dev/sdx`. <br><br> Example of two drives: <br> `/dev/sda` <br> `/dev/sdc` | Each partition is represented as `/dev/sdxN`. <br><br> Example of two partitions on the same drive: <br> `/dev/sda1` <br> `/dev/sda2` |
 | NVMe drives | Each drive is represented as `/dev/nvmeXn1`. <br><br> Examples: <br> `/dev/nvme0n1` <br> `/dev/nvme1n1` | Each partition is represented as `/dev/nvmeXnYpZ`. <br><br> Examples: <br> `/dev/nvme0n1p1` <br> `/dev/nvme0n1p2` |
 | Optical media (CD or DVD drives) | `/dev/srx` <br><br> Example of two CD / DVD drives: <br> `/dev/sr0` <br> `/dev/sr1` | NA |
 
-The `lsblk` utility can be used to list the block devices present on a system
-and the `fdisk` or `gdisk` (for handling of `GPT`) utilities to retrieve more
+The `lsblk` utility can be used to list the block devices present on a system,
+and the `fdisk` or `gdisk` (for `GPT` handling) utilities to retrieve more
 information on a specific device and its partitions.
 
 ```bash
 # Lists the block devices present on the system.
 lsblk
 
-# Retrieves information on the specific block device and its eventual partitions.
+# Retrieves information on the specified block device and its partitions (if any).
 # <DEVICE> example: /dev/sda
 fdisk -l <DEVICE>
 gdisk -l <DEVICE>
@@ -81,8 +82,8 @@ gdisk -l <DEVICE>
 
 *Imaging using dd*
 
-`dd` is the standard copy utility that, while not forensic oriented, can be
-used to create an image of a device / partition. `dd` presents the advantage of
+`dd` is the standard copy utility that, while not forensics-oriented, can be
+used to create an image of a device / partition. `dd` has the advantage of
 being available in most Linux distributions. A more forensically sound utility,
 such as `dc3dd` (presented below), should generally be used if possible.
 
@@ -101,13 +102,13 @@ sha256sum /dest_media/image.raw  > /dest_media/SHA256_image
 
 *Imaging using dc3dd*
 
-`dc3dd` is a more forensic oriented utility, based on `dd`, to make disk or
+`dc3dd` is a more forensics-oriented utility, based on `dd`, to make disk or
 partition images. `dc3dd` automatically detects bad sectors, natively integrates
-hashing of the input and output bytes, and integrates logging functionalities,
-making it more suitable for forensic imaging.
+hashing of the input and output bytes, and integrates logging features, making
+it more suitable for forensic imaging.
 
 ```bash
-# log option: output log files.
+# log option: output log file.
 # hlog option: output file that will contain the image hash(es).
 
 dc3dd if=<DEVICE | PARTITION> hof=/dest_media/image.raw log=<LOG_FILE> hash=sha256 hlog=<HASH_FILE>
@@ -115,19 +116,19 @@ dc3dd if=<DEVICE | PARTITION> hof=/dest_media/image.raw log=<LOG_FILE> hash=sha2
 
 *Imaging using Guymager*
 
-[`Guymager`](https://guymager.sourceforge.io/) is a GUI forensic imager, that
+[`Guymager`](https://guymager.sourceforge.io/) is a GUI forensic imager that
 can produce image files in raw, EWF, and AFF formats. `Guymager` is
-multi-threaded for faster collection and integrates hashing calculation.
+multi-threaded for faster collection and integrates hash calculation.
 
 ```
-Right click device -> Acquire image
+Right-click the device -> Acquire image
   -> Format selection (raw, EWF, AFF)
   -> Evidence collection metadata
   -> Selection of the image destination folder and name
   -> Calculate SHA-256
 ```
 
-### Virtual Machines
+### Virtual machines
 
 #### VMware vSphere
 
@@ -135,7 +136,7 @@ Right click device -> Acquire image
 
   1. Take a snapshot of the virtual machine to save the VM virtual memory (the
      corresponding option must be enabled when taking the snapshot). This can
-     be done through the `ESXi Host client` or in `SSH`.
+     be done through the `ESXi Host Client` or over `SSH`.
 
   2. Shut down the virtual machine and copy all the files in the VM folder from
      the datastore. Depending on the number of past snapshot(s) taken, relevant
@@ -145,28 +146,28 @@ Right click device -> Acquire image
 
 *Thick versus thin provisioning*
 
-For a thick provisioned virtual disk, the specified space is reserved directly
-upon the creation of the disk. Whereas, for a thin provisioned virtual disk,
-the allocated space will only grow over time as large as required for the data
-used by the virtual machine. However, as thin provisioning is a function of
-the `VMFS` filesystem, downloading a thin provisioned virtual disk (to an
-`NTFS`, `ext3/4`, etc.) will result in the full sized file. 
+For a thick-provisioned virtual disk, the specified space is reserved directly
+upon the creation of the disk, whereas, for a thin-provisioned virtual disk,
+the allocated space only grows over time, as required by the data used by the
+virtual machine. However, as thin provisioning is a function of the `VMFS`
+filesystem, downloading a thin-provisioned virtual disk (to an `NTFS`,
+`ext3/4`, etc. filesystem) will result in a full-sized file. 
 
-Thick provisioned drives can be either "lazily" or "eagerly" zeroed. While in
-both configurations the desired size for this virtual disk is reserved directly
-upon creation, the way empty disk space is processed is different. In "eagerly"
+Thick-provisioned drives can be either "lazily" or "eagerly" zeroed. While in
+both configurations the desired size of the virtual disk is reserved directly
+upon creation, the way empty disk space is processed differs. In an "eagerly"
 zeroed virtual disk, the unused space is zeroed directly at the time of
-creation, whereas for "lazily" zeroed virtual disk unallocated space remains
-untouched on the datastore until an I/O operation occurs for the virtual
-machine.
+creation, whereas in a "lazily" zeroed virtual disk, the unallocated space
+remains untouched on the datastore until an I/O operation occurs for the
+virtual machine.
 
 *Impacts of snapshots on virtual drives*
 
 When taking a snapshot of a virtual machine, a new virtual drive will be
 created. Modifications to the filesystem of the virtual machine after that
 snapshot will be applied to this newly created virtual drive. The
-drive is associated with its own disk descriptor file, that references the
-parent virtual disk (including in a human readable format in the
+drive is associated with its own disk descriptor file, which references the
+parent virtual disk (including in a human-readable format in the
 `parentFileNameHint` field).
 
 The following files are thus created after a snapshot is taken:
@@ -184,10 +185,10 @@ the virtual disk associated with the virtual machine at a boot event.
 Example: `2025-09-11T21:51:47.571Z In(05) vmx - DICT          scsi0:0.filename = "disk-000003.vmdk"`.
 
 The virtual disks of snapshots can be reassembled / reconsolidated using
-the 3rd-party open source script
+the third-party open-source script
 [`vmdksync`](https://github.com/mpalmer/vmdksync/blob/master/vmdksync)
-or the VMware `vmware-vdiskmanager.exe` utility. Some forensics tools, such as
-`X-ways`, can also be used to directly reassemble and mount snapshot virtual
+or the VMware `vmware-vdiskmanager.exe` utility. Some forensic tools, such as
+`X-Ways`, can also be used to directly reassemble and mount snapshot virtual
 disks (if the parent virtual drive(s) are also available and, for some tools,
 already loaded).
 
@@ -195,26 +196,26 @@ https://www.4n6k.com/2014/04/
 
 *Known limitations*
 
-If downloading the virtual disk(s) from the `ESXi Host client` `Datastore`
+If downloading the virtual disk(s) from the `ESXi Host Client` `Datastore`
 browser web interface, a virtual drive and its associated
-disk descriptor file are listed as a single file. For instance as `disk.vmdk`
-for `disk.vmdk` (disk descriptor file) and `disk-flat.vmdk` (virtual disk) or
-`disk-000001.vmdk` instead of `disk-000001.vmdk` and
+disk descriptor file are listed as a single file. For instance, as `disk.vmdk`
+for `disk.vmdk` (disk descriptor file) and `disk-flat.vmdk` (virtual disk), or
+as `disk-000001.vmdk` for `disk-000001.vmdk` and
 `disk-000001-sesparse.vmdk`. While the associated virtual machine is running,
-this file will be mapped to the disk descriptor file of the VM and when the
-VM is powered-off, the file will correspond to the actual virtual disk.
+this file will be mapped to the disk descriptor file of the VM, and when the
+VM is powered off, the file will correspond to the actual virtual disk.
 
 It is not possible to download any of the virtual drive(s), either using the
-`ESXi Host client` web interface or through `SCP`, if the virtual machine is
+`ESXi Host Client` web interface or through `SCP`, if the virtual machine is
 running. The downloaded `vmdk` will indeed appear empty.
 
-Before shutting down the virtual machine, it is recommended to make a snapshot
+Before shutting down the virtual machine, it is recommended to take a snapshot
 of the virtual memory:
 
-  - In `ESXi Host client`, on the virtual machine page:
+  - In the `ESXi Host Client`, on the virtual machine page:
     `Actions -> Snapshots -> Take snapshot -> Check "Snapshot the virtual machine's memory" -> Take snapshot`.
   
-  - In `ESXi Shell`:
+  - In the `ESXi Shell`:
     1. The `VMID` of the virtual machine to snapshot must first be retrieved,
        for instance with `vim-cmd vmsvc/getallvms`.
     2. Then a snapshot of the virtual machine, with the virtual memory included,
@@ -228,28 +229,28 @@ offsets to specific structures) required by memory forensics tools.
 ### Unix / Linux appliances
 
 For some appliances, such as physical network appliances, taking an image of
-the filesystem can be more easily achieved from a mounted partition / device
-over `SSH` of the live system. If taking an image is not practical, the
+the filesystem can be more easily achieved over `SSH`, from a mounted
+partition / device of the live system. If taking an image is not practical, the
 filesystem of the remote appliance can also be mounted locally over `SSH`
 using `SSHFS`.
 
 #### Disk imaging over SSH
 
 The mounted device(s) / partition(s) can be copied over `SSH` by
-using `dd` both on the server and client sides.
+using `dd` on both the server and client sides.
 
 ```bash
-# Running ssh client from the system that will receive the image:
+# Running the ssh client from the system that will receive the image:
 ssh <REMOTE_USER>@<REMOTE_HOST> "dd if=<DEVICE | PARTITION>" | dd of=<IMAGE_FILE>
 
 # Depending on the targeted appliance, it might be required to "drop" into a shell using a specific appliance command (such as "shell" in the example below):
 ssh <REMOTE_USER>@<REMOTE_HOST> 'shell "dd if=<DEVICE | PARTITION>"' | dd of=<IMAGE_FILE>
 
-# If running ssh client directly on the remote appliance:
+# If running the ssh client directly on the remote appliance:
 dd if=<DEVICE | PARTITION> | ssh <LOCAL_USER>@<LOCAL_SYSTEM> "dd of=<OUTPUT_FILE>"
 ```
 
-Following the copy, any eventual message printed by the remote host to `stdout`
+Following the copy, any message printed by the remote host to `stdout`
 upon an `SSH` connection will have to be removed to get the image in a clean
 state:
 
@@ -257,8 +258,8 @@ state:
 # Checks the first NUMBER_BYTES bytes of the image for any printed string.
 od -A d -N <NUMBER_BYTES> <IMAGE_FILE>
 
-# Trims the first NUMBER_BYTES bytes of the image to remove any eventual stdout printed string.
-# Note: tail is much faster than using dd.
+# Trims the first NUMBER_BYTES bytes of the image to remove any string printed to stdout.
+# Note: tail is much faster than dd.
 tail -c+<NUMBER_BYTES+1> <IMAGE_FILE> > <TRIMMED_IMAGE_FILE>
 dd iflag=skip_bytes skip=<NUMBER_BYTES> if=<IMAGE_FILE> of=<TRIMMED_IMAGE_FILE>
 ```
@@ -280,8 +281,8 @@ Following the imaging of a system disk, the image taken must be mounted as a
 partition for analysis. Numerous tools can be used, from either the Windows or
 Linux operating systems, to do so. An important aspect of image mounting is the
 preservation of the artefacts' integrity. The image should be mounted
-read-only (or temporary write), with a few specificities to preserve timestamps
-and data integrity.
+read-only (or with temporary writes), with a few specific options to preserve
+timestamps and data integrity.
 
 Some utilities, such as `Autoruns`, require writable partitions. To use such
 utilities, the image should be mounted using a utility supporting temporary
@@ -291,22 +292,22 @@ writes.
 
 The [`Arsenal Image Mounter`](https://arsenalrecon.com/downloads/) is a
 powerful graphical utility that can be used to mount multiple image types. It
-supports temporary write using a diff file that will store the modifications.
+supports temporary writes using a diff file that will store the modifications.
 `Arsenal Image Mounter` will automatically mount the different partitions of
-a given image and implements decryption of `BitLocker` protected partitions.
+a given image and supports the decryption of `BitLocker`-protected partitions.
 
 `Arsenal Image Mounter` supports the following disk image formats:
   - `raw` / `DD`
-  - Multi-parts `raw`
+  - Multi-part `raw`
   - `EnCase Evidence File (E01)`
   - `Advanced Forensics Format (AFF)`
   - `VDI` / `VMDK` / `VHD`
 
-Other utilities such as `FTK Imager` or `OSFMount` may be used as well.
+Other utilities, such as `FTK Imager` or `OSFMount`, may be used as well.
 
 ### On Linux OS
 
-#### Virtual Machine disks
+#### Virtual machine disks
 
 The `guestmount` utility can be used to mount a virtual machine disk (`vmdk`,
 `vhdx`, `qcow` / `qcow2`, `vdi`, etc.) directly:
@@ -335,12 +336,12 @@ The following procedure can be followed to mount disk images in the
 `Expert Witness/EnCase (EWF)` format:
 
 ```bash
-# Mount the raw EWF image. Following the ewfmount, an "ewf1" file should be present in the <RAW_EWF_DIR_PATH> directory.
+# Mounts the raw EWF image. Following the ewfmount execution, an "ewf1" file should be present in the <RAW_EWF_DIR_PATH> directory.
 # The ewfmount utility is part of the "ewf-tools" package on Debian / Kali Linux.
 mkdir <RAW_EWF_DIR>
 ewfmount <EWF_FILE_PATH> <RAW_EWF_DIR_PATH>
 
-# Mount the image as a loop device.
+# Mounts the image as a loop device.
 # show_sys_files and streams_interface=windows are options for Windows NTFS partitions.
 mkdir <MOUNTPOINT>
 mount <RAW_EWF_DIR_PATH>/ewf1 <MOUNTPOINT_PATH> -o ro,loop,noatime,noexec,noload,norecovery[,show_sys_files,streams_interface=windows]
@@ -349,8 +350,8 @@ mount <RAW_EWF_DIR_PATH>/ewf1 <MOUNTPOINT_PATH> -o ro,loop,noatime,noexec,noload
 #### Logical Volume Manager image
 
 `Logical Volume Manager (LVM)` is a device mapper framework that provides
-logical volume management (for the Linux kernel) to provide a system of
-partitions independent of underlying disk layout.
+logical volume management for the Linux kernel, offering a system of
+partitions independent of the underlying disk layout.
 
 The `LVM` feature is composed of the following building blocks:
 
@@ -371,7 +372,7 @@ Examples:
 
   - Physical disks: `/dev/sda1` and `/dev/sdb1`.
 
-  - Volume Group: `/dev/MyVolGroup/` = `/dev/sda1` + `/dev/sdb1`
+  - Volume group: `/dev/MyVolGroup/` = `/dev/sda1` + `/dev/sdb1`
 
   - Logical volumes: `/dev/MyVolGroup/rootvol`, `/dev/MyVolGroup/homevol`,
     `/dev/MyVolGroup/mediavol `
@@ -379,13 +380,13 @@ Examples:
 The following commands can be used to mount an `LVM` disk image:
 
 ```bash
-# Mappings for the LVM's volumes.
+# Creates the device mappings for the LVM volumes.
 kpartx -av <IMAGE_PATH>
 
-# Checks the LVM's PV(s) available.
+# Lists the available LVM PV(s).
 pvs
 
-# Checks the LVM's VG(s) and LV(s) available.
+# Lists the available LVM VG(s) and LV(s).
 lvdisplay
 
 # If the LV does not appear, the associated VG may need to be activated.
@@ -398,9 +399,9 @@ mount -o ro,noatime,noexec,noload,norecovery <LV_PATH> <MOUNT_POINT>
 
 #### Generic / raw image types
 
-The image partitions can be first determined using the `TSK`'s `mmls` or
-`fdisk` utilities. The utilities will retrieve the image sector size and the
-partition(s) offsets, both required to mount the partition.
+The image partitions can first be determined using `TSK`'s `mmls` or the
+`fdisk` utility. The utilities will retrieve the image sector size and the
+partition offset(s), both required to mount the partition.
 
 ```bash
 mmls [ -o offset ] <IMAGE_FILE>
@@ -414,11 +415,11 @@ fdisk -l <IMAGE_FILE>
 
 ```bash
 # mount options:
-# ro : read-only.
-# noatime : preserve the atime (last access time) timestamps.
-# noexec : files from the mounted partition cannot be executed.
-# norecovery/noload : prevent replaying of the partition journal to preserve integrity.
-# loop : explicitly tells mount to use a loop device (optional on newer versions of mount).
+# ro: read-only.
+# noatime: preserves the atime (last access time) timestamps.
+# noexec: files from the mounted partition cannot be executed.
+# norecovery/noload: prevents the replay of the partition journal, to preserve integrity.
+# loop: explicitly tells mount to use a loop device (optional on newer versions of mount).
 # show_sys_files and streams_interface=windows are options for Windows NTFS partitions.
 
 # OFFSET = SECTOR_SIZE * PARTITION_START.

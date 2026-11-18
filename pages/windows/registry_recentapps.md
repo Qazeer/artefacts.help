@@ -1,6 +1,6 @@
 ---
 title: Registry - RecentApps
-summary: 'Introduced in Windows 10 1607 and removed in Windows 10 1709 (with the key not present on subsequent versions), the RecentApps is an undocumented registry key that tracks program executions and files accessed by the tracked programs.\n\nInformation of interest: filename, last access timestamp, and run count execution of the application.\n\nAdditionally, 10 files accessed by the application (not necessarily the last files accessed) are tracked. For each file, the file name and file full path are referenced and the last access timestamp can be deduced (from the last write timestamp of the associated registry key).'
+summary: 'Introduced in Windows 10 1607 and removed in Windows 10 1709 (with the key not present on subsequent versions), RecentApps is an undocumented registry key that tracks program executions and files accessed by the tracked programs.\n\nInformation of interest: filename, last access timestamp, and run count of the application.\n\nAdditionally, 10 files accessed by the application (not necessarily the last files accessed) are tracked. For each file, the file name and file full path are referenced, and the last access timestamp can be deduced (from the last write timestamp of the associated registry key).'
 keywords: 'RecentApps'
 tags:
   - windows_registry
@@ -16,7 +16,7 @@ folder: windows
 ### Overview
 
 **Introduced in `Windows 10 1607` and removed in `Windows 10 1709`** (with the
-key not present on subsequent versions), the `RecentApps` is an undocumented
+key not present on subsequent versions), `RecentApps` is an undocumented
 registry key that **tracks program executions and files accessed by the tracked
 programs**.
 
@@ -26,16 +26,15 @@ Each subkey, identified with a GUID, under the `RecentApps` key corresponds to
 an executed program. In **these application GUID subkeys, the filename, last
 access timestamp, and run count of the application** are stored as values.
 
-Additionally, **each application GUID subkey can have up to 10 subkeys**, also
-identified with a GUID, that correspond to **files accessed using the
+Additionally, **each application GUID subkey can have up to 10 subkeys** (also
+identified with a GUID) that correspond to **files accessed using the
 application**. In these file GUID subkeys, **the file name, file full path, and
 (on some OS versions) a non-updated timestamp of last access** are stored as
 values. The cycling order of the file subkeys [appears to be based on the
-alphabetical order of the GUID and not on a first-in-first-out basis](https://df-stream.com/2017/10/recentapps/).
+alphabetical order of the GUIDs and not on a first-in-first-out basis](https://df-stream.com/2017/10/recentapps/).
 If a new file is accessed while 10 files are already referenced, the subkeys
-are sorted alphabetically and the last one is removed in place of the new
-entry. Thus the current files referenced are not necessarily the last 10 files
-accessed.
+are sorted alphabetically and the last one is replaced by the new entry. Thus,
+the files currently referenced are not necessarily the last 10 files accessed.
 
 The **last write timestamp of an application subkey can indicate when the
 program was last executed**, while the **last write timestamp of a file subkey

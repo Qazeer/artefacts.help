@@ -1,6 +1,6 @@
 ---
 title: WMI - Event Subscription
-summary: 'WMI Event Subscriptions can be used to maintain persistence on a Windows system, with permanent event subscriptions persisting across system reboots.\n\nPermanent event subscriptions are composed of: an "event filter" (event that will trigger the consumer), an "event consumer" (that will perform an action, such as executing a command), and a "filter to consumer binding".\n\nEvent subscriptions are written to disk in the "OBJECTS.DATA" file that notably contains the event filters and event consumers.'
+summary: 'WMI Event Subscriptions can be used to maintain persistence on a Windows system, with permanent event subscriptions persisting across system reboots.\n\nPermanent event subscriptions are composed of: an "event filter" (the event type that will trigger the consumer), an "event consumer" (which will perform an action, such as executing a command), and a "filter to consumer binding".\n\nEvent subscriptions are written to disk in the "OBJECTS.DATA" file, which notably contains the event filters and event consumers.'
 keywords: WMI, Event Subscription, event filter, event consumer, ActiveScriptEventConsumer, CommandLineEventConsumer, LogFileEventConsumer, NtEventLogEventConsumer, SMTPEventConsumer, FilterToConsumerBinding, OBJECTS.DATA, CIM, INDEX.BTR, Autoruns, Get-WMIObject, subscription, PyWMIPersistenceFinder, python-cim
 tags:
   - windows_wmi
@@ -21,35 +21,36 @@ folder: windows
 Permanent event subscriptions are composed of:
 
   - An `event filter` (`__EventFilter`), which is the event of interest that
-    will trigger the consumer. Such event can be, for example, a logon success
-    or system startup.
+    will trigger the consumer. Such as, for example, a successful logon or the
+    system startup event.
 
-  - An `event consumer`, which is the action to perform upon trigger of the
-    event filter.
+  - An `event consumer`, which is the action to perform when the event filter
+    is triggered.
 
-    Five Consumer classes are available:
+    Five consumer classes are available:
 
-      - The `ActiveScriptEventConsumer` class that runs arbitrary `VBScript`
+      - The `ActiveScriptEventConsumer` class, which runs arbitrary `VBScript`
         or `JScript` code.
 
-      - The `CommandLineEventConsumer` class that runs an arbitrary system
+      - The `CommandLineEventConsumer` class, which runs an arbitrary system
         command.
 
-      - The `LogFileEventConsumer` class that writes an arbitrary string to a
+      - The `LogFileEventConsumer` class, which writes an arbitrary string to a
         text-based log file.
 
-      - The `NtEventLogEventConsumer` class that writes an arbitrary Windows `ETW`
-        event.
+      - The `NtEventLogEventConsumer` class, which writes an arbitrary Windows
+        `ETW` event.
 
-      - The `SMTPEventConsumer` class that sends an email.
+      - The `SMTPEventConsumer` class, which sends an email.
 
-  - A `filter to consumer binding` (`FilterToConsumerBinding`) which is the
+  - A `filter to consumer binding` (`FilterToConsumerBinding`), which is the
     registration mechanism binding an event filter to an event consumer.
 
-`WMI Event Subscription` can be of two types:
+`WMI Event Subscriptions` can be of two types:
 
   - `Temporary`: only active as long as the process that created the
-    subscription is active and run under the privilege of the creating process.
+    subscription is active, and run under the privileges of the creating
+    process.
 
   - `Permanent`: stored in the `CIM` database on disk and run under
     `NT AUTHORITY\SYSTEM` privileges.
@@ -62,7 +63,7 @@ The persistent `WMI Event Subscriptions` are written to disk in the
 `%SystemRoot%\System32\wbem\Repository\FS\`:
 
   - `OBJECTS.DATA`: contains the `CIM objects` with, among other things, the
-    event subscriptions data (event consumer, filter, and filter to consumer
+    event subscription data (event consumer, filter, and filter to consumer
     binding).
 
   - `INDEX.BTR`: paged file in B-tree structure, "used to efficiently lookup
@@ -71,14 +72,14 @@ The persistent `WMI Event Subscriptions` are written to disk in the
   - `MAPPING<1-3>.MAP`: correlate/map pages from `OBJECTS.DATA` and
     `INDEX.BTR`.
 
-All three files are required to properly conduct forensics analysis on WMI
+All three files are required to properly conduct forensic analysis on WMI
 persistence.
 
 ### Tool(s)
 
 #### Live forensics
 
-The [`SysInternals` `Autoruns`](https://learn.microsoft.com/fr-fr/sysinternals/)
+The [`Sysinternals` `Autoruns`](https://learn.microsoft.com/fr-fr/sysinternals/)
 (GUI) and `AutorunsC` (CLI) utilities can be used to detect (and delete)
 `WMI`-related persistence.
 
@@ -97,7 +98,7 @@ ForEach ($NameSpace in "root\subscription","root\default") { Get-WMIObject -Name
 
 `WMI Event Subscription` data can be extracted from `OBJECTS.DATA` files using
 the [`PyWMIPersistenceFinder`](https://github.com/davidpany/WMI_Forensics)
-Python script (that relies on regexes to extract the data):
+Python script (which relies on regexes to extract the data):
 
 ```bash
 PyWMIPersistenceFinder.py "<OBJECTS.DATA_FILE>"
@@ -119,4 +120,4 @@ python3 samples/dump_class_layout.py win7 "<WMI_REPOSITORY_FOLDER>" "<ROOT\cimv2
 
   - [SANS - Chad Tilbury - Investigating WMI Attacks](https://www.youtube.com/watch?v=aBQ1vEjK6v4)
 
-  - [darkoperator - Carlos PEREZ - Basics of Tracking WMI Activity](https://www.darkoperator.com/blog/2017/10/14/basics-of-tracking-wmi-activity)
+  - [darkoperator - Carlos Perez - Basics of Tracking WMI Activity](https://www.darkoperator.com/blog/2017/10/14/basics-of-tracking-wmi-activity)

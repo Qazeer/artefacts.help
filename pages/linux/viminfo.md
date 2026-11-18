@@ -1,6 +1,6 @@
 ---
 title: viminfo
-summary: 'The vim text editor logs a number of operations in the text-based ".viminfo" log file.\n\n The log file notably includes information on the last 100 files accessed (by default) through vim.\n\n Under the "jumplist" section up to 50 file accesses are referenced, with each file access associated with two entries, one for the file opening and one for the file closing. Each entry includes the file path and an epoch timestamp of occurrence (file opening or closing). Subsequent openings of the same file do not erase previous entries for the file.\n\n Under the "# History of marks within files" section up to 100 file accesses are referenced, with only a single entry for a given file, which references the last closing of the file. This section may thus contain more historical data than the "jumplist" section.'
+summary: 'The vim text editor logs a number of operations in the text-based ".viminfo" log file.\n\n The log file notably includes information on the last 100 files accessed (by default) through vim.\n\n Under the "jumplist" section, up to 50 file accesses are referenced, with each file access associated with two entries, one for the file opening and one for the file closing. Each entry includes the file path and an epoch timestamp of occurrence (file opening or closing). Subsequent openings of the same file do not erase previous entries for the file.\n\n Under the "# History of marks within files" section, up to 100 file accesses are referenced, with only a single entry for a given file, which references the last closing of the file. This section may thus contain more historical data than the "jumplist" section.'
 keywords: vim, viminfo
 tags:
   - linux_files_and_folders_access
@@ -15,11 +15,11 @@ folder: linux
 ### Overview
 
 The `vim(1)` text editor logs a number of operations, including file access, in
-the text-based `.viminfo` log file. As the `.viminfo` file resides under a user
+the text-based `.viminfo` log file. As the `.viminfo` file resides in a user's
 home folder, the operations logged in the file can be linked to a specific user's
 usage of `vim`.
 
-The operations of a given `vim` "session" are written upon exit of the editor.
+The operations of a given `vim` "session" are written when the editor exits.
 
 The location and behavior of the `.viminfo` file can be configured in the
 `vimrc` configuration files (default locations `/etc/vimrc` and `~/.vimrc`).
@@ -77,9 +77,9 @@ The `.viminfo` log file notably includes:
     well, but as each file is uniquely referenced, the section may contain more
     historical data than the "jumplist" section. However, upon reaching the
     limit of 100 entries, it is not necessarily the latest entry that will be
-    overwritten during the rotation. Thus, it is not possible to draw a
-    conclusion on all files accessed during the timeframe covered by the first
-    and last entries if the history reaches 100 entries.
+    overwritten during the rotation. Thus, it is not possible to draw
+    conclusions about all the files accessed during the timeframe covered by
+    the first and last entries if the history reaches 100 entries.
 
     ```
     # File marks:

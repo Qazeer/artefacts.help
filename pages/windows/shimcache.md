@@ -23,14 +23,14 @@ existing software to new versions of the Windows operating system. As stated
 in the Microsoft documentation, the `Shim Infrastructure` "implements a form of
 application programming interface (API) hooking" in order to redirect API calls
 made by an application to an alternative library containing stub functions,
-known as the `Shim`. The process of making an application compatible to a new
+known as the `Shim`. The process of making an application compatible with a new
 version of Windows through `Shims` is referred to as "`shimming`".
 
 As a part of this framework, the `Application Compatibility Database`
 references the applications that have known `shimming` solutions. Upon
 execution of an application, the `Shim Engine` will query this database to
-determine whether the applications require `shimming`. The `Shimcache` contains
-metadata about the files that have been subject to such lookup, to
+determine whether the application requires `shimming`. The `Shimcache` contains
+metadata about the files that have been subject to such lookups, to
 optimize and improve the speed of later lookups.
 
 A `Shimcache` entry is created whenever a program is executed from a specific
@@ -38,7 +38,7 @@ path. However, starting from the `Windows Vista` and `Windows Server 2008`
 operating systems, **entries may also be created for files in a directory that
 is accessed interactively**. Indeed, browsing a directory using `explorer.exe`
 will generate `Shimcache` entries for the executables stored within the
-directory (if the executable was visible in the `Windows Explorer` window).
+directory (if the executables were visible in the `Windows Explorer` window).
 
 **`Shimcache` entries are only written to the registry upon shutdown of the
 system. The `Shimcache` entries generated since the last system boot are
@@ -47,16 +47,16 @@ thus only stored in memory.**
 While the `Shimcache` entry is not removed upon deletion of the associated
 file, `Shimcache` entries may be overwritten and information lost as the oldest
 entries are replaced by new data. A maximum of 96 `Shimcache` entries are
-stored in `Windows XP`, up to 512 entries on `Windows Server 2003`, and up to
+stored on `Windows XP`, up to 512 entries on `Windows Server 2003`, and up to
 1024 entries starting with the `Windows Vista` and `Windows Server 2008`
 operating systems. `Shimcache` entries roll over depending on the level of
 activity on the system, with historical data that can extend up to a few months
-on Windows server with minimal user activity.
+on Windows servers with minimal user activity.
 
 ### Information of interest
 
-Each `Shimcache` entry contains the following information, varying depending
-on the version of the Windows operating system in use:
+Each `Shimcache` entry contains the following information, depending on the
+version of the Windows operating system in use:
 
   - The associated **file full path**.
 
@@ -65,31 +65,31 @@ on the version of the Windows operating system in use:
   - The **`LastModifiedTime` (`$Standard_Information`) timestamp of the file at
     the time of execution**, which **does not necessarily reflect the execution
     time**. Indeed, `Shimcache` entries are not directly associated with an
-    insert/executed timestamp.
+    insert/execution timestamp.
     [Some executables](https://github.com/WithSecureLabs/chainsaw/blob/master/analysis/shimcache_patterns.txt),
-    such as `PsExesvc`, have their `LastModifiedTime` that corresponds to their
+    such as `PsExesvc`, have a `LastModifiedTime` that corresponds to their
     timestamp of execution (as the binaries are automatically downloaded /
     uploaded and executed).
 
   - The cache entry position, as a numerical value starting from 0, which
     represents the insertion position in the `Shimcache`.
-    **The lower the value, generally the more recently the program was
+    **Generally, the lower the value, the more recently the program was
     shimmed.** However, `Shimcache` entries can sometimes be updated in place,
     without generating a new entry with a lower cache entry position.
 
   - From `Windows Vista` / `Windows Server 2008` up to `Windows 8.1` /
-    `Windows Server 2012 R2`, the (undocumented) `Insert Flag` which, when
+    `Windows Server 2012 R2`, the (undocumented) `Insert Flag`, which, when
     set, seems to indicate that the entry was executed.
 
     While the insert/execution flag is no longer present starting from
     `Windows 10` / `Windows Server 2016`, the last 4 bytes of the entry can be
     an indicator of execution: if the last 4 bytes of the entry are equal to
-    `01 00 00 00`, the binary was executed. However, this appears to only apply
+    `01 00 00 00`, the binary was executed. However, this appears to apply only
     to non-native Windows binaries. Additionally, relying on the last 4 bytes
-    can be prone to false-negatives, as executed programs might not necessarily
+    can be prone to false negatives, as executed programs might not necessarily
     have their entry's last 4 bytes set to `0x1`. This technique can thus be
     used to validate that a (non-native Windows) binary has been executed, but
-    cannot be used to rule out execution of a given binary present in the
+    cannot be used to rule out the execution of a given binary present in the
     `Shimcache`.
 
   - On `Windows XP 32-bit`, the file `Last Update Time` timestamp.
@@ -99,12 +99,12 @@ on the version of the Windows operating system in use:
 #### Entries stored on disk
 
 [`AppCompatCacheParser`](https://github.com/EricZimmerman/AppCompatCacheParser)
-tool (`KAPE` associated module `AppCompatCacheParser`) and the
+tool (associated `KAPE` module `AppCompatCacheParser`) and the
 [`ShimCacheParser.py`](https://github.com/mandiant/ShimCacheParser) Python
 script can be used to parse `Shimcache` entries.
 
-By default, both tools will parse all the `ControlSet` found in the `SYSTEM`
-hive.
+By default, both tools will parse all the `ControlSet` keys found in the
+`SYSTEM` hive.
 
 ```bash
 # Parses the live system Registry.
@@ -131,7 +131,7 @@ chainsaw analyse shimcache <SYSTEM_HIVE> --regexfile ./analysis/shimcache_patter
 
 #### Entries only present in memory
 
-The `Volatility2`'s `shimcache` plugin can be used to extract the `Shimcache`
+`Volatility2`'s `shimcache` plugin can be used to extract the `Shimcache`
 entries living in memory (generated since the last system boot).
 
 ```bash
@@ -142,7 +142,7 @@ vol.py -f <MEMORY_IMAGE> --profile=<PROFILE> shimcache
 
   - [Microsoft - Application Compatibility Database](https://docs.microsoft.com/en-us/windows/win32/devnotes/application-compatibility-database)
 
-  - [Mandiant - TIMOTHY PARISI - Caching Out: The Value of Shimcache for Investigators](https://www.fireeye.com/blog/threat-research/2015/06/caching_out_the_val.html)
+  - [Mandiant - Timothy Parisi - Caching Out: The Value of Shimcache for Investigators](https://www.fireeye.com/blog/threat-research/2015/06/caching_out_the_val.html)
 
   - [FireEye - Shimcache whitepaper](https://www.fireeye.com/content/dam/fireeye-www/services/freeware/shimcache-whitepaper.pdf)
 

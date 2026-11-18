@@ -26,10 +26,9 @@ Each network share is stored in a dedicated value under the
 `Map Network Drive MRU` key. The value data contains the `UNC` path of the
 network share (such as `<IP | HOSTNAME>\<SHARE_NAME>`).
 
-The values are ordered in a `Most recently used (MRU)` list, specified in the
+The values are ordered in a `Most Recently Used (MRU)` list, specified in the
 `MRUList` value. Example: `MRUList` equal to `ba` means that the entry tagged
-as `b` was accessed last / the most recently, preceded by the entry tagged as
-`a`.
+as `b` was accessed most recently, preceded by the entry tagged as `a`.
 
 The last write timestamp of the key indicates the timestamp of the most
 recently accessed share.

@@ -1,6 +1,6 @@
 ---
 title: Registry - Services
-summary: 'The Services registry key holds the configuration information of the installed Windows services.\n\nInformation of interest, for each service: service name and display name, image or DLL path, service type, service start mode, and eventual Windows privileges required.\n\nThe timestamp of a service creation, or last configuration update, can be deduced from the last write timestamp of its registry key.'
+summary: 'The Services registry key holds the configuration information of the installed Windows services.\n\nInformation of interest, for each service: service name and display name, image or DLL path, service type, service start mode, and Windows privileges required (if any).\n\nThe timestamp of a service creation, or last configuration update, can be deduced from the last write timestamp of its registry key.'
 keywords: 'Services, installed services, windows service, svchost'
 tags:
   - windows_registry
@@ -20,7 +20,7 @@ Windows services are programs that operate in the background and conform to the
 interface rules and protocols of the `Service Control Manager (SCM)` (the
 component responsible for managing Windows services). Services can be
 implemented as binaries or `Dynamic Link Libraries (DLL)`. The services
-implemented as `DLL` are loaded and executed by an instance of the
+implemented as `DLLs` are loaded and executed by an instance of the
 `Service Host` (`svchost.exe`) process.
 
 The `Services` registry key **holds the configuration information of the
@@ -40,10 +40,10 @@ service name root key):
 
   - Service image path.
 
-    Services implemented as `Dynamic Link Library (DLL)` will usually have
+    Services implemented as `Dynamic Link Libraries (DLLs)` will usually have
     their image path set to
     `%SystemRoot%\system32\svchost.exe -k <SERVICE_HOST_GROUP>`,
-    with the `-k` flag defining the `Service Host Groups` of the service.
+    with the `-k` flag defining the `Service Host Group` of the service.
     As stated in the Microsoft documentation, the `Service Host`
     (`svchost.exe`) is a shared-service process that serves as a shell for
     loading services from `DLL` files. Services are organized into related
@@ -56,7 +56,7 @@ service name root key):
       - `-s <SERVICE_NAME>`: to only load the specified service from the
         given `Service Host Group`.
       - `-p`: [to enforce different policies: `DynamicCodePolicy`,
-        `BinarySignaturePolicy` and `ExtensionPolicy`](https://pusha.be/index.php/2020/05/07/exploration-of-svchost-exe-p-flag/).
+        `BinarySignaturePolicy`, and `ExtensionPolicy`](https://pusha.be/index.php/2020/05/07/exploration-of-svchost-exe-p-flag/).
 
   - The service type:
     - `0x1`: Kernel driver.
@@ -75,9 +75,9 @@ service name root key):
    - `0x03`: "Manual"
    - `0x04`: "Disabled"
 
-  - The Windows specific privileges required by the service
-    (`SeImpersonatePrivilege`, `SeDebugPrivilege`, etc.). No specific
-    privileges may also be set, for example if the service runs as
+  - The Windows-specific privileges required by the service
+    (`SeImpersonatePrivilege`, `SeDebugPrivilege`, etc.). Alternatively, no
+    specific privileges may be set, for example if the service runs as
     `NT AUTHORITY\SYSTEM`.
 
 ### References

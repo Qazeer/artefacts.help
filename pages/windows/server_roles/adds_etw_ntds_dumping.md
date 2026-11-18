@@ -1,6 +1,6 @@
 ---
 title: ETW - Active Directory Domain Services (Domain Controllers) ntds.dit dumping
-summary: 'Secrets stored in the Active Directory database (ntds.dit) can be retrieved a number of ways:\n\n- By leveraging the DRSUAPI replication functions, normally used by Domain Controllers to replicate objects (replicated) properties. This attack can be conducted over the network (without executing code on a Domain Controller) and is known as "DCSync".\n\n - By executing code/commands on a Domain Controller and exfiltrating the ntds.dit database directly. While the ntds.dit database can be accessed and copied using various tools and techniques, the "ntdsutil" built-in administration utility is often leveraged by threat actors to do so.'
+summary: 'Secrets stored in the Active Directory database (ntds.dit) can be retrieved in a number of ways:\n\n- By leveraging the DRSUAPI replication functions, normally used by Domain Controllers to replicate objects'' (replicated) properties. This attack can be conducted over the network (without executing code on a Domain Controller) and is known as "DCSync".\n\n - By executing code/commands on a Domain Controller and exfiltrating the ntds.dit database directly. While the ntds.dit database can be accessed and copied using various tools and techniques, the "ntdsutil" built-in administration utility is often leveraged by threat actors to do so.'
 keywords: Active Directory, Domain Controllers, NTDS, ntds.dit, DRSUAPI, DCSync, 4662, 1131f6aa-9c07-11d1-f79f-00c04fc2dcd2, 1131f6ad-9c07-11d1-f79f-00c04fc2dcd2, ntdsutil, ESENT, 325, 326, 327, 206
 tags:
   - windows_etw
@@ -15,11 +15,11 @@ folder: windows
 
 ### Overview
 
-Secrets stored in the Active Directory database (`ntds.dit`) can be retrieved a
-number of ways:
+Secrets stored in the Active Directory database (`ntds.dit`) can be retrieved
+in a number of ways:
 
   - By leveraging the `DRSUAPI` replication functions, normally used by
-    `Domain Controllers` to replicate objects (replicated) properties. This
+    `Domain Controllers` to replicate objects' (replicated) properties. This
     attack can be conducted over the network (without executing code on a
     `Domain Controller`) and is known as `DCSync`.
 
@@ -39,9 +39,9 @@ information. The `DRSUAPI` functions are normally used by the
 the AD objects consistent across all the `Domain Controllers` of the forest.
 The `DRSUAPI` replication functions are exposed on the network by the
 `Microsoft Remote Procedure Call (MSRPC)` `DRSUAPI` interface on each `Domain
-Controller`. Thus, contrary to the others methods explicated so far, no local
-code execution on a `Domain Controller` is required to retrieve information
-from the `ntds.dit` database.
+Controller`. Thus, unlike the other methods, no local code execution on a
+`Domain Controller` is required to retrieve information from the `ntds.dit`
+database.
 
 While multiple `DRSUAPI` intermediate functions are used in the replication
 process, the `DSGetNCChanges` function implements the replication request.
@@ -55,7 +55,7 @@ replication requests through the `DRSUAPI`:
 
 Those privileges are, in a default Active Directory configuration, granted to
 the `Domain Controllers`, `ENTERPRISE DOMAIN CONTROLLERS`, `Domain Admins`,
-`Enterprise Admins` and `Administrators` domain groups.
+`Enterprise Admins`, and `Administrators` domain groups.
 
 | Channel | Conditions | Events |
 |---------|------------|--------|
@@ -64,8 +64,8 @@ the `Domain Controllers`, `ENTERPRISE DOMAIN CONTROLLERS`, `Domain Admins`,
 ### ntdsutil usage
 
 If code execution is achieved on a `Domain Controller`, multiple Windows
-utilities can be used to export the `ntds.dit` database, file:
-`%SystemDrive%\Windows\NTDS\ntds.dit` (given sufficient privileges).
+utilities can be used to export the `ntds.dit` database (file
+`%SystemDrive%\Windows\NTDS\ntds.dit`), given sufficient privileges.
 
 On a standard `Domain Controller` installation, the `NT AUTHORITY\SYSTEM`
 built-in Windows account and the `Administrators` domain group have

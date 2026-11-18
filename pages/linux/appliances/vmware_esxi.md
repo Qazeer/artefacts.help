@@ -1,10 +1,10 @@
 ---
 title: VMware ESXi
-summary: 'VMware ESXi runs a Syslog service that logs messages from the kernel and other system components. Logs notably include information on authentication, commands entered in the ESXi Shell, and events on virtual machine life-cycle operations (configuration changes, web console access, snapshot operations, etc.). \n\n The ESXi logs location is defined through the "/etc/vmsyslog.conf" configuration file. By default, logs are placed in "/scratch/log/" / "/var/run/log/" (which are symlinks pointing to the same "/vmfs/volumes/<UID>/log/" directory).\n\nThe collection of ESXi logs can be automated through the creation of a "support bundle". A support bundle can be manually generated through the ESXi Host Client web interface or using the DFIR4vSphere PowerShell module (for ESXi attached to a running and reachable vCenter instance).'
-keywords: Vmware, vSphere, ESX, ESXi, vCenter, VMkernel, logdir, scratch, vmsyslog.conf, support bundle, shell.log, auth.log, hostd.log, vmware.log, vpxa.log, vmware-hostd, Vimsvc, WebMKS, snapshot, MKSScreenShotMgr, DFIR4vSphere, Start-ESXi_Investigation, Start-VC_Investigation, ESXBundle, VCBundle
+summary: 'VMware ESXi runs a Syslog service that logs messages from the kernel and other system components. Logs notably include information on authentication, commands entered in the ESXi Shell, and events on virtual machine lifecycle operations (configuration changes, web console access, snapshot operations, etc.). \n\n The ESXi log location is defined through the "/etc/vmsyslog.conf" configuration file. By default, logs are placed in "/scratch/log/" / "/var/run/log/" (which are symlinks pointing to the same "/vmfs/volumes/<UID>/log/" directory).\n\nThe collection of ESXi logs can be automated through the creation of a "support bundle". A support bundle can be manually generated through the ESXi Host Client web interface or using the DFIR4vSphere PowerShell module (for ESXi hosts attached to a running and reachable vCenter instance).'
+keywords: VMware, vSphere, ESX, ESXi, vCenter, VMkernel, logdir, scratch, vmsyslog.conf, support bundle, shell.log, auth.log, hostd.log, vmware.log, vpxa.log, vmware-hostd, Vimsvc, WebMKS, snapshot, MKSScreenShotMgr, DFIR4vSphere, Start-ESXi_Investigation, Start-VC_Investigation, ESXBundle, VCBundle
 tags:
   - hypervisors
-default_location: 'SSH authentication logs:\n/var/run/log/auth.log\n\nESXi host agent logs:\n/var/run/log/hostd.log\n\nESXi Shell logs:\n/var/run/log/shell.log\n\n vCenter Server agent logs:\n/var/run/log/vpxa.log\n\nPer virtual machines logs:\n/vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log'
+default_location: 'SSH authentication logs:\n/var/run/log/auth.log\n\nESXi host agent logs:\n/var/run/log/hostd.log\n\nESXi Shell logs:\n/var/run/log/shell.log\n\n vCenter Server agent logs:\n/var/run/log/vpxa.log\n\nPer-virtual machine logs:\n/vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log'
 last_updated: 2024-06-02
 sidebar: sidebar
 permalink: vmware_esxi.html
@@ -13,14 +13,14 @@ folder: linux
 
 ### VMware ESXi access
 
-`ESXi` host can be accessed and managed using a number of methods.
+`ESXi` hosts can be accessed and managed using a number of methods.
 
 | Access method | Description | Port |
 |---------------|-------------|------|
 | `ESXi Host Client` | Web management interface accessible over `HTTPS`. Access through the web interface is often leveraged to enable `SSH`. | `TCP` 443 |
-| `Secure Shell (SSH)` | `SSH` access to execute commands locally on the `ESXi` host through the `ESXi Shell`. `SSH` is commonly leveraged by threat actors to perform operations on the `ESXi` host, including power-off and encryption of virtual machines' virtual disks (`vmdk`) for ransomware operators. | 22 |
+| `Secure Shell (SSH)` | `SSH` access to execute commands locally on the `ESXi` host through the `ESXi Shell`. `SSH` is commonly leveraged by threat actors to perform operations on the `ESXi` host, including, for ransomware operators, powering off virtual machines and encrypting their virtual disks (`vmdk`). | 22 |
 | `Direct Console User Interface (DCUI)` | Text-based console accessible from the physical console attached to the `ESXi` host. | - |
-| [vSphere Web Services API](https://developer.broadcom.com/xapis/vsphere-web-services-api/7.0U2/) | API exposed as a Web service to manage `vCenter` instances and `ESXi` hosts, including life-cycle operations on virtual machines. | 443 |
+| [vSphere Web Services API](https://developer.broadcom.com/xapis/vsphere-web-services-api/7.0U2/) | API exposed as a web service to manage `vCenter` instances and `ESXi` hosts, including lifecycle operations on virtual machines. | 443 |
 
 #### Microsoft Active Directory Domain Services integration
 
@@ -30,18 +30,18 @@ is joined to an `AD` domain, members of the `AD` group defined in the
 administrative access to the host. By default, the `esxAdminsGroup` parameter
 is set to `ESX Admins`.
 
-The `esxAdminsGroup` parameter can be consulted and set in the
+The `esxAdminsGroup` parameter can be viewed and set in the
 `ESXi Host Client` web management interface: "Managed" -> "Advanced Settings"
 -> "Config.HostAgent.plugins.hostsvc.esxAdminsGroup". The value is stored in
 the `/etc/vmware/configstore/current-store-1` configuration file.
 Additionally, for offline analysis, the `esxAdminsGroup` parameter value is
-retrieved in a support bundle collection.
+included in a support bundle collection.
 
 ### VMware ESXi logs
 
 #### Overview
 
-`VMware ESXi` (5.0 and higher) runs a `Syslog` service (`vmsyslogd`), that logs
+`VMware ESXi` (5.0 and higher) runs a `Syslog` service (`vmsyslogd`) that logs
 messages from the `VMkernel` and other system components.
 
 The log location is defined through the `logdir` variable in the `vmsyslogd`
@@ -59,13 +59,13 @@ configured and accessed/collected.*
 | Component | Location | Details |
 |-----------|----------|---------|
 | Authentication | `<LOG_DIR>/auth.log` | Events related to authentication to the local `ESXi` host. <br><br> **Includes events from the `sshd` daemon for remote access.** |
-| ESXi host agent | `<LOG_DIR>/hostd.log` | Events from the `vmware-hostd` host/management daemon, that is responsible for most of the operations on the `ESXi` host and its associated virtual machines. <br><br> **Includes events:** <br> - **On authentications**, for SSH and other access types that are not recorded in auth.log, such as access through the web management interface ESXi Host Client, PowerCLI, programming language SDK, etc. <br> - **On virtual machine life-cycle operations**, such as VM creation, power on/off, deletion, snapshot operations. <br> - **On PowerCLI guest operations**, such as file transfers and command executions notably. <br> - etc. |
-| ESXi Shell | `<LOG_DIR>/shell.log` | Events for shell related activity. <br><br> **Includes events for every command entered in the `ESXi Shell`, shell session lifecycle, enabling/disabling of SSH access, etc.** |
-| Virtual machines | `/vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log` | Per virtual machine events on the VM life-cycle operations. <br><br> **Includes events for VM configuration changes, snapshot operations, `VMware WebMKS` console access, guest operations (file transfers and command executions notably) through PowerCLI, etc.** |
+| ESXi host agent | `<LOG_DIR>/hostd.log` | Events from the `vmware-hostd` host/management daemon, which is responsible for most of the operations on the `ESXi` host and its associated virtual machines. <br><br> **Includes events:** <br> - **On authentications**, for SSH and other access types that are not recorded in auth.log, such as access through the web management interface ESXi Host Client, PowerCLI, programming language SDKs, etc. <br> - **On virtual machine lifecycle operations**, such as VM creation, power on/off, deletion, and snapshot operations. <br> - **On PowerCLI guest operations**, such as file transfers and command executions notably. <br> - etc. |
+| ESXi Shell | `<LOG_DIR>/shell.log` | Events for shell-related activity. <br><br> **Includes events for every command entered in the `ESXi Shell`, shell session lifecycle, enabling/disabling of SSH access, etc.** |
+| Virtual machines | `/vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log` | Per-virtual machine events on VM lifecycle operations. <br><br> **Includes events for VM configuration changes, snapshot operations, `VMware WebMKS` console access, guest operations (notably file transfers and command executions) through PowerCLI, etc.** |
 | vCenter Server agent | `<LOG_DIR>/vpxa.log` | Events related to the ESXi agent that communicates with vCenter Servers (if the ESXi host is managed by vCenter). |
-| Install and updates | `<LOG_DIR>/esxupdate.log` | Install and updates related events. |
+| Installation and updates | `<LOG_DIR>/esxupdate.log` | Installation and update-related events. |
 
-Additionally, for environments with `vCenter`, `VI events` can also be a great
+Additionally, for environments with `vCenter`, `VI events` can be a great
 source of information (on every `vSphere API` call made through `vCenter`).
 
 #### Events related to various operations
@@ -83,7 +83,7 @@ Source: auth.log
 2023-12-05T17:59:31.981Z In(38) sshd[1053654]: Session closed for 'root' on /dev/char/pty/t0
 ```
 
-{% include note.html content="Access through `ESXi` web management interface `ESXi Host Client`." %}
+{% include note.html content="Access through the `ESXi` web management interface `ESXi Host Client`." %}
 
 ```
 Source: hostd.log
@@ -139,18 +139,18 @@ Source: hostd.log
 2024-06-02T21:19:01.386Z In(166) Hostd[1050738]: [Originator@6876 sub=Hostsvc.AppConfigOptionsProvider(Config.HostAgent.) opID=esxui-a003-5e51 sid=5295925c user=root] Set called with key 'Config.HostAgent.plugins.hostsvc.esxAdminsGroup' value '"ESX Admins new"'
 ```
 
-**Operations on Guest virtual machines**
+**Operations on guest virtual machines**
 
 {% include note.html content="Snapshot of a virtual machine." %}
 
 ```
-Source: shell.log (if conducted through ESXi shell)
+Source: shell.log (if conducted through the ESXi Shell)
 
 2023-12-05T17:42:32.948Z In(14) shell[1053659]: [root]: vim-cmd vmsvc/snapshot.create $vm_id
 ```
 
 ```
-Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been snapshot)
+Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that was snapshotted)
 
 2023-12-05T17:42:40.666Z In(05) vmx vim-cmd-09-a45d SnapshotVMX_TakeSnapshot start: 'snapshot_exfill', deviceState=1, lazy=1, quiesced=0, forceNative=0, tryNative=1, saveAllocMaps=0
 2023-12-05T17:42:40.680Z In(05) vcpu-0 vim-cmd-09-a45d MainMem: Writing full memory image, '/vmfs/volumes/643a85c2-3920a51f-8175-48210b361288/Base-WindowsServer2019/Base-WindowsServer2019-Snapshot2.vmem'
@@ -161,16 +161,16 @@ Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been 
 {% include note.html content="Access to a virtual machine description page through the `ESXi` web management interface `ESXi Host Client`." %}
 
 ```
-Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been snapshot)
+Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the accessed VM)
 
 2023-12-05T17:59:05.961Z In(05) vmx - MKSVMX: Vigor requested a screenshot
 2023-12-05T17:59:05.961Z In(05) svga - MKSScreenShotMgr: Taking a screenshot
 ```
 
-{% include note.html content="Access to a virtual machine login screen by launching the remote console through `ESXi` web management interface `ESXi Host Client`, bypassing possible network filtering. <br><br> Only indicates that an access was made to the guest host login screen, not necessarily that a successful login occurred (that would result in a logon `Type 2` / `Interactive` `4624` event on a Windows guest host)." %}
+{% include note.html content="Access to a virtual machine login screen by launching the remote console through the `ESXi` web management interface `ESXi Host Client`, bypassing possible network filtering. <br><br> Only indicates that the guest host login screen was accessed, not necessarily that a successful login occurred (which would result in a logon `Type 2` / `Interactive` `4624` event on a Windows guest host)." %}
 
 ```
-Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM that has been snapshot)
+Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the accessed VM)
 
 2023-12-05T18:02:22.340Z In(05) vmx - VigorTransportProcessClientPayload: opID=e0ada929 seq=8511: Receiving MKS.IssueTicket request.
 2023-12-05T18:02:22.341Z In(05) vmx e0ada929 Issuing new webmks ticket 2d0378... (120 seconds)
@@ -212,7 +212,7 @@ Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM from which the
 2024-06-04T21:53:35.263Z In(05) vcpu-1 - VigorTransport_ServerSendResponse opID=c4c9713c seq=3576: Completed GuestOps request with messages.
 ```
 
-{% include note.html content="Execution of a command on a guest virtual machine using `PowerCLI`'s `Invoke-VMScript` cmdlet. **The command executed is not logged in ESXi logs.** <br><br> The cmdlet first creates a temporary file to store (in real-time) the script `stdout`/`stderr` output, executes the given command, retrieves the temporary file to display the script console output on the local machine, and deletes the temporary file. <br><br> Command example: <br> `Invoke-VMScript -VM \"<VM_NAME>\" -GuestUser \"<USERNAME>\" -GuestPassword \"<PASSWORD>\" -ScriptText \"<COMMAND>\"`." %}
+{% include note.html content="Execution of a command on a guest virtual machine using `PowerCLI`'s `Invoke-VMScript` cmdlet. **The command executed is not logged in ESXi logs.** <br><br> The cmdlet first creates a temporary file to store (in real time) the script `stdout`/`stderr` output, executes the given command, retrieves the temporary file to display the script console output on the local machine, and deletes the temporary file. <br><br> Command example: <br> `Invoke-VMScript -VM \"<VM_NAME>\" -GuestUser \"<USERNAME>\" -GuestPassword \"<PASSWORD>\" -ScriptText \"<COMMAND>\"`." %}
 
 ```
 Source: hostd.log
@@ -225,7 +225,7 @@ Source: hostd.log
 ```
 
 ```
-Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM to which the file was transferred)
+Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM to which the the file was transferred)
 
 2024-06-04T21:58:00.759Z In(05) vmx - VigorTransportProcessClientPayload: opID=c4c97156 seq=3930: Receiving GuestOps.CreateTemporaryFile request.
 2024-06-04T21:58:00.913Z In(05) vcpu-0 - VigorTransport_ServerSendResponse opID=c4c97156 seq=3930: Completed GuestOps request with messages.
@@ -248,17 +248,17 @@ creation of a "support bundle". The generation of a support bundle is natively
 supported by `ESXi` and can be conducted through the `ESXi` web management
 interface `ESXi Host Client` or in PowerShell. In addition to the
 `/var/run/log/` folder, a support bundle also includes the outputs of various
-commands: running processes and active network connections, virtual machines
-and datastores listing, etc.
+commands: running processes and active network connections, virtual machine
+and datastore listings, etc.
 
-A support bundle can be manually generated through the `ESXi`
-`ESXi Host Client` interface at
+A support bundle can be manually generated through the `ESXi Host Client`
+interface at
 `https://<ESXI_IP | ESXI_HOSTNAME>/cgi-bin/vm-support.cgi` or through the
 "Monitor" interface (Host -> Monitor -> Logs -> Generate a support bundle).
 
-`ESXi` support bundle, for a specific `ESXi` or all `ESXi` attached to a
-`vCenter` instance, can be automatically generated and retrieved using the
-PowerShell module [`DFIR4vSphere`](https://github.com/ANSSI-FR/DFIR4vSphere).
+`ESXi` support bundles, for a specific `ESXi` host or all `ESXi` hosts attached
+to a `vCenter` instance, can be automatically generated and retrieved using the
+[`DFIR4vSphere`](https://github.com/ANSSI-FR/DFIR4vSphere) PowerShell module.
 `DFIR4vSphere` also supports the collection of the `vCenter` instance's
 `VI events`, and the generation of a support bundle for the `vCenter` appliance
 itself. `DFIR4vSphere` requires that the targeted `ESXi` instances are attached
@@ -287,16 +287,16 @@ Start-VC_Investigation -LightVIEvents -StartDate $StartDate -EndDate $EndDate
 
 # A subset of VI events can also be retrieved specifically.
 # For instance, to retrieve only the successful and unsuccessful login attempts.
-# Full list of available VI Events, per vSphere version: https://github.com/lamw/vCenter-event-mapping
+# Full list of available VI events, per vSphere version: https://github.com/lamw/vCenter-event-mapping
 Start-VC_Investigation -LightVIEvents -LightVIEventTypesId "com.vmware.sso.LoginSuccess", "com.vmware.sso.LoginFailure" -StartDate $StartDate -EndDate $EndDate
 
 # ESXi collection.
 
-# Collects basic information (running processes, open network connections, local accounts, etc.) and generate a support bundle for every ESXi in a given cluster.
+# Collects basic information (running processes, open network connections, local accounts, etc.) and generates a support bundle for every ESXi host in a given cluster.
 # The support bundle generation can be omitted by removing the -ESXBundle flag.
 Get-VMHost -Location <CLUSTER_NAME> | Start-ESXi_Investigation -ESXBundle
 
-# Collects basic information and generate a support bundle for the specific ESXi.
+# Collects basic information and generates a support bundle for the specified ESXi host.
 Start-ESXi_Investigation -Name <ESXI_NAME> -ESXBundle
 ```
 

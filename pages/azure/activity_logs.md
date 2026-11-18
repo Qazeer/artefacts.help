@@ -20,7 +20,7 @@ The key fields in the subscription/activity log schema are:
      - `identity.claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn`:
        the `UPN` of the identity that performed the action.
 
-     - `identity.claims.groups`: the AzureAD groups of which the identity is a
+     - `identity.claims.groups`: the Entra ID groups of which the identity is a
        member.
 
      - `identity.claims.ipaddr`: the IP address the identity authenticated from.
@@ -31,7 +31,7 @@ The key fields in the subscription/activity log schema are:
     `resourceId` follows the format:
     `/SUBSCRIPTIONS/<SUBSCRIPTION_ID>/RESOURCEGROUPS/<RESOURCEGROUP_NAME>/PROVIDERS/<PROVIDER>/<RESOURCE_NAME>`.
 
-    The provider can for example be `/MICROSOFT.COMPUTE/VIRTUALMACHINES` or
+    The provider can, for example, be `/MICROSOFT.COMPUTE/VIRTUALMACHINES` or
     `MICROSOFT.STORAGE/STORAGEACCOUNTS`.
 
   - `operationName`: the name of the operation.
