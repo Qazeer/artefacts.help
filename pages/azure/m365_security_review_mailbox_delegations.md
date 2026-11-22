@@ -151,24 +151,42 @@ The following roles, which group individual permissions, are available:
 
   - `Reviewer`: FolderVisible, ReadItems.
 
-```bash
-# Retrieves the folder-level permissions for the specified mailbox.
-Get-Mailbox -Identity <EMAIL> | Get-MailboxFolderPermission | Select-Object *
+The `Get-MailboxFolderPermission` cmdlet retrieves the permissions of a single
+folder, specified using the `<MAILBOX>:\<FOLDER_PATH>` syntax (for example
+`<EMAIL>:\Calendar` or `<EMAIL>:\Inbox`). If only the mailbox is specified,
+only the permissions of the root folder of the mailbox
+(`Top of Information Store`) are returned. As the folder names are localized
+(depending on the language of the mailbox), the folders can be enumerated with
+the `Get-MailboxFolderStatistics` cmdlet, and their `FolderId` used to retrieve
+their permissions (`<MAILBOX>:<FOLDER_ID>`).
 
-# Enumerates, for all the mailboxes, the folder-level permissions allowing access to Anonymous or Default.
+```bash
+# Retrieves the folder-level permissions of the root folder, or of the given folder, of the specified mailbox.
+Get-MailboxFolderPermission -Identity <EMAIL> | Select-Object *
+Get-MailboxFolderPermission -Identity <EMAIL>:\<Calendar | Inbox | FOLDER_PATH> | Select-Object *
+
+# Retrieves the folder-level permissions of all the folders of the specified mailbox.
+Get-MailboxFolderStatistics -Identity <EMAIL> | ForEach-Object { Get-MailboxFolderPermission -Identity "<EMAIL>:$($_.FolderId)" -ErrorAction SilentlyContinue } | Select-Object FolderName,User,AccessRights
+
+# Enumerates, for all the mailboxes and all their folders, the folder-level permissions allowing access to Anonymous or Default.
+# As each folder of each mailbox is queried, the enumeration may take a long time on large tenants.
 $MailBoxes = Get-Mailbox -Resultsize Unlimited
 ForEach ($MailBox in $MailBoxes) {
-  $Permissions = Get-MailboxFolderPermission $MailBox |
-  Where-Object { (($_.User -like 'Anonymous') -or ($_.User -like 'Default')) -and $_.AccessRights -ne 'None' }
+  $Folders = Get-MailboxFolderStatistics -Identity $MailBox.PrimarySmtpAddress
+  ForEach ($Folder in $Folders) {
+    $Permissions = Get-MailboxFolderPermission -Identity "$($MailBox.PrimarySmtpAddress):$($Folder.FolderId)" -ErrorAction SilentlyContinue |
+    Where-Object { (($_.User -like 'Anonymous') -or ($_.User -like 'Default')) -and $_.AccessRights -ne 'None' }
 
-  ForEach ($Permission in $Permissions) {
-    [PSCustomObject]@{
-      MailBoxIdentity = $MailBox.Identity
-      MailBoxPrimarySmtpAddress = $MailBox.PrimarySmtpAddress
-      FolderName = $Permission.FolderName
-      DelegateUser = $Permission.User
-      DelegateRights = $Permission.AccessRights
-      DelegateIsValid = $Permission.IsValid
+    ForEach ($Permission in $Permissions) {
+      [PSCustomObject]@{
+        MailBoxIdentity = $MailBox.Identity
+        MailBoxPrimarySmtpAddress = $MailBox.PrimarySmtpAddress
+        FolderName = $Permission.FolderName
+        FolderPath = $Folder.FolderPath
+        DelegateUser = $Permission.User
+        DelegateRights = $Permission.AccessRights
+        DelegateIsValid = $Permission.IsValid
+      }
     }
   }
 }
