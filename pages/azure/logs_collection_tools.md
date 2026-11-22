@@ -260,8 +260,8 @@ procedure to export logs from different sources is as follows:
   - `Entra ID` tenant logs (sign-in and audit logs) - P1/P2 license required:
 
     ```
-    Azure Active Directory portal
-       => Diagnostic settings (left menu)
+    Microsoft Entra admin center
+       => Entra ID => Monitoring & health => Diagnostic settings (left menu)
           => Add diagnostic setting
              => Check "AuditLogs", "SignInLogs", "NonInteractiveUserSignInLogs", "ServicePrincipalSignInLogs", "ManagedIdentitySignInLogs", "ADFSSignInLogs", "RiskyUsers", "UserRiskEvents"
              => Archive to a storage account / Send to Log Analytics workspace
