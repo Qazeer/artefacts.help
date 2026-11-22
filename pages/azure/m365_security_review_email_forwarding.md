@@ -1,7 +1,7 @@
 ---
 title: Security review - Email forwarding
 summary: 'Emails can be forwarded to external or internal recipients using different mechanisms:\n\n - Mailbox Email Forwarding.\n\n - Mailbox Inbox rules.\n\n - Mailbox Mail Flow / Transport rules (requires Exchange Admin privileges).'
-keywords: Email Forwarding, ForwardingSmtpAddress, ForwardingAddress, Inbox rules, Get-InboxRule, Mail Flow, Transport rules, Get-TransportRule
+keywords: Email Forwarding, ForwardingSmtpAddress, ForwardingAddress, DeliverToMailboxAndForward, Inbox rules, Get-InboxRule, Mail Flow, Transport rules, Get-TransportRule
 tags:
   - azure_security_review
 last_updated: 2024-01-28
@@ -12,13 +12,28 @@ folder: azure
 
 ### Mailbox Email Forwarding
 
-Mailbox Email Forwarding can be configured by any user for their mailbox,
-allowing forwarding to external (`ForwardingSmtpAddress`) or internal
-(`ForwardingAddress`) email addresses.
+Mailbox Email Forwarding can be configured through two mailbox properties:
+
+  - `ForwardingSmtpAddress`: forwarding to any SMTP email address (external or
+    internal). This property can be configured by any user for their mailbox
+    (from `Outlook on the web`: `Settings` -> `Mail` -> `Forwarding`), or by
+    administrators (from the `Exchange admin center`, the
+    `Microsoft 365 admin center`, or with the `Set-Mailbox` cmdlet).
+
+  - `ForwardingAddress`: forwarding to a recipient object defined in the
+    directory (another mailbox, a mail user, or a mail contact, which can
+    reference an external email address). This property can only be configured
+    by administrators (from the `Exchange admin center` or with the
+    `Set-Mailbox` cmdlet).
+
+If both properties are configured, the `ForwardingSmtpAddress` property is
+ignored and the emails are forwarded to the `ForwardingAddress` recipient. The
+`DeliverToMailboxAndForward` property defines whether the emails are delivered
+to the mailbox and forwarded (`True`), or only forwarded (`False`, by default).
 
 ```bash
 # Lists all mailboxes with a forwarding address configured from Mailbox Settings.
-Get-Mailbox -ResultSize Unlimited | Where-Object { ($Null -ne $_.ForwardingSmtpAddress) } | Select Identity,Name,PrimarySmtpAddress,ForwardingSmtpAddress
+Get-Mailbox -ResultSize Unlimited | Where-Object { ($Null -ne $_.ForwardingSmtpAddress) -or ($Null -ne $_.ForwardingAddress) } | Select-Object Identity,Name,PrimarySmtpAddress,ForwardingSmtpAddress,ForwardingAddress,DeliverToMailboxAndForward
 ```
 
 The email forwarding configured on a given mailbox can also be visualized
