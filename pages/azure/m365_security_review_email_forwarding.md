@@ -47,16 +47,17 @@ received emails.
 
 ```bash
 # Lists the Inbox rules of the given mailbox.
+# The -IncludeHidden switch includes the hidden Inbox rules in the results.
 
-Get-InboxRule -Mailbox <EMAIL> | Select-Object Identity,Name,Enabled,Description | Format-List
+Get-InboxRule -Mailbox <EMAIL> -IncludeHidden | Select-Object Identity,Name,Enabled,Description | Format-List
 
 # Lists the Inbox rules of the given mailbox with ForwardTo, RedirectTo, ForwardAsAttachmentTo, or DeleteMessage actions.
 
 $Mailboxes = Get-Mailbox -ResultSize Unlimited
 Foreach ($Mailbox in $Mailboxes) {
-    Get-InboxRule -Mailbox $Mailbox.Name |
+    Get-InboxRule -Mailbox $Mailbox.PrimarySmtpAddress -IncludeHidden |
     Where-Object {($Null -ne $_.ForwardTo) -or ($Null -ne $_.RedirectTo) -or ($Null -ne $_.ForwardAsAttachmentTo) -or ($True -eq $_.DeleteMessage) } |
-    Select-Object Identity,Name,PrimarySmtpAddress,Enabled,ForwardAsAttachmentTo,ForwardTo,RedirectTo,DeleteMessage
+    Select-Object Identity,Name,@{Name="PrimarySmtpAddress"; Expression={$Mailbox.PrimarySmtpAddress}},Enabled,ForwardAsAttachmentTo,ForwardTo,RedirectTo,DeleteMessage
 }
 ```
 
