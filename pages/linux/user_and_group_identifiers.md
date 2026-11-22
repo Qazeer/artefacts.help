@@ -1,7 +1,7 @@
 ---
 title: User and group identifiers
 summary: 'Each process is associated with a set of user and group identifiers: uid/gid, euid/egid, ruid/rgid, suid/sgid, and fsuid/fsgid.'
-keywords:
+keywords: uid, gid, euid, egid, ruid, rgid, suid, sgid, fsuid, fsgid, setuid, setgid, SUID, SGID, sudo, su, ps, passwd, group
 tags:
   - linux_system_information
 location: 'User identifiers (uid) to textual usernames mapping:\n/etc/passwd\n\nGroup identifiers (gid) to textual group names mapping:\n/etc/group'

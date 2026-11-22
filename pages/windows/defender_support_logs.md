@@ -1,7 +1,7 @@
 ---
 title: Windows Defender - Support logs
 summary: 'Windows Defender stores on disk a number of plain-text log files.\n\nAmong these log files, the Microsoft Protection Log (MPLog) includes a number of event types related to past Windows Defender scanning activity and detections.\n\nThe MPLog can notably be a source of historical information on:\n - Program and suspicious command line executions.\n - File existence and access.\n - Windows Defender configuration state, detections, and other telemetry.'
-keywords:
+keywords: Windows Defender, Defender, Support, MPLog, Microsoft Protection Log, MPDetection, BM telemetry, Filter caching disabled, EMS, SDN query, RTP Perf Log, mplog_parser
 tags:
   - windows_program_execution
   - windows_file_knowledge

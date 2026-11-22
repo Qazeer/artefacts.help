@@ -1,7 +1,7 @@
 ---
 title: NTFS - $LogFile
 summary: 'The $LogFile is part of a journaling feature of NTFS, activated by default, which maintains a low-level record of changes made to the NTFS volume with very limited historical data (usually only covering the last few hours).'
-keywords:
+keywords: Filesystem, NTFS, LogFile, $LogFile, Journal, journaling
 tags:
   - windows_ntfs_filesystem
   - windows_file_knowledge
