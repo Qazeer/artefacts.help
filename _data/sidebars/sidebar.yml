@@ -935,6 +935,10 @@
         url: /azure_m365_security_review_mailbox_delegations.html#recipient-or-sendas-access-rightpermission
         output: web
 
+      - title: SendOnBehalf permission
+        url: /azure_m365_security_review_mailbox_delegations.html#sendonbehalf-permission
+        output: web
+
       - title: Folder-level permissions
         url: /azure_m365_security_review_mailbox_delegations.html#folder-level-permissions
         output: web
