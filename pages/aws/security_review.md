@@ -16,8 +16,13 @@ The following commands can be used to retrieve basic information about the AWS
 account:
 
 ```bash
-# Retrieves information about the IAM entity usage (number of users, groups, roles, etc.).
-aws iam get-credential-report
+# Retrieves information about the IAM entity usage (number of users, groups, roles, etc.) and IAM quotas.
+aws iam get-account-summary
+
+# Generates and retrieves the credential report (Base64-encoded CSV), listing all the IAM users and the status of their credentials (password, access keys, MFA devices).
+# A new report is only generated if the last report is older than four hours.
+aws iam generate-credential-report
+aws iam get-credential-report --query 'Content' --output text | base64 -d > <OUTPUT_CSV>
 
 # Lists the IAM users, with their creation date and password last used timestamp.
 aws iam list-users
