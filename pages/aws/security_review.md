@@ -27,8 +27,12 @@ aws iam get-credential-report --query 'Content' --output text | base64 -d > <OUT
 # Lists the IAM users, with their creation date and password last used timestamp.
 aws iam list-users
 
-# Lists the users' access keys, with their status and creation date.
-aws iam list-access-keys
+# Lists the access keys of the specified user, with their status and creation date.
+# If no user is specified, the access keys of the user making the request are listed.
+aws iam list-access-keys --user-name "<USERNAME>"
+
+# Lists the access keys of all the IAM users.
+for user in $(aws iam list-users --query 'Users[*].UserName' --output text); do aws iam list-access-keys --user-name "$user"; done
 
 # Lists the IAM groups (collections of IAM users that can be associated with specific permissions).
 aws iam list-groups
