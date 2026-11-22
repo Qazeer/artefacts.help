@@ -58,6 +58,13 @@ aws iam list-user-policies --user-name "<USERNAME>"
 # IAM policies attached to the specified IAM user.
 aws iam list-group-policies --group-name "<GROUPNAME>"
 aws iam list-role-policies --role-name "<ROLENAME>"
+# Managed IAM policies attached to the specified IAM user/group/role.
+aws iam list-attached-user-policies --user-name "<USERNAME>"
+aws iam list-attached-group-policies --group-name "<GROUPNAME>"
+aws iam list-attached-role-policies --role-name "<ROLENAME>"
+
+# Retrieves the policy document of the specified inline policy (with similar get-group-policy and get-role-policy commands for groups and roles).
+aws iam get-user-policy --user-name "<USERNAME>" --policy-name "<POLICY_NAME>"
 
 # Lists all the IAM users, groups, and roles that the specified policy is attached to.
 # Example policy ARN: arn:aws:iam::aws:policy/service-role/AWSApplicationMigrationReplicationServerPolicy
