@@ -15,11 +15,14 @@ For instance, `MailItemsAccessed` mail access events will only be available
 for users associated with an `Office 365 E5` or `Microsoft 365 E5` license.
 
 ```bash
-# Lists the license plans in the tenant.
-Get-MsolAccountSku
+# Connects to Microsoft Graph with the required permissions.
+Connect-MgGraph -Scopes "Organization.Read.All","User.Read.All"
+
+# Lists the license plans (SKUs) subscribed by the tenant.
+Get-MgSubscribedSku | Select-Object SkuPartNumber, SkuId, ConsumedUnits, @{Name="EnabledUnits"; Expression={$_.PrepaidUnits.Enabled}}
 
 # Retrieves the license plans associated with the specified user.
-Get-MsolUser -UserPrincipalName <EMAIL> | Select-Object DisplayName -ExpandProperty Licenses
+Get-MgUserLicenseDetail -UserId <EMAIL> | Select-Object SkuPartNumber, SkuId
 ```
 
 The license plans in use, and their associated users, can also be visualized
