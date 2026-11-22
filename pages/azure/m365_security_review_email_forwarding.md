@@ -61,7 +61,7 @@ Foreach ($Mailbox in $Mailboxes) {
 }
 ```
 
-[`Microsoft-Extractor-Suite`](./logs_collection_tools.md#azure-ad-microsoft-365--azure-microsoft-extractor-suite)'s
+[`Microsoft-Extractor-Suite`](./logs_collection_tools.md#entra-id-microsoft-365--azure-microsoft-extractor-suite)'s
 [`Show-MailboxRules`](https://microsoft-365-extractor-suite.readthedocs.io/en/latest/functionality/M365/InboxRules.html)
 PowerShell cmdlet can be used to enumerate the Mailbox Inbox rules:
 
@@ -89,7 +89,7 @@ Get-TransportRule | Select-Object *
 Get-TransportRule | Where-Object { ($Null -ne $_.BlindCopyTo) -or ($Null -ne $_.CopyTo) -or ($Null -ne $_.AddToRecipients) -or ($Null -ne $_.RedirectMessageTo) } | Select-Object *
 ```
 
-[`Microsoft-Extractor-Suite`](./logs_collection_tools.md#azure-ad-microsoft-365--azure-microsoft-extractor-suite)'s
+[`Microsoft-Extractor-Suite`](./logs_collection_tools.md#entra-id-microsoft-365--azure-microsoft-extractor-suite)'s
 [`Show-TransportRules`](https://microsoft-365-extractor-suite.readthedocs.io/en/latest/functionality/M365/TransportRules.html)
 PowerShell cmdlet can be used to enumerate the `Transport rules` with
 output formatting:

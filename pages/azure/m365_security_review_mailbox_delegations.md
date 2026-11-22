@@ -194,7 +194,7 @@ ForEach ($MailBox in $MailBoxes) {
 
 ### Automated collection
 
-[`Microsoft-Extractor-Suite`](./logs_collection_tools.md#azure-ad-microsoft-365--azure-microsoft-extractor-suite)'s
+[`Microsoft-Extractor-Suite`](./logs_collection_tools.md#entra-id-microsoft-365--azure-microsoft-extractor-suite)'s
 [`Get-MailboxPermissions`](https://microsoft-365-extractor-suite.readthedocs.io/en/latest/functionality/M365/MailboxDelegatedPermissions.html)
 PowerShell cmdlet can be used to enumerate the Mailbox (`FullAccess`),
 Recipient (`SendAs`), and `SendOnBehalf` access rights / permissions, as well
