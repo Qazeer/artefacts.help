@@ -26,16 +26,23 @@ The following operations are notable for the `Exchange` workload:
 | Mailbox audit logs | `SoftDelete` | Soft deletion of a message (deletion from the `Deleted Items` folder, but potentially recoverable from the `Recoverable Items` folder). | `Owner`, `Delegate`, `Admin` | Yes |
 | Mailbox audit logs | `HardDelete` | Permanent deletion of a message (message won't be placed in the `Deleted Items` folder or recoverable from the `Recoverable Items` folder). | `Owner`, `Delegate`, `Admin` | Yes |
 | Mailbox audit logs | `UpdateInboxRules` | Creation, modification, or removal of mailbox inbox rules from the `Outlook` client (or through the `Exchange Web Services (EWS)` API's `UpdateInboxRules` operation). <br><br> Inbox rules created or modified from `Outlook on the web` (or with `Exchange Online PowerShell`) are logged as `New-InboxRule` / `Set-InboxRule` events in the `ExchangeAdmin` audit logs. | `Owner`, `Delegate`, `Admin` | Yes |
-| ExchangeAdmin audit logs | `Set-Mailbox` | Change to the mailbox parameters. Can notably be used to forward emails using the `ForwardingSmtpAddress` parameter. |
-| ExchangeAdmin audit logs | `New-InboxRule` | Creation of a new inbox rule in the mailbox. |
-| ExchangeAdmin audit logs | `Set-InboxRule` | Modification of an existing inbox rule in the mailbox. |
-| ExchangeAdmin audit logs | `New-TransportRule` <br> `Set-TransportRule` <br><br> With the `BlindCopyTo` parameter. | Creation of a Transport / Mail Flow rule to send a copy of the emails to the defined address. |
-| ExchangeAdmin audit logs | `Remove-InboxRule` | Removal of a mailbox inbox rule. |
-| ExchangeAdmin audit logs | `Disable-InboxRule` | Disabling of a mailbox inbox rule. |
-| ExchangeAdmin audit logs | `Add-MailboxPermission` | Update of the permissions associated with the mailbox, such as `FullAccess` or `ChangePermission` permissions (in the `AccessRights` field). |
-| ExchangeAdmin audit logs | `Add-RecipientPermission` | Addition of the `SendAs` permission to user(s) for the mailbox. |
-| ExchangeAdmin audit logs | `Set-OwaMailboxPolicy` | Update to the OWA mailbox policies. |
+| ExchangeAdmin audit logs | `Set-Mailbox` | Change to the mailbox parameters. Can notably be used to forward emails using the `ForwardingSmtpAddress` parameter. | N/A | Yes |
+| ExchangeAdmin audit logs | `New-InboxRule` | Creation of a new inbox rule in the mailbox. | N/A | Yes |
+| ExchangeAdmin audit logs | `Set-InboxRule` | Modification of an existing inbox rule in the mailbox. | N/A | Yes |
+| ExchangeAdmin audit logs | `New-TransportRule` <br> `Set-TransportRule` <br><br> With the `BlindCopyTo` parameter. | Creation of a Transport / Mail Flow rule to send a copy of the emails to the defined address. | N/A | Yes |
+| ExchangeAdmin audit logs | `Remove-InboxRule` | Removal of a mailbox inbox rule. | N/A | Yes |
+| ExchangeAdmin audit logs | `Disable-InboxRule` | Disabling of a mailbox inbox rule. | N/A | Yes |
+| ExchangeAdmin audit logs | `Add-MailboxPermission` | Update of the permissions associated with the mailbox, such as `FullAccess` or `ChangePermission` permissions (in the `AccessRights` field). | N/A | Yes |
+| ExchangeAdmin audit logs | `Add-RecipientPermission` | Addition of the `SendAs` permission to user(s) for the mailbox. | N/A | Yes |
+| ExchangeAdmin audit logs | `Set-OwaMailboxPolicy` | Update to the OWA mailbox policies. | N/A | Yes |
 
 The list of actions logged (depending on the logon type), and whether each
 action is logged by default, can be found in the
 [official Exchange documentation](https://learn.microsoft.com/en-us/microsoft-365/compliance/audit-mailboxes).
+
+The `Default Scope` (logon types) does not apply to the `ExchangeAdmin` audit
+logs. Exchange administrator audit logging is enabled by default, and records
+the changes made through the Exchange admin center or Exchange Online
+PowerShell cmdlets (except the cmdlets starting with `Get-`, `Search-`, or
+`Test-`), as long as auditing is enabled for the tenant
+(`UnifiedAuditLogIngestionEnabled` set to `true`, the default for most tenants).
