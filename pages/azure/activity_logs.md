@@ -29,10 +29,10 @@ The key fields in the subscription/activity log schema are:
 
   - `resourceId`: the unique resource identifier of the resource. The
     `resourceId` follows the format:
-    `/SUBSCRIPTIONS/<SUBSCRIPTION_ID>/RESOURCEGROUPS/<RESOURCEGROUP_NAME>/PROVIDERS/<PROVIDER>/<RESOURCE_NAME>`.
+    `/SUBSCRIPTIONS/<SUBSCRIPTION_ID>/RESOURCEGROUPS/<RESOURCEGROUP_NAME>/PROVIDERS/<PROVIDER_NAMESPACE>/<RESOURCE_TYPE>/<RESOURCE_NAME>`.
 
-    The provider can, for example, be `/MICROSOFT.COMPUTE/VIRTUALMACHINES` or
-    `MICROSOFT.STORAGE/STORAGEACCOUNTS`.
+    The resource provider namespace and resource type can, for example, be
+    `MICROSOFT.COMPUTE/VIRTUALMACHINES` or `MICROSOFT.STORAGE/STORAGEACCOUNTS`.
 
   - `operationName`: the name of the operation.
 
