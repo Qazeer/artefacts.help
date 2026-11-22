@@ -915,8 +915,8 @@
         url: /azure_m365_security_review_email_forwarding.html#mailbox-inbox-rules
         output: web
 
-      - title: Mailbox Mail Flow / Transport rules
-        url: /azure_m365_security_review_email_forwarding.html#mailbox-mail-flow--transport-rules
+      - title: Mail Flow / Transport rules
+        url: /azure_m365_security_review_email_forwarding.html#mail-flow--transport-rules
         output: web
 
     - title: Mailbox delegations

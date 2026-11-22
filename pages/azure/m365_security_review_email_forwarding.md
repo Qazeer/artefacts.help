@@ -1,6 +1,6 @@
 ---
 title: Security review - Email forwarding
-summary: 'Emails can be forwarded to external or internal recipients using different mechanisms:\n\n - Mailbox Email Forwarding.\n\n - Mailbox Inbox rules.\n\n - Mailbox Mail Flow / Transport rules (requires Exchange Admin privileges).'
+summary: 'Emails can be forwarded to external or internal recipients using different mechanisms:\n\n - Mailbox Email Forwarding.\n\n - Mailbox Inbox rules.\n\n - Mail Flow / Transport rules (organization-wide, requires Exchange Admin privileges).'
 keywords: Email Forwarding, ForwardingSmtpAddress, ForwardingAddress, DeliverToMailboxAndForward, Inbox rules, Get-InboxRule, Mail Flow, Transport rules, Get-TransportRule
 tags:
   - azure_security_review
@@ -71,10 +71,12 @@ Show-MailboxRules
 Show-MailboxRules -UserIds "<EMAIL | EMAILS_LIST>"
 ```
 
-### Mailbox Mail Flow / Transport rules
+### Mail Flow / Transport rules
 
-`Mailbox Mail Flow` / `Transport rules` can only be configured by
-`Exchange Admin` users and allow actions to be taken on in-transit emails.
+`Mail Flow` / `Transport rules` are defined at the organization level (and not
+for a specific mailbox), can only be configured by `Exchange Admin` users, and
+allow actions to be taken on in-transit emails flowing through the
+organization.
 
 For instance, a blind copy (i.e. without disclosure to the sender or
 recipients) can be sent to external or internal email addresses.
@@ -83,8 +85,8 @@ recipients) can be sent to external or internal email addresses.
 # Lists all Mail Flow / Transport rules.
 Get-TransportRule | Select-Object *
 
-# Lists all Mail Flow / Transport rules that send a copy of received emails.
-Get-TransportRule | Where-Object { ($Null -ne $_.BlindCopyTo) } | Select-Object *
+# Lists all Mail Flow / Transport rules that send a copy of emails (blind copy, copy, or added recipient) or redirect emails.
+Get-TransportRule | Where-Object { ($Null -ne $_.BlindCopyTo) -or ($Null -ne $_.CopyTo) -or ($Null -ne $_.AddToRecipients) -or ($Null -ne $_.RedirectMessageTo) } | Select-Object *
 ```
 
 [`Microsoft-Extractor-Suite`](./logs_collection_tools.md#azure-ad-microsoft-365--azure-microsoft-extractor-suite)'s
