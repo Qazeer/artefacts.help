@@ -51,9 +51,8 @@ Each shortcut file additionally yields the following information:
     read-only, etc.). The size and attributes are updated upon every access to
     the target file (that induces an update to the `shortcut file`).
 
-  - The **target file and the `shortcut file`** (source) itself **`Modified,
-    Access, and Created (MAC)` timestamps at the time of the last access to the
-    target file**.
+  - The **target file **`Modified,  Access, and Created (MAC)` timestamps at
+    the time of the last access to the target file**.
 
   - Whether the **target file was stored locally or on a remote network share**
     through the specification of a `LocalPath` or `NetworkPath`.
@@ -99,3 +98,5 @@ LECmd.exe [-q --csv <CSV_DIRECTORY_OUTPUT>] -d <C:\Users\<USERNAME>\AppData\Roam
   - [13Cubed - LNK Files and Jump Lists](https://www.youtube.com/watch?v=wu4-nREmzGM)
 
   - [Forensics Wiki - Lnk](https://forensics.wiki/lnk/)
+
+  - [Microsoft - [MS-SHLLINK] - 2.1 ShellLinkHeader](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-shllink/c3376b21-0931-45e4-b2fc-a48ac0e60d15)
