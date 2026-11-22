@@ -54,41 +54,38 @@ Search-UnifiedAuditLog -ResultSize 5000 -Operations <OPERATIONS>
 The [`Microsoft-Extractor-Suite`](https://github.com/invictus-ir/Microsoft-Extractor-Suite)
 PowerShell module can be used to extract logs from Entra ID and Microsoft 365.
 
+The `AzureAD` / `AzureADPreview` based cmdlets (such as `Get-EntraSignInLogs`
+and `Get-EntraAuditLogs`) were removed from `Microsoft-Extractor-Suite` in
+version `4.0.0` (July 2025), following the retirement of the `AzureAD` module,
+and the `Entra ID` logs are now retrieved through the `Microsoft Graph` API.
+
 ```bash
-# If necessary, installs the required PowerShell modules.
+# If necessary, installs the Microsoft-Extractor-Suite and the required PowerShell modules.
+Install-Module -Name Microsoft-Extractor-Suite
 Install-Module -Name ExchangeOnlineManagement
-Install-Module -Name AzureADPreview
+# Required for the cmdlets using the Microsoft Graph API, such as Get-GraphEntraSignInLogs or Get-GraphEntraAuditLogs.
+Install-Module -Name Microsoft.Graph
+# Required for the Azure Activity logs collection (Get-ActivityLogs).
+Install-Module -Name Az
 
-# Only required for cmdlets using the Graph API, such as Get-EntraSignInLogsGraph or Get-EntraAuditLogsGraph.
-Install-Module Microsoft.Graph.Beta
+Import-Module Microsoft-Extractor-Suite
 
-# The AzureADPreview module MUST be imported (in place of the AzureAD module), as Get-AzureADAuditSignInLogs is updated to allow the retrieval of all events (instead of 1,000 entries with the AzureAD version).
-Remove-Module -Name 'AzureAD' -Force
-Import-Module -Name 'AzureADPreview' -Force
-
-Import-Module .\Microsoft-Extractor-Suite.psd1
-
-# Connects to Office 365, Entra ID, and/or Azure (depending on the collection targets).
+# Connects to Microsoft 365, Microsoft Graph, and/or Azure (depending on the collection targets).
 Connect-M365
-Connect-Azure
+Connect-MgGraph -Scopes "AuditLog.Read.All","Directory.Read.All"
 Connect-AzureAZ
-Connect-MgGraph
 
-# Retrieves all Entra ID sign-in logs.
-Get-EntraSignInLogs
-# Retrieves Entra ID sign-in logs before and/or after the specified date(s) (no timestamp support, date with day precision only).
-Get-EntraSignInLogs -StartDate <YYYY-MM-DD> -EndDate <YYYY-MM-DD>
+# Retrieves the Entra ID sign-in logs (interactive, non-interactive, service principal, and managed identity sign-ins).
+# By default, retrieves data for the last 30 days.
+Get-GraphEntraSignInLogs
+# Retrieves Entra ID sign-in logs before and/or after the specified date(s).
+Get-GraphEntraSignInLogs -startDate <YYYY-MM-DD> -endDate <YYYY-MM-DD>
 
-# Retrieves all Entra ID audit logs.
-Get-EntraAuditLogs
-# Retrieves Entra ID audit logs before and/or after the specified date(s) (no timestamp support, date with day precision only).
-Get-EntraAuditLogs -StartDate <YYYY-MM-DD> -EndDate <YYYY-MM-DD>
-
-# Retrieves the total number of records in the UAL per record type.
-# By default, retrieves data for the last 90 days for all users.
-Get-UALStatistics
-# For the specified user(s) and/or in the given timeframe.
-Get-UALStatistics -UserIds "<EMAIL>" -StartDate <YYYY-MM-DDT00:00:00Z> -EndDate <YYYY-MM-DDT00:00:00Z>
+# Retrieves the Entra ID audit logs.
+# By default, retrieves data for the last 30 days.
+Get-GraphEntraAuditLogs
+# Retrieves Entra ID audit logs before and/or after the specified date(s).
+Get-GraphEntraAuditLogs -startDate <YYYY-MM-DD> -endDate <YYYY-MM-DD>
 
 # Retrieves all UAL data.
 # By default, retrieves data for the last 90 days for all users.
@@ -97,6 +94,7 @@ Get-UAL [-Output JSON]
 Get-UAL [-Output JSON] -UserIds "<EMAIL | EMAILS_LIST>" -StartDate <YYYY-MM-DDT00:00:00Z> -EndDate <YYYY-MM-DDT00:00:00Z>
 
 # Retrieves Mailbox audit logs for the specified or all mailboxes.
+# Search-MailboxAuditLog being deprecated, Get-MailboxAuditLog relies on Search-UnifiedAuditLog (with the ExchangeItem record type).
 Get-MailboxAuditLog [-StartDate <YYYY-MM-DDT00:00:00Z>] [-EndDate <YYYY-MM-DDT00:00:00Z>]
 Get-MailboxAuditLog -UserIds "<EMAIL | EMAILS_LIST>"
 
@@ -109,9 +107,9 @@ Get-MessageTraceLog -UserIds "<EMAIL | EMAILS_LIST>"
 ### [Entra ID, Microsoft 365, & Azure] DFIR-O365RC collector
 
 [`DFIR-O365RC`](https://github.com/ANSSI-FR/DFIR-O365RC) is a PowerShell module
-that implements a number of cmdlets to retrieve Office 365 and Azure logs. As
-`DFIR-O365RC` supports PowerShell Core, it can be used on both Windows and Linux
-endpoints.
+that implements a number of cmdlets to retrieve Microsoft 365, Entra ID, and
+Azure logs. As `DFIR-O365RC` supports PowerShell Core, it can be used on both
+Windows and Linux endpoints.
 
 The logs are retrieved in `JSON` from the following sources of information:
 
@@ -127,59 +125,90 @@ The logs are retrieved in `JSON` from the following sources of information:
 
   - `Azure DevOps Activity logs`
 
-#### Manual installation
+`DFIR-O365RC` can also retrieve the `Entra ID` applications and service
+principals, devices, and users (with their authentication methods).
 
-`DFIR-O365RC` depends on the [`MSAL.PS`](https://github.com/AzureAD/MSAL.PS)
-and [`PoshRSJob`](https://github.com/proxb/PoshRSJob) modules, which must be
-installed before use.
+The version `2.0.0` of `DFIR-O365RC` (August 2024) introduced breaking changes:
+the user authentication (including the device code authentication flow on
+PowerShell Core) was replaced by an application-only authentication, with
+`DFIR-O365RC` running in the context of a dedicated `Entra ID` application
+(service principal) authenticated with a certificate.
+
+#### Installation
+
+`DFIR-O365RC` can be installed from the `PowerShell Gallery` (which also
+installs its dependencies, such as the `ExchangeOnlineManagement`,
+`Microsoft Graph`, and `Az` modules) or used through its `Docker` image (the
+recommended method according to the `DFIR-O365RC` documentation).
 
 ```bash
-Install-PackageProvider Nuget -Force
-Install-Module -Name PowerShellGet -Force
+Install-Module -Name DFIR-O365RC
 
-Install-Module -Name MSAL.PS -RequiredVersion '4.21.0.1'
-Install-Module -Name PoshRSJob -RequiredVersion '1.7.4.4'
+docker pull anssi/dfir-o365rc:latest
+docker run --rm -v .:/mnt/host -it anssi/dfir-o365rc:latest
 ```
 
-On PowerShell Core, the installation of the `WSMan` client may also be
-required:
+The module can also be installed manually, by placing the `DFIR-O365RC`
+directory of the `DFIR-O365RC` project in one of the system module paths
+(retrievable using `$env:PSModulePath`), after installing the dependencies
+listed in the `DFIR-O365RC.psd1` file.
+
+#### Application creation
+
+The `DFIR-O365RC` application must be created, with the `New-Application`
+cmdlet, before the logs collection. A privileged account is required to create
+(and later remove) the application.
 
 ```bash
-Install-Module PSWSMan
-Install-WSMan
-```
+# Creates a self-signed certificate (in PFX format) and retrieves its base64-encoded public part (on Windows).
+$certificate = New-SelfSignedCertificate -Subject "CN=DFIRO365RC" -KeySpec KeyExchange -NotBefore (Get-Date) -NotAfter (Get-Date).AddDays(365)
+$certificateSecurePassword = Read-Host -AsSecureString -Prompt "Certificate password"
+Export-PfxCertificate -Cert $certificate -FilePath DFIRO365RC.pfx -Password $certificateSecurePassword
+$certificateb64 = [System.Convert]::ToBase64String($certificate.GetRawCertData())
 
-The `DFIR-O365RC` directory of the `DFIR-O365RC` project can then be placed in
-one of the system module paths (retrievable using `$env:PSModulePath`) and
-imported with `Import-Module DFIR-O365RC`.
+# Creates the application, and outputs its application identifier (AppID) and the tenant name.
+# The -subscriptions and -organizations switches are respectively required to retrieve the Azure Activity logs and Azure DevOps Activity logs, for the selected subscription(s) / organization(s).
+New-Application -certificateb64 $certificateb64 [-subscriptions] [-organizations]
+
+# Removes the application once the logs collection is done.
+Remove-Application [-subscriptions] [-organizations]
+```
 
 #### DFIR-O365RC cmdlets
 
-Note that when using PowerShell Core, the `-DeviceCode:$true` parameter
-must be specified for all `DFIR-O365RC` cmdlets in order to authenticate to the
-Entra ID tenant. The authentication should be done using a web browser at the
-`https://microsoft.com/devicelogin` URL and the obtained device code passed
-to the executed `DFIR-O365RC` cmdlet.
+All the `DFIR-O365RC` cmdlets take as parameters the application identifier
+(`-appId`), the tenant name (`-tenant`), and the path to the certificate in
+`PFX` format (`-certificatePath`).
+
+The `Unified Audit Logs` are retrieved by default using
+`Exchange Online PowerShell` (`Search-UnifiedAuditLog`), or using the
+`Microsoft Purview` audit search API if the `-purview` switch is specified.
 
 ```bash
+$appId = "<APP_ID>"
+$tenant = "<TENANT>.onmicrosoft.com"
+$certificatePath = "<PFX_CERTIFICATE_PATH>"
+
 $EndDate = (Get-Date).ToUniversalTime()
-$StartDate30 = $EndDate.adddays(-31)
-$StartDate90 = $EndDate.adddays(-91)
+$StartDate30 = $EndDate.AddDays(-30)
+$StartDate90 = $EndDate.AddDays(-90)
 
 # Get a subset of Office 365 Unified audit logs (selection of operations deemed of interest).
+# Operations sets: "all" (default), "allButAzureAD", "ExchangeOnly", "OneDrive_Sharepoint_Teams_YammerOnly", "AzureADOnly", "SecurityAlertsOnly", "Devices".
+# The -mailboxLogin switch can be specified to also retrieve the MailboxLogin operations.
 # Files produced:
 # - Get-O365Light.log
-# - O365_unified_audit_logs\YYYY-MM-DD\UnifiedAuditLog_<FQDN>_<YYYY-MM-DD>.json
-Get-O365Light -StartDate $StartDate90 -Enddate $EndDate [-Operationsset "AllbutAzureAD"]
+# - O365_unified_audit_logs\YYYY-MM-DD\UnifiedAuditLog_<TENANT>_<YYYY-MM-DD>_<HH>-00-00.json
+Get-O365Light -startDate $StartDate90 -endDate $EndDate -appId $appId -tenant $tenant -certificatePath $certificatePath [-operationsSet "allButAzureAD"] [-mailboxLogin]
 
-# Get all Office 365 Unified audit logs.
+# Get all Office 365 Unified audit logs, or the events of the specified record types.
 # As performance is poor, usage should be limited to a small time period or to small tenants.
-$StartDateLimited = $EndDate.adddays(-<DAYS>)
-Get-O365Full -StartDate [$StartDate90 | $StartDateLimited] -Enddate $EndDate
+$StartDateLimited = $EndDate.AddDays(-<DAYS>)
+Get-O365Full -startDate [$StartDate90 | $StartDateLimited] -endDate $EndDate -appId $appId -tenant $tenant -certificatePath $certificatePath [-recordTypes <RECORD_TYPES>]
 
 # Get Defender for Office 365 logs, from Office 365 Unified audit logs.
-# Defender logs require an E5 license or a license plan with Microsoft Defender for Office 365 or Microsoft Defender for Cloud Apps.
-Get-DefenderforO365 -StartDate $StartDate90 -Enddate $EndDate
+# Defender logs require at least one Office 365 E5 license or a license plan with Microsoft Defender for Office 365.
+Get-O365Defender -startDate $StartDate90 -endDate $EndDate -appId $appId -tenant $tenant -certificatePath $certificatePath
 
 # Search for activity related to a particular user, IP address, or free-text query in the Office 365 Unified audit logs.
 
@@ -190,24 +219,27 @@ Get-MailboxRegionalConfiguration -Identity <USER_ID>
 
 # If a user is specified, the Mailbox Audit Log will also be retrieved for the given user.
 # User IDs example: "user.name1@domain.com", "user.name2@domain.com"
-Search-O365 -StartDate $StartDate90 -Enddate $EndDate -UserIds <USER_ID | USER_IDS_COMMA_LIST>
-Search-O365 -StartDate $StartDate90 -Enddate $EndDate -IPAddresses <IP_ADDRESS | IP_ADDRESSES_COMMA_LIST>
-Search-O365 -StartDate $StartDate90 -Enddate $EndDate -Freetext "<TEXT>"
+Search-O365 -startDate $StartDate90 -endDate $EndDate -appId $appId -tenant $tenant -certificatePath $certificatePath -userIds <USER_ID | USER_IDS_COMMA_LIST>
+Search-O365 -startDate $StartDate90 -endDate $EndDate -appId $appId -tenant $tenant -certificatePath $certificatePath -IPAddresses <IP_ADDRESS | IP_ADDRESSES_COMMA_LIST>
+Search-O365 -startDate $StartDate90 -endDate $EndDate -appId $appId -tenant $tenant -certificatePath $certificatePath -freeTexts "<TEXT>"
 
-# Get tenant general information, plus all Azure sign-in and audit logs.
-Get-AADLogs	-StartDate $StartDate30 -Enddate $EndDate
+# Get tenant general information, plus all Entra ID sign-in and audit logs.
+Get-AADLogs -startDate $StartDate30 -endDate $EndDate -appId $appId -tenant $tenant -certificatePath $certificatePath
 
-# Get Azure audit logs related to Azure applications and service principals only.
-Get-AADApps	-StartDate $StartDate30 -Enddate $EndDate
+# Get Entra ID service principals and their applications, OAuth2 permission grants, and app role assignments.
+Get-AADApps -appId $appId -tenant $tenant -certificatePath $certificatePath
 
-# Get Azure audit logs related to Entra ID joined or registered devices only.
-Get-AADDevices -StartDate $StartDate30 -Enddate $EndDate
+# Get Entra ID devices and their owners / users.
+Get-AADDevices -appId $appId -tenant $tenant -certificatePath $certificatePath
 
-# Get all Azure activity logs available for the tenant or for the specified tenant.
-Get-AzRMActivityLogs -StartDate $StartDate90 -Enddate $EndDate [-SelectSubscription:$true]
+# Get Entra ID users, and optionally their authentication methods.
+Get-AADUsers -appId $appId -tenant $tenant -certificatePath $certificatePath [-authenticationMethods]
 
-# Get all Azure DevOps activity logs available for all the DevOps organization(s) the account executing the cmdlet has access to, or for the given DevOps organization.
-Get-AzDevOpsActivityLogs -StartDate $StartDate90 -Enddate $EndDate [-SelectOrg:$true]
+# Get all Azure activity logs for all the subscriptions the application has access to (subscription(s) selected at the application creation).
+Get-AzRMActivityLogs -startDate $StartDate90 -endDate $EndDate -appId $appId -tenant $tenant -certificatePath $certificatePath
+
+# Get all Azure DevOps activity logs for all the DevOps organization(s) the application has access to (organization(s) selected at the application creation).
+Get-AzDevOpsActivityLogs -startDate $StartDate90 -endDate $EndDate -appId $appId -tenant $tenant -certificatePath $certificatePath
 ```
 
 ### [Entra ID & Azure] Log Analytics workspace or storage account with Diagnostic settings
