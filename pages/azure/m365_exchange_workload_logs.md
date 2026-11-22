@@ -25,10 +25,10 @@ The following operations are notable for the `Exchange` workload:
 | Mailbox audit logs | `MoveToDeletedItems` | Deletion of a message (moved to the `Deleted Items` folder). | `Owner`, `Delegate`, `Admin` | Yes |
 | Mailbox audit logs | `SoftDelete` | Soft deletion of a message (deletion from the `Deleted Items` folder, but potentially recoverable from the `Recoverable Items` folder). | `Owner`, `Delegate`, `Admin` | Yes |
 | Mailbox audit logs | `HardDelete` | Permanent deletion of a message (message won't be placed in the `Deleted Items` folder or recoverable from the `Recoverable Items` folder). | `Owner`, `Delegate`, `Admin` | Yes |
+| Mailbox audit logs | `UpdateInboxRules` | Creation, modification, or removal of mailbox inbox rules from the `Outlook` client (or through the `Exchange Web Services (EWS)` API's `UpdateInboxRules` operation). <br><br> Inbox rules created or modified from `Outlook on the web` (or with `Exchange Online PowerShell`) are logged as `New-InboxRule` / `Set-InboxRule` events in the `ExchangeAdmin` audit logs. | `Owner`, `Delegate`, `Admin` | Yes |
 | ExchangeAdmin audit logs | `Set-Mailbox` | Change to the mailbox parameters. Can notably be used to forward emails using the `ForwardingSmtpAddress` parameter. |
 | ExchangeAdmin audit logs | `New-InboxRule` | Creation of a new inbox rule in the mailbox. |
 | ExchangeAdmin audit logs | `Set-InboxRule` | Modification of an existing inbox rule in the mailbox. |
-| ExchangeAdmin audit logs | `UpdateInboxRules` | Creation or modification of mailbox inbox rules, typically with the `Outlook Desktop` client using the `Exchange Web Services (EWS)` API. | `Owner`, `Delegate`, `Admin` | Yes |
 | ExchangeAdmin audit logs | `New-TransportRule` <br> `Set-TransportRule` <br><br> With the `BlindCopyTo` parameter. | Creation of a Transport / Mail Flow rule to send a copy of the emails to the defined address. |
 | ExchangeAdmin audit logs | `Remove-InboxRule` | Removal of a mailbox inbox rule. |
 | ExchangeAdmin audit logs | `Disable-InboxRule` | Disabling of a mailbox inbox rule. |
