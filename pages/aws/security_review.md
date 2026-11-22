@@ -53,9 +53,8 @@ aws iam list-policies --query 'Policies[*].[PolicyName, Arn]' --output text
 aws iam list-policies --query 'Policies[?PolicyName==`<POLICY_NAME>`]'
 
 # Retrieves the IAM policies associated with the specified user/group/role.
-# Inline IAM policies embedded in the specified IAM user.
+# Names of the inline IAM policies embedded in the specified IAM user/group/role.
 aws iam list-user-policies --user-name "<USERNAME>"
-# IAM policies attached to the specified IAM user.
 aws iam list-group-policies --group-name "<GROUPNAME>"
 aws iam list-role-policies --role-name "<ROLENAME>"
 # Managed IAM policies attached to the specified IAM user/group/role.
