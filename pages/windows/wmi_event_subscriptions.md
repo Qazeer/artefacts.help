@@ -79,7 +79,7 @@ persistence.
 
 #### Live forensics
 
-The [`Sysinternals` `Autoruns`](https://learn.microsoft.com/fr-fr/sysinternals/)
+The [`Sysinternals` `Autoruns`](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)
 (GUI) and `AutorunsC` (CLI) utilities can be used to detect (and delete)
 `WMI`-related persistence.
 

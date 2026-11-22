@@ -78,7 +78,7 @@ HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run
 ### Tool(s)
 
 The most common `ASEP` keys can be automatically checked using the
-[`Sysinternals` `Autoruns`](https://learn.microsoft.com/fr-fr/sysinternals/)
+[`Sysinternals` `Autoruns`](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)
 (GUI) and `AutorunsC` (CLI) utilities.
 
 The [`RECmd`](https://github.com/EricZimmerman/RECmd) utility can also be used

@@ -87,15 +87,15 @@ the following fields of interest:
 
   - [WIZ.IO - Lior Sonntag - Hunting for signs of persistence in the cloud: an IR guide following the CircleCI incident](https://www.wiz.io/blog/hunting-for-signs-of-persistence-in-the-cloud-an-ir-guide)
 
-  - [DATADOG - OOTB Rules](https://docs.datadoghq.com/fr/security/default_rules/#cat-cloud-siem-log-detection)
+  - [DATADOG - OOTB Rules](https://docs.datadoghq.com/security/default_rules/#cat-cloud-siem-log-detection)
 
   - [SEKOIA - CloudTrail](https://docs.sekoia.io/xdr/features/collect/integrations/cloud_and_saas/aws/aws_cloudtrail/)
 
-  - [AWS - Journalisation des appels d'API Lambda avec CloudTrail](https://docs.aws.amazon.com/fr_fr/lambda/latest/dg/logging-using-cloudtrail.html)
+  - [AWS - Logging AWS Lambda API calls using AWS CloudTrail](https://docs.aws.amazon.com/lambda/latest/dg/logging-using-cloudtrail.html)
 
   - [easttimor - AWS Incident Response](https://easttimor.github.io/aws-incident-response/)
 
-  - [DATADOG - AWS S3 Bucket ACL made public](https://docs.datadoghq.com/fr/security/default_rules/aws-bucket-acl-made-public/)
+  - [DATADOG - AWS S3 Bucket ACL made public](https://docs.datadoghq.com/security/default_rules/aws-bucket-acl-made-public/)
 
   - [HackTricksCloud - AWS - IAM Privesc](https://cloud.hacktricks.xyz/pentesting-cloud/aws-security/aws-privilege-escalation/aws-iam-privesc)
 

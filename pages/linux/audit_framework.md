@@ -268,9 +268,9 @@ ChopChopGo -target auditd -rules ./rules/linux/auditd/ [-out <csv | json>] -file
 
 ### References
 
-  - [Red Hat - Chapter 7. System Auditing](https://access.redhat.com/documentation/fr-fr/red_hat_enterprise_linux/6/html/security_guide/chap-system_auditing)
+  - [Red Hat - Chapter 7. System Auditing](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/security_guide/chap-system_auditing)
 
-  - [Red Hat - Understanding Audit Log Files](https://access.redhat.com/documentation/fr-fr/red_hat_enterprise_linux/7/html/security_guide/sec-understanding_audit_log_files)
+  - [Red Hat - Understanding Audit Log Files](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-understanding_audit_log_files)
 
   - [Debian - MAN AUDIT.RULES(7)](https://manpages.debian.org/unstable/auditd/audit.rules.7.en.html)
 
