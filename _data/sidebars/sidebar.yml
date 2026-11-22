@@ -292,11 +292,11 @@
         children:
 
         - title: OpenSaveMRU / OpenSavePidlMRU
-          url: /windows_registry_comdlg32.html#opensavemru--opensavepidlmru
+          url: /windows_registry_comdlg32.html#opensavemruopensavepidlmru
           output: web
 
         - title: LastVisitedMRU / LastVisitedPidlMRU
-          url: /windows_registry_comdlg32.html#lastvisitedmru--lastvisitedpidlmru--lastvisitedpidlmrulegacy
+          url: /windows_registry_comdlg32.html#lastvisitedmrulastvisitedpidlmrulastvisitedpidlmrulegacy
           output: web
 
         - title: CIDSizeMRU
@@ -539,8 +539,8 @@
           url: /windows_web_browsers.html#edge-legacy
           output: web
 
-        - title: Edge (Chronium-based)
-          url: /windows_web_browsers.html#edge-chronium-based
+        - title: Edge (Chromium-based)
+          url: /windows_web_browsers.html#edge-chromium-based
           output: web
 
         - title: Google Chrome
@@ -928,11 +928,11 @@
         output: web
 
       - title: Mailbox access rights / permissions
-        url: /azure_m365_security_review_mailbox_delegations.html#mailbox-access-rights--permissions
+        url: /azure_m365_security_review_mailbox_delegations.html#mailbox-access-rightspermissions
         output: web
 
       - title: Recipient access right / permission
-        url: /azure_m365_security_review_mailbox_delegations.html#recipient-or-sendas-access-right--permission
+        url: /azure_m365_security_review_mailbox_delegations.html#recipient-or-sendas-access-rightpermission
         output: web
 
       - title: Folder-level permissions
