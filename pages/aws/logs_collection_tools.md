@@ -53,10 +53,13 @@ separately.
 # Configures the required API access.
 aws configure
 
+# Without any parameter, invictus-aws.py starts in an interactive walkthrough mode.
 # -r <REGION>: specifies the region (such as "us-east-1") to retrieve the logs from.
-# -A <REGION>: retrieves the logs from all regions, starting with the specified region.
+# -A <REGION>: retrieves the logs from all regions, starting with the specified (optional) region.
 # -w <local | cloud>: defines whether the results should be stored in an S3 bucket only or if the results should also be downloaded to the local storage.
-python3 main.py [-r <REGION> | -A <REGION>] -w <local | cloud>
+# -s <STEPS>: comma-separated list of the steps to execute (1,2,3 by default, step 4 must be executed alone).
+# -start <YYYY-MM-DD> -end <YYYY-MM-DD>: limits the collection of the CloudTrail logs (step 3) to the specified time range (recommended, as the collection can otherwise be very long).
+python3 invictus-aws.py [-r <REGION> | -A <REGION>] -w <local | cloud> [-s <STEPS>] [-start <YYYY-MM-DD> -end <YYYY-MM-DD>]
 
 # Downloads the exported/collected elements from invictus-aws.py locally.
 aws s3 cp --recursive s3://<INVICTUS_BUCKET> <EXPORT_FOLDER>
