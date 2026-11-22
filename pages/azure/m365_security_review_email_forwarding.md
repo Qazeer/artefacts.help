@@ -37,7 +37,7 @@ Get-Mailbox -ResultSize Unlimited | Where-Object { ($Null -ne $_.ForwardingSmtpA
 ```
 
 The email forwarding configured on a given mailbox can also be visualized
-from the [Microsoft 365 admin center](https://portal.office.com/Adminportal/Home/?#/users) (https://portal.office.com/Adminportal/Home/?#/users).
+from the [Microsoft 365 admin center](https://portal.office.com/Adminportal/Home/?#/users).
 
 ### Mailbox Inbox rules
 
@@ -51,7 +51,7 @@ received emails.
 
 Get-InboxRule -Mailbox <EMAIL> -IncludeHidden | Select-Object Identity,Name,Enabled,Description | Format-List
 
-# Lists the Inbox rules of the given mailbox with ForwardTo, RedirectTo, ForwardAsAttachmentTo, or DeleteMessage actions.
+# Lists the Inbox rules of all mailboxes with ForwardTo, RedirectTo, ForwardAsAttachmentTo, or DeleteMessage actions.
 
 $Mailboxes = Get-Mailbox -ResultSize Unlimited
 Foreach ($Mailbox in $Mailboxes) {
