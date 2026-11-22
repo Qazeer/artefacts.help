@@ -15,13 +15,12 @@ folder: azure
 The following privileges/roles are required in the Entra ID tenant and
 Exchange Online instance:
 
-  - Entra ID tenant: `Global Reader` ("Lecteur Général") role.
+  - Entra ID tenant: `Global Reader` role.
 
-  - Exchange Online environment: `View-Only Audit Logs`
-    ("Journaux d’audit en affichage seul") role. This role is granted by
-    default to the `Compliance Management` and `Organization Management` role
-    groups (to which members can be assigned). Members can be assigned to the
-    aforementioned groups through the
+  - Exchange Online environment: `View-Only Audit Logs` role. This role is
+    granted by default to the `Compliance Management` and
+    `Organization Management` role groups (to which members can be assigned).
+    Members can be assigned to the aforementioned groups through the
     [Exchange administration portal](https://admin.exchange.microsoft.com/).
 
     If the required rights are not correctly granted to the user conducting the log collection, the following error will arise:
@@ -37,7 +36,7 @@ Exchange Online instance:
     the given Azure DevOps organization): `Auditing\View audit log` permission.
 
 Note that accessing Entra ID logs through the `MS Graph API` requires at least
-**one user with an Azure `AD Premium P1` or `AD Premium P2` license**. These
-licenses can be included in other license plans, such as
-`Microsoft 365 E3/E5/F3`. The user to which the license is assigned does
-not matter.
+**one user with a `Microsoft Entra ID P1` or `Microsoft Entra ID P2` license**
+(formerly `Azure AD Premium P1` / `P2`). These licenses can be included in
+other license plans, such as `Microsoft 365 E3/E5/F3`. The user to which the
+license is assigned does not matter.
