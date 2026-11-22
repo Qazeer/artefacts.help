@@ -98,4 +98,4 @@ LECmd.exe [-q --csv <CSV_DIRECTORY_OUTPUT>] -d <C:\Users\<USERNAME>\AppData\Roam
 
   - [13Cubed - LNK Files and Jump Lists](https://www.youtube.com/watch?v=wu4-nREmzGM)
 
-  - *forensicswiki.xyz - LNK - DOWN*
+  - [Forensics Wiki - Lnk](https://forensics.wiki/lnk/)

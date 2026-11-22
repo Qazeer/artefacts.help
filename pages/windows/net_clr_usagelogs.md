@@ -43,4 +43,4 @@ output (grouping filenames by user).
 
   - [BOHOPS - INVESTIGATING .NET CLR USAGE LOG TAMPERING TECHNIQUES FOR EDR EVASION](https://bohops.com/2021/03/16/investigating-net-clr-usage-log-tampering-techniques-for-edr-evasion/)
 
-  - Menasec - Interesting DFIR traces of .NET CLR - DOWN
+  - [MENASEC - Interesting DFIR traces of .NET CLR Usage Logs](https://web.archive.org/web/20210923050818/https://blog.menasec.net/2019/07/interesting-difr-traces-of-net-clr.html)

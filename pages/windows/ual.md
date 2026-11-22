@@ -148,4 +148,4 @@ can be used to automate the repair and parsing process (with `SumECmd`).
 
   - [13Cubed - User Access Logging (UAL) Forensics](https://www.youtube.com/watch?v=rVHKXUXhhWA)
 
-  - *KPMG - UAL - DOWN*
+  - [KPMG - Kevin Stokes - Digital forensics and incident response: A new type of User access log](https://web.archive.org/web/20210511221633/https://advisory.kpmg.us/blog/2021/digital-forensics-incident-response.html)

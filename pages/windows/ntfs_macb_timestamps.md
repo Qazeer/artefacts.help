@@ -191,4 +191,4 @@ SSDs).
 
   - [Alexandru Stamate - AlexSta - How to detect timestomping (on a Windows system)](https://alexsta-cybersecurity.com/how-to-detect-timestomping-on-a-windows-system/)
 
-  - *forensicswiki.xyz - MAC_times - DOWN*
+  - [Forensics Wiki - Mac times](https://forensics.wiki/mac_times/)
