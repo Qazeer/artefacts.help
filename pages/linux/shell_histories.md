@@ -1,7 +1,7 @@
 ---
 title: Shell histories
 summary: 'The shell history log files are linked to the shell history feature, which tracks a user''s command-line history for a given shell (Bash, Zsh, etc.). While easily bypassed or deleted, the history log files can be a valuable source of information on actions performed by a given user.\n\n The shell history log files contain commands entered in an (interactive) shell, with no additional meta information, such as timestamps (by default). By default, the shell history of a shell session is stored in memory until the shell session is closed.\n\n The behavior of the history feature can be modified by setting a number of environment variables (HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, etc.).'
-keywords: shell, history, bash, zsh, bash_history, .bash_history, zsh_history, .zsh_history, HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, HIST_IGNORE_SPACE
+keywords: shell, history, bash, zsh, bash_history, .bash_history, zsh_history, .zsh_history, HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, histappend, HIST_IGNORE_SPACE
 tags:
   - linux_program_execution
   - linux_files_and_folders_access
@@ -87,14 +87,26 @@ The number of commands stored in memory can be specified through the `HISTSIZE`
 environment variable. For instance, if `HISTSIZE` is set to 20, only the last
 20 commands will be stored in the in-memory history and will be written to disk
 once the shell session terminates. By default, `Bash` limits the history in
-memory to 1,000 entries (equivalent to `HISTSIZE` being set to 1,000).
+memory to 500 entries (`HISTSIZE` being set to 500 if not set in the startup
+files). `HISTSIZE` is however set to 1,000 in the default user `~/.bashrc` file
+of `Debian`-based distributions and in `/etc/profile` on `Red Hat`-based
+distributions.
 
 The number of commands stored on disk in the history file is specified through
 the `HISTFILESIZE` environment variable. When the shell session exits, the
-commands in memory (up to `HISTSIZE`) are written to the history file and the
-history file is truncated to be limited to `HISTFILESIZE` lines. By default,
-`Bash` limits the number of commands in the history file to 2,000 entries
-(equivalent of `HISTFILESIZE` being set to 2,000).
+commands entered during the session (up to `HISTSIZE`) are appended to the
+history file, and the history file is then truncated to be limited to
+`HISTFILESIZE` lines (by removing the oldest entries). By default,
+`HISTFILESIZE` is set to the value of `HISTSIZE` (if not set in the startup
+files). `HISTFILESIZE` is however set to 2,000 in the default user `~/.bashrc`
+file of `Debian`-based distributions.
+
+If more commands than `HISTSIZE` were entered during the session and the
+`histappend` shell option is not set (`Bash` default), the history file is
+instead overwritten by the in-memory history, the previous content of the
+history file being lost. The `histappend` option is set in the default user
+`~/.bashrc` file of `Debian`-based distributions and in `/etc/bashrc` on
+`Red Hat`-based distributions.
 
 ### References
 
