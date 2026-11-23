@@ -7,7 +7,7 @@ tags:
   - linux_lateral_movement_src
   - linux_ssh
   - linux_ssh_src
-default_location: 'System-wide:\n /etc/ssh/known_hosts\n\n User-scoped:\n ~/.ssh/known_hosts'
+default_location: 'System-wide:\n /etc/ssh/ssh_known_hosts\n /etc/ssh/ssh_known_hosts2\n\n User-scoped:\n ~/.ssh/known_hosts\n ~/.ssh/known_hosts2'
 last_updated: 2024-08-24
 sidebar: sidebar
 permalink: linux_ssh_known_hosts.html
@@ -24,7 +24,10 @@ and are used for server-side authentication of the `SSH` server.
 The `OpenSSH` client stores the public host key of hosts that were previously
 accessed. These keys, called "known host keys", are stored in the `known_hosts`
 text-based files. The `known_hosts` file can be system-wide
-(`/etc/ssh/known_hosts`) or user-scoped (`~/.ssh/known_hosts`).
+(`/etc/ssh/ssh_known_hosts`) or user-scoped (`~/.ssh/known_hosts`). The
+`/etc/ssh/ssh_known_hosts2` and `~/.ssh/known_hosts2` files are also read by
+default by the `OpenSSH` client (`GlobalKnownHostsFile` and
+`UserKnownHostsFile` client configuration options).
 
 The system-wide `known_hosts` file can optionally be set manually by a system
 administrator, while the user-scoped `known_hosts` file is automatically
