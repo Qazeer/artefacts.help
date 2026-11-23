@@ -1,7 +1,7 @@
 ---
 title: Basic system information
 summary: 'A variety of information about the local system is stored as text files: computer hostname, system timezone, mounted filesystems, DNS nameservers, etc.'
-keywords: etc, hostname, timezone, localtime, adjtime, fstab, DNS, nameservers, resolv.conf, openresolv, systemd-resolved, hosts, environment
+keywords: etc, hostname, timezone, localtime, adjtime, fstab, DNS, nameservers, resolv.conf, openresolv, systemd-resolved, hosts, nsswitch.conf, environment
 tags:
   - linux_system_information
 default_location: '/etc/hostname\n /etc/localtime\n /etc/timezone\n /etc/fstab\n /etc/resolv.conf\n /etc/hosts\n /etc/environment'
@@ -39,7 +39,7 @@ folder: linux
 
 | File(s) | Description |
 |---------|-------------|
-| `/etc/hosts` | Contains static domain name resolution(s) to map hostnames to IP addresses without relying on `DNS` queries. Entries in the `/etc/hosts` file take priority over `DNS` resolution. |
+| `/etc/hosts` <br><br> Name resolution order: <br> `/etc/nsswitch.conf` | Contains static domain name resolution(s) to map hostnames to IP addresses without relying on `DNS` queries. <br><br> The order of the name resolution sources is defined by the `hosts` entry of the `/etc/nsswitch.conf` file. Entries in the `/etc/hosts` file (`files` source) take priority over `DNS` resolution (`dns` source) if the `files` source is specified first, which is usually the case (such as `hosts: files dns`). The `systemd-resolved` service (`resolve` source) also reads the `/etc/hosts` file, with its entries having the highest priority. |
 
 ### System-wide environment variables
 
