@@ -45,11 +45,11 @@ already granted to the group. The permissions granted on the host can be
 listed with the `esxcli system permission list` command.
 
 The `esxAdminsGroup` parameter can be viewed and set in the
-`ESXi Host Client` web management interface: "Managed" -> "Advanced Settings"
--> "Config.HostAgent.plugins.hostsvc.esxAdminsGroup". The value is stored in
-the `/etc/vmware/configstore/current-store-1` configuration file.
-Additionally, for offline analysis, the `esxAdminsGroup` parameter value is
-included in a support bundle collection.
+`ESXi Host Client` web management interface: "Manage" -> "System" ->
+"Advanced settings" -> "Config.HostAgent.plugins.hostsvc.esxAdminsGroup". The
+value is stored in the `/etc/vmware/configstore/current-store-1` configuration
+file. Additionally, for offline analysis, the `esxAdminsGroup` parameter value
+is included in a support bundle collection.
 
 ### VMware ESXi logs
 
