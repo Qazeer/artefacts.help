@@ -1,7 +1,7 @@
 ---
 title: Shell histories
 summary: 'The shell history log files are linked to the shell history feature, which tracks a user''s command-line history for a given shell (Bash, Zsh, etc.). While easily bypassed or deleted, the history log files can be a valuable source of information on actions performed by a given user.\n\n The shell history log files contain commands entered in an (interactive) shell, with no additional meta information, such as timestamps (by default). By default, the shell history of a shell session is stored in memory until the shell session is closed.\n\n The behavior of the history feature can be modified by setting a number of environment variables (HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, etc.).'
-keywords: shell, history, bash, zsh, bash_history, .bash_history, zsh_history, .zsh_history, .histfile, HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, histappend, SAVEHIST, HIST_IGNORE_SPACE
+keywords: shell, history, bash, zsh, bash_history, .bash_history, zsh_history, .zsh_history, .histfile, HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, histappend, SAVEHIST, HIST_IGNORE_SPACE, EXTENDED_HISTORY
 tags:
   - linux_program_execution
   - linux_files_and_folders_access
@@ -77,10 +77,18 @@ deleted from a shell history file.
 The shell history log files contain commands entered in a shell, with no
 additional meta information (by default).
 
-Timestamps can be added to track the execution time of commands if the
-`HISTTIMEFORMAT` environment variable is set. The `%F` parameter adds the
+For `Bash`, timestamps can be added to track the execution time of commands if
+the `HISTTIMEFORMAT` environment variable is set. The `%F` parameter adds the
 date in `YYYY-MM-DD` format, and `%T` adds a `HH:MM:SS` timestamp
-(`HISTTIMEFORMAT="%F %T "`).
+(`HISTTIMEFORMAT="%F %T "`). The timestamps are stored in the history file as
+`epoch` timestamps, in comment lines preceding each command (such as
+`#1700000000`), the `HISTTIMEFORMAT` format only being used to display the
+timestamps with the `history` built-in command.
+
+For `Zsh`, the `EXTENDED_HISTORY` option (not enabled by default, but enabled
+by frameworks such as `Oh My Zsh`) saves the start timestamp (`epoch`) and the
+duration (in seconds) of each command, in the
+`: <START_TIMESTAMP>:<DURATION>;<COMMAND>` format.
 
 By default, the shell history of a shell session is stored in memory until the
 shell session is closed. While commands for a given shell session are stored in
