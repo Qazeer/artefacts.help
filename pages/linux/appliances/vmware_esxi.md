@@ -96,6 +96,8 @@ Source: hostd.log
 {% include note.html content="Access through `PowerCLI`." %}
 
 ```
+Source: hostd.log
+
 2024-06-03T19:58:26.435Z In(166) Hostd[1050278]: [Originator@6876 sub=Vimsvc.ha-eventmgr opID=c4c96306 sid=52018116] Event 220 : User root@192.168.127.13 logged in as PowerCLI/13.2.1.22851661
 ```
 
