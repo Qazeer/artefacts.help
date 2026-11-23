@@ -1,7 +1,7 @@
 ---
 title: VMware ESXi
 summary: 'VMware ESXi runs a Syslog service that logs messages from the kernel and other system components. Logs notably include information on authentication, commands entered in the ESXi Shell, and events on virtual machine lifecycle operations (configuration changes, web console access, snapshot operations, etc.). \n\n The ESXi log location is defined through the "/etc/vmsyslog.conf" configuration file. By default, logs are placed in "/scratch/log/" / "/var/run/log/" (which are symlinks pointing to the same "/vmfs/volumes/<UID>/log/" directory).\n\nThe collection of ESXi logs can be automated through the creation of a "support bundle". A support bundle can be manually generated through the ESXi Host Client web interface or using the DFIR4vSphere PowerShell module (for ESXi hosts attached to a running and reachable vCenter instance).'
-keywords: VMware, vSphere, ESX, ESXi, vCenter, VMkernel, logdir, scratch, vmsyslog.conf, support bundle, shell.log, auth.log, hostd.log, vmware.log, vpxa.log, vmware-hostd, Vimsvc, WebMKS, snapshot, MKSScreenShotMgr, DFIR4vSphere, Start-ESXi_Investigation, Start-VC_Investigation, ESXBundle, VCBundle
+keywords: VMware, vSphere, ESX, ESXi, vCenter, ESX Admins, esxAdminsGroup, CVE-2024-37085, VMkernel, logdir, scratch, vmsyslog.conf, support bundle, shell.log, auth.log, hostd.log, vmware.log, vpxa.log, vmware-hostd, Vimsvc, WebMKS, snapshot, MKSScreenShotMgr, DFIR4vSphere, Start-ESXi_Investigation, Start-VC_Investigation, ESXBundle, VCBundle
 tags:
   - hypervisors
 default_location: 'SSH authentication logs:\n/var/run/log/auth.log\n\nESXi host agent logs:\n/var/run/log/hostd.log\n\nESXi Shell logs:\n/var/run/log/shell.log\n\n vCenter Server agent logs:\n/var/run/log/vpxa.log\n\nPer-virtual machine logs:\n/vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log'
@@ -29,6 +29,20 @@ is joined to an `AD` domain, members of the `AD` group defined in the
 `Config.HostAgent.plugins.hostsvc.esxAdminsGroup` parameter will have full
 administrative access to the host. By default, the `esxAdminsGroup` parameter
 is set to `ESX Admins`.
+
+The `ESX Admins` group is not a built-in `AD` group and does not exist by
+default. As `ESXi` hosts do not validate that the group exists when joined to
+a domain, any domain user able to create a group named `ESX Admins` (or to
+rename an existing group to `ESX Admins`) can gain full administrative access
+to the domain-joined `ESXi` hosts (`CVE-2024-37085`). This technique was
+notably leveraged by ransomware operators to encrypt the virtual machines
+hosted on `ESXi` hypervisors. Since `ESXi 8.0 Update 3`, the
+`Config.HostAgent.plugins.hostsvc.esxAdminsGroupAutoAdd` parameter, which
+controls whether the `esxAdminsGroup` group is automatically granted
+administrative access, is set to `false` by default (`true` in prior
+versions). Changing this parameter to `false` does not remove the permissions
+already granted to the group. The permissions granted on the host can be
+listed with the `esxcli system permission list` command.
 
 The `esxAdminsGroup` parameter can be viewed and set in the
 `ESXi Host Client` web management interface: "Managed" -> "Advanced Settings"
