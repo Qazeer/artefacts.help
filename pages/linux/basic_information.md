@@ -27,7 +27,7 @@ folder: linux
 
 | File(s) | Description |
 |---------|-------------|
-| Configuration: <br> `/etc/fstab` <br><br> Mount logs (such as `Mounting` operation / keyword): <br> `/var/log/dmesg` | Contains information on the filesystems, their mount points, and mount options. Notably includes the partition types (ext3 / ext4, etc.) of mounted filesystems. |
+| Configuration: <br> `/etc/fstab` <br><br> Mount logs (such as `Mounting` operation / keyword): <br> `/var/log/dmesg` | Contains information on the filesystems, their mount points, and mount options. Notably includes the filesystem types (ext3 / ext4, xfs, etc.) of the mounted filesystems. |
 
 ### DNS nameservers
 
