@@ -1,7 +1,7 @@
 ---
 title: Basic system information
 summary: 'A variety of information about the local system is stored as text files: computer hostname, system timezone, mounted filesystems, DNS nameservers, etc.'
-keywords: etc, hostname, timezone, localtime, adjtime, fstab, DNS, nameservers, resolv.conf, openresolv, systemd-resolved, hosts, nsswitch.conf, environment
+keywords: etc, hostname, timezone, localtime, adjtime, fstab, DNS, nameservers, resolv.conf, openresolv, systemd-resolved, hosts, nsswitch.conf, environment, pam_env.conf
 tags:
   - linux_system_information
 default_location: '/etc/hostname\n /etc/localtime\n /etc/timezone\n /etc/fstab\n /etc/resolv.conf\n /etc/hosts\n /etc/environment'
@@ -45,7 +45,7 @@ folder: linux
 
 | File(s) | Description |
 |---------|-------------|
-| `/etc/environment` <br> `/etc/security/environ` | Contains, on some distributions, the system-wide environment variables, defined as key-value pairs. <br><br> The `/etc/environment` file is notably linked to the `Pluggable Authentication Modules (PAM)` component. When a `PAM-aware` program (such as `su` or `sudo`) is executed, the program loads `PAM`, which in turn searches under `/etc/pam.d` for a configuration file with the same name as the launched program (such as `/etc/pam.d/su`). If the `pam_env` module is specified (for example, `session required pam_env.so readenv=1`), the environment variables are loaded from the `/etc/environment` file. |
+| `/etc/environment` <br> `/etc/security/pam_env.conf` | Contains, on some distributions, the system-wide environment variables, defined as key-value pairs. <br><br> The `/etc/environment` file is notably linked to the `Pluggable Authentication Modules (PAM)` component. When a `PAM-aware` program (such as `su` or `sudo`) is executed, the program loads `PAM`, which in turn searches under `/etc/pam.d` for a configuration file with the same name as the launched program (such as `/etc/pam.d/su`). If the `pam_env` module is specified (for example, `session required pam_env.so readenv=1`), the environment variables are loaded from the `/etc/security/pam_env.conf` file (with the `VARIABLE [DEFAULT=[VALUE]] [OVERRIDE=[VALUE]]` syntax) and then from the `/etc/environment` file (with simple `NAME=VALUE` pairs). The user-specific `$HOME/.pam_environment` file is also read if the `user_readenv=1` option is specified (disabled by default). |
 
 ### References
 
