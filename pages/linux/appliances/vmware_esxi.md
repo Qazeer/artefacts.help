@@ -225,7 +225,7 @@ Source: hostd.log
 ```
 
 ```
-Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM to which the the file was transferred)
+Source: /vmfs/volumes/<DATASTORE_GUID>/<VM>/vmware.log (of the VM on which the command was executed)
 
 2024-06-04T21:58:00.759Z In(05) vmx - VigorTransportProcessClientPayload: opID=c4c97156 seq=3930: Receiving GuestOps.CreateTemporaryFile request.
 2024-06-04T21:58:00.913Z In(05) vcpu-0 - VigorTransport_ServerSendResponse opID=c4c97156 seq=3930: Completed GuestOps request with messages.
