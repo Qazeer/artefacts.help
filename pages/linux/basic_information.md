@@ -1,10 +1,10 @@
 ---
 title: Basic system information
 summary: 'A variety of information about the local system is stored as text files: computer hostname, system timezone, mounted filesystems, DNS nameservers, etc.'
-keywords: etc, hostname, timezone, fstab, DNS, nameservers, resolv.conf, openresolv, systemd-resolved, hosts, environment
+keywords: etc, hostname, timezone, localtime, adjtime, fstab, DNS, nameservers, resolv.conf, openresolv, systemd-resolved, hosts, environment
 tags:
   - linux_system_information
-default_location: '/etc/hostname\n /etc/timezone\n /etc/fstab\n /etc/resolv.conf\n /etc/hosts\n /etc/environment'
+default_location: '/etc/hostname\n /etc/localtime\n /etc/timezone\n /etc/fstab\n /etc/resolv.conf\n /etc/hosts\n /etc/environment'
 last_updated: 2025-06-24
 sidebar: sidebar
 permalink: linux_basic_information.html
@@ -21,7 +21,7 @@ folder: linux
 
 | File(s) | Description |
 |---------|-------------|
-| `/etc/timezone` <br><br> `/etc/adjtime` <br><br> `/etc/localtime` | Contains the timezone of the system. |
+| `/etc/localtime` <br><br> `/etc/timezone` <br><br> `/etc/adjtime` | `/etc/localtime`: configures the timezone of the system. Symbolic link to the binary timezone data file (`tzfile` format) of the configured timezone, under `/usr/share/zoneinfo/`. The timezone name can thus be determined from the link target (such as `/usr/share/zoneinfo/Europe/Paris`). <br><br> `/etc/timezone`: legacy file of `Debian`-based distributions that contains the name of the timezone of the system (such as `Europe/Paris`). The file is no longer created by the `tzdata` package since version `2024b-5` (and by the `Debian 13 (Trixie)` installer), and is removed upon upgrade to version `2025c-2` or later. <br><br> `/etc/adjtime`: does not contain the timezone, but records whether the hardware clock (`RTC`) is set to `UTC` or to the local time (`UTC` or `LOCAL` on the third line of the file). |
 
 ### Mounted filesystems
 
