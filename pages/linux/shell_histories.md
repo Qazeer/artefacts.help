@@ -1,7 +1,7 @@
 ---
 title: Shell histories
-summary: 'The shell history log files are linked to the shell history feature, which tracks a user''s command-line history for a given shell (Bash, Zsh, etc.). While easily bypassed or deleted, the history log files can be a valuable source of information on actions performed by a given user.\n\n The shell history log files contain commands entered in an (interactive) shell, with no additional meta information, such as timestamps (by default). By default, the shell history of a shell session is stored in memory until the shell session is closed.\n\n The behavior of the history feature can be modified by setting a number of environment variables (HISTFILE, HISTCONTROL, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, etc.).'
-keywords: shell, history, bash, zsh, bash_history, .bash_history, zsh_history, .zsh_history, HISTFILE, HISTCONTROL, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE
+summary: 'The shell history log files are linked to the shell history feature, which tracks a user''s command-line history for a given shell (Bash, Zsh, etc.). While easily bypassed or deleted, the history log files can be a valuable source of information on actions performed by a given user.\n\n The shell history log files contain commands entered in an (interactive) shell, with no additional meta information, such as timestamps (by default). By default, the shell history of a shell session is stored in memory until the shell session is closed.\n\n The behavior of the history feature can be modified by setting a number of environment variables (HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, etc.).'
+keywords: shell, history, bash, zsh, bash_history, .bash_history, zsh_history, .zsh_history, HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, HIST_IGNORE_SPACE
 tags:
   - linux_program_execution
   - linux_files_and_folders_access
@@ -27,8 +27,8 @@ Two built-in commands can be used to interact with the shell history:
     command.
 
 The behavior of the `history` feature can be modified by setting a number of
-environment variables: `HISTFILE`, `HISTCONTROL`, `HISTTIMEFORMAT`, `HISTSIZE`,
-`HISTFILESIZE` (among others).
+environment variables: `HISTFILE`, `HISTCONTROL`, `HISTIGNORE`,
+`HISTTIMEFORMAT`, `HISTSIZE`, `HISTFILESIZE` (among others).
 
 By default, the shell history log files are stored in their associated user's
 home directory. For instance, `Bash`'s history file is stored as
@@ -38,13 +38,29 @@ variable.
 
 #### Shell history bypass
 
-On many Linux distributions and Unix shells, commands with a leading space are
+Depending on the shell configuration, commands with a leading space may be
 ignored and not added to the history (in memory or in the history log file on
-disk).
+disk):
 
-This behavior can be controlled using the `HISTCONTROL` environment variable.
-For instance, for `Bash`, to ignore commands containing `-pass` or `-key`,
-`HISTCONTROL` can be set to `HISTIGNORE='*-pass*':'*-key*'`.
+  - For `Bash`, this behavior is controlled by the `HISTCONTROL` environment
+    variable (`ignorespace` or `ignoreboth` values), and is not enabled by
+    default. `HISTCONTROL` is however set to `ignoreboth` in the default user
+    `~/.bashrc` file of `Debian`-based distributions (such as `Ubuntu`). On
+    `Red Hat`-based distributions, `HISTCONTROL` is set to `ignoredups` in
+    `/etc/profile` (commands with a leading space are thus recorded).
+
+  - For `Zsh`, this behavior is controlled by the `HIST_IGNORE_SPACE` option,
+    which is not enabled by default (but is enabled by frameworks such as
+    `Oh My Zsh`).
+
+Specific commands can also be excluded from the `Bash` history using the
+`HISTIGNORE` environment variable (colon-separated list of patterns). For
+instance, to ignore commands containing `-pass` or `-key`, `HISTIGNORE` can be
+set to `'*-pass*:*-key*'`.
+
+The history can also be disabled for a given shell session, for example by
+unsetting the `HISTFILE` environment variable (`unset HISTFILE`), in which case
+the history is not saved when the shell exits.
 
 Additionally, shell history files are not protected against tampering, with
 no guarantee of their integrity. Specific or all commands can be trivially
