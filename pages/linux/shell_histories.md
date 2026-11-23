@@ -1,11 +1,11 @@
 ---
 title: Shell histories
 summary: 'The shell history log files are linked to the shell history feature, which tracks a user''s command-line history for a given shell (Bash, Zsh, etc.). While easily bypassed or deleted, the history log files can be a valuable source of information on actions performed by a given user.\n\n The shell history log files contain commands entered in an (interactive) shell, with no additional meta information, such as timestamps (by default). By default, the shell history of a shell session is stored in memory until the shell session is closed.\n\n The behavior of the history feature can be modified by setting a number of environment variables (HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, etc.).'
-keywords: shell, history, bash, zsh, bash_history, .bash_history, zsh_history, .zsh_history, HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, histappend, HIST_IGNORE_SPACE
+keywords: shell, history, bash, zsh, bash_history, .bash_history, zsh_history, .zsh_history, .histfile, HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, histappend, SAVEHIST, HIST_IGNORE_SPACE
 tags:
   - linux_program_execution
   - linux_files_and_folders_access
-default_location: 'Bash history:\n ~/.bash_history\n\n Zsh history:\n ~/.zsh_history\n\n Non-default history settings may be defined through environment variables set in shell configuration files:\n .profile, .bash_login / .zlogin, .bashrc / .zshrc, .bash_profile / .zprofile'
+default_location: 'Bash history:\n ~/.bash_history\n\n Zsh history (if configured, no default history file):\n ~/.zsh_history\n ~/.histfile\n\n Non-default history settings may be defined through environment variables set in shell configuration files:\n .profile, .bash_login / .zlogin, .bashrc / .zshrc, .bash_profile / .zprofile'
 last_updated: 2024-08-04
 sidebar: sidebar
 permalink: linux_shell_histories.html
@@ -32,9 +32,15 @@ environment variables: `HISTFILE`, `HISTCONTROL`, `HISTIGNORE`,
 
 By default, the shell history log files are stored in their associated user's
 home directory. For instance, `Bash`'s history file is stored as
-`~/.bash_history` and `Zsh`'s history file as `~/.zsh_history`. The location
-of the shell history file can be set using the `HISTFILE` environment
+`~/.bash_history` and `Zsh`'s history file usually as `~/.zsh_history`. The
+location of the shell history file can be set using the `HISTFILE` environment
 variable.
+
+`Zsh` does not save its history to a file by default: the `HISTFILE` and
+`SAVEHIST` (number of commands to save) environment variables must be set,
+usually in the `~/.zshrc` configuration file (for example by the
+`zsh-newuser-install` utility, with `~/.histfile` as history file) or by
+frameworks such as `Oh My Zsh` (with `~/.zsh_history` as history file).
 
 #### Shell history bypass
 
