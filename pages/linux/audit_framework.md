@@ -151,17 +151,16 @@ More record types are listed in the
 #### Notable fields
 
   - The [user and group identifiers](./user_and_group_identifiers.md)
-    (`uid`/`gid`, `euid`/`egid`, `ruid`/`rgid`, `suid`/`sgid`, and
+    (`uid`/`gid` for the real identifiers, `euid`/`egid`, `suid`/`sgid`, and
     `fsuid`/`fsgid`) of the process.
 
   - `auid`: `audit identifier` that, if present, identifies the initial `uid` of
     the user (from the initial process). The `auid` remains the same even if
     the user's identity changes (for instance through `sudo` or `su`, as these
-    utilities start a new process with updated `uid`, `euid`, `ruid`, and
-    `suid`).
+    utilities start a new process with updated `uid`, `euid`, and `suid`).
 
-    **An `auid` not equal to the event's `uid`/`ruid` can thus be an
-    indication of privilege escalation through `sudo` or `su`.**
+    **An `auid` not equal to the event's `uid` can thus be an indication of
+    privilege escalation through `sudo` or `su`.**
 
   - `tty` and `ses`: respectively the terminal and session from which the
     audited process was invoked.
