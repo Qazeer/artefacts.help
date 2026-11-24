@@ -169,9 +169,14 @@ More record types are listed in the
     stored in hexadecimal format. Keyword searches on parameter values can thus
     be more complex and require appropriate tooling.
 
-  - For `SYSCALL` records, the `aX` field(s) define the arguments/parameters
-    of the syscall, represented by unsigned long long integers, and as such
-    cannot be used to determine the values taken by the arguments.
+  - For `SYSCALL` records, the `a0` to `a3` fields contain the first four
+    arguments/parameters of the syscall, encoded in hexadecimal. Arguments
+    passed by value (such as flags, file descriptors, or numeric identifiers)
+    can be decoded (and are partially interpreted by `ausearch -i`), but
+    arguments passed as pointers (such as file paths or buffers) only contain
+    a memory address, and as such cannot be used to determine the values
+    pointed to (which may be recorded in other records, such as `PATH`,
+    `EXECVE`, or `SOCKADDR` records).
 
 ### Tool(s)
 
