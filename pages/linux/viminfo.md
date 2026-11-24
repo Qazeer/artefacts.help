@@ -1,7 +1,7 @@
 ---
 title: viminfo
 summary: 'The vim text editor logs a number of operations in the text-based ".viminfo" log file.\n\n The log file notably includes information on the last 100 files accessed (by default) through vim.\n\n Under the "jumplist" section, up to 50 file accesses are referenced, with each file access associated with two entries, one for the file opening and one for the file closing. Each entry includes the file path and an epoch timestamp of occurrence (file opening or closing). Subsequent openings of the same file do not erase previous entries for the file.\n\n Under the "# History of marks within files" section, up to 100 file accesses are referenced, with only a single entry for a given file, which references the last closing of the file. This section may thus contain more historical data than the "jumplist" section.'
-keywords: vim, viminfo
+keywords: vim, viminfo, jumplist, vimrc
 tags:
   - linux_files_and_folders_access
   - linux_file_knowledge
@@ -22,7 +22,9 @@ usage of `vim`.
 The operations of a given `vim` "session" are written when the editor exits.
 
 The location and behavior of the `.viminfo` file can be configured in the
-`vimrc` configuration files (default locations `/etc/vimrc` and `~/.vimrc`).
+`vimrc` configuration files (system-wide `/etc/vimrc` on `Red Hat`-based
+distributions or `/etc/vim/vimrc` on `Debian`-based distributions, and
+user-scoped `~/.vimrc`, `~/.vim/vimrc`, or `~/.config/vim/vimrc`).
 
 ### Information of interest
 
@@ -40,7 +42,9 @@ The `.viminfo` log file notably includes:
         opened or closed (depending on the entry).
 
       - The line and character number of the cursor position when the file was
-        opened (first entry) or closed (last entry).
+        opened (opening entry) or closed (closing entry). As the jumplist is
+        ordered from newest to oldest, the closing entry appears before the
+        opening entry.
 
     Subsequent openings of the same file do not erase previous entries for the
     file.
