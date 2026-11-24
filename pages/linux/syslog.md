@@ -54,8 +54,8 @@ projects, growing separately and in parallel.
 
 `syslog` relies on `Facilities` to classify and separate log messages by their
 originating subsystem/component (kernel, cron, user, mail, ...). The
-facilities are numbered from 0 to 23 inclusive, with the levels ranging from
-16 to 22 reserved for locally used facilities.
+facilities are numbered from 0 to 23 inclusive, with the facilities ranging
+from 16 to 23 reserved for local use.
 
 The facilities are described in
 [`RFC5424`](https://datatracker.ietf.org/doc/html/rfc5424#section-6.2.1):
