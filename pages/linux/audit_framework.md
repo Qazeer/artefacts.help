@@ -1,6 +1,6 @@
 ---
 title: Linux Audit framework (audit logs)
-summary: 'The Linux Audit system is a non-default auditing and logging framework that can be configured to log multiple types of operations, such as authentication successes or failures, process executions, file accesses, user commands executed in a TTY, etc.\n\nThe Linux Audit framework implements kernel-mode hooks to monitor user-mode processes and generate audit telemetry. The auditd daemon is the main user-mode component of the Linux Audit framework, that receives audit messages sent by the kernel and other components (such as pam).\n\nThe Linux Audit system operates on rules that define what records will be captured in the audit logs. If no rules are defined, which is the case by default, only distribution-specific records and telemetry from other components may be logged to the audit log file by the auditd daemon.\n\nDepending on the rules configured, multiple events can be generated for the same operation. An event can be split into multiple records, with each record of the same event sharing the same timestamp and the same unique identifier.\n\nEach record is associated with a given type: USER_AUTH, USER_LOGIN, EXECVE, SYSCALL, PATH, PROCTITLE, USER_CMD, TTY, SOCKADDR, etc.'
+summary: 'The Linux Audit system is an auditing and logging framework, installed by default on some Linux distributions only (such as Red Hat Enterprise Linux 7 and later), that can be configured to log multiple types of operations, such as authentication successes or failures, process executions, file accesses, user commands executed in a TTY, etc.\n\nThe Linux Audit framework implements kernel-mode hooks to monitor user-mode processes and generate audit telemetry. The auditd daemon is the main user-mode component of the Linux Audit framework, that receives audit messages sent by the kernel and other components (such as pam).\n\nThe Linux Audit system operates on rules that define what records will be captured in the audit logs. If no rules are defined, which is the case by default, only distribution-specific records and telemetry from other components may be logged to the audit log file by the auditd daemon.\n\nDepending on the rules configured, multiple events can be generated for the same operation. An event can be split into multiple records, with each record of the same event sharing the same timestamp and the same unique identifier.\n\nEach record is associated with a given type: USER_AUTH, USER_LOGIN, EXECVE, SYSCALL, PATH, PROCTITLE, USER_CMD, TTY, SOCKADDR, etc.'
 keywords: Linux Audit, audit, auditd, audit rules, auditctl, aureport, ausearch, audit.log, auditd.conf, audit.rules, auid, USER_AUTH, USER_LOGIN, EXECVE, SYSCALL, PATH, PROCTITLE, USER_CMD, TTY, SOCKADDR, msg, dissect, target-query, sigma, Zircolite, ChopChopGo
 tags:
   - linux_logging_frameworks
@@ -18,10 +18,12 @@ folder: linux
 
 ### Overview
 
-The `Linux Audit` system is a non-default auditing and logging framework that
-can be configured to log multiple types of operations, such as authentication
+The `Linux Audit` system is an auditing and logging framework that can be
+configured to log multiple types of operations, such as authentication
 successes or failures, process executions, file accesses, user commands
-executed in a TTY, etc.
+executed in a TTY, etc. The `Linux Audit` system is installed by default on
+some Linux distributions only, such as Red Hat Enterprise Linux 7 and later
+(but not on Ubuntu, for instance).
 
 The `Linux Audit` framework implements kernel-mode hooks to monitor user-mode
 processes and generate audit telemetry. The `auditd` daemon is the main
