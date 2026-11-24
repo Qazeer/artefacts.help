@@ -221,8 +221,8 @@ aureport -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTOR
 
 # ausearch.
 
-# Filters on the specified event/message type (TTY, USER_CMD, EXECVE, PATH, USER_AUTH, etc.).
-ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY>
+# Filters on the specified event/message type(s) (TTY, USER_CMD, EXECVE, PATH, USER_AUTH, etc.).
+ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> -m <TYPE | TYPE_1,...,TYPE_N>
 
 # Filters on the specified user identifier (across uid, euid, and auid).
 ausearch -i [-ts <START_TIME>] [-te <END_TIME>] -if <INPUT_FILE | INPUT_DIRECTORY> -ua "<UID>"
