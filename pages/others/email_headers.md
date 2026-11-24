@@ -130,7 +130,7 @@ The following `mechanisms` are supported:
 | `all` | Always matches. |
 | `include:<DOMAIN>` | Evaluate the `SPF` policy of the specified domain, returning a `PASS`/`Neutral`/`Fail`/`Softfail` result (or an error). <br><br> Only a `PASS` result will, however, be processed, effectively stopping the evaluation of the following mechanisms. Non-matching results will resume the processing of the remaining mechanisms. |
 | `a[:<DOMAIN>]` | Check if the sender email server `IP` address is included in the `A` or `AAAA` `DNS` records of the `MAIL FROM`/`HELO` domain or the domain specified in the mechanism. |
-| `mx[:<DOMAIN>]` | Check if the sender email server `IP` address is included in the `MX` `DNS` records of the `MAIL FROM`/`HELO` domain or the domain specified in the mechanism. |
+| `mx[:<DOMAIN>]` | Check if the sender email server `IP` address is one of the `IP` addresses of the email servers referenced in the `MX` `DNS` records of the `MAIL FROM`/`HELO` domain or the domain specified in the mechanism. |
 | `ip4:<IPV4 | IPV4_CIDR>` | Check if the sender email server `IP` address is the specified IPv4 address or in the specified IPv4 address range. |
 | `ip6:<IPV6 | IPV6_CIDR>` | Check if the sender email server `IP` address is the specified IPv6 address or in the specified IPv6 address range. |
 
@@ -140,7 +140,7 @@ follow if the `mechanism` matches. The following `qualifiers` are supported:
 | Qualifier keyword | Qualifier description | Description |
 |-------------------|-----------------------|-------------|
 | `+` | `PASS` | Allow the message. <br><br> I.e. if the associated `mechanism` matches, the message should be accepted by the receiving email server. <br><br> Default if the `qualifier` is not specified. |
-| `-` | `FAIL` | Reject the message. <br><br> I.e. if the associated `mechanism` matches, the message should be rejected by the receiving email server. |
+| `-` | `FAIL` | Reject the message. <br><br> I.e. if the associated `mechanism` matches, the message should be rejected by the receiving email server (the final handling of the message being, however, a matter of local policy of the receiving email server). |
 | `?` | `NEUTRAL` | The authoritative domain explicitly states that it is not asserting whether the sender email server `IP` address is authorized. <br><br> Can be processed as if the `SPF` record did not exist. I.e. if the associated `mechanism` matches, the message could be processed by the receiving email server as if no `SPF` record was configured. |
 | `~` | `SOFTFAIL` | The authoritative domain states that the sender email server `IP` address is probably not authorized, without publishing a stronger, more definitive, `FAIL` policy. <br><br> I.e. if the associated `mechanism` matches, the message should be accepted but marked as suspicious (or subjected to closer scrutiny) by the receiving email server. The message should not be rejected based solely on this result. |
 
