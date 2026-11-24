@@ -130,7 +130,7 @@ follow if the `mechanism` matches. The following `qualifiers` are supported:
 | `+` | `PASS` | Allow the message. <br><br> I.e. if the associated `mechanism` matches, the message should be accepted by the receiving email server. <br><br> Default if the `qualifier` is not specified. |
 | `-` | `FAIL` | Reject the message. <br><br> I.e. if the associated `mechanism` matches, the message should be rejected by the receiving email server. |
 | `?` | `NEUTRAL` | The authoritative domain explicitly states that it is not asserting whether the sender email server `IP` address is authorized. <br><br> Can be processed as if the `SPF` record did not exist. I.e. if the associated `mechanism` matches, the message could be processed by the receiving email server as if no `SPF` record was configured. |
-| `~` | `SOFTFAIL` | The authoritative domain explicitly states that it is not asserting whether the sender email server `IP` address is authorized. <br><br> Same behavior as `NEUTRAL`, with differences in processing left to the receiving email server. |
+| `~` | `SOFTFAIL` | The authoritative domain states that the sender email server `IP` address is probably not authorized, without publishing a stronger, more definitive, `FAIL` policy. <br><br> I.e. if the associated `mechanism` matches, the message should be accepted but marked as suspicious (or subjected to closer scrutiny) by the receiving email server. The message should not be rejected based solely on this result. |
 
 #### Spoofed email SPF headers example
 
