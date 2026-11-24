@@ -7,7 +7,7 @@ tags:
   - linux_lateral_movement
   - linux_lateral_movement_dst
   - linux_local_persistence
-default_location: 'Configuration files and directories:\n - /etc/syslog.conf\n - /etc/rsyslog.conf\n - /etc/rsyslog.d/*.conf\n - /etc/syslog-ng.conf\n - /etc/syslog-ng/*\n\nMain syslog log files:\n - auth/authpriv: (Debian/Ubuntu) /var/log/auth.log | (Red Hat/CentOS) /var/log/secure\n - All except auth and authpriv: /var/log/syslog\n - All except auth, authpriv, and mail: (Red Hat/CentOS) /var/log/messages\n - cron: /var/log/cron.log\n - mail: /var/log/mail.log\n - Linux kernel: /var/log/kern.log\n - User: /var/log/user.log'
+default_location: 'Configuration files and directories:\n - /etc/syslog.conf\n - /etc/rsyslog.conf\n - /etc/rsyslog.d/*.conf\n - /etc/syslog-ng.conf\n - /etc/syslog-ng/*\n\nMain syslog log files:\n - auth/authpriv: (Debian/Ubuntu) /var/log/auth.log | (Red Hat/CentOS, authpriv only) /var/log/secure\n - All except auth and authpriv: (Debian/Ubuntu) /var/log/syslog\n - All (info or higher) except authpriv, mail, and cron: (Red Hat/CentOS) /var/log/messages\n - cron: (Debian) /var/log/cron.log | (Red Hat/CentOS) /var/log/cron\n - mail: (Debian/Ubuntu) /var/log/mail.log | (Red Hat/CentOS) /var/log/maillog\n - Linux kernel: (Debian/Ubuntu) /var/log/kern.log\n - User: (Debian) /var/log/user.log'
 last_updated: 2024-07-24
 sidebar: sidebar
 permalink: linux_syslog.html
@@ -167,16 +167,26 @@ configuration, and the configuration files should thus first be
 reviewed. Additionally, Linux distributions and `syslog` implementations use
 different default configurations, with different default log file locations.
 
-| Facility | Debian/Ubuntu default | Red Hat/CentOS default |
-|----------|-------------------------|-------------------------|
-| all | `/var/log/syslog` (except auth-related messages) | `/var/log/syslog` (except auth-related messages) <br> `/var/log/messages` (except auth- and mail-related messages) |
-| `auth` | `/var/log/auth.log` | `/var/log/secure` |
-| `authpriv` | `/var/log/auth.log` | `/var/log/secure` |
-| `kern` | `/var/log/kern.log` | `/var/log/kern.log` |
-| `user` | `/var/log/user.log` | `/var/log/user.log` |
-| `cron` | `/var/log/cron.log` | `/var/log/cron.log` |
-| `mail` | `/var/log/mail.log` | `/var/log/mail.log` |
-| `daemon` | `/var/log/daemon.log` | - |
+Since `Debian 12`, `rsyslog` is no longer installed by default (with the logs
+only being stored by `journald`), but `rsyslog` is still installed by default
+on `Ubuntu`. Older `Debian` versions (with `rsyslog` installed by default)
+additionally logged to `/var/log/daemon.log`, `/var/log/messages`,
+`/var/log/debug`, `/var/log/lpr.log`, and `/var/log/mail.{info,warn,err}`.
+
+The following table presents the default `rsyslog` configurations of
+`Debian 12` / `13`, `Ubuntu 24.04`, and `Red Hat Enterprise Linux 9`:
+
+| Facility | Debian default | Ubuntu default | Red Hat/CentOS default |
+|----------|----------------|----------------|------------------------|
+| all | `/var/log/syslog` (except `auth` and `authpriv` messages) | `/var/log/syslog` (except `auth` and `authpriv` messages) | `/var/log/messages` (`info` level or higher, except `authpriv`, `mail`, and `cron` messages) |
+| `auth` | `/var/log/auth.log` | `/var/log/auth.log` | `/var/log/messages` |
+| `authpriv` | `/var/log/auth.log` | `/var/log/auth.log` | `/var/log/secure` |
+| `kern` | `/var/log/kern.log` | `/var/log/kern.log` | `/var/log/messages` |
+| `user` | `/var/log/user.log` | `/var/log/syslog` | `/var/log/messages` |
+| `cron` | `/var/log/cron.log` | `/var/log/syslog` | `/var/log/cron` |
+| `mail` | `/var/log/mail.log` | `/var/log/mail.log` <br> `/var/log/mail.err` (`err` level or higher) | `/var/log/maillog` |
+| `daemon` | `/var/log/syslog` | `/var/log/syslog` | `/var/log/messages` |
+| `local7` | `/var/log/syslog` | `/var/log/syslog` | `/var/log/boot.log` |
 
 ### Information of interest
 
