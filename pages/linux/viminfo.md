@@ -1,6 +1,6 @@
 ---
 title: viminfo
-summary: 'The vim text editor logs a number of operations in the text-based ".viminfo" log file.\n\n The log file notably includes information on the last 100 files accessed (by default) through vim.\n\n Under the "jumplist" section, up to 50 file accesses are referenced, with each file access associated with two entries, one for the file opening and one for the file closing. Each entry includes the file path and an epoch timestamp of occurrence (file opening or closing). Subsequent openings of the same file do not erase previous entries for the file.\n\n Under the "# History of marks within files" section, up to 100 file accesses are referenced, with only a single entry for a given file, which references the last closing of the file. This section may thus contain more historical data than the "jumplist" section.'
+summary: 'The vim text editor logs a number of operations in the text-based ".viminfo" log file.\n\n The log file notably includes information on the last 100 files accessed (by default, 20 on Red Hat-based distributions) through vim.\n\n Under the "jumplist" section, up to 50 file accesses are referenced, with each file access associated with two entries, one for the file opening and one for the file closing. Each entry includes the file path and an epoch timestamp of occurrence (file opening or closing). Subsequent openings of the same file do not erase previous entries for the file.\n\n Under the "# History of marks within files" section, up to 100 (by default) file accesses are referenced, with only a single entry for a given file, which references the last closing of the file. This section may thus contain more historical data than the "jumplist" section.'
 keywords: vim, viminfo, jumplist, vimrc
 tags:
   - linux_files_and_folders_access
@@ -69,21 +69,50 @@ The `.viminfo` log file notably includes:
   - The files accessed may also be referenced under the "# File marks" and
     "# History of marks within files (newest to oldest)" sections.
 
-    Entries in both sections also include the cursor position within the file
-    and a timestamp (of when the given file was closed).
+    In `vim`, a mark is a saved position (line and column) in a file that the
+    cursor can later jump back to. Marks are either set manually or
+    automatically by `vim`:
+
+    - `'a` to `'z`: lowercase marks, set manually (`m{a-z}`) and local to a
+      file.
+    - `'A` to `'Z`: uppercase marks, set manually (`m{A-Z}`) and global, as
+      they also record the file name.
+    - `'0` to `'9`: numbered marks, set automatically to the cursor position
+      in the last files edited.
+    - `"`: set automatically to the cursor position when the file was last
+      exited.
+    - `^`: set automatically to the position of the last insert.
+    - `.`: set automatically to the position of the last change.
+
+    The "# File marks" section stores the global marks, which point to
+    positions in any file: the uppercase marks and the numbered marks. Each
+    mark line (`'1  4  10  ~/.zshrc`) gives the mark name, the line, the
+    column and the file. It's followed by a line starting with `|` that
+    repeats the same information and adds a timestamp.
+
+    The "# History of marks within files" section stores, for each file, the
+    marks local to that file: the lowercase marks and the `"`, `^` and `.`
+    marks. Lines starting with `+` record positions from the file's list of
+    changes, while the line starting with `*` isn't a mark but holds the
+    timestamp of the last use of the file.
 
     While multiple "File marks" entries are logged upon multiple accesses to
     the same file, the "# History of marks within files" section only keeps a
     single entry for a given file, which references the last closing of the
     file.
 
-    The "# History of marks within files" section stores up to 100 entries as
-    well, but as each file is uniquely referenced, the section may contain more
-    historical data than the "jumplist" section. However, upon reaching the
-    limit of 100 entries, it is not necessarily the latest entry that will be
-    overwritten during the rotation. Thus, it is not possible to draw
-    conclusions about all the files accessed during the timeframe covered by
-    the first and last entries if the history reaches 100 entries.
+    The "# History of marks within files" section stores, by default, up to
+    100 entries as well, but as each file is uniquely referenced, the section
+    may contain more historical data than the "jumplist" section. The entries
+    are ordered by the timestamp of the last use of the file (newest to
+    oldest): when a file already referenced is accessed again, its entry is
+    moved to the top of the section, and, upon reaching the limit of entries,
+    the oldest entries are removed.
+
+    The limit of entries is defined by the `'` parameter of the `viminfo`
+    option (`'100` by default). The default `/etc/vimrc` configuration file of
+    `Red Hat`-based distributions sets this limit to 20 entries
+    (`set viminfo='20,\"50`).
 
     ```
     # File marks:
