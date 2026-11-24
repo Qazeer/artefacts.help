@@ -51,7 +51,7 @@ The `.viminfo` log file notably includes:
     the overall history available.
 
     Example of two entries associated with the first opening of the file
-    (cursor at line 1, character 0) and closing (cursor at line 3,
+    (cursor at line 1, character 0) and closing (cursor at line 4,
     character 10):
 
     ```
