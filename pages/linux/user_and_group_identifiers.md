@@ -38,30 +38,30 @@ ps -o uid,euid,ruid,suid,fsuid,egid,rgid,sgid
       0     0     0     0     0     0     0     0
 
 # SUID (user owner "root", uid 0) ps, executed as user with uid 1000.
-# sudo cp /usr/bin/ps /tmp/ps & sudo chown root /tmp/ps & sudo chmod u+s /tmp/ps
+# sudo cp /usr/bin/ps /tmp/ps && sudo chown root /tmp/ps && sudo chmod u+s /tmp/ps
 # /tmp/ps -rwsr-xr-x root user
 /tmp/ps -o uid,euid,ruid,suid,fsuid,egid,rgid,sgid
     UID  EUID  RUID  SUID FSUID  EGID  RGID  SGID
       0     0  1000     0     0  1000  1000  1000
 
 # SUID (user owner "test", uid 1001) ps, executed as user with uid 1000.
-# sudo cp /usr/bin/ps /tmp/ps & sudo chown test /tmp/ps & sudo chmod u+s /tmp/ps
+# sudo cp /usr/bin/ps /tmp/ps && sudo chown test /tmp/ps && sudo chmod u+s /tmp/ps
 # /tmp/ps -rwsr-xr-x test user
 /tmp/ps -o uid,euid,ruid,suid,fsuid,egid,rgid,sgid
     UID  EUID  RUID  SUID FSUID  EGID  RGID  SGID
    1001  1001  1000  1001  1001  1000  1000  1000
 
 # SGID (group owner "root", gid 0) ps, executed as user with uid 1000.
-# sudo cp /usr/bin/ps /tmp/ps & sudo chown user:root /tmp/ps & sudo chmod g+s /tmp/ps
+# sudo cp /usr/bin/ps /tmp/ps && sudo chown user:root /tmp/ps && sudo chmod g+s /tmp/ps
 # /tmp/ps -rwxr-sr-x user root
-ps -o uid,euid,ruid,suid,fsuid,egid,rgid,sgid
+/tmp/ps -o uid,euid,ruid,suid,fsuid,egid,rgid,sgid
     UID  EUID  RUID  SUID FSUID  EGID  RGID  SGID
    1000  1000  1000  1000  1000     0  1000     0
 
 # SGID (group owner "test", gid 1001) ps, executed as user with uid 1000.
-# sudo cp /usr/bin/ps /tmp/ps & sudo chown user:test /tmp/ps & sudo chmod g+s /tmp/ps
+# sudo cp /usr/bin/ps /tmp/ps && sudo chown user:test /tmp/ps && sudo chmod g+s /tmp/ps
 # /tmp/ps -rwxr-sr-x user test
-ps -o uid,euid,ruid,suid,fsuid,egid,rgid,sgid
+/tmp/ps -o uid,euid,ruid,suid,fsuid,egid,rgid,sgid
     UID  EUID  RUID  SUID FSUID  EGID  RGID  SGID
    1000  1000  1000  1000  1000  1001  1000  1001
 
