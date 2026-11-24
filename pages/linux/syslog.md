@@ -78,7 +78,7 @@ The facilities are described in
 | 13 | `security` | Log audit. |
 | 14 | `console` | Log alert. |
 | 15 | `solaris-cron` | Clock daemon (2). |
-| 16 to 23 | local use 0 to 7 (`local0` to `local7`). |
+| 16 to 23 | `local0` to `local7` | Local use 0 to 7. |
 
 Note, however, that the mapping between a facility code and a keyword is not
 uniform across Linux distributions or `syslog` implementations.
