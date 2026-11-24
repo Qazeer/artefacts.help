@@ -83,12 +83,18 @@ The facilities are described in
 Note, however, that the mapping between a facility code and a keyword is not
 uniform across Linux distributions or `syslog` implementations.
 
-The
+The `POSIX`
 [`syslog.h` interface](https://pubs.opengroup.org/onlinepubs/009695399/functions/syslog.html)
-only allows specific `Facilities`: `user` (`1`) and `local0` to `local7`
-(`16` to `23`). However, as `syslog` text-based log files are not protected
-against tampering, it is possible to manually edit the log files to add
-arbitrary messages in a log file normally linked to a specific `Facility`.
+only defines specific `Facilities` for applications: `user` (`1`) and `local0`
+to `local7` (`16` to `23`). However, on Linux, any process, without specific
+privileges, can log messages with any `Facility` (except `kern`, which is
+automatically converted to `user`) and with an arbitrary program name, for
+example using the `logger` utility
+(`logger -p authpriv.info -t <PROGRAM_NAME> <MESSAGE>`). Arbitrary messages can
+thus be added to the log files normally linked to a specific `Facility` (such
+as the `auth` / `authpriv` log files). Additionally, as `syslog` text-based log
+files are not protected against tampering, the log files can be manually
+edited (with sufficient privileges).
 
 `syslog` messages are associated with a `Severity` level, ranging from 0
 (`emergency`) to 7 (`debug`). Messages can be filtered by their `Severity`
