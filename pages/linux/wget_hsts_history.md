@@ -40,9 +40,10 @@ For each entry, the following notable information is available:
     website defining an `HSTS` policy, the creation timestamp matches the last
     access to the website.
 
-  - The maximum age retention timestamp in `UTC` (in `epoch` format) for the
-    entry, as specified by the `Strict-Transport-Security` `HTTP` response
-    header from the server.
+  - The maximum age (`max-age`) of the entry, as a duration in seconds, as
+    specified by the `Strict-Transport-Security` `HTTP` response header from
+    the server. The entry expires once the maximum age has elapsed since the
+    creation timestamp (`<CREATED>` + `<MAX_AGE>`).
 
 Example of a `wget` `HSTS` history:
 
