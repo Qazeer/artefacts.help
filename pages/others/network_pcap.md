@@ -136,7 +136,7 @@ analysis with tools supporting deep packet inspection (such as `Wireshark`).
 #    The "none" mode displays the IP and source/destination header on one line, the payload on a second line.
 #    The "single" mode displays everything (header and payload) on a single line.
 
-ngrep [-i] [-W <normal | single | byline> | -O <OUTPUT_PCAP_FILE>] -I <INPUT_PCAP_FILE> '<GREP_EXPRESSION>' '<BPF_FILTER>'
+ngrep [-i] [-W <normal | single | byline | none> | -O <OUTPUT_PCAP_FILE>] -I <INPUT_PCAP_FILE> '<GREP_EXPRESSION>' '<BPF_FILTER>'
 ```
 
 Example query to extract `GET` and `POST` `HTTP` requests from `10.0.0.5` to
