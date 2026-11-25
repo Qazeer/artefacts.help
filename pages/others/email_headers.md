@@ -1,7 +1,7 @@
 ---
 title: SMTP email headers
-summary: 'An email object contains an envelope and content. The envelope is the information that the email client and server use to send the email to the correct recipient(s). The email content is composed of the header section and the email body.\n\n A number of email envelope and content headers are common/mandatory for the email lifecycle, and some headers can be of great forensic value. Additionally, some headers are linked to optional security mechanisms (SPF, DKIM, and DMARC) that can help detect illegitimate/spoofed emails.'
-keywords: SMTP, mail, email, envelope, content, headers, Message Transfer Agent, MTA, MAIL FROM, RCPT TO, Return-Path, From, Reply-To, SPF, DKIM, DMARC, DKIM-Signature, Authentication-Results
+summary: 'An email object contains an envelope and content. The envelope is the information that the email client and server use to send the email to the correct recipient(s). The email content is composed of the header section and the email body.\n\n A number of email headers are common/mandatory for the email lifecycle, and some headers can be of great forensic value. Additionally, some headers are linked to optional security mechanisms (SPF, DKIM, and DMARC) that can help detect illegitimate/spoofed emails.'
+keywords: SMTP, mail, email, envelope, content, headers, Message Transfer Agent, MTA, MAIL FROM, RCPT TO, Return-Path, From, Reply-To, Received, SPF, DKIM, DMARC, DKIM-Signature, Authentication-Results
 tags:
   - network
   - mailservers
@@ -19,9 +19,10 @@ An email object contains an envelope and content.
 The envelope is the information that the email client and server use to
 send the email to the correct recipient(s). It notably includes the sender
 email address and the recipient email address(es) specified with the
-`MAIL FROM` and `RCPT TO` `SMTP` commands, respectively. The envelope also
-includes the `Received` headers added by each `Message Transfer Agent (MTA)`
-that relayed the email. The envelope headers are not displayed to end users.
+`MAIL FROM` and `RCPT TO` `SMTP` commands, respectively. The envelope is not
+part of the email content and is thus not displayed to end users (the envelope
+sender email address is, however, stored in the email content's `Return-Path`
+header upon final delivery of the email).
 
 The email content (sent through the `SMTP DATA` command) is composed of the
 header section and the email body. The header section consists of a collection
@@ -29,8 +30,14 @@ of header fields, which can be displayed to end users in their email client.
 For instance, the email content `From` header is used to display the email
 sender in email clients. The email body is the actual content of the email.
 
-A number of email envelope and content headers are common/mandatory for the
-email lifecycle, and some headers can be of great forensic value.
+The header section notably includes trace headers, added by each
+`Message Transfer Agent (MTA)` that received the email (`Received` headers)
+and upon final delivery of the email (`Return-Path` header). The trace headers
+are usually not displayed by email clients, but can be reviewed by viewing the
+email source / headers.
+
+A number of email headers are common/mandatory for the email lifecycle, and
+some headers can be of great forensic value.
 Additionally, some headers are linked to optional security mechanisms (`SPF`,
 `DKIM`, and `DMARC`) that can help detect illegitimate/spoofed emails.
 
@@ -40,11 +47,13 @@ Additionally, some headers are linked to optional security mechanisms (`SPF`,
 
 The email address of the sender is present in three headers:
 
-  - The `Return-Path` envelope header, whose value is based on the email
-    address specified in the `MAIL FROM` `SMTP` command. This header is
-    verified by the `SPF` mechanism and is thus a more reliable source of
-    information for determining the sender of an email. The `Return-Path`
-    header is used to process the "bounces" that may occur with an email.
+  - The `Return-Path` trace header, added upon final delivery of the email and
+    whose value is based on the email address specified in the `MAIL FROM`
+    `SMTP` command (envelope sender). The domain of this email address is
+    verified by the `SPF` mechanism, and the header is thus a more reliable
+    source of information for determining the sender of an email. The
+    `Return-Path` header is used to process the "bounces" that may occur with
+    an email.
 
   - The `From` content header, which is displayed to the end user as the sender
     of the email. The `From` header is not verified by the `SPF` mechanism and
@@ -66,8 +75,8 @@ mechanism (detailed below) can be used to detect/prevent spoofing of the
 
 #### MTA Received headers
 
-A `Received` header is added to the email envelope headers by every
-`Message Transfer Agent (MTA)` that relayed the email. `Received` headers are
+A `Received` header is added at the top of the email header section by every
+`Message Transfer Agent (MTA)` that received the email. `Received` headers are
 ordered in reverse chronological order, with the last `Received` header
 corresponding to the one added first by the `MTA` closest to the email sender
 (and the first appearing `Received` header corresponding to the `MTA` closest
@@ -106,7 +115,9 @@ Received: from XXX.PROD.OUTLOOK.COM
 in [RFC 7208](https://datatracker.ietf.org/doc/html/rfc7208), designed to
 detect and/or block spoofed emails by detecting illegitimate sender servers.
 More specifically, the `SPF` mechanism will validate the domains a mail server
-can send emails for (through the `MAIL FROM` envelope header of an email).
+can send emails for (through the domain of the envelope sender email address
+specified with the `MAIL FROM` `SMTP` command, and optionally the domain
+specified with the `HELO` / `EHLO` `SMTP` command).
 
 `SPF` can be used by organizations to define servers authorized to send emails
 for their domain names. `SPF` relies on specific `DNS` `TXT` records that
