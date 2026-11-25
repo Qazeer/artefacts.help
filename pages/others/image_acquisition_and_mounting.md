@@ -57,8 +57,11 @@ The procedure is as follows:
 Linux storage devices, such as hard disks or SSDs, are typically block
 devices represented as files under `/dev`. Block devices can be divided into
 one or more logical disks called partitions. This partitioning is recorded in
-the partition table, such as `MBR` or `GPT`, usually found in sector 0 of the
-disk.
+the partition table, such as `MBR` or `GPT`, found at the beginning of the
+disk: the `MBR` partition table is located in sector 0 (`LBA 0`), while the
+`GPT` header is located in sector 1 (`LBA 1`), with sector 0 containing a
+protective `MBR` and a backup `GPT` header being located in the last sector of
+the disk.
 
 | Type | Block device | Partition(s), if any |
 |------|--------------|-----------------------|
