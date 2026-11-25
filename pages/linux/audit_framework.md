@@ -252,6 +252,28 @@ are not decoded to ASCII.
 target-query -f audit <TARGET> | rdump <--csv | --json | --jsonlines>
 ```
 
+#### Vector and Vector4IR
+
+[`Vector`](github.com/vectordotdev/vector) and the
+[`Vector4IR`'s auditd config]https://github.com/Qazeer/Vector4IR/blob/main/Parsers/Linux/Vector_Linux_auditd_audit_log.toml
+can be used to parse `audit` logs into `JSON` output. The hex-encoded fields,
+such as `PROCTITLE` or `USER_CMD` commands, will be decoded to clear-text.
+
+```bash
+# Sets the required environment variables.
+# In PowerShell, backslash must be escaped for paths. Example: "C:\\folder\\input_folder".
+$env:INPUT_FOLDER = "<INPUT_FOLDER>"
+$env:VECTOR_TEMP_FOLDER = "<VECTOR_TEMP_FOLDER>"
+$env:SOURCE_HOST = "<HOSTNAME>"
+$env:OUTPUT_PATH = "<OUTPUT_PATH>"
+
+# Starts the conversion and enables the API (required for the "vector top" command).
+vector.exe --dangerously-allow-env-var-interpolation --internal-log-rate-limit 0 -c .\Parsers\Linux\Vector_Linux_auditd_audit_log.toml,.\Sinks\file.toml,.\Sinks\enable_api.toml
+
+# Displays the on-going conversion metrics.
+vector top
+```
+
 #### Sigma-based analysis with Zircolite and ChopChopGo
 
 The [`Zircolite`](https://github.com/wagga40/Zircolite) Python script (or
