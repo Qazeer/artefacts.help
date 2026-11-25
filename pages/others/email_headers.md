@@ -125,13 +125,16 @@ identify authorized servers and the behavior the receiver should follow in
 case an email is received from an unauthorized server.
 
 `SPF` `DNS` records follow the format below, with mechanisms/rules evaluated
-from left to right and stopping on the first match (except for the `INCLUDE`
-mechanism).
+from left to right and stopping on the first match (the `include` mechanism
+only matching if the evaluation of the `SPF` policy of the specified domain
+returns a `PASS` result). If no mechanism matches (and no `redirect` modifier
+is specified), a `NEUTRAL` result is returned (as if `?all` was specified as
+the last mechanism).
 
 ```
 # Only version 1 of SPF is supported, so the version tag will always be set to v=spf1.
 
-v=<spf1 | SPF_VERSION> <QUALIFIER><MECHANISM_1> ... <QUALIFIER><MECHANISM_N>
+v=<spf1 | SPF_VERSION> <QUALIFIER><MECHANISM_1> ... <QUALIFIER><MECHANISM_N> [redirect=<DOMAIN>] [exp=<DOMAIN>]
 ```
 
 The following `mechanisms` are supported:
@@ -139,7 +142,7 @@ The following `mechanisms` are supported:
 | Mechanism | Description |
 |-----------|-------------|
 | `all` | Always matches. |
-| `include:<DOMAIN>` | Evaluate the `SPF` policy of the specified domain, returning a `PASS`/`Neutral`/`Fail`/`Softfail` result (or an error). <br><br> Only a `PASS` result will, however, be processed, effectively stopping the evaluation of the following mechanisms. Non-matching results will resume the processing of the remaining mechanisms. |
+| `include:<DOMAIN>` | Evaluate the `SPF` policy of the specified domain, returning a `PASS`/`Neutral`/`Fail`/`Softfail` result (or an error). <br><br> The mechanism only matches on a `PASS` result, effectively stopping the evaluation of the following mechanisms (with the qualifier of the `include` mechanism determining the result, for example a `FAIL` result for `-include:<DOMAIN>`). Non-matching results (`Neutral`/`Fail`/`Softfail`) will resume the processing of the remaining mechanisms. Errors, including the absence of an `SPF` record for the specified domain, stop the evaluation with an error result. |
 | `a[:<DOMAIN>]` | Check if the sender email server `IP` address is included in the `A` or `AAAA` `DNS` records of the `MAIL FROM`/`HELO` domain or the domain specified in the mechanism. |
 | `mx[:<DOMAIN>]` | Check if the sender email server `IP` address is one of the `IP` addresses of the email servers referenced in the `MX` `DNS` records of the `MAIL FROM`/`HELO` domain or the domain specified in the mechanism. |
 | `ip4:<IPV4 | IPV4_CIDR>` | Check if the sender email server `IP` address is the specified IPv4 address or in the specified IPv4 address range. |
