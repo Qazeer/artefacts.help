@@ -1,7 +1,7 @@
 ---
 title: Procedure - Image acquisition and mounting
 summary: 'Image acquisition of physical devices (FTK Imager, dd, dc3dd, and Guymager), VMware vSphere virtual machines, and Unix / Linux appliances (over SSH), and image mounting on Windows (Arsenal Image Mounter) and Linux (guestmount, ewfmount, LVM, and mount).'
-keywords: image, disk, mount, raw, img, Advanced Forensics Format, AFF, EnCase, E01, FTK Imager, dd, dc3dd, Guymager, CAINE, TX1, Tableau, MBR, GPT, vmdk, VHD, VHDX, VDI, OVF, ESXi, vSphere, lsblk, SSHFS, Arsenal Image Mounter, guestmount, ewfmount, Logical Volume Manager, LVM, kpartx, pvs, lvdisplay, vgchange, mmls, loop, noload, noatime, noexec, show_sys_files, vmsn, vmem, ermount
+keywords: image, disk, mount, raw, img, Advanced Forensics Format, AFF, EnCase, E01, FTK Imager, dd, dc3dd, Guymager, CAINE, TX1, Tableau, MBR, GPT, vmdk, VHD, VHDX, VDI, OVF, ESXi, vSphere, lsblk, SSHFS, Arsenal Image Mounter, guestmount, ewfmount, Logical Volume Manager, LVM, kpartx, pvs, lvdisplay, vgchange, mmls, loop, noload, noatime, noexec, show_sys_files, vmsn, vmem, SEsparse, ermount
 tags:
   - procedures
 last_updated: 2025-09-01
@@ -179,7 +179,10 @@ parent virtual disk (including in a human-readable format in the
 
 The following files are thus created after a snapshot is taken:
 
-  - The virtual drive `vmdk`: `disk-X-sesparse.vmdk`, such as
+  - The virtual drive `vmdk`: `disk-X-sesparse.vmdk` (`SEsparse` format, used
+    on `VMFS6` datastores and for virtual disks larger than 2 TB on `VMFS5`
+    datastores) or `disk-X-delta.vmdk` (`VMFSsparse` format, used for virtual
+    disks smaller than 2 TB on `VMFS5` datastores), such as
     `disk-000001-sesparse.vmdk`, with `X` being the snapshot number.
 
   - The disk descriptor file: `disk-X.vmdk`, such as `disk-000001.vmdk`
