@@ -27,8 +27,13 @@ system can be changed). A Linux distribution suitable for forensic imaging
 should be used, such as the [`CAINE`](https://www.caine-live.net/) distribution
 (based on `Ubuntu`) or
 [`Kali Linux in Forensics Mode`](https://www.kali.org/docs/general-use/kali-linux-forensics-mode/).
-In such distributions, all devices are set to read-only, auto-mounting is
-disabled, and a number of forensic tools are installed for acquisition.
+In such distributions, the devices are protected against accidental writes and
+a number of forensic tools are installed for acquisition: `CAINE` sets all
+block devices to read-only by default (the `UnBlock` and `Mounter` utilities
+allowing to make a device writable), while `Kali Linux` in forensics mode
+never uses the internal disks (including swap partitions) and disables the
+auto-mounting of the internal disks and removable media (without, however,
+setting the devices to read-only).
 
 #### Using a Windows OS
 
