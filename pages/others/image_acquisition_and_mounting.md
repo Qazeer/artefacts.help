@@ -183,15 +183,18 @@ The following files are thus created after a snapshot is taken:
     on `VMFS6` datastores and for virtual disks larger than 2 TB on `VMFS5`
     datastores) or `disk-X-delta.vmdk` (`VMFSsparse` format, used for virtual
     disks smaller than 2 TB on `VMFS5` datastores), such as
-    `disk-000001-sesparse.vmdk`, with `X` being the snapshot number.
+    `disk-000001-sesparse.vmdk`, with `X` being an incremented number (that
+    usually matches the snapshot number, but may not, as the file names are
+    chosen based on availability).
 
   - The disk descriptor file: `disk-X.vmdk`, such as `disk-000001.vmdk`
-    (with `X` also being the snapshot number).
+    (with `X` being the same number as for the virtual drive).
 
-The virtual machine logs, `vmware.log` and `vmware-XX.log` files, in the virtual
-machine folder in the datastore, can be used to determine which snapshot /
-virtual disk was used at a given time. The `scsi0:0.filename` log entry specifies
-the virtual disk associated with the virtual machine at a boot event.
+The virtual machine logs, `vmware.log` and `vmware-XX.log` files, in the
+virtual machine folder in the datastore, can be used to determine which
+snapshot / virtual disk was used at a given time. The `scsi0:0.filename` log
+entry specifies the virtual disk associated with the virtual machine at a boot
+event.
 Example: `2025-09-11T21:51:47.571Z In(05) vmx - DICT          scsi0:0.filename = "disk-000003.vmdk"`.
 
 The virtual disks of snapshots can be reassembled / reconsolidated using
@@ -205,7 +208,10 @@ already loaded).
 For instance, the `vmware-vdiskmanager.exe` utility can be used to merge a
 snapshot virtual disk and its parent virtual disk(s), using the disk
 descriptor file of the latest snapshot as input:
-`vmware-vdiskmanager.exe -r <LATEST_SNAPSHOT_DISK_DESCRIPTOR_FILE> -t 0 <OUTPUT_VMDK>`.
+
+```
+vmware-vdiskmanager.exe -r <LATEST_SNAPSHOT_DISK_DESCRIPTOR_FILE> -t 0 <OUTPUT_VMDK>
+```
 
 *Known limitations*
 
