@@ -80,7 +80,7 @@ be used in `Wireshark`) and statistic expressions:
 | `tshark -qnr <INPUT_FILE> -z follow,<tcp | http>,ascii,<TCP_STREAM_NUMBER>` | Follows the specified `TCP` or `HTTP` stream, printing its content. |
 | `tshark -nr <INPUT_FILE> -2 -R 'ip.src == <SRC_IP> && ip.dst in {10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16}' -q -z io,phs` <br><br> `tshark -nr <INPUT_FILE> -2 -R 'ip.src == <SRC_IP> && ip.dst in {10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16}' -q -z endpoints,ip` | Displays basic metrics (frames and bytes exchanged) per protocol (`io,phs`) or per remote host (`endpoints,ip`) for the given `IP` source `SRC_IP` to all private hosts. |
 | `tshark -nr <INPUT_FILE> --export-objects smb,<OUTPUT_FOLDER>` <br><br> `tshark -nr <INPUT_FILE> --export-objects http,<OUTPUT_FOLDER>` | Extracts the files found in the `SMB` or `HTTP` streams to disk. |
-| `tshark -nr <INPUT_FILE> -Y 'dns || udp.dstport == 53 || tcp.dstport == 53' -T fields -e ip.src -e dns.qry.name | sort -u` | Extracts `DNS` queries made per host. |
+| `tshark -nr <INPUT_FILE> -Y 'dns.flags.response == 0' -T fields -e ip.src -e dns.qry.name | sort -u` | Extracts `DNS` queries made per host. <br><br> The `dns.flags.response == 0` filter excludes the `DNS` responses, which also contain the queried domain names but originate from the `DNS` resolver. |
 | `tshark -nr <INPUT_FILE> -Y 'tls.handshake.type eq 1'` <br><br> `tshark -nr <INPUT_FILE> -Y 'tls.handshake.type eq 1' -T fields -e ip.src -e tls.handshake.extensions_server_name | sort -u` | Lists/extracts the `TLS` `Client Hello` requests, which may contain [`Server Name Indication` (`SNI`)](https://www.cloudflare.com/learning/ssl/what-is-sni/) referencing the requested domain. <br><br> `Client Hello` requests can be listed, or the specified `SNI` extracted per host. |
 | `tshark -nr <INPUT_FILE> -Y 'http && http.request.method in {"GET", "POST"}'` | Extracts `GET` and `POST` `HTTP` requests. |
 | `tshark -nr <INPUT_FILE> -Y 'http' -T fields -e http.host -e http.user_agent | sort -u` | Extracts the unique `User-Agents` used in `HTTP` requests per host. |
@@ -93,8 +93,8 @@ be used in `Wireshark`) and statistic expressions:
     # Filter HTTP requests.
     FILTER="http.request.method"
 
-    # Filter HTTP responses.
-    FILTER="http.response.code"
+    # Or, to filter HTTP responses (uncomment to override the filter above).
+    # FILTER="http.response.code"
 
     for p in $(tshark -nr $file -Y "$FILTER" -T fields -e http.file_data); do
       printf $p | xxd -r -p
@@ -113,11 +113,13 @@ related to the network activity occurring in the `PCAP`.
 By default, `zeek` outputs `TSV` files, but also supports `JSON` output.
 
 ```bash
+# -C: ignores invalid checksums. By default, zeek discards the packets with invalid checksums, which are notably present in traffic captured on a system that offloads checksumming to the network adapter (for the packets sent by this system).
+
 # TSV-formatted output files.
-zeek -r <PCAP_FILE>
+zeek [-C] -r <PCAP_FILE>
 
 # JSON-formatted output files.
-zeek -C -r <PCAP_FILE> LogAscii::use_json=T
+zeek [-C] -r <PCAP_FILE> LogAscii::use_json=T
 ```
 
 ### ngrep
