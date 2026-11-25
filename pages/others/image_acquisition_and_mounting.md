@@ -1,10 +1,9 @@
 ---
 title: Procedure - Image acquisition and mounting
-summary: ''
-keywords: image, disk, mount, raw, img, Advanced Forensics Format, AFF, EnCase, E01, FTK Imager, dd, dc3dd, Guymager, CAINE, TX1, Tableau, MBR, GPT, vmdk, VHD, VHDX, VDI, OVF, ESXi, vSphere, lsblk, SSHFS, Arsenal Image Mounter, guestmount, ewfmount, Logical Volume Manager, LVM, kpartx, pvs, lvdisplay, vgchange, mmls, loop, noload, noatime, noexec, show_sys_files, vmsn, vmem
+summary: 'Image acquisition of physical devices (FTK Imager, dd, dc3dd, and Guymager), VMware vSphere virtual machines, and Unix / Linux appliances (over SSH), and image mounting on Windows (Arsenal Image Mounter) and Linux (guestmount, ewfmount, LVM, and mount).'
+keywords: image, disk, mount, raw, img, Advanced Forensics Format, AFF, EnCase, E01, FTK Imager, dd, dc3dd, Guymager, CAINE, TX1, Tableau, MBR, GPT, vmdk, VHD, VHDX, VDI, OVF, ESXi, vSphere, lsblk, SSHFS, Arsenal Image Mounter, guestmount, ewfmount, Logical Volume Manager, LVM, kpartx, pvs, lvdisplay, vgchange, mmls, loop, noload, noatime, noexec, show_sys_files, vmsn, vmem, ermount
 tags:
   - procedures
-location: ''
 last_updated: 2025-09-01
 sidebar: sidebar
 permalink: procedure_image_acquisition_and_mounting.html
@@ -200,7 +199,10 @@ or the VMware `vmware-vdiskmanager.exe` utility. Some forensic tools, such as
 disks (if the parent virtual drive(s) are also available and, for some tools,
 already loaded).
 
-https://www.4n6k.com/2014/04/
+For instance, the `vmware-vdiskmanager.exe` utility can be used to merge a
+snapshot virtual disk and its parent virtual disk(s), using the disk
+descriptor file of the latest snapshot as input:
+`vmware-vdiskmanager.exe -r <LATEST_SNAPSHOT_DISK_DESCRIPTOR_FILE> -t 0 <OUTPUT_VMDK>`.
 
 *Known limitations*
 
@@ -441,17 +443,35 @@ sudo mount -o ro,loop,noload,noatime,noexec,[show_sys_files,streams_interface=wi
 
 ### Automated script
 
-The [`ermount.sh`](https://github.com/dfir-scripts/EverReady-Disk-Mount/blob/master/ermount.sh)
+The [`EverReady Disk Mount`](https://github.com/dfir-scripts/EverReady-Disk-Mount)
+scripts (`er2.sh` and the original interactive
+[`ermount.sh`](https://github.com/dfir-scripts/EverReady-Disk-Mount/blob/master/ermount.sh)
+script) can be used to automate the read-only mounting of disk images (`raw`,
+`E01`, `AFF`, `VMDK`, `VHD` / `VHDX`, `VDI`, `QCOW2`, etc.), including images
+containing `LVM` volumes. The original `ermount.sh` script additionally
+supports the mounting of `Volume Shadow Copies` and `BitLocker`-encrypted
+volumes.
+
+```bash
+# -l: scans and activates LVM volumes.
+sudo er2.sh -i <IMAGE_FILE> -m <MOUNT_POINT> [-l]
+
+# Unmounts the image.
+sudo er2.sh -u -m <MOUNT_POINT>
+```
 
 --------------------------------------------------------------------------------
 
 ## References
 
-  - [Barry J. Grundy - The Law Enforcement and Forensic Examiner’s Introduction to Linux](https://www.linuxleo.com/Docs/LinuxLEO_4.98.pdf)
+  - [4n6k - Forensics Quickie: Merging VMDKs & Delta/Snapshot Files (2 Solutions)](https://www.4n6k.com/2014/04/forensics-quickie-merging-vmdks.html)
 
+  - [Barry J. Grundy - The Law Enforcement and Forensic Examiner’s Introduction to Linux](https://www.linuxleo.com/Docs/LinuxLEO_4.98.pdf)
 
   - [BlueMonkey 4n6 - CAINE 02 forensic imaging and cloning using Guymager](https://www.youtube.com/watch?v=FoEO9p-J15w)
 
+  - [Broadcom - Overview of virtual machine snapshots in vSphere (KB 1015180)](https://knowledge.broadcom.com/external/article?legacyId=1015180)
+
   - [Brendan Kinchla - Forensic Recovery of Evidence From Deleted VMware VSphere Hypervisor Virtual Machines](https://www.scribd.com/document/911111385/Forensic-Recovery-of-Evidence-From-Deleted-VMware-VSphere-Hypervisor-Virtual-Machines#content=query:eage,pageNum:16,indexOnPage:1,bestMatch:false)
- 
-   - [Mickaël Walter - A quick walkthrough in the VMDK format](https://web.archive.org/web/20250802235346/https://www.mickaelwalter.fr/a-quick-walkthrough-in-the-vmdk-format/)
+
+  - [Mickaël Walter - A quick walkthrough in the VMDK format](https://web.archive.org/web/20250802235346/https://www.mickaelwalter.fr/a-quick-walkthrough-in-the-vmdk-format/)
