@@ -1,7 +1,7 @@
 ---
 title: Procedure - Image acquisition and mounting
 summary: ''
-keywords: image, disk, mount, raw, img, Advanced Forensics Format, AFF, EnCase, E01, FTK Imager, dd, dc3dd, Guymager, CAINE, TX1, Tableau, MBR, GPT, vmdk, VHD, VHDX, VDI, OVF, ESXi, vSphere, lsblk, SSHFS, Arsenal Image Mounter, guestmount, ewfmount, Logical Volume Manager, LVM, kpartx, pvs, lvdisplay, vgchange, mmls, loop, noload, noatime, noexec, show_sys_files
+keywords: image, disk, mount, raw, img, Advanced Forensics Format, AFF, EnCase, E01, FTK Imager, dd, dc3dd, Guymager, CAINE, TX1, Tableau, MBR, GPT, vmdk, VHD, VHDX, VDI, OVF, ESXi, vSphere, lsblk, SSHFS, Arsenal Image Mounter, guestmount, ewfmount, Logical Volume Manager, LVM, kpartx, pvs, lvdisplay, vgchange, mmls, loop, noload, noatime, noexec, show_sys_files, vmsn, vmem
 tags:
   - procedures
 location: ''
@@ -141,8 +141,8 @@ Right-click the device -> Acquire image
   2. Shut down the virtual machine and copy all the files in the VM folder from
      the datastore. Depending on the number of past snapshot(s) taken, relevant
      data may be present in different virtual drives. Additionally, metadata
-     files (`vmsm` for virtual memory or disk descriptor files) can be 
-     required / relevant for analysis.  
+     files (`vmsn` for the virtual memory or disk descriptor files) can be
+     required / relevant for analysis.
 
 *Thick versus thin provisioning*
 
@@ -223,7 +223,7 @@ of the virtual memory:
        `vim-cmd vmsvc/snapshot.create <VMID> "<SNAPSHOT_NAME>" "<SNAPSHOT_DESCRIPTION>" true true Create Snapshot:`
 
 The virtual memory of the virtual machine at the time of the snapshot will be
-stored in the `vmem` file and the `vmsm` file will contain metadata (such as
+stored in the `vmem` file and the `vmsn` file will contain metadata (such as
 offsets to specific structures) required by memory forensics tools.
 
 ### Unix / Linux appliances
