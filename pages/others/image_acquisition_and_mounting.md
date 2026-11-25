@@ -220,7 +220,11 @@ of the virtual memory:
        for instance with `vim-cmd vmsvc/getallvms`.
     2. Then a snapshot of the virtual machine, with the virtual memory included,
        can be taken using:
-       `vim-cmd vmsvc/snapshot.create <VMID> "<SNAPSHOT_NAME>" "<SNAPSHOT_DESCRIPTION>" true true Create Snapshot:`
+       `vim-cmd vmsvc/snapshot.create <VMID> "<SNAPSHOT_NAME>" "<SNAPSHOT_DESCRIPTION>" 1 0`.
+       The two last parameters, `includeMemory` and `quiesced`, respectively
+       specify to include the virtual memory (`1`) and to not quiesce the
+       guest file system (`0`), as quiescing and memory snapshots are mutually
+       exclusive.
 
 The virtual memory of the virtual machine at the time of the snapshot will be
 stored in the `vmem` file and the `vmsn` file will contain metadata (such as
