@@ -15,13 +15,13 @@ folder: memory
 
 [`MemProcFS`](https://github.com/ufrisk/MemProcFS) is a memory analysis tool
 that presents the memory of a Windows system as files in a virtual file
-system, mounted as `M:` by default on Windows (using the `Dokany` file system
-library) or using `FUSE` on Linux and macOS. The memory artefacts, such as the
-processes and their modules, handles, and memory, the network connections, the
-registry, the services, or the scheduled tasks, can thus be browsed and
-analyzed with any tool. At the root of the virtual file system, the
-`memory.pmem` file exposes the raw physical memory and the `memory.dmp` file a
-`WinDbg`-compatible full crash dump.
+system, mounted using the `Dokany` file system library on Windows or using
+`FUSE` on Linux and macOS. The memory artefacts, such as the processes and
+their modules, handles, and memory, the network connections, the registry, the
+services, or the scheduled tasks, can thus be browsed and analyzed with any
+tool. At the root of the virtual file system, the `memory.pmem` file exposes
+the raw physical memory and the `memory.dmp` file a `WinDbg`-compatible full
+crash dump.
 
 `MemProcFS` supports raw memory images, full Microsoft crash dumps, full `ELF`
 core dumps, `LiME` dumps, `VMware` memory files (`vmem`, with the associated
@@ -36,12 +36,13 @@ the analysis (refer to the
 [`pagefile.sys` and `swapfile.sys` note](../windows/pagefile.sys.md)).
 
 The `forensic` mode of `MemProcFS` performs a more thorough analysis of the
-memory image, producing timelines and CSV files (in `M:\forensic\timeline`
-and `M:\forensic\csv`), and the `FindEvil` detections of suspicious elements
-(process injection, suspicious parent / child relationships, etc.) in
-`M:\forensic\findevil\findevil.txt`. The `FindEvil` detections can be
-complemented with `YARA` rules, built-in (from `Elastic Security`, enabled by
-accepting the associated license) or user-specified.
+memory image, producing timelines and CSV files (in
+`<MOUNT_POINT>:\forensic\timeline` and `<MOUNT_POINT>:\forensic\csv`), and the
+`FindEvil` detections of suspicious elements (process injection, suspicious
+parent / child relationships, etc.) in
+`<MOUNT_POINT>:\forensic\findevil\findevil.txt`. The `FindEvil` detections can
+be complemented with `YARA` rules, built-in (from `Elastic Security`, enabled
+by accepting the associated license) or user-specified.
 
 ```bash
 # Mounts the memory image as M: (Windows, requires Dokany).
@@ -98,12 +99,8 @@ memnixfs --dump <MEMORY_DUMP_FILE> list
 memnixfs --dump <MEMORY_DUMP_FILE> [--auto-fetch | --symbols <ISF_FILE | ISF_DIR> | --vmlinux <VMLINUX>] [--forensic] mount <M: | MOUNT_POINT>
 
 # Reads a single file, or exports the files of the virtual file system to a folder, without mounting (and thus without requiring WinFsp / FUSE).
-memnixfs --dump <MEMORY_DUMP_FILE> cat /sys/findevil/findevil.txt
+memnixfs --dump <MEMORY_DUMP_FILE> cat <FILE_PATH>
 memnixfs --dump <MEMORY_DUMP_FILE> export <OUTPUT_DIR>
-
-# Triage verdict and timeline.
-cat M:/sys/findevil/triage.txt
-cat M:/forensic/timeline.txt
 ```
 
 --------------------------------------------------------------------------------
