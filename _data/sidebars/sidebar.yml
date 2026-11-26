@@ -883,46 +883,6 @@
       url: /vmware_esxi.html
       output: web
 
-- title: Memory analysis
-  output: web
-  children:
-
-  - title: Memory acquisition
-    output: web
-    children:
-
-    - title: Overview
-      url: /memory_acquisition_overview.html
-      output: web
-
-    - title: Virtual Machines
-      url: /memory_acquisition_virtualmachines.html
-      output: web
-
-    - title: Windows
-      url: /memory_acquisition_windows.html
-      output: web
-    
-    - title: Linux
-      url: /memory_acquisition_linux.html
-      output: web
-
-  - title: Memory analysis
-    output: web
-    children:
-
-    - title: Overview
-      url: /memory_analysis_overview.html
-      output: web
-
-    - title: MemProcFS/MemNixFS
-      url: /memory_analysis_memprocfs.html
-      output: web
-    
-    - title: Volatility2/3
-      url: /memory_analysis_volatility.html
-      output: web
-
 - title: Azure / Microsoft 365
   output: web
   children:
@@ -1055,14 +1015,89 @@
         url: /aws_cloudtrail.html#notable-api--events
         output: web
 
-- title: Others
+    - title: Amazon EKS (Kubernetes)
+      url: /kubernetes_eks.html
+      output: web
 
+- title: Guides
   output: web
   children:
 
-  - title: Procedure - Image acquisition and mounting
-    url: /procedure_image_acquisition_and_mounting.html
+  - title: Image
     output: web
+    children:
+
+    - title: Image acquisition
+      output: web
+      children:
+
+      - title: Physical devices
+        url: /image_acquisition_physical_devices.html
+        output: web
+
+      - title: Virtual Machines
+        url: /image_acquisition_virtual_machines.html
+        output: web
+
+      - title: Unix / Linux appliances
+        url: /image_acquisition_appliances.html
+        output: web
+
+    - title: Image mounting
+      output: web
+      children:
+
+      - title: Windows
+        url: /image_mounting_windows.html
+        output: web
+
+      - title: Linux
+        url: /image_mounting_linux.html
+        output: web
+
+  - title: Memory
+    output: web
+    children:
+
+    - title: "Memory acquisition"
+      output: web
+      children:
+
+      - title: Overview
+        url: /memory_acquisition_overview.html
+        output: web
+
+      - title: Virtual Machines
+        url: /memory_acquisition_virtualmachines.html
+        output: web
+
+      - title: Windows
+        url: /memory_acquisition_windows.html
+        output: web
+
+      - title: Linux
+        url: /memory_acquisition_linux.html
+        output: web
+
+    - title: Memory analysis
+      output: web
+      children:
+
+      - title: Overview
+        url: /memory_analysis_overview.html
+        output: web
+
+      - title: MemProcFS/MemNixFS
+        url: /memory_analysis_memprocfs.html
+        output: web
+
+      - title: Volatility2/3
+        url: /memory_analysis_volatility.html
+        output: web
+
+- title: Others
+  output: web
+  children:
 
   - title: Network PCAP
     url: /network_pcap.html

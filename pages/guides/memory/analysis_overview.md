@@ -4,7 +4,7 @@ summary: 'Overview of the memory analysis tools (MemProcFS, MemNixFS, and Volati
 keywords: memory, memory analysis, memory forensics, MemProcFS, MemNixFS, Volatility, FindEvil, process tree, process injection, network connections, YARA
 tags:
   - memory
-  - procedures
+  - guides
 last_updated: 2026-11-25
 sidebar: sidebar
 permalink: memory_analysis_overview.html

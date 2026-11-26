@@ -4,7 +4,7 @@ summary: 'Memory analysis of Windows and Linux memory images with Volatility 3 (
 keywords: memory, memory analysis, Volatility, Volatility 3, Volatility 2, vol, vol.py, symbol tables, ISF, dwarf2json, banners, profile, pslist, psscan, pstree, psxview, dlllist, ldrmodules, handles, malfind, netscan, netstat, filescan, dumpfiles, hivelist, printkey, strings, yarascan, timeliner, layerwriter, winesap, autoruns, pagecache, single-swap-locations
 tags:
   - memory
-  - procedures
+  - guides
 last_updated: 2026-11-25
 sidebar: sidebar
 permalink: memory_analysis_volatility.html

@@ -4,7 +4,7 @@ summary: 'Memory analysis with MemProcFS (Windows) and MemNixFS (Linux), which p
 keywords: memory, memory analysis, MemProcFS, memprocfs.exe, Dokany, FUSE, forensic mode, FindEvil, timeline, YARA, Elastic, memory.pmem, memory.dmp, pagefile, MemProcFS-Analyzer, MemNixFS, memnixfs, WinFsp, BTF, ISF
 tags:
   - memory
-  - procedures
+  - guides
 last_updated: 2026-11-25
 sidebar: sidebar
 permalink: memory_analysis_memprocfs.html

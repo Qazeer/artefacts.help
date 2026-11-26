@@ -4,7 +4,7 @@ summary: 'The volatile memory should be acquired as early as possible, with the 
 keywords: memory, RAM, volatile memory, memory dump, memory image, memory acquisition, remediation, footprint, external drive, network share, virtual machine, hypervisor, memory snapshot, Windows, Linux
 tags:
   - memory
-  - procedures
+  - guides
 last_updated: 2026-11-25
 sidebar: sidebar
 permalink: memory_acquisition_overview.html
@@ -23,7 +23,7 @@ hypervisor (through a memory snapshot for instance), which does not require
 executing any utility in the virtual machine and thus limits the alteration of
 its memory.
 
-The acquisition procedures are detailed in the following notes:
+The acquisition guides are detailed in the following notes:
 
   - [Windows](./acquisition_windows.md): `WinPmem`, `DumpIt`, and
     memory-related files on disk (`pagefile.sys`, `swapfile.sys`, and

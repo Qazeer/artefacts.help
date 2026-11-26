@@ -4,7 +4,7 @@ summary: 'Memory acquisition of Windows systems with WinPmem and DumpIt, and mem
 keywords: memory, RAM, volatile memory, memory dump, memory image, memory acquisition, raw, crash dump, Windows, WinPmem, AFF4, DumpIt, Magnet, pagefile.sys, swapfile.sys, hiberfil.sys
 tags:
   - memory
-  - procedures
+  - guides
 last_updated: 2026-11-25
 sidebar: sidebar
 permalink: memory_acquisition_windows.html

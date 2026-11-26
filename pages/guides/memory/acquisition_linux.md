@@ -4,7 +4,7 @@ summary: 'Memory acquisition of Linux systems with AVML (Acquire Volatile Memory
 keywords: memory, RAM, volatile memory, memory dump, memory image, memory acquisition, Linux, AVML, LiME, Snappy, /proc/kcore, insmod, kernel module, Azure Blob Storage, symbol table
 tags:
   - memory
-  - procedures
+  - guides
 last_updated: 2026-11-25
 sidebar: sidebar
 permalink: memory_acquisition_linux.html

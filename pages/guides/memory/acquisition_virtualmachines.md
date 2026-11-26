@@ -4,14 +4,14 @@ summary: 'Memory acquisition of virtual machines from the hypervisor: VMware vSp
 keywords: memory, RAM, memory dump, memory acquisition, virtual machine, hypervisor, VMware, ESXi, vSphere, vSAN, snapshot, suspend, vmsn, vmss, vmem, vim-cmd, objtool, vmss2core, memory.dmp, vmss.core, zlib1.dll, Hyper-V, vmrs, LiveKd, Proxmox, KVM
 tags:
   - memory
-  - procedures
+  - guides
 last_updated: 2026-11-25
 sidebar: sidebar
 permalink: memory_acquisition_virtualmachines.html
 folder: memory
 ---
 
-Detailed procedures for `VMware ESXi`, `Microsoft Hyper-V`, `Proxmox VE`, and
+Detailed guides for `VMware ESXi`, `Microsoft Hyper-V`, `Proxmox VE`, and
 `KVM` are available in the Kaspersky forum post
 ["How to get a memory dump of a virtual machine from its hypervisor"](https://forum.kaspersky.com/topic/how-to-get-a-memory-dump-of-a-virtual-machine-from-its-hypervisor-36407/).
 
@@ -63,7 +63,7 @@ cat /vmfs/volumes/<VSAN_DATASTORE>/<VM_NAME>/<VM_NAME>-Snapshot<N>.vmem
 ```
 
 The acquisition of the virtual disks of the virtual machine is covered in the
-[image acquisition and mounting note](../others/image_acquisition_and_mounting.md#vmware-vsphere).
+[virtual machines image acquisition note](../image/acquisition_virtual_machines.md#vmware-vsphere).
 
 ### VMware memory and state files
 
