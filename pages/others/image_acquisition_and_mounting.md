@@ -1,7 +1,7 @@
 ---
 title: Procedure - Image acquisition and mounting
 summary: 'Image acquisition of physical devices (FTK Imager, dd, dc3dd, and Guymager), VMware vSphere virtual machines, and Unix / Linux appliances (over SSH), and image mounting on Windows (Arsenal Image Mounter) and Linux (guestmount, ewfmount, LVM, and mount).'
-keywords: image, disk, mount, raw, img, Advanced Forensics Format, AFF, EnCase, E01, FTK Imager, dd, dc3dd, Guymager, CAINE, TX1, Tableau, MBR, GPT, vmdk, VHD, VHDX, VDI, OVF, ESXi, vSphere, lsblk, SSHFS, Arsenal Image Mounter, guestmount, ewfmount, Logical Volume Manager, LVM, kpartx, pvs, lvdisplay, vgchange, mmls, loop, noload, noatime, noexec, show_sys_files, vmsn, vmem, SEsparse, ermount
+keywords: image, disk, mount, raw, img, Advanced Forensics Format, AFF, EnCase, E01, FTK Imager, dd, dc3dd, Guymager, CAINE, TX1, Tableau, MBR, GPT, vmdk, VHD, VHDX, VDI, OVF, ESXi, vSphere, lsblk, SSHFS, Arsenal Image Mounter, guestmount, ewfmount, Logical Volume Manager, LVM, kpartx, pvs, lvdisplay, vgchange, mmls, loop, noload, norecovery, noatime, noexec, show_sys_files, ntfs-3g, XFS, vmsn, vmem, SEsparse, ermount
 tags:
   - procedures
 last_updated: 2025-09-01
@@ -229,25 +229,8 @@ It is not possible to download any of the virtual drive(s), either using the
 running. The downloaded `vmdk` will indeed appear empty.
 
 Before shutting down the virtual machine, it is recommended to take a snapshot
-of the virtual memory:
-
-  - In the `ESXi Host Client`, on the virtual machine page:
-    `Actions -> Snapshots -> Take snapshot -> Check "Snapshot the virtual machine's memory" -> Take snapshot`.
-  
-  - In the `ESXi Shell`:
-    1. The `VMID` of the virtual machine to snapshot must first be retrieved,
-       for instance with `vim-cmd vmsvc/getallvms`.
-    2. Then a snapshot of the virtual machine, with the virtual memory included,
-       can be taken using:
-       `vim-cmd vmsvc/snapshot.create <VMID> "<SNAPSHOT_NAME>" "<SNAPSHOT_DESCRIPTION>" 1 0`.
-       The two last parameters, `includeMemory` and `quiesced`, respectively
-       specify to include the virtual memory (`1`) and to not quiesce the
-       guest file system (`0`), as quiescing and memory snapshots are mutually
-       exclusive.
-
-The virtual memory of the virtual machine at the time of the snapshot will be
-stored in the `vmem` file and the `vmsn` file will contain metadata (such as
-offsets to specific structures) required by memory forensics tools.
+of the virtual memory, as detailed in the
+[VMware vSphere / ESXi section of the virtual machines memory acquisition note](../memory/acquisition_virtualmachines.md#vmware-vsphere--esxi).
 
 ### Unix / Linux appliances
 
@@ -365,9 +348,15 @@ mkdir <RAW_EWF_DIR>
 ewfmount <EWF_FILE_PATH> <RAW_EWF_DIR_PATH>
 
 # Mounts the image as a loop device.
-# show_sys_files and streams_interface=windows are options for Windows NTFS partitions.
+# For an image of a full disk (with a partition table), the offset of the partition to mount must be specified with the "offset=<OFFSET>" option (refer to the "Generic / raw image types" section below).
+# noload is an option for ext3 / ext4 partitions, while show_sys_files and streams_interface=windows are options of the ntfs-3g driver for Windows NTFS partitions (refer to the "Generic / raw image types" section below).
 mkdir <MOUNTPOINT>
-mount <RAW_EWF_DIR_PATH>/ewf1 <MOUNTPOINT_PATH> -o ro,loop,noatime,noexec,noload,norecovery[,show_sys_files,streams_interface=windows]
+
+# ext3 / ext4 partitions.
+mount <RAW_EWF_DIR_PATH>/ewf1 <MOUNTPOINT_PATH> -o ro,loop,noload,noatime,noexec
+
+# Windows NTFS partitions.
+mount -t ntfs-3g <RAW_EWF_DIR_PATH>/ewf1 <MOUNTPOINT_PATH> -o ro,loop,norecover,noatime,noexec,show_sys_files,streams_interface=windows
 ```
 
 #### Logical Volume Manager image
@@ -417,7 +406,11 @@ vgchange -ay <VG_NAME>
 
 # Mounts the specified LV.
 # LV path example: /dev/<VG_NAME>/<root | LV_NAME>
-mount -o ro,noatime,noexec,noload,norecovery <LV_PATH> <MOUNT_POINT>
+# ext3 / ext4 LV.
+mount -o ro,noload,noatime,noexec <LV_PATH> <MOUNT_POINT>
+
+# XFS LV (XFS being the default filesystem on Red Hat-based distributions).
+mount -o ro,norecovery,noatime,noexec[,nouuid] <LV_PATH> <MOUNT_POINT>
 ```
 
 #### Generic / raw image types
@@ -441,13 +434,21 @@ fdisk -l <IMAGE_FILE>
 # ro: read-only.
 # noatime: preserves the atime (last access time) timestamps.
 # noexec: files from the mounted partition cannot be executed.
-# norecovery/noload: prevents the replay of the partition journal, to preserve integrity.
+# noload (ext3 / ext4), norecovery (XFS), or norecover (NTFS): prevents the replay of the partition journal/logfile, to preserve integrity.
 # loop: explicitly tells mount to use a loop device (optional on newer versions of mount).
-# show_sys_files and streams_interface=windows are options for Windows NTFS partitions.
 
 # OFFSET = SECTOR_SIZE * PARTITION_START.
 
-sudo mount -o ro,loop,noload,noatime,noexec,[show_sys_files,streams_interface=windows,]offset=<OFFSET | $((<SECTOR_SIZE> * <PARTITION_START>))> <IMAGE_FILE> </mnt/ | MOUNT_POINT>
+# ext3 / ext4 partitions.
+sudo mount -o ro,loop,noload,noatime,noexec,offset=<OFFSET | $((<SECTOR_SIZE> * <PARTITION_START>))> <IMAGE_FILE> </mnt/ | MOUNT_POINT>
+
+# Windows NTFS partitions.
+# show_sys_files and streams_interface=windows: options of the ntfs-3g driver for Windows NTFS partitions, to respectively list the NTFS metafiles (such as $MFT) and access the alternate data streams (using the <FILE>:<STREAM> syntax).
+sudo mount -t ntfs-3g -o ro,loop,norecover,noatime,noexec,show_sys_files,streams_interface=windows,offset=<OFFSET | $((<SECTOR_SIZE> * <PARTITION_START>))> <IMAGE_FILE> </mnt/ | MOUNT_POINT>
+
+# XFS partitions.
+# nouuid (XFS): allows mounting an XFS filesystem with the same UUID as an already mounted filesystem (such as the filesystem of the analysis system or of another mounted image).
+sudo mount -o ro,loop,norecovery,noatime,noexec,[nouuid,]offset=<OFFSET | $((<SECTOR_SIZE> * <PARTITION_START>))> <IMAGE_FILE> </mnt/ | MOUNT_POINT>
 ```
 
 ### Automated script
