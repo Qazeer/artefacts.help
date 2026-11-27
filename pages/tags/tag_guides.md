@@ -1,5 +1,5 @@
 ---
-title: "Procedures"
+title: "Guides"
 tagName: guides
 search: exclude
 permalink: tag_guides.html

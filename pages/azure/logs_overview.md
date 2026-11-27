@@ -1,5 +1,5 @@
 ---
-title: Logs overview
+title: Azure / Microsoft 365 - Logs overview
 summary: 'A number of log sources are available in Azure that can be useful for incident response purposes:\n\n - Office 365 Unified Audit Logs: all Office 365 logs (including Entra ID logs with a more limited level of information).\n\n - Mailbox Audit Log: logs certain actions performed on mailboxes by mailbox owners, delegates, and admins.\n\n - Entra ID sign-in logs: logs Entra ID sign-ins and resource usage.\n\n - Entra ID audit logs: logs changes applied to the Entra ID tenant, such as user or group management and updates.\n\n - Azure Activity logs: logs activity in an Azure subscription, such as resource modification, virtual machine creation and start, etc.\n\n - Azure DevOps Activity logs: logs operations in the Azure DevOps organization(s).'
 keywords: Unified Audit Logs, UAL, Mailbox Audit Log, Entra ID, AAD, Entra ID sign-in logs, sign-in logs, Entra ID audit logs, audit logs, Azure DevOps, Activity logs
 tags:

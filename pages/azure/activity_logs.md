@@ -1,5 +1,5 @@
 ---
-title: Azure activity/subscription logs
+title: Azure - Activity/subscription logs
 summary: 'The Azure activity/subscription logs record activity in an Azure subscription, such as resource modification, virtual machine creation and start, etc.'
 keywords: activity, subscription, identity.claims, UPN, callerIpAddress, resourceId, operationName, correlationId
 tags:

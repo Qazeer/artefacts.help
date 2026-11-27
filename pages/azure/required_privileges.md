@@ -1,5 +1,5 @@
 ---
-title: Procedure - Required privileges
+title: "[How-To] Azure / Microsoft 365 - Required privileges for collection"
 summary: 'The "Global Reader" role on the Entra ID tenant is required to access the Entra ID sign-ins and audit logs.\n\nThe "View-Only Audit Logs" role in Exchange Online is required to access the Office 365 Unified and Mailbox Audit Logs.\n\nThe "Log Analytics Reader" role on the Azure subscription is required to access the Azure Activity logs.\n\nThe "Auditing\View audit log" permission is required in the Azure DevOps organization to access the Azure DevOps Activity logs.'
 keywords: Global Reader, View-Only Audit Logs, Compliance Management, Organization Management, Log Analytics Reader, View audit log
 tags:

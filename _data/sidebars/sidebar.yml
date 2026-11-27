@@ -891,7 +891,7 @@
   output: web
   children:
 
-  - title: Required privileges
+  - title: Required privileges for collection
     url: /azure_required_privileges.html
     output: web
 
@@ -987,7 +987,7 @@
   output: web
   children:
 
-  - title: Required privileges
+  - title: Required privileges for collection
     url: /aws_required_privileges.html
     output: web
 

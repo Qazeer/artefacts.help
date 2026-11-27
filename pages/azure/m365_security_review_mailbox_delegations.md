@@ -1,5 +1,5 @@
 ---
-title: Security review - Mailbox delegations
+title: "[How-To] Microsoft 365 security review - Mailbox delegations"
 summary: 'The following levels/scopes of mailbox delegation can be configured:\n\n - Mailbox permissions: to allow viewing items at the mailbox level (but not the right to send emails).\n\n - Recipient SendAs permissions: to delegate the right to send emails from the mailbox (which transparently appear to the recipients to come from the specified mailbox).\n\n - SendOnBehalf permissions (GrantSendOnBehalfTo mailbox property): to delegate the right to send emails on behalf of the mailbox (which will appear as such to the recipients).\n\n - Folder-level permissions: to delegate the rights to interact with items at the mailbox''s folder level.'
 keywords: Mailbox permissions, Recipient permissions, SendAs, SendOnBehalf, GrantSendOnBehalfTo, Folder-level permissions, ChangeOwner, ChangePermission, DeleteItem, ExternalAccount, FullAccess, ReadPermission
 tags:

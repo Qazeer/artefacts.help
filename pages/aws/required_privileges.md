@@ -1,5 +1,5 @@
 ---
-title: Procedure - Required privileges
+title: "[How-To] AWS - Required privileges for collection"
 summary: 'AWS CLI access requires credentials to be locally configured. While various authentication methods are supported, some tools may only support IAM user long-term credentials.\n\nThe ReadOnlyAccess and SecurityAudit managed policies can be attached to the principal used to conduct the investigations in order to grant the required permissions.'
 keywords: Access key ID, Secret access key, aws configure, ReadOnlyAccess, SecurityAudit
 tags:

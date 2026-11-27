@@ -1,9 +1,10 @@
 ---
-title: Security review - Email forwarding
+title: "[How-To] Microsoft 365 security review - Email forwarding"
 summary: 'Emails can be forwarded to external or internal recipients using different mechanisms:\n\n - Mailbox Email Forwarding.\n\n - Mailbox Inbox rules.\n\n - Mail Flow / Transport rules (organization-wide, requires Exchange Admin privileges).'
 keywords: Email Forwarding, ForwardingSmtpAddress, ForwardingAddress, DeliverToMailboxAndForward, Inbox rules, Get-InboxRule, Mail Flow, Transport rules, Get-TransportRule
 tags:
   - azure_security_review
+  - guides
 last_updated: 2024-01-28
 sidebar: sidebar
 permalink: azure_m365_security_review_email_forwarding.html

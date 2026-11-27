@@ -1,7 +1,7 @@
 ---
-title: Security review - Licensing plans
-summary: 'The licensing plans in use will define the level of logs available.\n\nFor instance, MailItemsAccessed mail access events will only be available for users associated with an E5 license.'
-keywords: Licenses, Get-MsolAccountSku, Get-MsolUser
+title: "[How-To] Microsoft 365 security review - Licensing plans"
+summary: 'The licensing plans in use will define the level of logs available.\n\nFor instance, Microsoft Purview Audit (Premium) licenses (such as E5 licenses) extend the default retention of the Exchange, SharePoint, OneDrive, and Entra ID audit records from 180 days to one year.'
+keywords: Licenses, Get-MgSubscribedSku, Get-MgUserLicenseDetail, Get-MsolAccountSku, Get-MsolUser
 tags:
   - azure_security_review
   - guides

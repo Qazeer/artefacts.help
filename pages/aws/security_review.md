@@ -1,5 +1,5 @@
 ---
-title: Basic security review
+title: "[How-To] AWS - Basic security review"
 summary: 'The AWS account state and configuration (IAM users, users'' access keys, IAM roles and policies, compute instances, storage objects, etc.) can be reviewed manually using the AWS CLI utility or in a more automated fashion using third-party tools such as Scout Suite.'
 keywords: AWS CLI, iam, Scout Suite
 tags:

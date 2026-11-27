@@ -1,5 +1,5 @@
 ---
-title: Security review - OAuth permissions
+title: "[How-To] Microsoft 365 security review - OAuth permissions"
 summary: 'OAuth is a protocol to delegate access and grant third-party websites or applications access to users'' data and perform operations on their behalf.\n\nOAuth applications can be leveraged by threat actors: in illicit consent grant phishing attacks, to maintain persistence, or to automate operations (such as virtual machine creation for cryptomining activity).'
 keywords: OAuth, permissions, OAuth2PermissionGrants, consent grant, phishing
 tags:

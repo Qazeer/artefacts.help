@@ -1,5 +1,5 @@
 ---
-title: Security review - Mailbox auditing configuration
+title: "[How-To] Microsoft 365 security review Mailbox auditing configuration"
 summary: 'Mailbox auditing is on by default for the entire Office 365 tenant, but can be turned off.\n\nWhile mailbox auditing cannot be disabled for a specific mailbox if mailbox auditing is enabled tenant-wide, mailbox audit logging can still be bypassed for specific users. In such circumstances, mailbox access and actions, to any mailbox, made by the bypassing account are not logged.'
 keywords: Owner, Delegate, Admin, Get-OrganizationConfig, Get-MailboxAuditBypassAssociation
 tags:
