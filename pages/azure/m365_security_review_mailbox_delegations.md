@@ -4,6 +4,7 @@ summary: 'The following levels/scopes of mailbox delegation can be configured:\n
 keywords: Mailbox permissions, Recipient permissions, SendAs, SendOnBehalf, GrantSendOnBehalfTo, Folder-level permissions, ChangeOwner, ChangePermission, DeleteItem, ExternalAccount, FullAccess, ReadPermission
 tags:
   - azure_security_review
+  - guides
 last_updated: 2024-01-28
 sidebar: sidebar
 permalink: azure_m365_security_review_mailbox_delegations.html

@@ -1,8 +1,8 @@
 ---
 title: "Procedures"
-tagName: procedures
+tagName: guides
 search: exclude
-permalink: tag_procedures.html
+permalink: tag_guides.html
 sidebar: sidebar
 hide_sidebar: false
 folder: tags

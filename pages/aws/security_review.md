@@ -4,6 +4,7 @@ summary: 'The AWS account state and configuration (IAM users, users'' access key
 keywords: AWS CLI, iam, Scout Suite
 tags:
   - aws
+  - guides
 last_updated: 2024-01-27
 sidebar: sidebar
 permalink: aws_security_review.html

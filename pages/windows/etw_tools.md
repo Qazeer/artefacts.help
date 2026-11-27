@@ -4,7 +4,7 @@ summary: 'Tools for processing ETW and EVTX files, including: wevtutil, Get-WinE
 keywords: 'Event Tracing for Windows tools, ETW tools, EVTX tools, EVTX parsing, Event Viewer, Event Log Explorer, wevtutil, Get-WinEvent, LogParser, LogParser_LogonLogoffEvents, Winlogbeat, EvtxECmd, Chainsaw, Hayabusa, Velociraptor, Sigma, sigma rules'
 tags:
   - windows_etw
-  - procedures
+  - guides
 last_updated: 2024-01-02
 sidebar: sidebar
 permalink: windows_etw_tools.html

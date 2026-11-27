@@ -4,6 +4,7 @@ summary: 'Mailbox auditing is on by default for the entire Office 365 tenant, bu
 keywords: Owner, Delegate, Admin, Get-OrganizationConfig, Get-MailboxAuditBypassAssociation
 tags:
   - azure_security_review
+  - guides
 last_updated: 2024-01-28
 sidebar: sidebar
 permalink: azure_m365_security_review_mailbox_auditing_configuration.html

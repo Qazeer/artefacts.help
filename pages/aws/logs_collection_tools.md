@@ -4,7 +4,7 @@ summary: 'CloudTrail logs can be collected in a specific region or across all re
 keywords: awsCloudTrailDownload, Invictus-AWS, awslogs
 tags:
   - aws
-  - procedures
+  - guides
 last_updated: 2024-01-27
 sidebar: sidebar
 permalink: aws_logs_collection_tools.html

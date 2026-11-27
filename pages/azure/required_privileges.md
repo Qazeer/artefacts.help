@@ -5,7 +5,7 @@ keywords: Global Reader, View-Only Audit Logs, Compliance Management, Organizati
 tags:
   - azure_logs
   - azure_security_review
-  - procedures
+  - guides
 last_updated: 2024-01-28
 sidebar: sidebar
 permalink: azure_required_privileges.html

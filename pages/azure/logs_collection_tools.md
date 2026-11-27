@@ -4,7 +4,7 @@ summary: 'The Azure logs (Entra ID sign-ins and audit logs, Office 365 Unified a
 keywords: Search-UnifiedAuditLog, DFIR-O365RC, Microsoft-Extractor-Suite, Log Analytics workspace, Diagnostic settings
 tags:
   - azure_logs
-  - procedures
+  - guides
 last_updated: 2024-01-28
 sidebar: sidebar
 permalink: azure_logs_collection_tools.html

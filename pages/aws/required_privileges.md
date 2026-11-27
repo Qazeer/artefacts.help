@@ -4,7 +4,7 @@ summary: 'AWS CLI access requires credentials to be locally configured. While va
 keywords: Access key ID, Secret access key, aws configure, ReadOnlyAccess, SecurityAudit
 tags:
   - aws
-  - procedures
+  - guides
 last_updated: 2024-01-27
 sidebar: sidebar
 permalink: aws_required_privileges.html

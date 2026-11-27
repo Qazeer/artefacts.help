@@ -4,6 +4,7 @@ summary: 'The licensing plans in use will define the level of logs available.\n\
 keywords: Licenses, Get-MsolAccountSku, Get-MsolUser
 tags:
   - azure_security_review
+  - guides
 last_updated: 2024-01-28
 sidebar: sidebar
 permalink: azure_m365_security_review_licensing_plans.html

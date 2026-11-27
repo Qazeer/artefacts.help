@@ -4,6 +4,7 @@ summary: 'OAuth is a protocol to delegate access and grant third-party websites 
 keywords: OAuth, permissions, OAuth2PermissionGrants, consent grant, phishing
 tags:
   - azure_security_review
+  - guides
 last_updated: 2024-01-28
 sidebar: sidebar
 permalink: azure_m365_security_review_oauth_permissions.html

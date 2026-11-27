@@ -50,7 +50,7 @@
         url: /windows_etw_overview.html
         output: web
 
-      - title: Procedure - Tools
+      - title: "[How-To] Tools"
         url: /windows_etw_tools.html
         output: web
 
@@ -174,7 +174,7 @@
         url: /windows_registry_timestamp.html
         output: web
 
-      - title: Procedure - Tools
+      - title: "[How-To] Tools"
         url: /windows_registry_tools.html
         output: web
 
@@ -371,7 +371,7 @@
       url: /windows_hiberfilsys.html
       output: web
 
-    - title: Jumplists
+    - title: JumpLists
       url: /windows_jumplists.html
       output: web
 
@@ -381,6 +381,10 @@
 
     - title: .NET CLR UsageLogs
       url: /windows_net_clr_usagelogs.html
+      output: web
+
+    - title: Pagefile.sys and swapfile.sys
+      url: /windows_pagefilesys.html
       output: web
 
     - title: PCA
@@ -427,7 +431,7 @@
         url: /windows_registry_terminalserverclient.html
         output: web
 
-      - title: mstsc Jumplists
+      - title: mstsc JumpLists
         url: /windows_jumplists.html
         output: web
 
@@ -690,8 +694,8 @@
     - title: Active Directory Domain Services
       output: web
       children:
-        
-        - title: Procedure - NTDS offline mounting
+
+        - title: "[How-To] NTDS offline mounting"
           url: /adds_ntds_offline_mounting.html
           output: web
 
@@ -722,7 +726,7 @@
     - title: Active Directory Certificate Services
       url: /adcs.html
       output: web
-    
+
     - title: Microsoft Exchange
       url: /microsoft_exchange.html
       output: web
@@ -891,7 +895,7 @@
     url: /azure_required_privileges.html
     output: web
 
-  - title: Microsoft 365 security review
+  - title: "[How-To] Microsoft 365 security review"
     output: web
     children:
 
@@ -955,7 +959,7 @@
       url: /azure_logs_overview.html
       output: web
 
-    - title: Procedure - Logs search and collection
+    - title: "[How-To] Logs search and collection"
       url: /azure_logs_collection_tools.html
       output: web
 
@@ -966,7 +970,7 @@
       - title: Exchange Online workload
         url: /azure_m365_exchange_workload_logs.html
         output: web
-      
+
       - title: SharePoint/OneDrive workloads
         url: /azure_m365_sharepoint_onedrive_workload_logs.html
         output: web
@@ -987,7 +991,7 @@
     url: /aws_required_privileges.html
     output: web
 
-  - title: Basic security review
+  - title: "[How-To] AWS basic security review"
     url: /aws_security_review.html
     output: web
 
@@ -999,7 +1003,7 @@
       url: /aws_logs_overview.html
       output: web
 
-    - title: Procedure - Logs search and collection
+    - title: "[How-To] Logs search and collection"
       url: /aws_logs_collection_tools.html
       output: web
 
@@ -1012,7 +1016,7 @@
         output: web
 
       - title: Notable API / events
-        url: /aws_cloudtrail.html#notable-api--events
+        url: /aws_cloudtrail.html#notable-api-events
         output: web
 
     - title: Amazon EKS (Kubernetes)

@@ -5,8 +5,8 @@ keywords: Active Directory, Active Directory Domain Services, Domain Controllers
 tags:
   - windows_active_directory
   - windows_server_roles
-  - procedures
-location: 'NTDS database location: %SystemRoot%/ntds\NTDS.DIT\n\n Commands for offline mounting:\n esentutl /p <NTDS_DIT_PATH>\n dsamain.exe -dbpath <NTDS_DIT_PATH> -ldapport 3266 -allownonadminaccess'
+  - guides
+location: 'NTDS database location: %SystemRoot%\NTDS\Ntds.dit\n\n Commands for offline mounting:\n esentutl /p <NTDS_DIT_PATH>\n dsamain.exe -dbpath <NTDS_DIT_PATH> -ldapport 3266 -allownonadminaccess'
 last_updated: 2024-09-08
 sidebar: sidebar
 permalink: adds_ntds_offline_mounting.html
