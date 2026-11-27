@@ -1,5 +1,5 @@
 ---
-title: ETW - Windows Scheduled Tasks
+title: Windows - ETW - Windows Scheduled Tasks
 summary: 'For local Windows Scheduled Task creation and operations.\n\nMain events:\n\nChannel: Microsoft-Windows-TaskScheduler/Operational (channel not enabled by default).\nEvent ID 106: "User "<ACCOUNT>" registered Task Scheduler task "\<TASK_NAME>"".\nEvent ID 140: "User "<ACCOUNT>" updated Task Scheduler task "<TASK_NAME>"".\nEvent ID 200: "Task Scheduler launched action "<EXECUTABLE>" in instance "<INSTANCE_GUID>" of task "<TASK_NAME>"".\n\nChannel: Security (events not enabled by default).\nEvent ID 4698: "A scheduled task was created".\nEvent ID 4702: "A scheduled task was updated".'
 keywords: TaskScheduler, Windows Scheduled Tasks, Scheduled Tasks, Task, Microsoft-Windows-TaskScheduler/Operational, 100, 102, 103, 106, 107, 108, 110, 118, 119, 129, 140, 141, 200, 201
 tags:

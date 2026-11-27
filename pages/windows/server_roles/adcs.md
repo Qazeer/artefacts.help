@@ -1,5 +1,5 @@
 ---
-title: Active Directory Certificate Services
+title: Windows - Active Directory Certificate Services
 summary: 'Active Directory Certificate Services (AD CS) is a Windows Server role for issuing and managing Public Key Infrastructure (PKI) certificates used in secure communication and authentication protocols.\n\n In the last few years, a number of possible AD CS misconfigurations, leading to privilege escalation and persistence in an Active Directory environment, have been published by security researchers and exploited by threat actors.'
 keywords: Active Directory, Active Directory Certificate Services, ADCS, AD CS, FarsightAD, ESC1, ESC8, ntlm relay, certificates, certificate templates, templates, X.509, X509, X.509v3, X509Certificate2, SubjectAltName, EnhancedKeyUsageList, SerialNumber, userCertificate, Get-X509CertificateStringFromUserCertificate, Export-ADHuntingPrincipalsCertificates
 tags:

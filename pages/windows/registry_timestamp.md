@@ -1,5 +1,5 @@
 ---
-title: Registry - Timestamp and timestomping
+title: Windows - Registry - Timestamp and timestomping
 summary: 'The last write/modified timestamp of a registry key is the only generic timestamp available regarding registry keys and corresponds to the last time a write operation occurred on the key.\n\nThere is indeed no last write/modified timestamp for registry values.\n\nAs with MFT MACB timestamps, the last write/modified timestamp of a registry key can be timestomped, which is hard to detect without dedicated monitoring tools.'
 keywords: 'last write registry key, timestomping, NtSetInformationKey'
 tags:

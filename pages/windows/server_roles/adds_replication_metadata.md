@@ -1,5 +1,5 @@
 ---
-title: Active Directory Domain Services (Domain Controllers) replication metadata
+title: Windows - Active Directory Domain Services (Domain Controllers) replication metadata
 summary: 'The Active Directory replication metadata holds information about changes made to an Active Directory object. The replication metadata is used by the Domain Controllers to replicate modifications and, as such, only attributes that are replicated will be logged in the replication metadata.\n Every object within Active Directory stores replication metadata in its "msDS-ReplAttributeMetaData" (for regular attributes) and "msDS-ReplValueMetaData" (for linked attributes) attributes.'
 keywords: Active Directory, Active Directory Domain Services, Domain Controllers, DC, replication metadata, msDS-ReplAttributeMetaData, msDS-ReplValueMetaData, pszAttributeName, dwVersion, ftimeLastOriginatingChange, pszLastOriginatingDsaDN, uuidLastOriginatingDsaInvocationID, ftimeCreated, ftimeDeleted, lastLogonTimestamp, lastLogon, repadmin, Get-ADReplicationAttributeMetadata, ADTimeline, FarsightAD, esentutl, dsamain.exe
 tags:

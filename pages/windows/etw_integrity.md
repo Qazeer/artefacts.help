@@ -1,5 +1,5 @@
 ---
-title: ETW - Integrity
+title: Windows - ETW - Integrity
 summary: 'The Windows event logs can be tampered with in a number of ways, potentially impacting their integrity.\n\nTwo categories of Windows event log tampering can be distinguished:\n - Tampering with the Event Log service, to avoid the generation of new events.\n - Tampering with the existing Windows events, to delete traces of past activities. The log file/channel can be deleted altogether, or events can be deleted or tampered with individually.\n\nMain events:\n\nChannel: Security.\nEvent ID 1102: "The audit log was cleared".\n\nChannel: System.\nEvent ID 104: "The <CHANNEL> log file was cleared".\nEvent ID 7040: "The start type of the Windows Event Log service was changed from auto start to disabled".'
 keywords: 'Event Log, EventRecordID, Tampering, wevtutil, EventCleaner, Clear-Eventlog, DeleteRecordofFile, mimikatz, wevtsvc.dll, ActualProcessEvent, danderspritz, EvtxECmd, 1100, 1102, 104, 7001, 7040'
 tags:

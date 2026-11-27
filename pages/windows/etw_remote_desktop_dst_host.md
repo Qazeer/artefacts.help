@@ -1,5 +1,5 @@
 ---
-title: ETW - Remote Desktop - Destination host
+title: Windows - ETW - Remote Desktop - Destination host
 summary: 'Destination host of Remote Desktop access.\n\nMain events:\n\nChannel: Security.\nEvent ID 4624: "An account was successfully logged on", with LogonType 10.\n\nChannel:\nMicrosoft-Windows-TerminalServices-RemoteConnectionManager/Operational.\nEvent ID 1149: "Remote Desktop Services: User authentication succeeded".\n\nChannel:\nMicrosoft-Windows-TerminalServices-LocalSessionManager/Operational.\nEvent ID 21: "Remote Desktop Services: Session logon succeeded".\nEvent ID 23: "Remote Desktop Services: Session logoff succeeded".\nEvent ID 24: "Remote Desktop Services: Session has been disconnected".\nEvent ID 25: "Remote Desktop Services: Session reconnection succeeded".'
 keywords: 'RDP, Remote Desktop, Terminal Services, RemoteConnectionManager, LocalSessionManager, RdpCoreTS, LogonType 10, 1149, 21, 22, 23, 24, 25, 131, 1158, ::%16777216, %16777216, 16777216'
 tags:

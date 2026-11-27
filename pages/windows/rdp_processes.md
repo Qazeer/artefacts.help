@@ -1,5 +1,5 @@
 ---
-title: RDP - Processes
+title: Windows - RDP - Processes
 summary: 'The following processes are related to RDP activity:\n\n- mstsc.exe: Windows built-in RDP client. The remote host can, but does not have to, be specified using the command-line parameter "/v:".\n\n- rdpclip.exe: RDP Clipboard Monitor, executed on the remote host every time a remote interactive RDP session is successfully established.\n\n- TSTheme.exe: TSTheme Server Module, starting with Windows 7, executed on the remote host every time a remote interactive RDP session is successfully established and upon session closure.'
 keywords: RDP, mstsc.exe, rdpclip.exe, RDP Clipboard Monitor, tstheme.exe, TSTheme Server Module, NLA
 tags:

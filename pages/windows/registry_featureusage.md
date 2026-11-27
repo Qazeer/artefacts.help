@@ -1,5 +1,5 @@
 ---
-title: Registry - FeatureUsage
+title: Windows - Registry - FeatureUsage
 summary: 'Introduced in Windows 10 version 1903, the FeatureUsage registry key is linked to the Windows taskbar, storing a number of metrics related to taskbar usage.\n\nInformation of interest: program full path and run counter of the associated taskbar operation (brought to focus, right-clicked, icon updated, etc.).\n\nNo timestamp of execution/occurrence is available.'
 keywords: 'FeatureUsage, AppSwitched, ShowJumpView, AppBadgeUpdated, AppLaunch, TrayButtonClicked'
 tags:

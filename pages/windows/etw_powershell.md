@@ -1,5 +1,5 @@
 ---
-title: ETW - PowerShell activity
+title: Windows - ETW - PowerShell activity
 summary: 'For local PowerShell activity.\n\nWindows PowerShell version 2.0, and prior versions, provide few useful audit settings, thereby limiting the availability of evidence (such as a command history).\n\nStarting with PowerShell v5, PowerShell logging was enhanced, with the notable addition of Script Block Logging, which records the full contents of PowerShell code executed (both original and deobfuscated code). While Script Block Logging is not fully enabled by default, it will record events for code containing suspicious keywords (from a Microsoft predefined list).'
 keywords: 'PowerShell, Script Block Logging, Windows PowerShell.evtx, Microsoft-Windows-PowerShell%4Operational.evtx, Microsoft-Windows-PowerShell%4Analytic.etl, Microsoft-Windows-WinRM%4Operational.evtx, Microsoft-Windows-WinRM%4Analytic.etl, AppLocker, PSDecode, 400, 403, 500, 501, 600, 800, 4100, 4103, 4104, SuspiciousContentChecker'
 tags:

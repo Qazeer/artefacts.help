@@ -1,5 +1,5 @@
 ---
-title: ETW - PowerShell remoting - Destination host
+title: Windows - ETW - PowerShell remoting - Destination host
 summary: 'Destination host of PowerShell remoting / WinRM access.\n\nMain events:\n\nChannel: Microsoft-Windows-Windows Remote Management/Operational.\nEvent ID 91: "Creating WSMan shell on server with ResourceUri: <X>".'
 keywords: PowerShell remoting, WinRM, WSMan, ServerRemoteHost, 91
 tags:

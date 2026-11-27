@@ -1,5 +1,5 @@
 ---
-title: WMI - Processes
+title: Windows - WMI - Processes
 summary: 'The following processes are related to WMI activity:\n\n- wmic.exe: client command-line utility to interact with WMI (locally or on a remote computer). The PowerShell Invoke-WmiMethod cmdlet can be used as an alternative to wmic.\n\n- WmiPrvSE.exe: WMI Provider Host program that is executed to run WMI commands. If a program is executed through WMI, it will be spawned as a child of a wmiprvse.exe process.'
 keywords: WMI, wmic, node, Invoke-WmiMethod, Win32_Process, WmiPrvSE, scrcons
 tags:

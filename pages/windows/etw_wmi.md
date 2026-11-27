@@ -1,5 +1,5 @@
 ---
-title: ETW - WMI events
+title: Windows - ETW - WMI events
 summary: 'For WMI activity.\n\nTracking process execution is the only way to natively detect lateral movement leveraging WMI. Without "Audit process tracking" enabled to log process creation event 4688 (or a dedicated product tracking process creation, such as Sysmon or an EDR), lateral movement over WMI cannot be reliably investigated.\n\nMain events:\n\nChannel: Security.\nEvent ID 4688: "A new process has been created", to track WMI process execution (wmic.exe and WmiPrvSE.exe notably).\n\nChannel: Microsoft-Windows-WMI-Activity/Operational.\nEvent ID 5860 for temporary WMI Event subscription creation.\nEvent ID 5861 for permanent WMI Event subscription creation.'
 keywords: WMI, wmic, node, WmiPrvSE, WMI Event subscription, Event subscription, 4688
 tags:

@@ -1,5 +1,5 @@
 ---
-title: Windows 10 Timeline / ActivitiesCache.db
+title: Windows - Windows 10 Timeline / ActivitiesCache.db
 summary: 'Introduced in Windows 10 version 1803, the Windows Activity history tracks a number of operations on the system: programs used, local files opened, SharePoint documents viewed, and websites browsed (using Internet Explorer/Microsoft Edge Legacy).\n\nThe ActivitiesCache.db database only stores data for the last 30 days by default.\n\nInformation of interest, which depends on the activity type: start and end times of the activity (in UTC), executable full path for program execution, file name/SharePoint link for files accessed using certain programs, creation and last modification timestamps of the associated file, etc.\n\nThe history of the clipboard data may also be stored for a short amount of time (approximately 12 hours) in a non-default configuration.'
 keywords: Windows 10 Timeline, ActivitiesCache.db, ActivitiesCache
 tags:

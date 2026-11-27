@@ -1,5 +1,5 @@
 ---
-title: User Access Logging / SUM
+title: Windows - User Access Logging / SUM
 summary: 'Introduced in Windows Server 2012 and enabled by default, User Access Logging (UAL) is a feature that consolidates data on user access to Windows Server roles (such as "Active Directory Domain Services" on Domain Controllers).\n\nUAL stores up to 2 years of data.\n\nInformation of interest:\n- Accessed Windows Server role (such as ADDS, CIFS, ADCS, etc.).\n- The client domain and username.\n- The client IPv4 or IPv6 address.\n- First, last, and daily access timestamps.\n- Total number of accesses.\n\nAs machine accounts of domain-joined systems also authenticate to ADDS, the UAL of Domain Controllers can be used to map hostnames to past IP addresses.'
 keywords: User Access Logging, SUM, UAL, DNS, Current.mdb
 tags:

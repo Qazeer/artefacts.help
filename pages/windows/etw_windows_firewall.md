@@ -1,5 +1,5 @@
 ---
-title: ETW - Windows Firewall
+title: Windows - ETW - Windows Firewall
 summary: 'Windows Firewall activity, such as configuration changes and rule creation, modification, or deletion.\n\nMain events:\n\nChannel: Microsoft-Windows-Windows Firewall With Advanced Security/Firewall.\nEvent ID 2003: "A Windows Defender Firewall setting in the <Domain | Private | Public> profile has changed".\nEvents 2004, 2071, and 2097 (depending on the Windows operating system version): "A rule has been added to the Windows Defender Firewall exception list".\nEvents 2005 and 2099 (depending on the Windows operating system version): "A rule has been modified in the Windows Defender Firewall exception list".'
 keywords: 'Firewall, Windows Firewall, Domain, Private, Public, rule, block, allow, 2003, 2004, 2071, 2097, 2005, 2099, 2006, 2033, 2052'
 tags:

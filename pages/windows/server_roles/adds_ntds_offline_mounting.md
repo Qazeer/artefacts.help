@@ -1,5 +1,5 @@
 ---
-title: Procedure - Active Directory Domain Services NTDS offline mounting
+title: "[How-To] Windows - Active Directory Domain Services NTDS offline mounting"
 summary: 'An exported NTDS database file can be mounted using dsamain, to then be queried over LDAP or with PowerShell cmdlets through the "AD Web Services".'
 keywords: Active Directory, Active Directory Domain Services, Domain Controllers, DC, replication metadata, msDS-ReplAttributeMetaData, msDS-ReplValueMetaData, Get-ADReplicationAttributeMetadata, ADTimeline, FarsightAD, esentutl, dsamain.exe
 tags:

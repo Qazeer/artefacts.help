@@ -1,5 +1,5 @@
 ---
-title: Registry - MountPoints2
+title: Windows - Registry - MountPoints2
 summary: 'The MountPoints2 registry key references the currently or previously mapped drives (such as the system drive, USB devices, or network shares) mounted by the associated user.\n\nInformation of interest: each drive is represented by a subkey, which is named as either the volume GUID, a letter, or, for network shares, "##<IP | HOSTNAME>#<SHARE_NAME>".'
 keywords: 'MountPoints2'
 tags:

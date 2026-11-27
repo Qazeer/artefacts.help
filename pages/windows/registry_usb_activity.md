@@ -1,5 +1,5 @@
 ---
-title: Registry - Devices and USB activity
+title: Windows - Registry - Devices and USB activity
 summary: 'The registry holds a lot of information on currently and previously plugged devices, such as USB devices. The information is stored across a number of registry keys.\n\nGiven a known variable about a device as input (such as the device serial number), other identifiers can be retrieved from the registry: serial number, vendor ID, product ID, device ID (vendor and product names), instance ID, device interface class, associated volume friendly name and volume letter, etc.\n\nThe first and last plugged-in timestamps, and last unplugged timestamp (for Windows 7 / 8 and later) of a device are also stored in the registry (Enum\USB and Enum\USBSTOR registry keys).'
 keywords: 'USB, USBSTOR, WPDBUSENUM, Enum\USB, Enum\USBSTOR, Enum\SWD\WPDBUSENUM, MountedDevices, DeviceClasses, Windows Portable Devices, VolumeInfoCache, EMDMgmt, MountPoints2'
 tags:

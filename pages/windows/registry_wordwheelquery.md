@@ -1,5 +1,5 @@
 ---
-title: Registry - WordWheelQuery
+title: Windows - Registry - WordWheelQuery
 summary: 'Introduced in Windows 7, and not present in Windows Server operating systems, the WordWheelQuery registry key tracks the keywords searched in the Windows Explorer search box.\n\nInformation of interest: terms/keywords entered in the Windows Explorer search box.\n\nValues are ordered in a Most Recently Used (MRU) list. The search timestamp of the most recently searched item can thus be deduced from the last write timestamp of the registry key.'
 keywords: 'WordWheelQuery, MRU'
 tags:

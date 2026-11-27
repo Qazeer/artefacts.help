@@ -1,5 +1,5 @@
 ---
-title: Setupapi logs
+title: Windows - Setupapi logs
 summary: 'The setupapi logs are plaintext log files that track the installation of devices and drivers on the system.\n\nThe logs are rotated and preserved, so historical data dating back to the system installation is usually available.\n\nInformation of interest: device serial number, device ID (vendor and product names) or vendor ID (VID) + product ID (PID), and when a device was first plugged in (timestamp in the local timezone of the system).'
 keywords: USB, device, setupapi, serial number
 tags:

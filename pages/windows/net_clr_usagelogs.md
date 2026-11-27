@@ -1,5 +1,5 @@
 ---
-title: .NET CLR UsageLogs
+title: Windows - .NET CLR UsageLogs
 summary: 'Following the execution (or in-memory injection) of a .NET assembly, the Common Language Runtime (CLR) creates a Usage Log file whose name is based on the name of the executed assembly.\n\nInformation of interest: the filename of the log file matches the name of the assembly/binary executed.\nThe file creation timestamp corresponds to the first time the associated assembly was executed, and the file last modification timestamp corresponds to the last execution time of the assembly.'
 keywords: .NET, CLR, Common Language Runtime, UsageLogs, Usage Log, assembly, ConvertUsageLogsTo-CSV
 tags:

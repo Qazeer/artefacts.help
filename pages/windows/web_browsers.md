@@ -1,5 +1,5 @@
 ---
-title: Web browsers
+title: Windows - Web browsers
 summary: 'Web browser-related artefacts can be split into the following categories:\n\n- User profile: web browsers, such as Chromium-based browsers (Chrome, Edge) and Firefox, implement a profile feature to store users'' settings, history, favorites, etc. The databases and files that store this information are usually located under a user-specific profile folder.\n\n- History: web browsing history and download history.\n\n- Cookies: web browsing cookies (session tokens).\n\n- Cache: cache of resources downloaded from accessed websites.\n\n- Sessions: tabs and windows from a browsing session.\n\n- Settings: configuration settings.'
 keywords: web browsers, Chromium, Chrome, Edge, Firefox, Internet Explorer, history, downloads, cookies, cache, sessions, WebCacheV01.dat, BrowsingHistoryView
 tags:

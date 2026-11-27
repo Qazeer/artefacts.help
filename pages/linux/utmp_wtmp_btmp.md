@@ -1,5 +1,5 @@
 ---
-title: utmp, wtmp and btmp
+title: Linux - utmp, wtmp and btmp
 summary: 'The utmp, wtmp, and btmp files track successful and failed logins on the system. They are notably maintained by the login(1), init(1), sshd(8), and some versions of the getty(8) programs.\n\n The utmp entry format is specified in the "utmp.h" header. This format is used by the utmp, wtmp, and btmp logs. The username and the remote host''s hostname or IP address are notably recorded for remote logins.\n\n *tmp login records are not stored in cleartext and must be parsed with appropriate utilities, such as utmpdump or Dissect.'
 keywords: utmp, wtmp, btmp
 tags:

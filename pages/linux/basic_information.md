@@ -1,5 +1,5 @@
 ---
-title: Basic system information
+title: Linux - Basic system information
 summary: 'A variety of information about the local system is stored as text files: computer hostname, system timezone, mounted filesystems, DNS nameservers, etc.'
 keywords: etc, hostname, timezone, localtime, adjtime, fstab, DNS, nameservers, resolv.conf, openresolv, systemd-resolved, hosts, nsswitch.conf, environment, pam_env.conf
 tags:

@@ -1,5 +1,5 @@
 ---
-title: Recycle Bin
+title: Windows - Recycle Bin
 summary: 'Deleted files and folders (if deleted through a Recycle Bin-aware application), associated with a given user (by their SID).\n\nTwo kinds of files:\n $I, which contains the path and timestamp of deletion of the original file.\n$R, which contains the original file content.'
 keywords: Recycle Bin, $Recycle.Bin, $I, $R
 tags:

@@ -1,5 +1,5 @@
 ---
-title: Windows Defender - Quarantine
+title: Windows - Windows Defender - Quarantine
 summary: 'Windows Defender quarantines files that were detected as malicious, storing the full content of the files. It is thus possible to recover the quarantined files for further investigation.\n\nAdditionally, Windows Defender stores some metadata on each detection under the "Windows Defender\Quarantine" folder, including the original path of the file, the timestamp of quarantine, and the associated threat name.'
 keywords: Windows Defender, Defender, Quarantine, dissect, defender-dump.py
 tags:

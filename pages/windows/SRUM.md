@@ -1,5 +1,5 @@
 ---
-title: System Resource Usage Monitor (SRUM)
+title: Windows - System Resource Usage Monitor (SRUM)
 summary: 'Introduced in Windows 8, the System Resource Usage Monitor (SRUM) is a feature that records numerous metrics of system activities.\n\nThe SRUM database only stores data for the last 30 to 60 days.\n\nEntries are not associated with their timestamp of occurrence but with the timestamp of insertion in the SRUM database (every hour).\n\nInformation of interest: executable full path, executing user SID, metrics on CPU usage, I/O and network activity per execution.'
 keywords: System Resource Usage Monitor, SRUM
 tags:

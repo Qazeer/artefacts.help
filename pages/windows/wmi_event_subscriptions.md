@@ -1,5 +1,5 @@
 ---
-title: WMI - Event Subscription
+title: Windows - WMI - Event Subscription
 summary: 'WMI Event Subscriptions can be used to maintain persistence on a Windows system, with permanent event subscriptions persisting across system reboots.\n\nPermanent event subscriptions are composed of: an "event filter" (the event type that will trigger the consumer), an "event consumer" (which will perform an action, such as executing a command), and a "filter to consumer binding".\n\nEvent subscriptions are written to disk in the "OBJECTS.DATA" file, which notably contains the event filters and event consumers.'
 keywords: WMI, Event Subscription, event filter, event consumer, ActiveScriptEventConsumer, CommandLineEventConsumer, LogFileEventConsumer, NtEventLogEventConsumer, SMTPEventConsumer, FilterToConsumerBinding, OBJECTS.DATA, CIM, INDEX.BTR, Autoruns, Get-WMIObject, subscription, PyWMIPersistenceFinder, python-cim
 tags:

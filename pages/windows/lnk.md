@@ -1,5 +1,5 @@
 ---
-title: Shortcut files / LNK
+title: Windows - Shortcut files / LNK
 summary: 'Shortcut files (*.lnk) are Windows Shell Items that reference an original file, folder, or application.\n\nWhile LNK files can be created manually, Windows also creates LNK files upon numerous user activities, such as the opening of a non-executable file.\n\nInformation of interest, per LNK file:\n - Target file absolute path, size, and attributes.\n - Target file Modified, Access, and Created (MAC) timestamps at the time of the last access.\n - Sometimes information on the volume that stored the target file (local or network share, serial number, and label).\n - Additionally, for automatically created LNK files, the creation and modification timestamps of the LNK itself will usually indicate when the target file was first and last opened.\n\nShortcut files can also be automatically executed upon an interactive user logon, by being placed under the system-wide Startup folder (under %ALLUSERSPROFILE%) or the user-scoped Startup folders (under each user''s %APPDATA% folder).'
 keywords: 'LNK, Shortcut files, Recent, Startup, Startup folder, Start Menu'
 tags:

@@ -1,5 +1,5 @@
 ---
-title: NTFS - UsnJrnl
+title: Windows - NTFS - UsnJrnl
 summary: 'The USN Journal is a feature of NTFS, activated by default on Vista and later, which maintains a record of changes made to the NTFS volume.\n\n The $J stream stores the actual change log records, usually with historical data covering the last few days.\n\n Each change log record is notably composed of: the timestamp, filename, and reason/operation of the change.\n\n Additionally, each change log record contains the MFT "entry" and "sequence" numbers and the direct parent "entry" and "sequence" numbers of the file concerned by the change, making it possible to retrieve the location of the file using the MFT. The UsnJrnl can be "rewinnd" to exhaustively and accurately rebuild the location of every file in the journal.'
 keywords: Filesystem, NTFS, UsnJrnl, USN, Journal
 tags:

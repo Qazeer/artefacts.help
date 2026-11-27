@@ -1,5 +1,5 @@
 ---
-title: NTFS - MACB timestamps and timestomping
+title: Windows - NTFS - MACB timestamps and timestomping
 summary: 'On NTFS filesystems, each file possesses (at least) two attributes that hold (among other information) Modification, Access, Change, and Birth (MACB) timestamps: the $STANDARD_INFORMATION and $FILENAME attributes.\n\nThe $STANDARD_INFORMATION and $FILENAME timestamps are updated differently depending on the operation.\n\nTimestomping is the action of modifying the timestamps of a file, generally to evade detection.\n\nTimestomping may be detected using a number of techniques:\n - Identifying $STANDARD_INFORMATION timestamps older than $FILENAME timestamps.\n - Using UsnJrnl records.\n - Identifying non nano-second precise $STANDARD_INFORMATION timestamps.\n - Using MFT entry numbers.\n\nHowever, each technique is prone to false positives and false negatives.'
 keywords: Filesystem, MACB timestamps, STANDARD_INFORMATION, $STANDARD_INFORMATION, FILENAME, $FILENAME, timestomping
 tags:

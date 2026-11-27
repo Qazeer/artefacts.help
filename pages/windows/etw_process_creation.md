@@ -1,5 +1,5 @@
 ---
-title: ETW - Process creation
+title: Windows - ETW - Process creation
 summary: 'Process creation event.\n\nRequires "Audit Process Creation" to be enabled and ProcessCreationIncludeCmdLine_Enabled to be enabled for the command line to be logged.\n\nEvents:\n\n Event ID 4688: "A new process has been created".\n\nEvent ID 4689: "Process Termination: Success and Failure".'
 keywords: 'Audit Process Creation, ProcessCreationIncludeCmdLine_Enabled, 4688, A new process has been created, 4689, TokenElevationType, NewProcessName, ParentProcessName, SubjectLogonId'
 tags:

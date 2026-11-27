@@ -1,5 +1,5 @@
 ---
-title: Pagefile.sys and swapfile.sys
+title: Windows - Pagefile.sys and swapfile.sys
 summary: 'The pagefile.sys and swapfile.sys files are used by Windows for memory paging, to store memory pages from the main memory (RAM) on disk. The pagefile.sys file is the system-wide page file, while the swapfile.sys file is used to suspend and resume Universal Windows Platform (UWP) applications.\n\nAs the files only store unstructured / unordered memory pages, their analysis on their own is limited to carving and strings extraction. MemProcFS and Volatility 3 can however use the page files, acquired at the same time as the memory image, to complement the analysis of the memory image.\n\nThe page file is cleared upon system shutdown if the ClearPageFileAtShutdown setting is enabled.'
 keywords: pagefile.sys, swapfile.sys, page file, paging file, swap, virtual memory, memory, PagingFiles, ClearPageFileAtShutdown, EncryptPagingFile, memory compression, carving, strings, bstrings, bulk_extractor, YARA, MemProcFS, Volatility, single-swap-locations
 tags:

@@ -1,5 +1,5 @@
 ---
-title: PowerShell ConsoleHost_history
+title: Windows - PowerShell ConsoleHost_history
 summary: 'Starting with PowerShell v5 on Windows 10, the commands entered in a PowerShell console will be logged by the PSReadline module to a user-scoped ConsoleHost_history.txt file.\n\nBy default, only the last 4096 commands are stored.\n\nInformation of interest: commands entered, with no associated timestamps (or any additional metadata). The execution timestamp of the last command entered can be deduced from the last write timestamp of the ConsoleHost_history file itself.'
 keywords: PowerShell, ConsoleHost_history, PSReadline
 tags:

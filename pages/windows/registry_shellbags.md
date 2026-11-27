@@ -1,5 +1,5 @@
 ---
-title: Registry - Shellbags
+title: Windows - Registry - Shellbags
 summary: 'The Shellbags are Windows Registry keys designed to enhance the user experience by keeping track of Windows Explorer graphical display settings on a folder-by-folder basis.\n\nShellbags contain folders and network shares to which a given user has navigated (using the Windows Explorer), but not the content of a directory. Files will thus not be referenced, and subdirectories will only be referenced if they were navigated into.\n\nShellbag entries are stored in the registry as a tree-like hierarchical data structure, allowing the reconstitution of the browsed directory tree.\n\nInformation of interest for each Shellbags entry on a given target/directory:\n\n- Target name and absolute path.\n\n- Target Modified, Accessed, and Created (MAC) timestamps (in UTC), retrieved from the $MFT upon creation of the Shellbag entry (and not updated afterward).\n\n- The order in which the sub-targets of a target were accessed (maintained in an MRUListEx list).\n\nAdditionally, the first and last interacted timestamps can be indirectly deduced for some targets.'
 keywords: Shellbags, BagMRU, ShellBagsExplorer, SBECmd, MRUListEx
 tags:

@@ -1,5 +1,5 @@
 ---
-title: ETW - Devices and USB activity
+title: Windows - ETW - Devices and USB activity
 summary: 'For device and USB activity.\n\nVarious events are generated for device and USB activity, split across a number of channels. More events and information are available on recent versions of the Windows operating system.\n\nUsing known variables about a given device, found for example in the Windows registry, events can be used to determine timestamps of activity for the device, such as when the device was first plugged in, last plugged in, and unplugged.\n\nAdditionally, supplementary information about devices can be retrieved from events, such as device storage sizes and an extract of their partition table.'
 keywords: 'USB, Devices, Microsoft-Windows-Storage-ClassPnP/Operational, 507, 500, 502, 503, 504, 505, 506, 510, Microsoft-Windows-Kernel-PnP/Device Configuration, 400, 401, 410, 411, 420, 430, Microsoft-Windows-Kernel-PnP/Device Management, 1010, Microsoft-Windows-Partition/Diagnostic, 1006, Microsoft-Windows-Ntfs/Operational, 142, 4, 9, 10, 300, 303'
 tags:

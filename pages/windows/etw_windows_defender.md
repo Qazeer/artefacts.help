@@ -1,5 +1,5 @@
 ---
-title: ETW - Windows Defender
+title: Windows - ETW - Windows Defender
 summary: 'Windows Defender activity, such as malware detections or configuration changes.\n\nMain events:\n\nChannel: Microsoft-Windows-Windows Defender/Operational.\nEvent ID 1116: "The antimalware engine found malware or other potentially unwanted software".\nEvent ID 5001: "Real-time protection is disabled".\nEvent ID 5007: "The antimalware platform configuration changed".'
 keywords: 'Windows Defender, Defender'
 tags:

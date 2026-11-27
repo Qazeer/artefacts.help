@@ -1,5 +1,5 @@
 ---
-title: ETW - Authentication - Destination host
+title: Windows - ETW - Authentication - Destination host
 summary: 'Destination host of local or remote access.\n\nMain events:\n\nEvent ID 4624: "An account was successfully logged on".\n\nEvent ID 4625: "An account failed to log on".\n\nEvent ID 4672: "Special privileges assigned to new logon".'
 keywords: Security, Logon, 4624, 4625, 4672, 4634, 4647, 4649, 4778, 4779, 4800, 4801, 4802, 4803, 5378, 5632, 5633, LogonType, ImpersonationLevel
 tags:

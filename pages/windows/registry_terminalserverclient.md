@@ -1,5 +1,5 @@
 ---
-title: Registry - Terminal Server Client\Servers
+title: Windows - Registry - Terminal Server Client\Servers
 summary: 'The Terminal Server Client\Servers registry key tracks the remote hosts the associated user connected to using the built-in mstsc.exe Remote Desktop client.\n\nInformation of interest: IP address of the remote host and saved username associated with the remote host (if any).\n\nThe last write timestamp may be an indicator of the first access to the remote host.'
 keywords: 'Terminal Server Client\Servers'
 tags:

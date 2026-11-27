@@ -1,5 +1,5 @@
 ---
-title: ETW - Windows Services
+title: Windows - ETW - Windows Services
 summary: 'For local Windows service creation and operations.\n\nMain events:\n\nChannel: System.\nEvent ID 7045: "A service was installed in the system".\nEvent ID 7036: "The <SERVICE_NAME> service entered the <running/stopped> state".\n\nChannel: Security.\nEvent ID 4697: "A service was installed in the system" (not enabled by default).'
 keywords: Windows service, services, installed, running, stopped, 7045, 7036, 7035, 7000, 7023, 7031, 7034, 7040, 7030, 4697
 tags:

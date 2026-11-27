@@ -1,5 +1,5 @@
 ---
-title: VMware ESXi
+title: Linux - VMware ESXi
 summary: 'VMware ESXi runs a Syslog service that logs messages from the kernel and other system components. Logs notably include information on authentication, commands entered in the ESXi Shell, and events on virtual machine lifecycle operations (configuration changes, web console access, snapshot operations, etc.). \n\n The ESXi log location is defined through the "/etc/vmsyslog.conf" configuration file. By default, logs are placed in "/scratch/log/" / "/var/run/log/" (which are symlinks pointing to the same "/vmfs/volumes/<UID>/log/" directory).\n\nThe collection of ESXi logs can be automated through the creation of a "support bundle". A support bundle can be manually generated through the ESXi Host Client web interface or using the DFIR4vSphere PowerShell module (for ESXi hosts attached to a running and reachable vCenter instance).'
 keywords: VMware, vSphere, ESX, ESXi, vCenter, ESX Admins, esxAdminsGroup, CVE-2024-37085, VMkernel, logdir, scratch, vmsyslog.conf, support bundle, shell.log, auth.log, hostd.log, vmware.log, vpxa.log, vmware-hostd, Vimsvc, WebMKS, snapshot, MKSScreenShotMgr, DFIR4vSphere, Start-ESXi_Investigation, Start-VC_Investigation, ESXBundle, VCBundle
 tags:

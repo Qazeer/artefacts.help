@@ -1,5 +1,5 @@
 ---
-title: ETW - Active Directory Domain Services (Domain Controllers) ntds.dit dumping
+title: Windows - ETW - Active Directory Domain Services (Domain Controllers) ntds.dit dumping
 summary: 'Secrets stored in the Active Directory database (ntds.dit) can be retrieved in a number of ways:\n\n- By leveraging the DRSUAPI replication functions, normally used by Domain Controllers to replicate objects'' (replicated) properties. This attack can be conducted over the network (without executing code on a Domain Controller) and is known as "DCSync".\n\n - By executing code/commands on a Domain Controller and exfiltrating the ntds.dit database directly. While the ntds.dit database can be accessed and copied using various tools and techniques, the "ntdsutil" built-in administration utility is often leveraged by threat actors to do so.'
 keywords: Active Directory, Domain Controllers, NTDS, ntds.dit, DRSUAPI, DCSync, 4662, 1131f6aa-9c07-11d1-f79f-00c04fc2dcd2, 1131f6ad-9c07-11d1-f79f-00c04fc2dcd2, ntdsutil, ESENT, 325, 326, 327, 206
 tags:

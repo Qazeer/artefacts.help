@@ -1,5 +1,5 @@
 ---
-title: ETW - System uptime
+title: Windows - ETW - System uptime
 summary: 'System boot and shutdown events, to determine the time ranges during which the system was turned on.\n\nMain events:\n\nEvent 1074: "The process <PROCESS_EXE> has initiated the <restart | power off> of computer <HOSTNAME> on behalf of user <USERNAME> for the following reason: <SHUTDOWN_REASON_TEXT>".\n\nEvent 12: "The operating system started at system time <TIME>".\n\nEvent 13: "The operating system is shutting down at system time <TIME>".\n\nEvent 41: "The system has rebooted without cleanly shutting down first".'
 keywords: 'system uptime, User32, Microsoft-Windows-Kernel-General, Microsoft-Windows-Kernel-Power, Microsoft-Windows-Power-Troubleshooter, EventLog, TurnedOnTimesView'
 tags:

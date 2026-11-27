@@ -1,5 +1,5 @@
 ---
-title: SSH known_hosts
+title: Linux - SSH known_hosts
 summary: 'When an SSH connection is being established, the server sends its public host key to the client and proves knowledge of the associated private host key. The OpenSSH client automatically stores the public host key of hosts that were previously accessed. These keys, called "known host keys", are stored in the known_hosts files.\n\n The known_hosts files are plaintext files, with (generally) one known host entry per line, containing the following information: the hostname(s)/IP address(es), the public host key type, the base64-encoded public host key, and an optional comment.\n\n The remote hosts'' hostname and IP address can be stored either in cleartext or hashed. If the host information is hashed, it is possible to test whether a specific host is present in the known_hosts file, or to brute-force the hashes to try to recover the associated hostnames/IP addresses.'
 keywords: SSH
 tags:

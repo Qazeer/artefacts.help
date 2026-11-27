@@ -1,5 +1,5 @@
 ---
-title: Windows devices terminology
+title: Windows - Devices terminology
 summary: 'The Windows operating system uses a number of "device identification strings" and "device instance identification strings" to identify devices that are plugged into/installed on a computer, and their instances.\n\nThe following identification strings are defined: vendor ID, product ID, device ID, hardware ID, instance ID, device instance ID, and container ID.\n\nThese various identifiers can be used to uniquely identify USB drives plugged into a computer, and are referenced in various registry keys, ETW events, and log files.'
 keywords: 'vendor ID, product ID, device ID, hardware ID, instance ID, device instance ID, container ID, device interface class'
 tags:

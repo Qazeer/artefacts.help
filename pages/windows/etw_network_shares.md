@@ -1,5 +1,5 @@
 ---
-title: ETW - Network shares activity and access
+title: Windows - ETW - Network shares activity and access
 summary: 'For access and operations on network shares configured on the local system, and access to files and folders hosted on network shares.\n\nBy default, no audit events are generated, as network share auditing requires "Audit File Share" (share access and lifecycle) and/or "Audit Detailed File Share" (access to hosted files and folders) to be enabled. However, enabling network share auditing may generate an overwhelming number of events.\n\nMain events:\n\nChannel: Security.\nEvent ID 5140: "A network share object was accessed".\nEvent ID 5145: "A network share object was checked to see whether client can be granted desired access".\n\n Microsoft-Windows-SMBServer/Security events can be an indicator of share access if errors (either permission-related or operational) were encountered while accessing a share.'
 keywords: 'shares, network share, network drive, Audit File Share, Audit Detailed File Share, 5140, 5142, 5143, 5144, 5145, Microsoft-Windows-SMBServer/Security, 1006, 1016, 1020'
 tags:

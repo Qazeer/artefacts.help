@@ -1,5 +1,5 @@
 ---
-title: Shell histories
+title: Linux - Shell histories
 summary: 'The shell history log files are linked to the shell history feature, which tracks a user''s command-line history for a given shell (Bash, Zsh, etc.). While easily bypassed or deleted, the history log files can be a valuable source of information on actions performed by a given user.\n\n The shell history log files contain commands entered in an (interactive) shell, with no additional meta information, such as timestamps (by default). By default, the shell history of a shell session is stored in memory until the shell session is closed.\n\n The behavior of the history feature can be modified by setting a number of environment variables (HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, etc.).'
 keywords: shell, history, bash, zsh, bash_history, .bash_history, zsh_history, .zsh_history, .histfile, HISTFILE, HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT, HISTSIZE, HISTFILESIZE, histappend, SAVEHIST, HIST_IGNORE_SPACE, EXTENDED_HISTORY
 tags:

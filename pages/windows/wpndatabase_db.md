@@ -1,5 +1,5 @@
 ---
-title: Windows Push Notifications (wpndatabase.db)
+title: Windows - Windows Push Notifications (wpndatabase.db)
 summary: 'Introduced in Windows 10, the Windows Push Notification service allows applications to deliver/push notifications, notably in the form of "Toast" notifications (pop-up boxes that can appear at the bottom right of the screen).\n\nEach notification is associated with a dedicated entry in the Notification table of the wpndatabase.db database, with a system-wide database instance (for global notifications) and per-user database instances (for per-user notifications).\n\nInformation of interest: the arrival and expiry times of the notification, as well as a "payload" associated with the notification. For Toast notifications, the payload contains the content of the notification (such as message content for instant messaging applications).\n\nThe notifications are short-lived and deleted from the database after their expiry time or following a user acknowledgment, thus providing very limited historical data.'
 keywords: notification, Windows Push Notifications, WPN, wpndatabase, instant messaging, instant message, Teams, Slack, Discord, Badge, Tile, Toast
 tags:

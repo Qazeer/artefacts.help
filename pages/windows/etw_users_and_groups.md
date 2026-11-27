@@ -1,5 +1,5 @@
 ---
-title: ETW - Users and security groups operations
+title: Windows - ETW - Users and security groups operations
 summary: 'For user account and security group operations, such as user object creation or modification, and security group membership updates.\n\nMain events:\n\nChannel: Security.\nEvent ID 4720: "A user account was created".\nEvent ID 4724: "An attempt was made to reset an account''s password".\nEvent ID 4738: "A user account was changed".\nEvent ID 4732: "A member was added to a security-enabled local group".'
 keywords: ''
 tags:

@@ -1,5 +1,5 @@
 ---
-title: Registry - Auto-Start Extensibility Points
+title: Windows - Registry - Auto-Start Extensibility Points
 summary: 'A number of registry keys, known as Auto-Start Extensibility Points (ASEP) registry keys, reference programs that are run whenever the system is booted or a specific user logs in.\n\nThe ASEP keys under HKLM are run every time the system is started, while the ASEP keys under HKCU are only executed when the user associated with the keys logs onto the system.\n\nWhile a subset of ASEP registry keys is leveraged by threat actors, hundreds of keys may be used to execute a program at boot or following a user logon.'
 keywords: ASEP, Auto-Start Extensibility Points, Run, RunOnce, Winlogon, Startup, Appinit_Dlls, Userinit, Autoruns, AutorunsC, RECmd, RegistryASEPs, T1547.001
 tags:

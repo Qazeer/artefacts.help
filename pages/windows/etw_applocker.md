@@ -1,5 +1,5 @@
 ---
-title: ETW - AppLocker
+title: Windows - ETW - AppLocker
 summary: 'AppLocker is a native Windows feature introduced in Windows 7 Enterprise, designed to replace "Software Restriction Policies (SRP)". AppLocker enables the restriction and control of executable files that users can run.\n\n AppLocker can control the process creation for executables, Dynamic Link Libraries, scripts (PowerShell, DOS, VBS, etc.), MSI, and packaged apps.\n\n AppLocker operates on the principle of whitelisting, where files are only allowed to execute or run if they are explicitly allowed by defined rules. Rule sets can be enforced (blocking the execution of files associated with specific types) or configured in audit mode (only generating ETW events).'
 keywords: 'AppLocker, PowerShell, EXE, DLL, EXE and DLL, Microsoft-Windows-AppLocker/EXE and DLL, MSI, Script, PowerShell, MSI and Script, Microsoft-Windows-AppLocker/MSI and Script, 8002, 8003, 8004, 8005, 8006, 8007'
 tags:

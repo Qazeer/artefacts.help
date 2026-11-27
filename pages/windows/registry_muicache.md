@@ -1,5 +1,5 @@
 ---
-title: Registry - MUICache
+title: Windows - Registry - MUICache
 summary: 'The Multilanguage User Interface (MUI) is a feature that allows applications to have a single executable for multiple languages.\n\nThe MUICache registry key references GUI program executions only.\n\nInformation of interest: executable full path, executable PE FileDescription attribute (which references the original filename, allowing the identification of renamed files), and the executable PE CompanyName attribute.\n\nThe MUICache does not provide a timestamp of execution.'
 keywords: 'Multilanguage User Interface, MUI, MUICache, FriendlyAppName, FileDescription, ApplicationCompany, CompanyName'
 tags:

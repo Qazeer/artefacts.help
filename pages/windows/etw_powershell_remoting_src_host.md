@@ -1,5 +1,5 @@
 ---
-title: ETW - PowerShell remoting - Source host
+title: Windows - ETW - PowerShell remoting - Source host
 summary: 'Source host initiating PowerShell remoting / WinRM access.\n\nMain events:\n\nChannel: Microsoft-Windows-Windows Remote Management/Operational.\nEvent ID 6: "Creating WSMan Session. The connection string is: <REMOTE_HOST>/wsman?PSVersion=XXX".'
 keywords: PowerShell remoting, WinRM, WSMan, Windows Remote Management, Microsoft-Windows-WinRM/Operational, 2, 4, 6, 8, 12, 15, 16, 30, 31, 33, 80, 162, 166
 tags:

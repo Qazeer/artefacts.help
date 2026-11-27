@@ -1,5 +1,5 @@
 ---
-title: Windows Defender - Detection History files
+title: Windows - Windows Defender - Detection History files
 summary: 'Windows Defender stores information on past detections, from its real-time and cloud-delivered protection components, in DetectionHistory file(s).\n\nInformation of interest, per detection:\n - The file path, size, and hashes (md5, sha1, and sha256) of the file that triggered the detection.\n - The threat name.\n - The process, and the domain and username of the user associated with the detection.\n - For Potentially Unwanted Applications (PUA) detections, the associated Uninstall registry key.'
 keywords: Windows Defender, Defender, DetectionHistory, Detection History, PUA, DHParser, dhparser.exe
 tags:

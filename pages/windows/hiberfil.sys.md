@@ -1,5 +1,5 @@
 ---
-title: Hiberfil.sys
+title: Windows - Hiberfil.sys
 summary: 'The hiberfil.sys file is linked to the hibernation, hybrid sleep, and Fast Boot (Windows 8) / Fast Startup (Windows 10) features. These features are mostly used on Windows laptops/desktops and are generally not available by default on Windows virtual machines.\n\nAs the hiberfil.sys file is shared by three features, the file can be in various states, with its content being either a partial or a full memory snapshot. The partial memory snapshot, linked to the Fast Boot / Fast Startup feature, contains the memory of the Windows kernel and session 0 processes, notably including the MFT and registry hives.\n\nThe hiberfil.sys file is zeroed out after a system boot starting from Windows 8 / 8.1 and must thus be retrieved from a powered-off system.\n\nThe structure of the hiberfil.sys file has evolved starting with Windows 8. Both the old and new formats can be analyzed using volatility, by first converting the hibernation file to a raw file using the volatility3 windows.hibernation.Dump plugin.'
 keywords: hibernation, hiberfil.sys, memory, sleep, fast boot, fast startup, ClearPageFileAtShutdown, volatility, hibernation recon, hibernation.Dump
 tags:

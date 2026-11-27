@@ -1,5 +1,5 @@
 ---
-title: Registry - Scheduled tasks (Taskcache)
+title: Windows - Registry - Scheduled tasks (Taskcache)
 summary: 'Scheduled tasks are used to automatically perform a task on the system whenever the criteria associated with the scheduled task are met.\n\nA scheduled task can be created through direct manipulation of the registry in order to avoid the generation of task creation ETW events.\n\nInformation of interest, for each task under its associated "Taskcache\Tasks\<TASK_GUID>" and "Taskcache\Tree\<TASK_NAME>" subkeys: task name and file path, lifecycle timestamps (created on, last start, and last stop), and trigger(s) and action(s).\n\nThe lifecycle timestamps, trigger(s), and action(s) are in binary, non-human-readable format.'
 keywords: Scheduled Tasks, Taskcache, TaskCache, Tasks, Tree, Actions, Triggers, DynamicInfo, SecurityDescriptor
 tags:

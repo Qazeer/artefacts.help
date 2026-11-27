@@ -1,5 +1,5 @@
 ---
-title: PowerShell Transcript
+title: Windows - PowerShell Transcript
 summary: 'PowerShell Transcript is a mechanism to record a PowerShell console session. The full console input and, depending on the transcript configuration, stdout and stderr streams are logged to a text file.\n\n This logging mechanism, disabled by default, is the only Windows built-in feature to gain extended visibility into PowerShell console interactions, and in particular into the results of PowerShell commands entered in a console. However, unlike Script Block Logging, PowerShell Transcript does not include the content of scripts executed, but only the commands as they are entered in the PowerShell console.\n\n PowerShell Transcript can be enabled using the Start-Transcript cmdlet, by GPO, or directly in the registry.'
 keywords: PowerShell, Transcripts
 tags:

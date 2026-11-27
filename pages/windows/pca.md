@@ -1,5 +1,5 @@
 ---
-title: Program Compatibility Assistant (PCA)
+title: Windows - Program Compatibility Assistant (PCA)
 summary: 'Introduced in Windows 11, the Program Compatibility Assistant (PCA) is an application compatibility feature that aims to maintain support of existing desktop applications on new versions of the Windows operating system.\n\nInformation of interest, only for programs executed as GUI programs: file full path and timestamp of execution. More information is available for executions resulting in a non-0x0 exit code.'
 keywords: Program Compatibility Assistant, PCA, PcaAppLaunchDic, PcaGeneralDb0, PcaGeneralDb1
 tags:

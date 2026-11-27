@@ -1,5 +1,5 @@
 ---
-title: viminfo
+title: Linux - viminfo
 summary: 'The vim text editor logs a number of operations in the text-based ".viminfo" log file.\n\n The log file notably includes information on the last 100 files accessed (by default, 20 on Red Hat-based distributions) through vim.\n\n Under the "jumplist" section, up to 50 file accesses are referenced, with each file access associated with two entries, one for the file opening and one for the file closing. Each entry includes the file path and an epoch timestamp of occurrence (file opening or closing). Subsequent openings of the same file do not erase previous entries for the file.\n\n Under the "# History of marks within files" section, up to 100 (by default) file accesses are referenced, with only a single entry for a given file, which references the last closing of the file. This section may thus contain more historical data than the "jumplist" section.'
 keywords: vim, viminfo, jumplist, vimrc
 tags:

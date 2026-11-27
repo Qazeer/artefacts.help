@@ -1,5 +1,5 @@
 ---
-title: ETW - Registry Auto-Start Extensibility Points
+title: Windows - ETW - Registry Auto-Start Extensibility Points
 summary: 'Events are generated for tasks executed through the Run and RunOnce registry keys. Additionally, events can be generated for modifications of registry keys, but require non-default audit settings and the configuration of SACLs on the registry keys to audit.\n\nMain events:\n\nChannel: Microsoft-Windows-Shell-Core/Operational.\nEvent ID 9707: "Started execution of command <COMMAND>".\nEvent ID 9708: "Finished execution of command <COMMAND> (PID <PROCESS_ID>)".\n\nChannel: Security.\nEvent ID 4657: "A registry value was modified".\nRequires non-default audit settings and the configuration of SACLs on the registry keys to audit.'
 keywords: Run, RunOnce, ASEP, registry modification
 tags:

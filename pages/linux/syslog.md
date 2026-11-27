@@ -1,5 +1,5 @@
 ---
-title: Syslog
+title: Linux - Syslog
 summary: 'Syslog, also known as "legacy-syslog" or "BSD-syslog", is a logging framework defined in RFC3164, then RFC5424 (IETF-syslog). syslog-ng and rsyslog extended the initial syslog protocol, and all three versions continue to be developed as separate projects, growing separately and in parallel.\n\nsyslog logs events/messages from various system components, notably on:\n - Successful authentication and failed authentication attempts.\n - sudo usage.\n - Kernel and hardware component activities.\n - cron jobs and mail activity (sendmail).\n - ...\n\nsyslog relies on "Facilities" to classify and separate log messages by their originating subsystem/component (kernel, cron, user, mail, ...). The facilities are associated with actions in syslog configuration files, to log the messages to a file on disk, send them over the network, or display them to end users.\n\nThe syslog log file locations are fully dependent on the syslog configuration and differ between Linux distributions and syslog implementations.'
 keywords: syslog, RFC3164, RFC5424, syslog-ng, rsyslog, Facility, Severity, Priority, auth, cron, kernel
 tags:

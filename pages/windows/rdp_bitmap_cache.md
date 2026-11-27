@@ -1,5 +1,5 @@
 ---
-title: RDP Bitmap Cache
+title: Windows - RDP Bitmap Cache
 summary: 'The RDP Bitmap Cache contains partial image captures, in the bitmap format, of the remote host screen from Remote Desktop sessions. This feature is implemented to reduce the amount of data sent by the server.\n\nInformation of interest: small bitmap images (with a width of 64 pixels and a height of up to 64 pixels) that represent pieces of the content displayed in past Remote Desktop sessions of the user.\n\nThousands of tiles may be available for a given user''s RDP Bitmap Cache folder.'
 keywords: RDP, Remote Desktop, Terminal Server Client, bitmap cache, bcache, bmc, bmc-tools, RdpCacheStitcher
 tags:

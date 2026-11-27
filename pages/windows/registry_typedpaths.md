@@ -1,5 +1,5 @@
 ---
-title: Registry - TypedPaths
+title: Windows - Registry - TypedPaths
 summary: 'The TypedPaths registry key tracks the last 25 entries entered in the Windows Explorer path bar. Entries can be paths or programs.\n\nEntries are only committed to the registry after the Windows Explorer window is closed.'
 keywords: 'TypedPaths, Explorer, MRUList'
 tags:

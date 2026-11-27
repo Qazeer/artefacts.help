@@ -1,5 +1,5 @@
 ---
-title: ETW - Active Directory Domain Services (Domain Controllers) RBCD detections
+title: Windows - ETW - Active Directory Domain Services (Domain Controllers) RBCD detections
 summary: 'Resource-based constrained delegation, introduced in Windows Server 2012, shifts the trust in Kerberos delegations to the final resources. Instead of trusting a service account to impersonate other users to destination services, service accounts can specifically authorize other services to authenticate using delegated service tickets. The authorized services are identified, by their SPN, in the msDS-AllowedToActOnBehalfOfOtherIdentity attribute of the final services.\n\n The first step of the RBCD attack is usually the modification of an object''s "msDS-AllowedToActOnBehalfOfOtherIdentity" attribute, which generates an associated 5136 event.\n\n The exploitation of the configured delegation relies on a first S4U2Self request and a subsequent S4U2Proxy request, each request generating a specific 4769 event.'
 keywords: Active Directory, Domain Controllers, Kerberos, RBCD, Delegations, Resource-Based Constrained Delegations, msDS-AllowedToActOnBehalfOfOtherIdentity, Service-for-User-to-Self, S4U2self, 5136, 4769, 0x40800018, Service for User to Proxy, S4U2Proxy, 0x40820010, service ticket, Transited Services
 tags:

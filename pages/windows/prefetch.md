@@ -1,5 +1,5 @@
 ---
-title: Prefetch
+title: Windows - Prefetch
 summary: 'Windows Prefetch is a performance enhancement feature that enables prefetching of applications to make system boots or application startups faster. Prefetch is disabled by default on Windows Server operating systems and is limited to 128 entries on Windows XP to Windows 7, and 1024 entries starting from Windows 8.\n\nPrefetch files are created whenever a program is executed from a specific path.\n\nInformation of interest: file name and size, first and, starting from Windows 8, last eight execution timestamps, run count, and list of files and directories accessed during the first ten seconds of execution (often including the full path of the executed file itself).'
 keywords: Prefetch
 tags:

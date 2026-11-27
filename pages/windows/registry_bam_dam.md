@@ -1,5 +1,5 @@
 ---
-title: Registry - Background Activity Moderator (BAM) and Desktop Activity Moderator (DAM)
+title: Windows - Registry - Background Activity Moderator (BAM) and Desktop Activity Moderator (DAM)
 summary: 'Introduced in Windows 10 Fall Creators Update - version 1709, the Background Activity Moderator (BAM) is a mostly undocumented feature that controls the programs executed in the background. The Desktop Activity Moderator (DAM) is a feature for mobile devices that support the "Connected Standby" mode (and thus holds no data on Windows desktops or servers).\n\nIf a file is deleted, the associated entry in the BAM (if any) is deleted as well after the system reboot. Additionally, BAM entries older than 7 days are deleted upon system boot.\n\nInformation of interest: program full path, timestamp of execution, and executing user (as the values are grouped by user SID).'
 keywords: 'Background Activity Moderator, BAM, Desktop Activity Moderator, DAM'
 tags:

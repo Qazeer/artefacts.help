@@ -1,5 +1,5 @@
 ---
-title: Registry - Services
+title: Windows - Registry - Services
 summary: 'The Services registry key holds the configuration information of the installed Windows services.\n\nInformation of interest, for each service: service name and display name, image or DLL path, service type, service start mode, and Windows privileges required (if any).\n\nThe timestamp of a service creation, or last configuration update, can be deduced from the last write timestamp of its registry key.'
 keywords: 'Services, installed services, windows service, svchost'
 tags:

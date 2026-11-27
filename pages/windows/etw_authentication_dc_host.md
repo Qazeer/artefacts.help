@@ -1,5 +1,5 @@
 ---
-title: ETW - Authentication - Active Directory Domain Services (Domain Controllers)
+title: Windows - ETW - Authentication - Active Directory Domain Services (Domain Controllers)
 summary: 'For authentication attempts from a source host to an Active Directory domain-joined destination host (which is not a Domain Controller).\n\nMain events:\n\nEvent ID 4624: "An account was successfully logged on", with LogonType 3 (only for a remote interactive logon on a domain-joined destination host).\n\nEvent ID 4776: "The domain controller attempted to validate the credentials for an account", for NTLM authentication.\n\nEvent 4768: "A Kerberos authentication ticket (TGT) was requested" and 4769: "A Kerberos service ticket was requested", for Kerberos ticket requests and usage.\n\nEvent 4771: "Kerberos pre-authentication failed", for authentication failures over Kerberos.'
 keywords: Security, Authentication, Active Directory, Domain Services, Domain Controllers, domain-joined, NTLM, 4776, Kerberos, TGT, TGS, ST, 4768, 4769, 4771, pre-authentication
 tags:

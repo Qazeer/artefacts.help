@@ -1,5 +1,5 @@
 ---
-title: ETW - Remote Desktop - Remote Desktop Gateway
+title: Windows - ETW - Remote Desktop - Remote Desktop Gateway
 summary: 'For Remote Desktop access through a Remote Desktop Gateway (a Windows server role that implements the Remote Desktop Protocol (RDP) over HTTPS).\n\nMain events:\n\nChannel: Microsoft-Windows-TerminalServices-Gateway/Operational.\nEvent ID 200: "<DOMAIN>\<USERNAME> on client computer <SOURCE_IP> met resource authorization policy [...] to access the TS Gateway server".\nEvent ID 302: "<DOMAIN>\<USERNAME> on client computer <SOURCE_IP> connected to <REMOTE_HOST_FQDN>".\nEvent ID 303: "<DOMAIN>\<USERNAME> on client computer <SOURCE_IP> disconnected from <REMOTE_HOST_FQDN>. Before <DOMAIN>\<USERNAME> disconnected, the client transferred <BYTES_SENT> bytes and received <BYTES_RECEIVED> bytes. The client session duration was <SESSION_DURATION> seconds".'
 keywords: 'RDP, Remote Desktop, Terminal Services, Remote Desktop Gateway, Microsoft-Windows-TerminalServices-Gateway'
 tags:

@@ -1,5 +1,5 @@
 ---
-title: wget HSTS history
+title: Linux - wget HSTS history
 summary: 'The wget utility''s HTTP Strict Transport Security (HSTS) history. This history references websites implementing HSTS that were accessed over HTTPS using wget.\n\n wget history is implemented as a plaintext file, with one entry per line. For each entry, the domain and timestamp of last access are notably referenced.'
 keywords: wget, HSTS, HTTP, Strict Transport Security, wget-hsts
 tags:
