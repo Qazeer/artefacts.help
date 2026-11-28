@@ -779,6 +779,10 @@
         url: /linux_audit_framework.html
         output: web
 
+    - title: cron, anacron, and at
+      url: /linux_cron_anacron_at.html
+      output: web
+
     - title: Shell histories
       url: /linux_shell_histories.html
       output: web
