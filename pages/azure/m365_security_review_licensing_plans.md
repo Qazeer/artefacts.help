@@ -12,8 +12,20 @@ folder: azure
 ---
 
 The licensing plans in use will define the level of logs available.
-For instance, `MailItemsAccessed` mail access events will only be available
-for users associated with an `Office 365 E5` or `Microsoft 365 E5` license.
+For instance, the audit records of users associated with a
+`Microsoft Purview Audit (Premium)` license (included in the `Microsoft 365 E5`
+and `Microsoft 365 E5` licenses) are retained for one year by default (for the
+Exchange, SharePoint, OneDrive, and Entra ID workloads), versus 180 days for
+`Audit (Standard)`.
+
+The `MailItemsAccessed` mail access and `Send` events were historically only
+available for users associated with an `E5` license. Since mid-2024, these
+events are also generated for `Audit (Standard)` users (unless the default
+mailbox audit configuration of the mailbox was modified).
+
+The `MSOnline` (`Get-Msol*` cmdlets) and `AzureAD` PowerShell modules are
+retired (`MSOnline` stopped working between April and May 2025), and are
+replaced by the `Microsoft Graph PowerShell` SDK.
 
 ```bash
 # Connects to Microsoft Graph with the required permissions.

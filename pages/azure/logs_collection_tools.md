@@ -1,6 +1,6 @@
 ---
 title: "[How-To] Azure / Microsoft 365 - Logs search and collection tools"
-summary: 'The Azure logs (Entra ID sign-ins and audit logs, Office 365 Unified and Mailbox Audit Logs, Azure Activity logs, etc.) can be collected using Microsoft PowerShell modules and third-party tools, such as DFIR-O365RC or Microsoft-Extractor-Suite.'
+summary: 'The Azure logs (Entra ID sign-ins and audit logs, Microsoft 365 Unified and Mailbox Audit Logs, Azure Activity logs, etc.) can be collected using Microsoft PowerShell modules and third-party tools, such as DFIR-O365RC or Microsoft-Extractor-Suite.'
 keywords: Search-UnifiedAuditLog, DFIR-O365RC, Microsoft-Extractor-Suite, Log Analytics workspace, Diagnostic settings
 tags:
   - azure_logs
@@ -113,7 +113,7 @@ Windows and Linux endpoints.
 
 The logs are retrieved in `JSON` from the following sources of information:
 
-  - `Office 365 Unified Audit Logs`
+  - `Microsoft 365 Unified Audit Logs`
 
   - `Mailbox Audit Log`
 
@@ -193,7 +193,7 @@ $EndDate = (Get-Date).ToUniversalTime()
 $StartDate30 = $EndDate.AddDays(-30)
 $StartDate90 = $EndDate.AddDays(-90)
 
-# Get a subset of Office 365 Unified audit logs (selection of operations deemed of interest).
+# Get a subset of Microsoft 365 Unified audit logs (selection of operations deemed of interest).
 # Operations sets: "all" (default), "allButAzureAD", "ExchangeOnly", "OneDrive_Sharepoint_Teams_YammerOnly", "AzureADOnly", "SecurityAlertsOnly", "Devices".
 # The -mailboxLogin switch can be specified to also retrieve the MailboxLogin operations.
 # Files produced:
@@ -201,16 +201,16 @@ $StartDate90 = $EndDate.AddDays(-90)
 # - O365_unified_audit_logs\YYYY-MM-DD\UnifiedAuditLog_<TENANT>_<YYYY-MM-DD>_<HH>-00-00.json
 Get-O365Light -startDate $StartDate90 -endDate $EndDate -appId $appId -tenant $tenant -certificatePath $certificatePath [-operationsSet "allButAzureAD"] [-mailboxLogin]
 
-# Get all Office 365 Unified audit logs, or the events of the specified record types.
+# Get all Microsoft 365 Unified audit logs, or the events of the specified record types.
 # As performance is poor, usage should be limited to a small time period or to small tenants.
 $StartDateLimited = $EndDate.AddDays(-<DAYS>)
 Get-O365Full -startDate [$StartDate90 | $StartDateLimited] -endDate $EndDate -appId $appId -tenant $tenant -certificatePath $certificatePath [-recordTypes <RECORD_TYPES>]
 
-# Get Defender for Office 365 logs, from Office 365 Unified audit logs.
-# Defender logs require at least one Office 365 E5 license or a license plan with Microsoft Defender for Office 365.
+# Get Defender for Office 365 logs, from Microsoft 365 Unified audit logs.
+# Defender logs require at least one Microsoft 365 E5 license or a license plan with Microsoft Defender for Office 365.
 Get-O365Defender -startDate $StartDate90 -endDate $EndDate -appId $appId -tenant $tenant -certificatePath $certificatePath
 
-# Search for activity related to a particular user, IP address, or free-text query in the Office 365 Unified audit logs.
+# Search for activity related to a particular user, IP address, or free-text query in the Microsoft 365 Unified audit logs.
 
 # To retrieve the default time zone of a given user's mailbox, the ExchangeOnlineManagement PowerShell module can be used (in order to correlate the Mailbox logs with UTC+0).
 # Install-Module ExchangeOnlineManagement
