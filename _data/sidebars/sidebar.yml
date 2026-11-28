@@ -743,10 +743,6 @@
   output: web
   children:
 
-  - title: Work in progress!
-    url: /linux.html
-    output: web
-
   - title: All
     output: web
     children:
@@ -777,6 +773,14 @@
 
       - title: Linux Audit system
         url: /linux_audit_framework.html
+        output: web
+
+    - title: File system
+      output: web
+      children:
+
+      - title: ext4
+        url: /linux_ext4.html
         output: web
 
     - title: cron, anacron, and at
