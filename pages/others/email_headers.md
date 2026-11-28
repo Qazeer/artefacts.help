@@ -139,14 +139,24 @@ v=<spf1 | SPF_VERSION> <QUALIFIER><MECHANISM_1> ... <QUALIFIER><MECHANISM_N> [re
 
 The following `mechanisms` are supported:
 
-| Mechanism | Description |
-|-----------|-------------|
-| `all` | Always matches. |
-| `include:<DOMAIN>` | Evaluate the `SPF` policy of the specified domain, returning a `PASS`/`Neutral`/`Fail`/`Softfail` result (or an error). <br><br> The mechanism only matches on a `PASS` result, effectively stopping the evaluation of the following mechanisms (with the qualifier of the `include` mechanism determining the result, for example a `FAIL` result for `-include:<DOMAIN>`). Non-matching results (`Neutral`/`Fail`/`Softfail`) will resume the processing of the remaining mechanisms. Errors, including the absence of an `SPF` record for the specified domain, stop the evaluation with an error result. |
-| `a[:<DOMAIN>]` | Check if the sender email server `IP` address is included in the `A` or `AAAA` `DNS` records of the `MAIL FROM`/`HELO` domain or the domain specified in the mechanism. |
-| `mx[:<DOMAIN>]` | Check if the sender email server `IP` address is one of the `IP` addresses of the email servers referenced in the `MX` `DNS` records of the `MAIL FROM`/`HELO` domain or the domain specified in the mechanism. |
-| `ip4:<IPV4 | IPV4_CIDR>` | Check if the sender email server `IP` address is the specified IPv4 address or in the specified IPv4 address range. |
-| `ip6:<IPV6 | IPV6_CIDR>` | Check if the sender email server `IP` address is the specified IPv6 address or in the specified IPv6 address range. |
+| Mechanism | Description | Example |
+|-----------|-------------|---------|
+| `all` | Always matches. | `-all` (as the last mechanism, `FAIL` result for the email servers not matched by the previous mechanisms) |
+| `include:<DOMAIN>` | Evaluate the `SPF` policy of the specified domain, returning a `PASS`/`Neutral`/`Fail`/`Softfail` result (or an error). <br><br> The mechanism only matches on a `PASS` result, effectively stopping the evaluation of the following mechanisms (with the qualifier of the `include` mechanism determining the result, for example a `FAIL` result for `-include:<DOMAIN>`). Non-matching results (`Neutral`/`Fail`/`Softfail`) will resume the processing of the remaining mechanisms. Errors, including the absence of an `SPF` record for the specified domain, stop the evaluation with an error result. | `include:spf.protection.outlook.com` (`Microsoft 365` email servers) <br><br> `include:_spf.google.com` (`Google Workspace` email servers) |
+| `a[:<DOMAIN>]` | Check if the sender email server `IP` address is included in the `A` or `AAAA` `DNS` records of the `MAIL FROM`/`HELO` domain or the domain specified in the mechanism. | `a` <br><br> `a:mail.example.com` |
+| `mx[:<DOMAIN>]` | Check if the sender email server `IP` address is one of the `IP` addresses of the email servers referenced in the `MX` `DNS` records of the `MAIL FROM`/`HELO` domain or the domain specified in the mechanism. | `mx` <br><br> `mx:example.com` |
+| `ip4:<IPV4 | IPV4_CIDR>` | Check if the sender email server `IP` address is the specified IPv4 address or in the specified IPv4 address range. | `ip4:192.0.2.10` <br><br> `ip4:192.0.2.0/24` |
+| `ip6:<IPV6 | IPV6_CIDR>` | Check if the sender email server `IP` address is the specified IPv6 address or in the specified IPv6 address range. | `ip6:2001:db8::10` <br><br> `ip6:2001:db8::/32` |
+| `exists:<DOMAIN>` | Check if an `A` `DNS` record exists for the specified domain, which can be dynamically constructed using macros (such as `%{i}` for the sender email server `IP` address, or `%{s}` for the `MAIL FROM` email address). | `exists:%{i}._spf.example.com` (for an email sent from `192.0.2.10`, matches if an `A` record exists for `192.0.2.10._spf.example.com`) |
+| `ptr[:<DOMAIN>]` | Check if the reverse `DNS` (`PTR`) records of the sender email server `IP` address reference a (validated) hostname of the `MAIL FROM`/`HELO` domain or of the domain specified in the mechanism. <br><br> Deprecated mechanism (slow and less reliable) that should not be used. | `ptr:example.com` |
+
+The following `modifiers`, that should be specified at the end of the `SPF`
+`DNS` record, are also supported:
+
+| Modifier | Description |
+|----------|-------------|
+| `redirect=<DOMAIN>` | If no mechanism matches, evaluate the `SPF` policy of the specified domain, whose result is used as the result of the evaluation. |
+| `exp=<DOMAIN>` | Explanation string, retrieved from the `TXT` `DNS` record of the specified domain, returned (for example, in the `SMTP` rejection message) in case of a `FAIL` result. |
 
 The `qualifiers` determine the behavior the receiving email server should
 follow if the `mechanism` matches. The following `qualifiers` are supported:
