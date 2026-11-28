@@ -771,6 +771,10 @@
         url: /linux_syslog.html
         output: web
 
+      - title: Systemd journal
+        url: /linux_systemd_journal.html
+        output: web
+
       - title: Linux Audit system
         url: /linux_audit_framework.html
         output: web
